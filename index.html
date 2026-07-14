@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aniket Shetty — Free, ad-free apps built for the love of it</title>
+  <meta name="description" content="Independent developer building free, ad-free, tracking-free apps for iOS — for the joy of it. Home of Forehead Flip and Ozora.">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/">Aniket Shetty</a>
+      <nav class="nav">
+        <a href="/#apps">Apps</a>
+        <a href="/#story">The Story</a>
+        <a href="/support/">Support</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap">
+        <span class="eyebrow">Independent developer</span>
+        <h1>Apps built for the<br><span class="grad">love of it.</span></h1>
+        <p class="lede">I'm Aniket — I build iOS apps in my spare time, for the joy of making
+        things my family and yours can enjoy. No ads. No tracking. No price tags. Ever.</p>
+        <div class="chips">
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64A9 9 0 1 1 5.64 6.64"/><line x1="12" y1="2" x2="12" y2="12"/></svg> No ads</span>
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> No third-party tracking</span>
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg> Free, always</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- VALUES -->
+    <section class="pad pad-t">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>A simple promise</h2>
+          <p>These apps exist because they were fun to build — not to make money from you.</p>
+        </div>
+        <div class="pillars">
+          <div class="pillar">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="9" y1="15" x2="9.01" y2="15"/></svg></div>
+            <h3>No advertising</h3>
+            <p>Not a single banner, pop-up, or interstitial. Your screen is yours.</p>
+          </div>
+          <div class="pillar">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+            <h3>No tracking</h3>
+            <p>No third-party analytics or trackers. Nothing about you leaves your device.</p>
+          </div>
+          <div class="pillar">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+            <h3>No paywalls</h3>
+            <p>Free to download and free to use — with no locked decks or "pro" upsells.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STORY -->
+    <section id="story" class="pad pad-t">
+      <div class="wrap">
+        <div class="story">
+          <div class="text">
+            <h2>It started as a weekend with my daughter</h2>
+            <p>One weekend, my 9-year-old daughter and I wanted to play charades. We tried a
+            few apps on the App Store — and one by one they asked us to pay: to unlock more
+            word decks, to remove ads, to keep playing past a point.</p>
+            <p class="muted">A game meant to bring us closer kept stopping to ask for money.</p>
+            <p class="pullquote">So I decided to build the one I wished existed — free for
+            every parent and child, with no strings attached.</p>
+            <p>That became <strong>Forehead Flip</strong>: a charades game that's completely
+            free, with the ability to create your own word decks using AI themes — also free.
+            Ozora followed, built on the same belief. If you enjoy them, that's the whole point.</p>
+          </div>
+          <figure class="photo">
+            <img src="/assets/family.jpg" alt="Aniket with his family at a theme park">
+            <figcaption>Where it all started — time with family.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPS -->
+    <section id="apps" class="pad pad-t">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>The apps</h2>
+          <p>Made for iPhone and iPad. Free, ad-free, and private.</p>
+        </div>
+        <div id="app-grid" class="app-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>
+        <a href="/#apps">Apps</a>
+        <a href="/support/">Support</a>
+        <a href="/terms/">Terms</a>
+      </div>
+      <div>© <span id="year"></span> Aniket Shetty</div>
+    </div>
+  </footer>
+
+  <script src="/assets/app.js"></script>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

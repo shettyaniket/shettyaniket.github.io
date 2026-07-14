@@ -1,0 +1,23 @@
+[
+  {
+    "slug": "forehead-flip",
+    "name": "Forehead Flip",
+    "tagline": "The free charades game for families — with AI-powered word decks.",
+    "platform": "iOS",
+    "appStoreId": "6777682330",
+    "appStoreUrl": "https://apps.apple.com/in/app/forehead-flip/id6777682330",
+    "icon": "/assets/icons/forehead-flip.png",
+    "accent": "#f97316",
+    "collectsData": false
+  },
+  {
+    "slug": "ozora",
+    "name": "Ozora",
+    "tagline": "Your pocket companion to the Ozora Festival — offline timetable, personal lineup & set reminders.",
+    "platform": "iOS",
+    "appStoreId": "0000000000",
+    "icon": "/assets/icons/ozora.png",
+    "accent": "#6366f1",
+    "collectsData": false
+  }
+]
