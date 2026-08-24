@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ScatteredBrain — The forgetful person's daily organiser | Aniket Shetty</title>
+  <meta name="description" content="ScatteredBrain is a free daily organiser for people who forget things — tasks by time of day, birthday reminders, notes, and activity tracking. 100% offline, no account needed.">
+  <link rel="stylesheet" href="/assets/style.css">
+  <style>
+    /* Phone mockup — scoped to this page only */
+    .sb-spotlights { display: flex; flex-direction: column; gap: 0; }
+
+    .sb-spot {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 52px;
+      align-items: center;
+      padding: 64px 0;
+      border-top: 1px solid var(--border);
+    }
+    .sb-spot.flip { grid-template-columns: 220px 1fr; }
+    .sb-spot.flip .sb-copy { order: 2; }
+    .sb-spot.flip .sb-phone-wrap { order: 1; }
+
+    .sb-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: #7c4dff; margin-bottom: 12px;
+    }
+    .sb-spot h2 {
+      font-size: clamp(20px, 3vw, 28px); font-weight: 700;
+      letter-spacing: -.02em; line-height: 1.15; margin: 0 0 14px;
+      text-wrap: balance;
+    }
+    .sb-spot p { color: var(--muted); font-size: 15px; line-height: 1.7; margin: 0 0 12px; max-width: 38ch; }
+    .sb-spot p:last-of-type { margin-bottom: 0; }
+    .sb-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .sb-tag {
+      font-size: 12px; font-weight: 600; padding: 4px 11px;
+      border-radius: 999px; background: var(--surface);
+      border: 1px solid var(--border); color: var(--muted);
+    }
+    .sb-tag.purple { background: rgba(124,77,255,.1); border-color: rgba(124,77,255,.2); color: #a78bfa; }
+    .sb-tag.teal   { background: rgba(0,201,167,.1);  border-color: rgba(0,201,167,.2);  color: #00c9a7; }
+    .sb-tag.red    { background: rgba(240,122,110,.1); border-color: rgba(240,122,110,.2); color: #f07a6e; }
+
+    /* Phone frame */
+    .sb-phone-wrap { display: flex; justify-content: center; }
+    .sb-phone {
+      width: 220px;
+      border-radius: 38px;
+      border: 2.5px solid var(--border);
+      background: #0e0d14;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0,0,0,.45), 0 0 0 1px rgba(0,0,0,.4), 0 0 48px rgba(124,77,255,.18);
+      position: relative;
+    }
+    .sb-phone::before {
+      content: ""; position: absolute; top: 10px; left: 50%;
+      transform: translateX(-50%); width: 76px; height: 22px;
+      background: #000; border-radius: 20px; z-index: 20;
+    }
+    .ph { background: #0e0d14; color: #f0eef8; font-size: 10px; -webkit-font-smoothing: antialiased; padding-top: 36px; }
+
+    /* Shared phone UI atoms */
+    .ph-hd { padding: 6px 12px 4px; display: flex; align-items: center; justify-content: space-between; }
+    .ph-greet { font-size: 8px; color: #9b97b8; }
+    .ph-greet b { color: #f0eef8; }
+    .ph-ic  { display: flex; gap: 7px; font-size: 9.5px; color: #5b5870; }
+
+    .ph-chips { display: flex; gap: 5px; padding: 5px 10px; overflow: hidden; }
+    .ph-chip { font-size: 7.5px; font-weight: 700; padding: 4px 9px; border-radius: 999px; white-space: nowrap; }
+    .ch-wins { background: rgba(255,179,71,.15); border: 1px solid rgba(255,179,71,.3); color: #ffb347; }
+    .ch-wait { background: rgba(100,149,237,.15); border: 1px solid rgba(100,149,237,.3); color: #6495ed; }
+    .ch-ai   { background: rgba(124,77,255,.15);  border: 1px solid rgba(124,77,255,.3);  color: #a78bfa; }
+    .ch-log  { background: rgba(0,201,167,.15);   border: 1px solid rgba(0,201,167,.3);   color: #00c9a7; }
+
+    .ph-tabs { display: flex; gap: 5px; padding: 4px 10px 7px; }
+    .ph-tab  { font-size: 7.5px; font-weight: 600; padding: 5px 10px; border-radius: 999px; }
+    .pt-today { background: #7c4dff; color: #fff; }
+    .pt-catch { background: rgba(240,122,110,.12); color: #f07a6e; border: 1px solid rgba(240,122,110,.25); }
+    .pt-catch .bdg { display: inline-block; background: #f07a6e; color: #fff; border-radius: 999px; padding: 0 4px; font-size: 6.5px; margin-left: 3px; }
+    .pt-up { background: rgba(255,255,255,.06); color: #5b5870; }
+
+    .ph-lbl { padding: 5px 12px 2px; font-size: 7px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: #4e4b68; }
+
+    .ph-task { margin: 2px 10px; padding: 7px 9px; background: rgba(255,255,255,.04); border-radius: 9px; border: 1px solid rgba(255,255,255,.06); display: flex; align-items: flex-start; gap: 7px; position: relative; overflow: hidden; }
+    .ph-task::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; border-radius: 3px 0 0 3px; }
+    .ph-task.hi::before { background: #f07a6e; }
+    .ph-task.md::before { background: #ffb347; }
+    .ph-task.lo::before { background: #00c9a7; }
+    .ph-ti { width: 17px; height: 17px; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 8.5px; flex-shrink: 0; margin-top: 1px; }
+    .ti-bills  { background: rgba(212,241,249,.1); }
+    .ti-family { background: rgba(193,231,224,.1); }
+    .ti-errand { background: rgba(255,214,224,.1); }
+    .ph-tb { flex: 1; min-width: 0; }
+    .ph-tt { font-size: 8.5px; font-weight: 600; color: #f0eef8; line-height: 1.3; margin-bottom: 2px; }
+    .ph-tm { font-size: 7px; color: #7b778f; display: flex; align-items: center; gap: 5px; }
+    .pri { font-size: 6.5px; font-weight: 700; padding: 1px 5px; border-radius: 4px; }
+    .pri-hi { background: rgba(240,122,110,.2); color: #f07a6e; }
+    .pri-md { background: rgba(255,179,71,.2);  color: #ffb347; }
+    .pri-lo { background: rgba(0,201,167,.2);   color: #00c9a7; }
+    .ph-circle { width: 13px; height: 13px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.18); flex-shrink: 0; margin-top: 2px; }
+
+    .ph-overdue { margin: 6px 10px; padding: 7px 9px; background: rgba(240,122,110,.08); border: 1px solid rgba(240,122,110,.18); border-radius: 9px; }
+    .ph-od-lbl { font-size: 7.5px; font-weight: 700; color: #f07a6e; margin-bottom: 4px; }
+    .ph-od-row { font-size: 7.5px; color: #f0eef8; padding: 2.5px 0; border-bottom: 1px solid rgba(255,255,255,.05); display: flex; justify-content: space-between; align-items: center; }
+    .ph-od-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .ph-od-age { font-size: 7px; color: #f07a6e; font-weight: 600; }
+
+    /* People phone */
+    .ph-ppl-hd { padding: 6px 12px 5px; display: flex; justify-content: space-between; align-items: center; }
+    .ph-ppl-t { font-size: 13px; font-weight: 700; }
+    .ph-upcoming { margin: 3px 10px; padding: 8px 9px; background: linear-gradient(135deg,rgba(124,77,255,.1),rgba(0,201,167,.06)); border: 1px solid rgba(124,77,255,.18); border-radius: 9px; }
+    .ph-up-lbl { font-size: 7px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: #a78bfa; margin-bottom: 5px; }
+    .ph-brow { display: flex; align-items: center; gap: 7px; }
+    .ph-av { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg,#7c4dff,#a78bfa); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: #fff; flex-shrink: 0; }
+    .ph-bn { font-size: 8.5px; font-weight: 600; color: #f0eef8; }
+    .ph-bd { font-size: 7px; color: #a78bfa; }
+    .ph-cnt { font-size: 7.5px; font-weight: 700; color: #fff; background: #7c4dff; padding: 2px 7px; border-radius: 999px; }
+    .ph-acts { display: flex; gap: 5px; margin-top: 6px; padding-left: 29px; }
+    .ph-btn { font-size: 7.5px; font-weight: 600; padding: 4px 9px; border-radius: 999px; border: 1px solid; }
+    .pb-wish { background: rgba(255,179,71,.12); border-color: rgba(255,179,71,.3); color: #ffb347; }
+    .pb-add  { background: rgba(0,201,167,.12);  border-color: rgba(0,201,167,.3);  color: #00c9a7; }
+
+    .ph-sheet { background: #1a1828; border-radius: 14px 14px 0 0; margin-top: 8px; padding: 10px 11px; }
+    .ph-sh-handle { width: 28px; height: 3px; background: rgba(255,255,255,.13); border-radius: 2px; margin: 0 auto 8px; }
+    .ph-sh-title { font-size: 9.5px; font-weight: 700; color: #f0eef8; margin-bottom: 7px; }
+    .ph-sh-input { background: #0e0d14; border-radius: 7px; padding: 6px 8px; font-size: 8px; color: #f0eef8; border: 1px solid rgba(124,77,255,.3); margin-bottom: 6px; }
+    .ph-sh-meta { display: flex; gap: 5px; font-size: 7px; flex-wrap: wrap; }
+    .ph-sh-pill { background: rgba(255,255,255,.07); border-radius: 5px; padding: 3px 6px; color: #9b97b8; }
+    .ph-sh-pill.ac { background: rgba(124,77,255,.15); color: #a78bfa; }
+
+    .ph-contact-lbl { padding: 7px 12px 3px; font-size: 7px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: #4e4b68; }
+    .ph-crow { display: flex; align-items: center; gap: 7px; margin: 2px 10px; padding: 6px 8px; background: rgba(255,255,255,.04); border-radius: 8px; border: 1px solid rgba(255,255,255,.05); }
+    .ph-cav { width: 19px; height: 19px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 8.5px; font-weight: 700; color: #fff; flex-shrink: 0; }
+    .ph-cn { font-size: 8px; font-weight: 600; color: #f0eef8; }
+    .ph-cd { font-size: 7px; color: #7b778f; }
+    .ph-cdot { width: 5px; height: 5px; border-radius: 50%; background: #00c9a7; margin-left: auto; flex-shrink: 0; }
+
+    @media (max-width: 780px) {
+      .sb-spot, .sb-spot.flip { grid-template-columns: 1fr; gap: 32px; }
+      .sb-spot .sb-phone-wrap,
+      .sb-spot.flip .sb-phone-wrap { order: 1; }
+      .sb-spot .sb-copy,
+      .sb-spot.flip .sb-copy { order: 2; }
+      .sb-spot p { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/">Aniket Shetty</a>
+      <nav class="nav">
+        <a href="/#apps">Apps</a>
+        <a href="/#story">The Story</a>
+        <a href="/support/">Support</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="wrap">
+      <div class="app-hero">
+        <div class="big-icon" style="background:none;padding:0;overflow:hidden;"><img src="/assets/icons/scatteredbrain.png" alt="ScatteredBrain app icon" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+        <div>
+          <span class="os-tag">iPhone · iOS 17+</span>
+          <h1>ScatteredBrain</h1>
+          <p class="lede">The daily organiser for people who forget things — tasks sorted by time of day, birthday reminders with gift task shortcuts, notes, and activity tracking. All on your phone. No account. No subscription.</p>
+          <div class="btn-row">
+            <a class="btn soon" href="#">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 1.5c.1 1-.3 2-.9 2.8-.7.8-1.7 1.4-2.7 1.3-.1-1 .4-2 1-2.7.6-.8 1.7-1.3 2.6-1.4zM19 17.3c-.5 1.1-.7 1.6-1.3 2.6-.9 1.4-2.1 3.1-3.6 3.1-1.3 0-1.7-.9-3.5-.8-1.8 0-2.2.8-3.5.8-1.5 0-2.6-1.5-3.5-2.9-2.5-3.9-2.8-8.5-1.2-11 1-1.6 2.6-2.5 4.1-2.5 1.5 0 2.5.9 3.7.9 1.2 0 1.9-.9 3.7-.9 1.3 0 2.7.7 3.7 2-3.3 1.8-2.8 6.5.9 8.6z"/></svg>
+              Coming soon on the App Store
+            </a>
+            <a class="btn secondary" href="/scatteredbrain/privacy/">Privacy</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE GRID -->
+    <section class="pad pad-t">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Everything you keep forgetting, in one tab bar.</h2>
+          <p>Four tabs. Tasks, people, notes, activity. Nothing buried in menus.</p>
+        </div>
+        <div class="features">
+          <div class="feature">
+            <h3>📋 Tasks by time of day</h3>
+            <p>Morning, Afternoon, Evening — plus a Catch Up pane for anything that slipped. Tasks are never silently deleted.</p>
+          </div>
+          <div class="feature">
+            <h3>🎂 Birthdays with one-tap reminders</h3>
+            <p>Tap "Add task" on any birthday card and a gift reminder opens, pre-filled with the name and occasion. Two taps, done.</p>
+          </div>
+          <div class="feature">
+            <h3>🤖 Just type what you're forgetting</h3>
+            <p>"Pay rent tomorrow morning urgent" becomes a task with the right date, time, and priority. Works on-device, or use your own AI key.</p>
+          </div>
+          <div class="feature">
+            <h3>🔒 Fully offline, fully private</h3>
+            <p>No account, no cloud, no ads. Everything stays on your device. Export a backup JSON from Settings anytime.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPOTLIGHT MOCKUPS -->
+    <section class="pad-t">
+      <div class="wrap sb-spotlights">
+
+        <!-- Spotlight 1: Today tab -->
+        <div class="sb-spot">
+          <div class="sb-copy">
+            <div class="sb-eyebrow">Today tab</div>
+            <h2>See what needs doing — and what you've already missed.</h2>
+            <p>Tasks are grouped by time of day so you instantly know what's due now. Switch to <strong>Catch Up</strong> to see anything overdue — it's never buried, never auto-deleted, just waiting.</p>
+            <p>Quick-access chips at the top jump to Wins, Waiting On, AI Add, and Activity Log without leaving Today.</p>
+            <div class="sb-tags">
+              <span class="sb-tag purple">Morning / Afternoon / Evening</span>
+              <span class="sb-tag red">Catch Up — overdue</span>
+              <span class="sb-tag">Upcoming</span>
+            </div>
+          </div>
+          <div class="sb-phone-wrap">
+            <div class="sb-phone">
+              <div class="ph">
+                <div class="ph-hd">
+                  <span class="ph-greet">Good morning ☀️ &nbsp;<b>Aniket</b> · Mon, 24 Aug</span>
+                  <span class="ph-ic">🔍 ✏️</span>
+                </div>
+                <div class="ph-chips">
+                  <span class="ph-chip ch-wins">🏆 Wins</span>
+                  <span class="ph-chip ch-wait">⏳ Waiting</span>
+                  <span class="ph-chip ch-ai">🤖 AI Add</span>
+                  <span class="ph-chip ch-log">🏃 Log</span>
+                </div>
+                <div class="ph-tabs">
+                  <span class="ph-tab pt-today">✦ Today</span>
+                  <span class="ph-tab pt-catch">Catch Up <span class="bdg">2</span></span>
+                  <span class="ph-tab pt-up">Upcoming</span>
+                </div>
+                <div class="ph-lbl">🌅 Morning</div>
+                <div class="ph-task hi">
+                  <div class="ph-ti ti-bills">💳</div>
+                  <div class="ph-tb">
+                    <div class="ph-tt">Pay electricity bill</div>
+                    <div class="ph-tm"><span class="pri pri-hi">HIGH</span> 9:00 AM</div>
+                  </div>
+                  <div class="ph-circle"></div>
+                </div>
+                <div class="ph-task hi">
+                  <div class="ph-ti ti-bills">💳</div>
+                  <div class="ph-tb">
+                    <div class="ph-tt">Call bank — credit card dispute</div>
+                    <div class="ph-tm"><span class="pri pri-hi">HIGH</span> 11:00 AM</div>
+                  </div>
+                  <div class="ph-circle"></div>
+                </div>
+                <div class="ph-lbl">☀️ Afternoon</div>
+                <div class="ph-task hi">
+                  <div class="ph-ti ti-family">🏡</div>
+                  <div class="ph-tb">
+                    <div class="ph-tt">Pick up Rhea from school</div>
+                    <div class="ph-tm"><span class="pri pri-hi">HIGH</span> 3:30 PM</div>
+                  </div>
+                  <div class="ph-circle"></div>
+                </div>
+                <div class="ph-lbl">🌙 Evening</div>
+                <div class="ph-task lo">
+                  <div class="ph-ti ti-errand">🛒</div>
+                  <div class="ph-tb">
+                    <div class="ph-tt">Grocery run — milk, eggs, bread</div>
+                    <div class="ph-tm"><span class="pri pri-lo">LOW</span> 6:00 PM</div>
+                  </div>
+                  <div class="ph-circle"></div>
+                </div>
+                <div class="ph-overdue">
+                  <div class="ph-od-lbl">⚠ Catch Up — 2 tasks overdue</div>
+                  <div class="ph-od-row">Renew car insurance <span class="ph-od-age">2 days ago</span></div>
+                  <div class="ph-od-row">Submit Q2 expense report <span class="ph-od-age">yesterday</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spotlight 2: People / wishing -->
+        <div class="sb-spot flip">
+          <div class="sb-phone-wrap">
+            <div class="sb-phone">
+              <div class="ph">
+                <div class="ph-ppl-hd">
+                  <span class="ph-ppl-t">🎉 Never Forget</span>
+                  <span class="ph-ic">🔍 ↺ +</span>
+                </div>
+                <div class="ph-upcoming">
+                  <div class="ph-up-lbl">🎂 Coming up in 5 days</div>
+                  <div class="ph-brow">
+                    <div class="ph-av">P</div>
+                    <div>
+                      <div class="ph-bn">Priya Sharma</div>
+                      <div class="ph-bd">Birthday · 29 Aug · 36 yrs</div>
+                    </div>
+                    <div class="ph-cnt">5 days</div>
+                  </div>
+                  <div class="ph-acts">
+                    <span class="ph-btn pb-wish">🎂 Copy wish</span>
+                    <span class="ph-btn pb-add">+ Add task</span>
+                  </div>
+                </div>
+                <!-- Task sheet slides up -->
+                <div class="ph-sheet">
+                  <div class="ph-sh-handle"></div>
+                  <div class="ph-sh-title">✦ New Task</div>
+                  <div class="ph-sh-input">Buy a gift for Priya's birthday 🎁</div>
+                  <div class="ph-sh-meta">
+                    <span class="ph-sh-pill">📅 Thu, 27 Aug</span>
+                    <span class="ph-sh-pill ac">🎉 Social</span>
+                    <span class="ph-sh-pill">🙋 Myself</span>
+                  </div>
+                </div>
+                <div class="ph-contact-lbl">All contacts · by date</div>
+                <div class="ph-crow">
+                  <div class="ph-cav" style="background:linear-gradient(135deg,#4a90d9,#6cb2eb)">R</div>
+                  <div>
+                    <div class="ph-cn">Rahul Mehra</div>
+                    <div class="ph-cd">🎂 Birthday · 10 Sep · 17 days</div>
+                  </div>
+                  <div class="ph-cdot"></div>
+                </div>
+                <div class="ph-crow">
+                  <div class="ph-cav" style="background:linear-gradient(135deg,#e67e9a,#d4537a)">M</div>
+                  <div>
+                    <div class="ph-cn">Meera &amp; Vikram Kapoor</div>
+                    <div class="ph-cd">💍 Anniversary · 5 Sep · 12 days</div>
+                  </div>
+                </div>
+                <div class="ph-crow">
+                  <div class="ph-cav" style="background:linear-gradient(135deg,#56ab91,#2ecc8a)">A</div>
+                  <div>
+                    <div class="ph-cn">Arjun Nair</div>
+                    <div class="ph-cd">🎂 Birthday · 15 Oct · 52 days</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="sb-copy">
+            <div class="sb-eyebrow">People tab</div>
+            <h2>Wishing someone takes exactly two taps.</h2>
+            <p>Tap <strong>+ Add task</strong> on anyone's birthday card and a task opens with "Buy a gift for Priya's birthday" already filled in — name, occasion, and a suggested date. No typing, no copy-pasting.</p>
+            <p>Anniversaries, engagements, pet birthdays — anything worth remembering gets a card and a countdown so nothing sneaks up on you.</p>
+            <div class="sb-tags">
+              <span class="sb-tag teal">Pre-filled gift task</span>
+              <span class="sb-tag purple">Countdown badges</span>
+              <span class="sb-tag">Copy birthday wish</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SCREENSHOT GALLERY -->
+    <section class="pad pad-t">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Take a look</h2>
+          <p>Today's tasks, the people you care about, notes, activity log, and AI Add.</p>
+        </div>
+        <div class="shots">
+          <div class="shot"><img src="/assets/screenshots/scatteredbrain/01-today.jpg" alt="Today tab showing tasks grouped by time of day" loading="lazy"></div>
+          <div class="shot"><img src="/assets/screenshots/scatteredbrain/02-people.jpg" alt="People tab with birthday countdowns and Add task chip" loading="lazy"></div>
+          <div class="shot"><img src="/assets/screenshots/scatteredbrain/03-notes.jpg" alt="Notes tab with scratch pad, service log, and warranty" loading="lazy"></div>
+          <div class="shot"><img src="/assets/screenshots/scatteredbrain/04-activity.jpg" alt="Activity Log tab" loading="lazy"></div>
+          <div class="shot"><img src="/assets/screenshots/scatteredbrain/05-ai.jpg" alt="AI Script — type naturally and it becomes a task" loading="lazy"></div>
+        </div>
+        <p class="shots-hint">← swipe to see more →</p>
+      </div>
+    </section>
+
+    <!-- STORY -->
+    <section class="pad pad-t">
+      <div class="wrap">
+        <div class="story">
+          <div class="text">
+            <h2>The app that started as a sticky note.</h2>
+            <p>I'm a chronic forgetter — not the dramatic kind, the quiet daily kind where you remember to pay the bill on the way to the kitchen and completely forget by the time you sit down. Tasks in Reminders, birthdays in Contacts, everything else on a sticky note stuck to the monitor.</p>
+            <p>I built ScatteredBrain because I wanted one place — not four apps — for the ordinary stuff life throws at you. It's not a productivity system. There's no "second brain" philosophy here. Just a quiet helper that keeps score so you don't have to.</p>
+            <p class="muted">No account. No subscription. Everything on your phone, yours completely.</p>
+            <p><a href="/#story">Read the full story →</a></p>
+          </div>
+          <figure class="photo">
+            <img src="/assets/family.jpg" alt="Aniket Shetty">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>
+        <a href="/#apps">Apps</a>
+        <a href="/support/">Support</a>
+        <a href="/scatteredbrain/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+      </div>
+      <div>© <span id="year"></span> Aniket Shetty</div>
+    </div>
+  </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

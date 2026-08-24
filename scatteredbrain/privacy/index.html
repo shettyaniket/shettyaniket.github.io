@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy — ScatteredBrain</title>
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/">Aniket Shetty</a>
+      <nav class="nav">
+        <a href="/#apps">Apps</a>
+        <a href="/support/">Support</a>
+        <a href="/terms/">Terms</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content">
+    <div class="wrap">
+      <h1>ScatteredBrain — Privacy Policy</h1>
+      <p class="updated">Last updated: 24 August 2026</p>
+
+      <h2>The short version</h2>
+      <p><strong>ScatteredBrain collects no personal data.</strong> There are no accounts, no
+      analytics, no ads, and no third-party tracking or crash-reporting SDKs. Nothing you enter
+      ever leaves your device.</p>
+
+      <h2>Your data stays on your device</h2>
+      <p>All tasks, contacts, notes, activity log entries, wins, and waiting-on items are stored
+      locally using Apple's SwiftData framework on your iPhone. This data is not synced to any
+      server, not shared with any third party, and not accessible to me.</p>
+
+      <h2>Backups</h2>
+      <p>ScatteredBrain lets you export a backup as a JSON file from Settings → Backup. This file
+      is generated entirely on your device and saved wherever you choose (Files, iCloud Drive, AirDrop,
+      etc.). The app never sends this file anywhere automatically.</p>
+
+      <h2>API keys</h2>
+      <p>If you choose to use a cloud AI provider for the AI Add feature (Gemini, OpenAI, or Claude),
+      you supply your own API key. That key is stored in your device's Keychain — not in the app's
+      database, and not included in backups. It is used only to make requests directly from your device
+      to the provider you chose; ScatteredBrain never sees or stores the key or the request content.</p>
+
+      <h2>AI Add feature</h2>
+      <p>When you type a task description in AI Add, ScatteredBrain first attempts to parse it entirely
+      on-device using built-in natural language processing. If you have configured a cloud provider and
+      on-device parsing is insufficient, the task description text is sent directly from your device to
+      that provider's API using your own key. This text is not logged, retained, or linked to your
+      identity by ScatteredBrain.</p>
+
+      <h2>Children's privacy</h2>
+      <p>ScatteredBrain does not knowingly collect data from anyone, including children under 13.</p>
+
+      <h2>Third-party services</h2>
+      <p>ScatteredBrain does not integrate any advertising networks, analytics platforms, or tracking
+      SDKs of any kind.</p>
+
+      <h2>Changes to this policy</h2>
+      <p>If this policy changes, the updated version will appear on this page with a new date above.</p>
+
+      <h2>Contact</h2>
+      <p>Questions? Email <a href="mailto:aniket.shetty@gmail.com">aniket.shetty@gmail.com</a>.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>
+        <a href="/scatteredbrain/">ScatteredBrain</a>
+        <a href="/support/">Support</a>
+        <a href="/terms/">Terms</a>
+      </div>
+      <div>© <span id="year"></span> Aniket Shetty</div>
+    </div>
+  </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
