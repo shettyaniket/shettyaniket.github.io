@@ -6,7 +6,7 @@
     "platform": "iOS",
     "appStoreId": "6777682330",
     "appStoreUrl": "https://apps.apple.com/in/app/forehead-flip/id6777682330",
-    "icon": "/assets/icons/forehead-flip.png",
+    "icon": "/assets/icons/foreheadflip.png",
     "accent": "#f97316",
     "collectsData": false
   },
@@ -15,9 +15,19 @@
     "name": "Ozora",
     "tagline": "Your pocket companion to the Ozora Festival — offline timetable, personal lineup & set reminders.",
     "platform": "iOS",
-    "appStoreId": "0000000000",
+    "appStoreId": "6790055721",
+    "appStoreUrl": "https://apps.apple.com/in/app/ozora-festival-lovers/id6790055721",
     "icon": "/assets/icons/ozora.png",
     "accent": "#6366f1",
+    "collectsData": false
+  },
+  {
+    "slug": "scatteredbrain",
+    "name": "ScatteredBrain",
+    "tagline": "The daily organiser for forgetful people — tasks by time of day, birthday reminders, activity log. No account.",
+    "platform": "iOS 17+",
+    "icon": "/assets/icons/scatteredbrain.png",
+    "accent": "#2d1c6e",
     "collectsData": false
   }
 ]
