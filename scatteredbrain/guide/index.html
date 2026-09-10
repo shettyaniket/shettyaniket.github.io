@@ -1,0 +1,1426 @@
+<title>ScatteredBrain User Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --bg:        #0C0C14;
+    --bg-raised: #161622;
+    --bg-card:   #1E1E2E;
+    --border:    #2A2A3E;
+    --accent:    #8B6FFF;
+    --accent-lo: rgba(139,111,255,.12);
+    --teal:      #4ECDC4;
+    --teal-lo:   rgba(78,205,196,.12);
+    --coral:     #FF7A5C;
+    --coral-lo:  rgba(255,122,92,.12);
+    --gold:      #F5C842;
+    --gold-lo:   rgba(245,200,66,.1);
+    --text:      #F0EEF8;
+    --text-2:    #8A88A0;
+    --text-3:    #555470;
+    --radius:    12px;
+    --radius-sm: 7px;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg:        #F5F4FF;
+      --bg-raised: #FFFFFF;
+      --bg-card:   #F0EEFF;
+      --border:    #DDD9F8;
+      --accent-lo: rgba(139,111,255,.08);
+      --teal-lo:   rgba(78,205,196,.1);
+      --coral-lo:  rgba(255,122,92,.08);
+      --gold-lo:   rgba(245,200,66,.08);
+      --text:      #15112A;
+      --text-2:    #5E5A78;
+      --text-3:    #9B98B8;
+    }
+  }
+
+  :root[data-theme="light"] {
+    --bg:        #F5F4FF;
+    --bg-raised: #FFFFFF;
+    --bg-card:   #F0EEFF;
+    --border:    #DDD9F8;
+    --accent-lo: rgba(139,111,255,.08);
+    --teal-lo:   rgba(78,205,196,.1);
+    --coral-lo:  rgba(255,122,92,.08);
+    --gold-lo:   rgba(245,200,66,.08);
+    --text:      #15112A;
+    --text-2:    #5E5A78;
+    --text-3:    #9B98B8;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    grid-template-rows: auto 1fr;
+    min-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .topbar {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 32px;
+    height: 60px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-raised);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .topbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -.3px;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .topbar-logo .app-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    background: linear-gradient(135deg, #8B6FFF, #6148D5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .topbar-badge {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-2);
+    background: var(--border);
+    padding: 2px 8px;
+    border-radius: 20px;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+  }
+
+  .topbar-right { margin-left: auto; display: flex; align-items: center; gap: 16px; }
+
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 5px 10px;
+    color: var(--text-2);
+    font-size: 13px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: border-color .2s, color .2s;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+  .sidebar {
+    position: sticky;
+    top: 60px;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+    border-right: 1px solid var(--border);
+    padding: 24px 0 40px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-track { background: transparent; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  .nav-section { padding: 0 20px; margin-bottom: 6px; }
+
+  .nav-section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-3);
+    padding: 16px 0 6px;
+    display: block;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text-2);
+    text-decoration: none;
+    transition: background .15s, color .15s;
+    cursor: pointer;
+  }
+  .nav-link:hover { background: var(--accent-lo); color: var(--accent); }
+  .nav-link.active { background: var(--accent-lo); color: var(--accent); font-weight: 600; }
+  .nav-icon { font-size: 14px; width: 18px; text-align: center; flex-shrink: 0; }
+
+  .main { padding: 48px 64px 80px 64px; max-width: 780px; min-width: 0; }
+
+  .guide-section {
+    padding-bottom: 64px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 64px;
+  }
+  .guide-section:last-child { border-bottom: none; }
+
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -.8px;
+    color: var(--text);
+    text-wrap: balance;
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(20px, 3vw, 26px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -.4px;
+    color: var(--text);
+    text-wrap: balance;
+    margin-bottom: 14px;
+  }
+
+  h3 {
+    font-family: 'Sora', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -.2px;
+    color: var(--text);
+    margin-bottom: 10px;
+    margin-top: 28px;
+  }
+  h3:first-child { margin-top: 0; }
+
+  p {
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--text-2);
+    max-width: 62ch;
+    margin-bottom: 14px;
+  }
+  p:last-child { margin-bottom: 0; }
+
+  .guide-intro {
+    padding-bottom: 64px;
+    margin-bottom: 64px;
+    border-bottom: 1px solid var(--border);
+  }
+  .guide-intro p {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text-2);
+    max-width: 58ch;
+  }
+
+  .intro-meta { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+
+  .meta-pill {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--text-2);
+    letter-spacing: .3px;
+  }
+  .meta-pill.accent { border-color: var(--accent); color: var(--accent); background: var(--accent-lo); }
+
+  .steps { list-style: none; display: flex; flex-direction: column; gap: 16px; margin: 18px 0; }
+
+  .step { display: grid; grid-template-columns: 32px 1fr; gap: 14px; align-items: start; }
+
+  .step-num {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--accent-lo);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-size: 13px; font-weight: 700;
+    font-family: 'Sora', sans-serif;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+
+  .step-body { min-width: 0; }
+  .step-title { font-size: 14.5px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .step-desc { font-size: 14px; color: var(--text-2); line-height: 1.6; margin: 0; }
+
+  .callout {
+    display: flex; gap: 14px; padding: 16px 18px;
+    border-radius: var(--radius); border-left: 3px solid; margin: 20px 0;
+  }
+  .callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .callout-body { min-width: 0; }
+  .callout-title {
+    font-size: 13px; font-weight: 700; letter-spacing: .3px;
+    text-transform: uppercase; margin-bottom: 4px;
+  }
+  .callout p { font-size: 14px; margin: 0; max-width: none; }
+
+  .callout.tip  { background: var(--teal-lo);   border-color: var(--teal);  }
+  .callout.tip  .callout-title { color: var(--teal); }
+  .callout.note { background: var(--accent-lo); border-color: var(--accent); }
+  .callout.note .callout-title { color: var(--accent); }
+  .callout.warn { background: var(--coral-lo);  border-color: var(--coral); }
+  .callout.warn .callout-title { color: var(--coral); }
+  .callout.gold { background: var(--gold-lo);   border-color: var(--gold);  }
+  .callout.gold .callout-title { color: var(--gold); }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px; margin: 18px 0;
+  }
+  .feature-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+  .feature-card .fc-icon { font-size: 20px; margin-bottom: 8px; display: block; }
+  .feature-card .fc-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .feature-card .fc-desc { font-size: 13px; color: var(--text-2); line-height: 1.5; }
+
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+
+  .pill {
+    font-size: 13px; font-weight: 600; padding: 5px 13px;
+    border-radius: 20px; display: flex; align-items: center; gap: 5px;
+  }
+  .pill.violet { background: var(--accent-lo); color: var(--accent); border: 1px solid var(--accent); }
+  .pill.teal   { background: var(--teal-lo);   color: var(--teal);   border: 1px solid var(--teal); }
+  .pill.coral  { background: var(--coral-lo);  color: var(--coral);  border: 1px solid var(--coral); }
+  .pill.neutral{ background: var(--bg-card);   color: var(--text-2); border: 1px solid var(--border); }
+
+  .table-wrap { overflow-x: auto; margin: 18px 0; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 400px; }
+
+  th {
+    text-align: left; padding: 10px 14px;
+    font-weight: 600; font-size: 12px; letter-spacing: .5px;
+    text-transform: uppercase; color: var(--text-3);
+    border-bottom: 1px solid var(--border); white-space: nowrap;
+  }
+
+  td {
+    padding: 11px 14px; border-bottom: 1px solid var(--border);
+    color: var(--text-2); vertical-align: top; line-height: 1.5;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--accent-lo); }
+  td strong { color: var(--text); font-weight: 600; }
+
+  .divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+  .swipe-diagram {
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden; margin: 18px 0; font-size: 14px;
+  }
+  .swipe-side { padding: 16px; display: flex; flex-direction: column; gap: 6px; }
+  .swipe-side.left  { background: var(--teal-lo); border-right: 1px solid var(--border); }
+  .swipe-side.right { background: var(--coral-lo); }
+  .swipe-center {
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 12px; background: var(--bg-card); color: var(--text-3);
+    font-size: 22px; flex-direction: column; gap: 4px;
+  }
+  .swipe-center small { font-size: 10px; letter-spacing: .5px; text-transform: uppercase; color: var(--text-3); }
+  .swipe-dir { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+  .swipe-side.left .swipe-dir  { color: var(--teal); }
+  .swipe-side.right .swipe-dir { color: var(--coral); }
+  .swipe-action { display: flex; align-items: center; gap: 6px; color: var(--text-2); font-size: 13.5px; }
+
+  .tab-row {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden; margin: 18px 0;
+  }
+  .tab-item {
+    padding: 14px 8px; text-align: center; font-size: 12px;
+    color: var(--text-2); border-right: 1px solid var(--border);
+  }
+  .tab-item:last-child { border-right: none; }
+  .tab-item.active { background: var(--accent-lo); color: var(--accent); font-weight: 600; }
+  .tab-item .ti-icon { font-size: 20px; display: block; margin-bottom: 4px; }
+  .tab-item .ti-label { font-size: 11px; font-weight: 500; }
+
+  .path-display {
+    font-family: 'Inter', monospace; font-size: 13px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 10px 14px;
+    color: var(--teal); margin: 12px 0; word-break: break-all;
+  }
+  .path-display span { color: var(--text-2); }
+
+  .toast-demo {
+    display: flex; flex-direction: column; gap: 8px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 16px; margin: 18px 0;
+  }
+  .toast {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--bg-raised); border: 1px solid var(--border);
+    border-radius: 12px; padding: 10px 14px;
+  }
+  .toast-icon { font-size: 18px; flex-shrink: 0; }
+  .toast-body { flex: 1; min-width: 0; }
+  .toast-title { font-size: 13px; font-weight: 600; color: var(--text); }
+  .toast-sub { font-size: 12px; color: var(--text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .toast-btn {
+    font-size: 12px; font-weight: 700; color: white;
+    padding: 5px 11px; border-radius: 20px; flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .toast-btn.green { background: #22a86e; }
+  .toast-btn.teal  { background: var(--teal); }
+  .toast-caption {
+    font-size: 12px; color: var(--text-3); text-align: center;
+    font-style: italic; margin-top: 4px;
+  }
+
+  .mobile-nav-toggle {
+    display: none;
+    background: none; border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 6px 10px;
+    color: var(--text-2); font-family: 'Inter', sans-serif;
+    font-size: 13px; cursor: pointer; gap: 6px; align-items: center;
+  }
+
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar {
+      position: fixed; top: 60px; left: 0; width: 260px; z-index: 90;
+      background: var(--bg-raised); transform: translateX(-100%);
+      transition: transform .25s ease; border-right: 1px solid var(--border);
+    }
+    .sidebar.open { transform: translateX(0); }
+    .main { padding: 32px 24px 60px; grid-column: 1; }
+    .mobile-nav-toggle { display: flex; }
+    .feature-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 500px) {
+    .feature-grid { grid-template-columns: 1fr; }
+    .swipe-diagram { grid-template-columns: 1fr; }
+    .swipe-center { display: none; }
+    .swipe-side { border-right: none !important; border-bottom: 1px solid var(--border); }
+    .tab-row { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+  }
+</style>
+
+<div class="layout">
+<header class="topbar">
+  <a class="topbar-logo" href="https://aniketshetty.com/scatteredbrain">
+    <span class="app-icon">🧠</span>
+    ScatteredBrain
+  </a>
+  <span class="topbar-badge">User Guide</span>
+  <div class="topbar-right">
+    <button class="mobile-nav-toggle" id="menuToggle" aria-label="Toggle navigation">☰ Menu</button>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle colour scheme">🌓 Theme</button>
+  </div>
+</header>
+
+<nav class="sidebar" id="sidebar" aria-label="Guide navigation">
+  <div class="nav-section">
+    <span class="nav-section-label">Start here</span>
+    <a class="nav-link active" href="#welcome" onclick="closeMobileNav()">
+      <span class="nav-icon">👋</span> Welcome
+    </a>
+    <a class="nav-link" href="#tabs" onclick="closeMobileNav()">
+      <span class="nav-icon">📱</span> The Four Tabs
+    </a>
+  </div>
+  <div class="nav-section">
+    <span class="nav-section-label">Features</span>
+    <a class="nav-link" href="#home" onclick="closeMobileNav()">
+      <span class="nav-icon">🏠</span> Home Tab
+    </a>
+    <a class="nav-link" href="#adding-tasks" onclick="closeMobileNav()">
+      <span class="nav-icon">➕</span> Adding Tasks
+    </a>
+    <a class="nav-link" href="#completing" onclick="closeMobileNav()">
+      <span class="nav-icon">🏆</span> Completing Tasks
+    </a>
+    <a class="nav-link" href="#recurring" onclick="closeMobileNav()">
+      <span class="nav-icon">🔁</span> Recurring Tasks
+    </a>
+    <a class="nav-link" href="#bills" onclick="closeMobileNav()">
+      <span class="nav-icon">💸</span> Bills &amp; Renewals
+    </a>
+    <a class="nav-link" href="#ai" onclick="closeMobileNav()">
+      <span class="nav-icon">🤖</span> AI Quick-Add
+    </a>
+    <a class="nav-link" href="#people" onclick="closeMobileNav()">
+      <span class="nav-icon">🎂</span> People Tab
+    </a>
+    <a class="nav-link" href="#notes" onclick="closeMobileNav()">
+      <span class="nav-icon">📝</span> Notes Tab
+    </a>
+    <a class="nav-link" href="#activity" onclick="closeMobileNav()">
+      <span class="nav-icon">🏃</span> Activity Log
+    </a>
+    <a class="nav-link" href="#widget" onclick="closeMobileNav()">
+      <span class="nav-icon">🔒</span> Lock Screen Widget
+    </a>
+  </div>
+  <div class="nav-section">
+    <span class="nav-section-label">Your data</span>
+    <a class="nav-link" href="#backup" onclick="closeMobileNav()">
+      <span class="nav-icon">💾</span> Backup &amp; Restore
+    </a>
+    <a class="nav-link" href="#settings" onclick="closeMobileNav()">
+      <span class="nav-icon">⚙️</span> Settings
+    </a>
+    <a class="nav-link" href="#tips" onclick="closeMobileNav()">
+      <span class="nav-icon">✨</span> Tips &amp; Tricks
+    </a>
+  </div>
+</nav>
+
+<main class="main" id="main">
+
+  <!-- ── Welcome ── -->
+  <section class="guide-intro" id="welcome">
+    <div class="section-eyebrow">ScatteredBrain · User Guide</div>
+    <h1>Your quiet helper for the stuff life makes you forget</h1>
+    <p>ScatteredBrain is a daily organiser for people who forget things. Tasks, birthdays, bills, notes, and activity logs — all in one place, all on your phone. No account. No cloud. No subscription.</p>
+    <div class="intro-meta">
+      <span class="meta-pill accent">iOS 17+</span>
+      <span class="meta-pill">iPhone &amp; iPad</span>
+      <span class="meta-pill">100% on-device</span>
+      <span class="meta-pill">Free forever</span>
+    </div>
+    <div class="callout tip" style="margin-top:28px;">
+      <span class="callout-icon">🔒</span>
+      <div class="callout-body">
+        <div class="callout-title">Your data stays on your phone</div>
+        <p>Nothing leaves your device. No analytics, no third-party trackers, no hidden syncing. If you delete the app, your data goes with it — which is why the <a href="#backup" style="color:var(--teal)">backup</a> feature matters.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Four Tabs ── -->
+  <section class="guide-section" id="tabs">
+    <h2>The four tabs</h2>
+    <p>Everything in ScatteredBrain lives in one of four tabs at the bottom of the screen.</p>
+
+    <div class="tab-row">
+      <div class="tab-item active">
+        <span class="ti-icon">🏠</span>
+        <span class="ti-label">Home</span>
+      </div>
+      <div class="tab-item">
+        <span class="ti-icon">🎉</span>
+        <span class="ti-label">People</span>
+      </div>
+      <div class="tab-item">
+        <span class="ti-icon">📝</span>
+        <span class="ti-label">Notes</span>
+      </div>
+      <div class="tab-item">
+        <span class="ti-icon">🏃</span>
+        <span class="ti-label">Activity</span>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Tab</th><th>What it's for</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>🏠 Home</strong></td><td>Your dashboard — tasks by time of day, overdue items, upcoming events, and a quick capture button</td></tr>
+          <tr><td><strong>🎉 People</strong></td><td>Birthdays, anniversaries, and special dates for everyone you care about — with countdown, wish shortcuts, and a full contact detail view</td></tr>
+          <tr><td><strong>📝 Notes</strong></td><td>Diary, Wins journal, Waiting-on list, Service log, and Warranty tracker — your personal logbook</td></tr>
+          <tr><td><strong>🏃 Activity</strong></td><td>Log exercise, sleep, water, meals, and custom habits — a quick daily record without a separate tracker app</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── Home Tab ── -->
+  <section class="guide-section" id="home">
+    <h2>Home tab</h2>
+    <p>The Home tab is your dashboard. It shows what you need to do right now, organised into three panes you switch between with the pill tabs at the top.</p>
+
+    <h3>The three panes</h3>
+    <div class="pill-row">
+      <span class="pill violet">☀️ Today</span>
+      <span class="pill coral">⚠ Catch Up</span>
+      <span class="pill teal">📅 Upcoming</span>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Pane</th><th>What it shows</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>☀️ Today</strong></td>
+            <td>Tasks due today, split into Morning, Afternoon, and Evening slots. Past slots are dimmed but stay visible so you can still act on them.</td>
+          </tr>
+          <tr>
+            <td><strong>⚠ Catch Up</strong></td>
+            <td>Tasks from previous days you haven't completed or dismissed. Nothing is auto-deleted — they wait here until you deal with them.</td>
+          </tr>
+          <tr>
+            <td><strong>📅 Upcoming</strong></td>
+            <td>Future tasks grouped by date. Includes a calendar picker so you can tap any day to jump ahead.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Swiping task cards</h3>
+    <p>Every task card is swipeable — no need to open it to act on it.</p>
+
+    <div class="swipe-diagram">
+      <div class="swipe-side left">
+        <div class="swipe-dir">← Swipe left</div>
+        <div class="swipe-action">🗑 <span>Delete task</span></div>
+        <div class="swipe-action">✅ <span>Mark done</span></div>
+      </div>
+      <div class="swipe-center">
+        <span>📋</span>
+        <small>card</small>
+      </div>
+      <div class="swipe-side right">
+        <div class="swipe-dir">Swipe right →</div>
+        <div class="swipe-action">✅ <span>Mark done</span></div>
+        <div class="swipe-action">💤 <span>Snooze 2 hrs</span></div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <span class="callout-icon">💡</span>
+      <div class="callout-body">
+        <div class="callout-title">Snooze undo</div>
+        <p>Accidentally snoozed something? A banner appears right after — tap <strong>Undo</strong> to put it back immediately.</p>
+      </div>
+    </div>
+
+    <h3>Header icons</h3>
+    <p>The top-right corner of the Home tab has three icons:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Icon</th><th>What it does</th></tr></thead>
+        <tbody>
+          <tr><td><strong>⊙ Focus</strong></td><td>Enter distraction-free Focus Mode — one task at a time, swipe to complete or skip.</td></tr>
+          <tr><td><strong>🔍 Search</strong></td><td>Search across all tasks, including completed and skipped ones. Filter by category, persona, or status.</td></tr>
+          <tr><td><strong>⋯ More</strong></td><td>Task History, toggle Light/Dark mode, and Settings.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Quick-access chip</h3>
+    <p>Below the header, a <strong>🏆 Wins</strong> chip opens the Wins journal directly from the Home tab without navigating to the Notes tab.</p>
+  </section>
+
+  <!-- ── Adding Tasks ── -->
+  <section class="guide-section" id="adding-tasks">
+    <h2>Adding tasks</h2>
+    <p>Tap the purple <strong>+</strong> button (bottom right of the Home tab) to open QuickCapture — a fast input sheet designed to get something out of your head in under 10 seconds.</p>
+
+    <h3>QuickCapture</h3>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Type what's on your mind</div>
+          <div class="step-desc">Just dump it — "call dentist", "buy birthday gift", "pay electricity bill". Don't worry about formatting.</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Pick a time chip</div>
+          <div class="step-desc">Tap <strong>Now</strong>, <strong>1h</strong>, <strong>Tonight</strong>, or <strong>Tomorrow</strong> — or tap the schedule card to pick a custom date and time.</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Set a priority (optional)</div>
+          <div class="step-desc">Low / Medium / High chips appear below the time row. Tap one if it matters — otherwise leave it as Low.</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-title">Tap Capture</div>
+          <div class="step-desc">The task is saved immediately and appears in the right time slot on your dashboard.</div>
+        </div>
+      </li>
+    </ol>
+
+    <div class="callout tip">
+      <span class="callout-icon">🤖</span>
+      <div class="callout-body">
+        <div class="callout-title">AI button in QuickCapture</div>
+        <p>Tap the <strong>AI</strong> button (top right of the QuickCapture sheet) to switch to natural-language input. Type "pay rent tomorrow morning urgent" and the app extracts the task, date, and priority automatically. See the <a href="#ai" style="color:var(--teal)">AI Quick-Add</a> section for details.</p>
+      </div>
+    </div>
+
+    <h3>More options — the full task form</h3>
+    <p>Tap <strong>More options</strong> at the bottom of QuickCapture to open the full AddTask form. By default it shows just the three essentials:</p>
+    <div class="pill-row">
+      <span class="pill violet">Title</span>
+      <span class="pill violet">Category</span>
+      <span class="pill violet">Date &amp; time</span>
+    </div>
+    <p>Tap <strong>More options</strong> inside the full form to expand everything else:</p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <span class="fc-icon">🗂</span>
+        <div class="fc-title">Task type</div>
+        <div class="fc-desc">Task (tracked, shows on dashboard) or Reminder (notification-only, no task card).</div>
+      </div>
+      <div class="feature-card">
+        <span class="fc-icon">🗒</span>
+        <div class="fc-title">Notes</div>
+        <div class="fc-desc">Free-text context for the task — details, links, references.</div>
+      </div>
+      <div class="feature-card">
+        <span class="fc-icon">👤</span>
+        <div class="fc-title">Persona</div>
+        <div class="fc-desc">Tag the task to a person — Wife, Kids, Work. Filter by persona later to focus on what belongs to each role.</div>
+      </div>
+      <div class="feature-card">
+        <span class="fc-icon">🔁</span>
+        <div class="fc-title">Repeat frequency</div>
+        <div class="fc-desc">Daily, weekly, monthly, quarterly, annually, or hourly.</div>
+      </div>
+      <div class="feature-card">
+        <span class="fc-icon">🚦</span>
+        <div class="fc-title">Priority</div>
+        <div class="fc-desc">Low, Medium, or High. Shown as a colour stripe on the card.</div>
+      </div>
+      <div class="feature-card">
+        <span class="fc-icon">🛡</span>
+        <div class="fc-title">Protect from Auto-Ignore</div>
+        <div class="fc-desc">Stops the app from auto-hiding this task if it stays overdue too long. For things you genuinely must not lose track of.</div>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <span class="callout-icon">🎂</span>
+      <div class="callout-body">
+        <div class="callout-title">Birthday or anniversary?</div>
+        <p>If your task title contains "birthday" or "anniversary", the app suggests switching to the People tab — which gives you yearly reminders, countdowns, and one-tap wish shortcuts automatically.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Completing Tasks ── -->
+  <section class="guide-section" id="completing">
+    <h2>Completing tasks</h2>
+    <p>Tap the circle on the right side of any task card, or swipe right, to mark it done. What happens next is designed to feel like a small celebration.</p>
+
+    <h3>The drum roll</h3>
+    <p>Every time you complete a task, the phone plays a short haptic drum roll — light taps building to a single heavy impact — followed by a chime. It's a small ritual that makes completion feel earned rather than administrative.</p>
+
+    <h3>Log as a win?</h3>
+    <p>After completing any task, a toast nudge appears at the bottom of the screen for four seconds:</p>
+
+    <div class="toast-demo">
+      <div class="toast">
+        <div class="toast-icon">🏆</div>
+        <div class="toast-body">
+          <div class="toast-title">Log as a win?</div>
+          <div class="toast-sub">Call dentist and book appointment</div>
+        </div>
+        <div class="toast-btn green">Log it</div>
+      </div>
+      <div class="toast-caption">Tap "Log it" to open the Wins journal pre-filled with the task name. Dismiss by waiting or tapping ✕.</div>
+    </div>
+
+    <p>Wins are for the completions that feel significant — not every task needs to be logged. The nudge auto-dismisses if you ignore it.</p>
+
+    <h3>Log to Activity? (recurring tasks)</h3>
+    <p>If the task you just completed is a recurring one — a weekly gym session, a daily water target — a second toast appears alongside the win nudge:</p>
+
+    <div class="toast-demo">
+      <div class="toast">
+        <div class="toast-icon">💪</div>
+        <div class="toast-body">
+          <div class="toast-title">Log to Activity?</div>
+          <div class="toast-sub">Morning run — 30 min</div>
+        </div>
+        <div class="toast-btn teal">Track it</div>
+      </div>
+      <div class="toast-caption">Tap "Track it" to jump to the Activity Log tab and record the habit entry.</div>
+    </div>
+  </section>
+
+  <!-- ── Recurring Tasks ── -->
+  <section class="guide-section" id="recurring">
+    <h2>Recurring tasks</h2>
+    <p>Any task can be set to repeat. Tap <strong>More options</strong> when adding a task and choose a frequency.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Frequency</th><th>How it works</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Daily</strong></td><td>Every day, or weekdays only. Pre-generates 30 days ahead and extends automatically.</td></tr>
+          <tr><td><strong>Weekly</strong></td><td>Pick specific days (Mon/Wed/Fri…). Pre-generates 8 weeks ahead and extends.</td></tr>
+          <tr><td><strong>Monthly</strong></td><td>Choose <em>Start Date</em> (same date each month), <em>Day of Month</em>, or <em>Weekday Pattern</em> (e.g. first Monday). 12 months generated ahead.</td></tr>
+          <tr><td><strong>Quarterly</strong></td><td>Every 3 months. 4 instances generated ahead.</td></tr>
+          <tr><td><strong>Annually</strong></td><td>Once a year. 3 years generated ahead.</td></tr>
+          <tr><td><strong>Hourly</strong></td><td>Repeats every hour between a start and end time. Useful for medication, hydration, or breaks.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Deleting a recurring task</h3>
+    <p>When you swipe to delete a recurring task, the app asks:</p>
+    <div class="pill-row">
+      <span class="pill coral">🗑 Delete this event only</span>
+      <span class="pill coral">🗑 Delete entire series</span>
+    </div>
+    <p>"This event only" removes just the one occurrence. "Entire series" removes all future instances.</p>
+
+    <div class="callout tip">
+      <span class="callout-icon">💡</span>
+      <div class="callout-body">
+        <div class="callout-title">Monthly repeat — "Start From" date</div>
+        <p>When you choose <em>Day of Month</em> or <em>Weekday Pattern</em>, the date picker label changes to <strong>Start From</strong>. This sets the month the series begins — the actual first occurrence is calculated from the pattern.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Bills & Renewals ── -->
+  <section class="guide-section" id="bills">
+    <h2>Bills &amp; Renewals</h2>
+    <p>ScatteredBrain includes a built-in recurring activity scheduler for the bills and renewals that come around every year without fail — electricity, internet, car insurance, income tax. Instead of creating these as recurring tasks manually, the app offers to schedule them for you.</p>
+
+    <h3>The annual scheduling prompt</h3>
+    <p>When you open the app and there are bills or renewals not yet scheduled for the current year, a sheet appears automatically. It shows every enabled activity with how many tasks it would add and when.</p>
+
+    <ol class="steps">
+      <li class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Select what to schedule</div>
+          <div class="step-desc">All enabled activities are pre-checked. Deselect anything you handle differently or don't want on your task list.</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Tap "Add to [year]" or "Schedule remaining months"</div>
+          <div class="step-desc">If it's already mid-year, the button reads "Schedule remaining [Month]–Dec" so only the months still ahead are created — not the ones already past.</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Tasks appear on your dashboard</div>
+          <div class="step-desc">Each bill or renewal is added as a regular task on its due date, where it can be completed, snoozed, or rescheduled like any other task.</div>
+        </div>
+      </li>
+    </ol>
+
+    <h3>Built-in activities</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Activity</th><th>Frequency</th><th>Default due</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>⚡ Electricity Bill</strong></td><td>Monthly</td><td>5th of each month</td></tr>
+          <tr><td><strong>💧 Water Bill</strong></td><td>Monthly</td><td>7th of each month</td></tr>
+          <tr><td><strong>📡 Internet Bill</strong></td><td>Monthly</td><td>10th of each month</td></tr>
+          <tr><td><strong>📱 Mobile Bill</strong></td><td>Monthly</td><td>15th of each month</td></tr>
+          <tr><td><strong>💳 Credit Card Bill</strong></td><td>Monthly</td><td>20th of each month</td></tr>
+          <tr><td><strong>🏛️ Quarterly Tax</strong></td><td>Quarterly</td><td>15th Jan / Apr / Jul / Oct</td></tr>
+          <tr><td><strong>🚗 Car Insurance</strong></td><td>Annual</td><td>1 March</td></tr>
+          <tr><td><strong>🏥 Health Insurance</strong></td><td>Annual</td><td>1 April</td></tr>
+          <tr><td><strong>🔧 Car Service</strong></td><td>Annual</td><td>1 June</td></tr>
+          <tr><td><strong>📋 Income Tax Filing</strong></td><td>Annual</td><td>31 July</td></tr>
+          <tr><td><strong>🪪 Vehicle Registration</strong></td><td>Annual</td><td>1 September</td></tr>
+          <tr><td><strong>🏠 Home/Renters Insurance</strong></td><td>Annual</td><td>15 January</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>AI prompts for bills</h3>
+    <p>In the AI Quick-Add view (tap the AI button in QuickCapture), typing keywords like <strong>"pay"</strong>, <strong>"bill"</strong>, <strong>"insurance"</strong>, <strong>"renewal"</strong>, or <strong>"service my car"</strong> shows a row of chips for common recurring activities. Tap one to pre-fill the task input with the right title and category.</p>
+
+    <div class="callout tip">
+      <span class="callout-icon">💡</span>
+      <div class="callout-body">
+        <div class="callout-title">Enabling and disabling activities</div>
+        <p>The scheduling prompt only shows activities you've enabled. To customise the list — disable activities you don't need, change due dates, or add your own — go to <strong>Settings → Recurring Activities</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── AI Quick-Add ── -->
+  <section class="guide-section" id="ai">
+    <h2>AI Quick-Add</h2>
+    <p>Type naturally and let the app figure out the task, date, and priority. No special syntax — just say it like you'd say it to a friend.</p>
+
+    <h3>How to access it</h3>
+    <p>Tap the purple <strong>+</strong> FAB → QuickCapture opens → tap the <strong>AI</strong> button in the top right corner of the sheet. The view switches to a text-first input with suggested prompt chips.</p>
+
+    <ol class="steps">
+      <li class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Type what you need to do</div>
+          <div class="step-desc">"Pay rent tomorrow morning urgent", "book dentist next Tuesday", "call mum this evening".</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">The app reads it</div>
+          <div class="step-desc">Dates, times, priorities, and task names are extracted on-device. A preview shows what was detected before anything is saved.</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Review and confirm</div>
+          <div class="step-desc">Adjust anything in the preview card, then tap Save. The AI is a first draft, not a final answer.</div>
+        </div>
+      </li>
+    </ol>
+
+    <h3>On-device vs. cloud AI</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Mode</th><th>Privacy</th><th>Setup</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>On-device (default)</strong></td>
+            <td>Nothing leaves your phone</td>
+            <td>Works immediately, no API key needed</td>
+          </tr>
+          <tr>
+            <td><strong>Cloud (Gemini / OpenAI / Claude)</strong></td>
+            <td>Text is sent to the provider's servers</td>
+            <td>Paste your own API key in Settings → AI Engine</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout note">
+      <span class="callout-icon">🔑</span>
+      <div class="callout-body">
+        <div class="callout-title">API keys are stored securely</div>
+        <p>Your API key is stored in the iOS Keychain — not in a file that gets backed up or synced. You'll need to re-enter it if you reinstall the app.</p>
+      </div>
+    </div>
+
+    <h3>Quick-add a birthday or special date</h3>
+    <p>Inside the AI view, tap <strong>People</strong> in the segmented picker at the top. Type a date in plain English — the app figures out the name, date, and occasion type automatically.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>What you type</th><th>What gets saved</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><em>Today is Priya's birthday</em></td><td>Birthday for Priya on today's date</td></tr>
+          <tr><td><em>Our anniversary is June 12</em></td><td>Wedding Anniversary on 12 Jun</td></tr>
+          <tr><td><em>Rajan turns 30 today</em></td><td>Birthday for Rajan, birth year recorded</td></tr>
+          <tr><td><em>Dad's birthday is March 5 1960</em></td><td>Birthday for Dad on 5 Mar 1960</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout tip">
+      <span class="callout-icon">📸</span>
+      <div class="callout-body">
+        <div class="callout-title">Great for Instagram birthdays</div>
+        <p>Spotted a birthday wish on Instagram? Open AI Quick-Add → switch to People → type the name and "birthday today" → it's saved in two seconds.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── People Tab ── -->
+  <section class="guide-section" id="people">
+    <h2>People tab</h2>
+    <p>The People tab is a relationship manager — not just a birthday calendar. It tracks everyone's special dates and also surfaces any tasks you've added that relate to that person.</p>
+
+    <h3>Adding a person</h3>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Tap + in the top right</div>
+          <div class="step-desc">The app shows contact suggestions from your phone's Contacts app. Tap a chip to pre-fill the name and phone number, or enter manually.</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Add special dates</div>
+          <div class="step-desc">Tap <strong>Add Date</strong> to add a birthday, anniversary, engagement, pet birthday, or custom occasion. Multiple dates per person are supported.</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Add relationships (optional)</div>
+          <div class="step-desc">Link the person to a relative — e.g. a "Spouse" relationship with their own birthday. One contact card can track an entire family.</div>
+        </div>
+      </li>
+    </ol>
+
+    <h3>Viewing a contact's details</h3>
+    <p><strong>Tap anywhere on a contact row</strong> to open their detail view. It shows:</p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <span class="fc-icon">📅</span>
+        <div class="fc-title">Upcoming dates</div>
+        <div class="fc-desc">All their special dates sorted by how soon they are, with a countdown badge (Today / in 3d / in 14d…).</div>
+      </div>
+      <div class="feature-card">
+        <span class="fc-icon">✅</span>
+        <div class="fc-title">Related tasks</div>
+        <div class="fc-desc">Any task whose title or notes mentions this person's name — automatically surfaced, no tagging required.</div>
+      </div>
+      <div class="feature-card">
+        <span class="fc-icon">📞</span>
+        <div class="fc-title">Phone &amp; relationships</div>
+        <div class="fc-desc">Their phone number and any linked relatives listed at the top.</div>
+      </div>
+      <div class="feature-card">
+        <span class="fc-icon">✏️</span>
+        <div class="fc-title">Edit contact</div>
+        <div class="fc-desc">Tap the <strong>pencil icon</strong> on the contact row to edit their dates and details. Tapping the row itself opens the detail view.</div>
+      </div>
+    </div>
+
+    <h3>On a person's birthday</h3>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <span class="fc-icon">🎂</span>
+        <div class="fc-title">Countdown badge</div>
+        <div class="fc-desc">Shows days until the occasion. On the day itself, the card highlights and moves to the top.</div>
+      </div>
+      <div class="feature-card">
+        <span class="fc-icon">💬</span>
+        <div class="fc-title">One-tap wish</div>
+        <div class="fc-desc">Tap <strong>Wish 🎉</strong> for a curated set of message templates for WhatsApp, iMessage, or any app.</div>
+      </div>
+      <div class="feature-card">
+        <span class="fc-icon">🎁</span>
+        <div class="fc-title">Add gift task</div>
+        <div class="fc-desc">Tap <strong>Add task</strong> on any birthday card. Opens with the name and occasion pre-filled.</div>
+      </div>
+      <div class="feature-card">
+        <span class="fc-icon">🔔</span>
+        <div class="fc-title">Automatic reminders</div>
+        <div class="fc-desc">The app sends a notification on the morning of every birthday and anniversary — every year, automatically.</div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <span class="callout-icon">🎂</span>
+      <div class="callout-body">
+        <div class="callout-title">Import birthdays from Contacts</div>
+        <p>Tap the sync icon (⟳) in the toolbar to pull birthdays already saved in your phone's Contacts app. The app shows you a preview before adding anything — no duplicates created.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Notes Tab ── -->
+  <section class="guide-section" id="notes">
+    <h2>Notes tab</h2>
+    <p>The Notes tab is your personal logbook — five purpose-built sections for everything that doesn't fit neatly into tasks.</p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <span class="fc-icon">📔</span>
+        <div class="fc-title">Diary</div>
+        <div class="fc-desc">Freeform daily notes. A thought, a memory, a quick recap of the day.</div>
+      </div>
+      <div class="feature-card">
+        <span class="fc-icon">🏆</span>
+        <div class="fc-title">Wins</div>
+        <div class="fc-desc">Log something you're proud of. Small victories count. Useful for performance reviews and days when you feel like you did nothing.</div>
+      </div>
+      <div class="feature-card">
+        <span class="fc-icon">⏳</span>
+        <div class="fc-title">Waiting On</div>
+        <div class="fc-desc">Things you're expecting from other people — a delivery, a bank reply, a colleague's review. Mark as received when it arrives.</div>
+      </div>
+      <div class="feature-card">
+        <span class="fc-icon">🔧</span>
+        <div class="fc-title">Service Log</div>
+        <div class="fc-desc">Track service history for your car, appliances, or home — anything you maintain regularly.</div>
+      </div>
+      <div class="feature-card">
+        <span class="fc-icon">🛡</span>
+        <div class="fc-title">Warranty Tracker</div>
+        <div class="fc-desc">Log purchases with warranty expiry dates. Attach a photo of the receipt. The app reminds you when a warranty is about to expire.</div>
+      </div>
+    </div>
+
+    <h3>Wins journal</h3>
+    <p>The Wins journal tracks a streak — how many consecutive days you've logged at least one win. After completing a task, a <strong>🏆 Log as a win?</strong> nudge appears at the bottom of the screen for four seconds. Tap <strong>Log it</strong> and the journal opens pre-filled with the task name, ready to save with one tap.</p>
+
+    <div class="callout tip">
+      <span class="callout-icon">💡</span>
+      <div class="callout-body">
+        <div class="callout-title">Quick access from Home</div>
+        <p>Tap the <strong>🏆 Wins</strong> chip at the top of the Home tab to open the Wins journal without navigating to the Notes tab.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Activity Log ── -->
+  <section class="guide-section" id="activity">
+    <h2>Activity Log</h2>
+    <p>The Activity tab is a quick daily record for recurring physical and personal habits — without needing a separate tracker app. Log exercise, sleep, water intake, and custom activities in a few taps.</p>
+
+    <h3>Logging an entry</h3>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Tap the Activity tab</div>
+          <div class="step-desc">Or tap <strong>Track it</strong> on the habit nudge toast that appears after completing a recurring task — it takes you directly here.</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Pick a category</div>
+          <div class="step-desc">Built-in types: 🏋️ Gym, 🏃 Run, 🚶 Walk, 🏊 Swim, 🚴 Cycle, ⚽ Sport, 🧘 Yoga, 😴 Sleep, 💧 Water, 🧘‍♂️ Meditation, and more — or create a custom one.</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Add quantity and a note (optional)</div>
+          <div class="step-desc">"30 min run, felt sluggish" — then tap Log. The entry is added with today's date and time.</div>
+        </div>
+      </li>
+    </ol>
+
+    <p>The Activity view shows your recent entries and streak counts per category so you can see patterns over time at a glance.</p>
+
+    <div class="callout tip">
+      <span class="callout-icon">💡</span>
+      <div class="callout-body">
+        <div class="callout-title">Habit nudge after recurring tasks</div>
+        <p>Complete a recurring task (weekly gym session, daily walk reminder…) and a <strong>💪 Log to Activity?</strong> toast appears automatically. Tap <strong>Track it</strong> to jump straight here without navigating manually.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Lock Screen Widget ── -->
+  <section class="guide-section" id="widget">
+    <h2>Lock Screen widget</h2>
+    <p>ScatteredBrain includes a lock screen widget that shows your next upcoming task with a countdown — glanceable without unlocking your phone.</p>
+
+    <h3>Adding the widget</h3>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Long-press your Lock Screen</div>
+          <div class="step-desc">Tap <strong>Customise</strong> and then the widget area below the clock.</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Tap the + button</div>
+          <div class="step-desc">Search for <strong>ScatteredBrain</strong>.</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Choose a widget size</div>
+          <div class="step-desc">Rectangular (title + time), Circular (countdown ring), or Inline (one-line title).</div>
+        </div>
+      </li>
+    </ol>
+
+    <div class="callout tip">
+      <span class="callout-icon">💡</span>
+      <div class="callout-body">
+        <div class="callout-title">Widget not updating?</div>
+        <p>Lock screen widgets refresh on a system schedule, not in real time. Open the app briefly to force a refresh — the widget updates within a few seconds.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Backup ── -->
+  <section class="guide-section" id="backup">
+    <h2>Backup &amp; Restore</h2>
+    <p>Since everything lives on your phone, a backup is your only safety net. ScatteredBrain does this automatically and also lets you do it manually.</p>
+
+    <h3>Automatic backups</h3>
+    <p>The app saves a rolling backup every 6 hours whenever you use it. It keeps the 5 most recent backups.</p>
+
+    <div class="path-display">
+      <span>Files app → On My iPhone →</span> ScatteredBrain <span>→</span> Backups <span>→ ScatteredBrain-YYYY-MM-DD-HHmm.json</span>
+    </div>
+
+    <div class="callout warn">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-body">
+        <div class="callout-title">After an app update</div>
+        <p>iOS updates can rarely wipe app data during a SwiftData migration. Your most recent automatic backup is the fastest way to recover — open Files app, find the latest <code style="font-size:12px;background:var(--bg-card);padding:1px 5px;border-radius:4px;color:var(--teal)">.json</code> in the Backups folder, then follow the restore steps below.</p>
+      </div>
+    </div>
+
+    <h3>Creating a manual backup</h3>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Open Settings (⋯ More → Settings)</div>
+          <div class="step-desc">From the Home tab, tap the ⋯ icon in the top right, then Settings.</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Scroll to Backup → Create Backup</div>
+          <div class="step-desc">The app generates a <code style="font-size:12px;background:var(--bg-card);padding:1px 5px;border-radius:4px;color:var(--teal)">ScatteredBrain-Backup-YYYY-MM-DD.json</code> file.</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Tap Share Backup File</div>
+          <div class="step-desc">Save to iCloud Drive, email it to yourself, or AirDrop to your Mac — anywhere outside the phone.</div>
+        </div>
+      </li>
+    </ol>
+
+    <h3>Restoring from a backup</h3>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Settings → Restore from Backup</div>
+          <div class="step-desc">Opens the iOS file picker.</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Navigate to your backup file</div>
+          <div class="step-desc">For an auto-backup: <em>Browse → On My iPhone → ScatteredBrain → Backups</em>. For a manual one, wherever you saved it.</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Tap the file</div>
+          <div class="step-desc">The app shows a summary of what was found. Import is additive — it never overwrites data already on the device.</div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ── Settings ── -->
+  <section class="guide-section" id="settings">
+    <h2>Settings</h2>
+    <p>Open Settings from the Home tab: tap the <strong>⋯ More</strong> icon in the top right, then <strong>Settings</strong>.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Section</th><th>What you can do</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Appearance</strong></td><td>Light, dark, or system theme. Choose a region (India, US, UK, AU, Global) to adapt the app's tone and date formatting.</td></tr>
+          <tr><td><strong>Notifications</strong></td><td>Check notification permission status. All task and birthday reminders are set automatically.</td></tr>
+          <tr><td><strong>Categories</strong></td><td>Add, edit, or delete task categories. Pick an emoji and colour for each.</td></tr>
+          <tr><td><strong>Personas</strong></td><td>Add people tags for filtering tasks — "Wife", "Kids", "Work".</td></tr>
+          <tr><td><strong>AI Engine</strong></td><td>Choose on-device (default) or a cloud provider. Paste your API key for Gemini, OpenAI, or Claude.</td></tr>
+          <tr><td><strong>Recurring Activities</strong></td><td>Enable or disable built-in bills and renewals. Customise due dates. Add your own.</td></tr>
+          <tr><td><strong>Auto-Ignore</strong></td><td>Tasks overdue past a threshold are auto-hidden to keep the dashboard clean. Set the threshold here (default: 15 days).</td></tr>
+          <tr><td><strong>Backup</strong></td><td>Create a manual backup, share it, restore from a file, and see when the last auto-backup ran.</td></tr>
+          <tr><td><strong>Import from Contacts</strong></td><td>Pull birthdays from your phone's Contacts app into the People tab.</td></tr>
+          <tr><td><strong>Purge data</strong></td><td>Delete specific data types (tasks, people, habits…) or everything at once. Irreversible — backup first.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── Tips ── -->
+  <section class="guide-section" id="tips">
+    <h2>Tips &amp; tricks</h2>
+
+    <div class="callout gold">
+      <span class="callout-icon">✨</span>
+      <div class="callout-body">
+        <div class="callout-title">QuickCapture is for brain-dumping</div>
+        <p>Don't overthink QuickCapture. Type it fast, pick a rough time, hit Capture. You can always tap the card later to refine it — the goal is to get it out of your head, not to fill in every field right now.</p>
+      </div>
+    </div>
+
+    <div class="callout gold">
+      <span class="callout-icon">✨</span>
+      <div class="callout-body">
+        <div class="callout-title">Use categories for bulk actions</div>
+        <p>Long-press a category chip in the Home tab to bulk-complete or bulk-ignore all tasks in that category at once — useful for clearing out a finished project in one move.</p>
+      </div>
+    </div>
+
+    <div class="callout gold">
+      <span class="callout-icon">✨</span>
+      <div class="callout-body">
+        <div class="callout-title">Contact detail view finds related tasks automatically</div>
+        <p>Tap any person in the People tab. The detail view scans your task list and shows every task that mentions their name — no manual tagging needed. Good for seeing everything you're doing for or with that person in one place.</p>
+      </div>
+    </div>
+
+    <div class="callout gold">
+      <span class="callout-icon">✨</span>
+      <div class="callout-body">
+        <div class="callout-title">Schedule bills for the rest of the year, not from January</div>
+        <p>If you open the Bills &amp; Renewals prompt in, say, August, it shows "Schedule remaining Aug–Dec" — so only tasks from now through December are created. No duplicate tasks for months already past.</p>
+      </div>
+    </div>
+
+    <div class="callout gold">
+      <span class="callout-icon">✨</span>
+      <div class="callout-body">
+        <div class="callout-title">Search finds everything</div>
+        <p>Tap the 🔍 icon to search across all tasks — including completed and skipped ones. Filter by category, persona, or status. Great for finding what you did last month.</p>
+      </div>
+    </div>
+
+    <div class="callout gold">
+      <span class="callout-icon">✨</span>
+      <div class="callout-body">
+        <div class="callout-title">Protect critical tasks from Auto-Ignore</div>
+        <p>The app quietly hides tasks that have been overdue for more than 15 days. For things you genuinely must not miss, turn on <strong>Protect from Auto-Ignore</strong> in More Options when creating the task.</p>
+      </div>
+    </div>
+
+    <div class="callout gold">
+      <span class="callout-icon">✨</span>
+      <div class="callout-body">
+        <div class="callout-title">Warranty tracker pays for itself</div>
+        <p>Add your appliances, electronics, and furniture with their warranty end dates. The app reminds you a month before expiry — so you actually get to use the warranty.</p>
+      </div>
+    </div>
+
+    <div class="callout gold">
+      <span class="callout-icon">✨</span>
+      <div class="callout-body">
+        <div class="callout-title">Waiting On keeps other people accountable</div>
+        <p>Every time you're waiting for a reply, a delivery, or an approval — log it in Waiting On. When it arrives, mark it received. No more "did I follow up on that?" anxiety.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <p style="text-align:center; color: var(--text-3); font-size:14px; margin-top:8px;">
+      Built by <a href="https://aniketshetty.com" style="color:var(--accent); text-decoration:none;">Aniket Shetty</a> · Free, ad-free, always private
+    </p>
+  </section>
+
+</main>
+</div>
+
+<script>
+  const root = document.documentElement;
+  const toggle = document.getElementById('themeToggle');
+  const saved = localStorage.getItem('sb-guide-theme');
+  if (saved) root.setAttribute('data-theme', saved);
+
+  toggle.addEventListener('click', () => {
+    const current = root.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('sb-guide-theme', next);
+  });
+
+  const menuToggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+
+  menuToggle.addEventListener('click', () => sidebar.classList.toggle('open'));
+
+  window.closeMobileNav = function() { sidebar.classList.remove('open'); };
+
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth <= 860 &&
+        sidebar.classList.contains('open') &&
+        !sidebar.contains(e.target) &&
+        e.target !== menuToggle) {
+      sidebar.classList.remove('open');
+    }
+  });
+
+  const sections = document.querySelectorAll('[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
