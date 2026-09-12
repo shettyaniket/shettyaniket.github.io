@@ -501,7 +501,7 @@
   </div>
   <div class="nav-section">
     <span class="nav-section-label">Other tabs</span>
-    <a class="nav-link" href="#loaniq" onclick="closeMobileNav()"><span class="nav-icon">💳</span> LoanIQ · My Loans</a>
+    <a class="nav-link" href="#loaniq" onclick="closeMobileNav()"><span class="nav-icon">💳</span> My Loans</a>
     <a class="nav-link" href="#benchmarks" onclick="closeMobileNav()"><span class="nav-icon">⚖️</span> Benchmarks &amp; Risk</a>
     <a class="nav-link" href="#settings" onclick="closeMobileNav()"><span class="nav-icon">⚙️</span> Settings</a>
   </div>
@@ -534,14 +534,13 @@
   <section class="guide-section" id="first-minute">
     <div class="section-eyebrow">Getting started</div>
     <h2>Your first minute</h2>
-    <p>The app opens with a sample deal already filled in — a 2BHK in Pune — so you see a complete verdict before typing anything. Replace the sample numbers with yours:</p>
+    <p>On first launch the app walks you through <strong>Quick Start</strong> — a welcome page and two short screens that ask for the six things a verdict needs. If you'd rather explore first, tap <em>Use sample deal</em> and play with the built-in 2BHK (it carries a SAMPLE badge until you rename it).</p>
     <ol class="steps">
-      <li class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Type the agreement value</div><p class="step-desc">Under <strong>Property</strong>, tap the box next to Agreement value, type <code>85</code> and leave the unit chip on <strong>L</strong> for lakhs (or switch to <strong>Cr</strong>). Tapping a box clears it so you can type straight away; leave it empty and the old value comes back.</p></div></li>
-      <li class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Ready or under construction?</div><p class="step-desc">Use the switch at the top of the Property card. Under construction adds a <strong>Months to handover</strong> control and charges 5% GST; Ready (with Occupancy Certificate) charges none.</p></div></li>
-      <li class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Expected monthly rent</div><p class="step-desc">What the flat would rent for today. The app escalates it 5% a year and allows 5% vacancy — both adjustable under <em>More</em>.</p></div></li>
-      <li class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">The loan</div><p class="step-desc">Under <strong>Home loan</strong>, set the down payment (or type the loan amount — they stay in sync), the interest rate and the tenure.</p></div></li>
-      <li class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Scroll up</div><p class="step-desc">The verdict at the top has already recomputed. Everything updates live as you change any input.</p></div></li>
+      <li class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">About the flat</div><p class="step-desc">Name the deal (e.g. <em>2BHK, Hinjewadi</em>), pick the state, say whether it's ready or under construction (and months until handover), and type the flat price and the rent it would fetch. Money boxes have ₹ / L / Cr chips; tapping a box clears it so you can type straight away.</p></div></li>
+      <li class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">About the loan</div><p class="step-desc">Down payment %, interest rate and loan tenure. The loan amount is shown as you go.</p></div></li>
+      <li class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">See my verdict</div><p class="step-desc">The deal is saved and you land on its verdict. Everything — stamp-duty details, builder charges, prepayments, tax slab — can be changed later from the deal screen, and every change recomputes live.</p></div></li>
     </ol>
+    <p>The same Quick Start runs whenever you choose <strong>New deal</strong> from the Deals menu. To rename a deal, just tap its name above the verdict and type.</p>
     <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><div class="callout-title">Every ⓘ is a plain-English explanation</div><p>Next to nearly every label and number there's a small ⓘ. Tap it for a two-line explanation of what the term means and why it matters — PLC, MODT, Section 24(b), XIRR, all of it.</p></div></div>
   </section>
 
@@ -550,11 +549,11 @@
     <div class="section-eyebrow">Getting started</div>
     <h2>The three tabs</h2>
     <div class="feature-grid">
-      <div class="feature-card"><span class="fc-icon">🏢</span><div class="fc-title">LoanYield Studio</div><div class="fc-desc">One property plus its loan. The verdict, the chart, the inputs, the schedule and the AI memo. This is where you'll spend your time.</div></div>
-      <div class="feature-card"><span class="fc-icon">💳</span><div class="fc-title">LoanIQ · My Loans</div><div class="fc-desc">A vault for loans that aren't tied to a property deal — an existing home loan, a car loan, a LAP. Track them and simulate prepayments.</div></div>
+      <div class="feature-card"><span class="fc-icon">🏢</span><div class="fc-title">Deal</div><div class="fc-desc">One property plus its loan. The verdict, the chart, the inputs, the schedule and the AI memo. This is where you'll spend your time.</div></div>
+      <div class="feature-card"><span class="fc-icon">💳</span><div class="fc-title">My Loans</div><div class="fc-desc">A vault for loans that aren't tied to a property deal — an existing home loan, a car loan, a LAP. Track them and simulate prepayments.</div></div>
       <div class="feature-card"><span class="fc-icon">⚖️</span><div class="fc-title">Benchmarks &amp; Risk</div><div class="fc-desc">The selected deal's return against a Nifty SIP, a REIT and prepaying debt, plus a table of shocks: rates up, rent down, handover late.</div></div>
     </div>
-    <p>On iPad the Studio becomes two columns — inputs on the left, verdict, chart and tables on the right — and the tab bar moves to the top.</p>
+    <p>On iPad the Deal tab becomes two columns — inputs on the left, verdict, chart and tables on the right — and the tab bar moves to the top.</p>
   </section>
 
   <!-- ── Verdict ── -->
@@ -655,7 +654,7 @@
     <div class="table-wrap"><table>
       <thead><tr><th>Input</th><th>Notes</th></tr></thead>
       <tbody>
-        <tr><td><strong>Agreement value</strong></td><td>The price in the registered agreement (base cost; floor rise and PLC are added under More). Stamp duty and GST are charged on this. The hint underneath shows your state's duty, the registration fee and the GST rate live.</td></tr>
+        <tr><td><strong>Flat price (agreement value)</strong></td><td>The price in the registered agreement (base cost; floor rise and PLC are added under More). Stamp duty and GST are charged on this. The hint underneath shows your state's duty, the registration fee and the GST rate live.</td></tr>
         <tr><td><strong>Months to handover</strong></td><td>Shown only for under-construction. Drives pre-EMI, the shaded gestation block, and the "Cash before handover" tile.</td></tr>
         <tr><td><strong>Expected monthly rent</strong></td><td>Today's rent for this flat. Escalates yearly; vacancy is deducted.</td></tr>
       </tbody>
@@ -685,7 +684,7 @@
         <tr><td><strong>Loan amount</strong></td><td>The same number the other way round. Type the sanctioned amount and the down-payment % follows, or vice versa. Banks usually cap at 75–90% LTV.</td></tr>
         <tr><td><strong>Interest rate</strong></td><td>Repo-linked floating rate. Rule of thumb: every 25 bps changes a ₹70 L / 20-year EMI by about ₹1,100.</td></tr>
         <tr><td><strong>Monthly EMI</strong></td><td>Read-only — the plain EMI before any step-up.</td></tr>
-        <tr><td><strong>Tenure</strong></td><td>5–30 years. Longer = smaller EMI but far more total interest.</td></tr>
+        <tr><td><strong>Loan tenure</strong></td><td>5–30 years. Longer = smaller EMI but far more total interest.</td></tr>
       </tbody>
     </table></div>
     <h3>More: loan charges, MaxGain &amp; joint loan</h3>
@@ -732,11 +731,11 @@
   <section class="guide-section" id="deals">
     <div class="section-eyebrow">Deals</div>
     <h2>Saving &amp; switching deals</h2>
-    <p>Every change is saved automatically. The <strong>Deals</strong> menu (archive icon, top left) lists every saved deal and lets you:</p>
+    <p>Every change is saved automatically. To rename a deal, tap its name just above the verdict and type. The <strong>Deals</strong> menu (archive icon, top left) lists every saved deal and lets you:</p>
     <ul style="color:var(--text-2);font-size:15px;line-height:1.75;padding-left:20px">
-      <li><strong>New deal</strong> — starts from the sample numbers.</li>
+      <li><strong>New deal</strong> — runs Quick Start for a fresh deal.</li>
       <li><strong>Duplicate</strong> — copies the current deal, loan and prepayments included. The fastest way to test a variation without losing the original.</li>
-      <li><strong>Rename</strong> · <strong>Delete</strong>.</li>
+      <li><strong>Delete</strong>.</li>
       <li><strong>Compare two deals</strong> — see below.</li>
     </ul>
     <p>The Benchmarks tab always shows the deal selected here.</p>
@@ -776,7 +775,7 @@
   <!-- ── LoanIQ ── -->
   <section class="guide-section" id="loaniq">
     <div class="section-eyebrow">Other tabs</div>
-    <h2>LoanIQ · My Loans</h2>
+    <h2>My Loans</h2>
     <p>A separate vault for loans that aren't attached to a property deal — the home loan you already have, a car loan, a personal loan, a loan against property, or a MaxGain overdraft. Add one with the + button (name, type, outstanding principal, rate, remaining tenure). The list shows your total debt, combined EMI, lifetime interest and the date you'll be debt-free.</p>
     <p>Tap a loan for its detail screen: EMI and closing month versus the plain schedule, a balance chart, all the structure controls (step-up, MaxGain, joint borrower), and the same tap-to-prepay schedule as the Studio.</p>
     <div class="callout tip"><div class="callout-icon">🗣️</div><div class="callout-body"><div class="callout-title">Siri</div><p>"Ask LoanYield IQ what happens if I prepay" — Siri asks for the amount in lakhs and the month, and tells you the interest and months saved on your first standalone loan.</p></div></div>
@@ -798,12 +797,14 @@
   <section class="guide-section" id="settings">
     <div class="section-eyebrow">Other tabs</div>
     <h2>Settings</h2>
-    <p>Gear icon in the Studio toolbar.</p>
+    <p>Gear icon in the Deal toolbar. The <strong>?</strong> next to it opens this guide.</p>
     <div class="table-wrap"><table>
       <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
       <tbody>
         <tr><td><strong>Appearance</strong></td><td>System · Light · Dark.</td></tr>
-        <tr><td><strong>AI engine</strong></td><td>On-device (Apple Intelligence, default) or bring your own key for Anthropic Claude, Google Gemini or OpenAI. Keys are stored in the iOS Keychain (after-first-unlock, this device only) and used only to call that provider directly. The model name is editable.</td></tr>
+        <tr><td><strong>Help</strong></td><td>Links to this guide, the privacy policy, and email.</td></tr>
+        <tr><td><strong>AI memo</strong></td><td>Shows whether the memo runs on-device (Apple Intelligence) or via the built-in rules engine.</td></tr>
+        <tr><td><strong>Advanced: bring your own AI key</strong></td><td>Optional. Expand to pick Anthropic Claude, Google Gemini or OpenAI and paste a key. Keys are stored in the iOS Keychain (after-first-unlock, this device only) and used only to call that provider directly. The model name is editable.</td></tr>
       </tbody>
     </table></div>
     <div class="callout warn"><div class="callout-icon">🔐</div><div class="callout-body"><div class="callout-title">You don't need a key</div><p>The memo works without one. Cloud keys are for people who already have them; the app never sends your deal anywhere unless you add a key and press Generate.</p></div></div>
