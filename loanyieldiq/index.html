@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LoanYield IQ — Should I buy this flat? | Aniket Shetty</title>
+  <meta name="description" content="LoanYield IQ is a free, offline iOS app that gives Indian home buyers an honest verdict on a property deal — all-in cost with stamp duty and GST, pre-EMI cash before handover, Section 24 tax shield, 10-year leveraged return, and how the same cheques would do in a Nifty SIP. No account, no ads.">
+  <link rel="stylesheet" href="/assets/style.css">
+  <style>
+    :root { --ly-emerald: #14c48f; --ly-sky: #4cc3fb; --ly-crimson: #fb4d6d; --ly-amber: #ffc43d; --ly-purple: #b07cff; }
+
+    .ly-spot {
+      display: grid; grid-template-columns: 1fr 250px; gap: 52px; align-items: center;
+      padding: 64px 0; border-top: 1px solid var(--border);
+    }
+    .ly-spot.flip { grid-template-columns: 250px 1fr; }
+    .ly-spot.flip .ly-copy { order: 2; }
+    .ly-spot.flip .ly-shot { order: 1; }
+    .ly-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ly-emerald); margin-bottom: 12px; }
+    .ly-spot h2 { font-size: clamp(20px, 3vw, 28px); font-weight: 700; letter-spacing: -.02em; line-height: 1.15; margin: 0 0 14px; text-wrap: balance; }
+    .ly-spot p { color: var(--muted); font-size: 15px; line-height: 1.7; margin: 0 0 12px; max-width: 40ch; }
+    .ly-spot p:last-of-type { margin-bottom: 0; }
+    .ly-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .ly-tag { font-size: 12px; font-weight: 600; padding: 4px 11px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); color: var(--muted); }
+    .ly-tag.green { background: rgba(20,196,143,.1); border-color: rgba(20,196,143,.25); color: var(--ly-emerald); }
+    .ly-tag.sky   { background: rgba(76,195,251,.1); border-color: rgba(76,195,251,.25); color: var(--ly-sky); }
+    .ly-tag.red   { background: rgba(251,77,109,.1); border-color: rgba(251,77,109,.25); color: var(--ly-crimson); }
+    .ly-tag.amber { background: rgba(255,196,61,.1); border-color: rgba(255,196,61,.25); color: var(--ly-amber); }
+    .ly-tag.purple{ background: rgba(176,124,255,.1); border-color: rgba(176,124,255,.25); color: var(--ly-purple); }
+
+    .ly-shot { display: flex; justify-content: center; }
+    .ly-shot img {
+      width: 250px; border-radius: 34px; border: 2.5px solid var(--border); display: block;
+      box-shadow: 0 24px 64px rgba(0,0,0,.45), 0 0 48px rgba(20,196,143,.14);
+    }
+    .ly-shot img.card { width: 250px; border-radius: 16px; }
+
+    /* Problem / verdict strip */
+    .ly-problem { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px; }
+    .ly-problem .p {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px;
+    }
+    .ly-problem .p b { display: block; font-size: 30px; font-weight: 800; letter-spacing: -.02em; margin-bottom: 6px; }
+    .ly-problem .p span { color: var(--muted); font-size: 14px; line-height: 1.6; }
+    .ly-problem .p.red b { color: var(--ly-crimson); }
+    .ly-problem .p.amber b { color: var(--ly-amber); }
+    .ly-problem .p.green b { color: var(--ly-emerald); }
+
+    /* Verdict demo pills */
+    .ly-verdicts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+    .ly-v { flex: 1; min-width: 150px; border-radius: 14px; padding: 12px 14px; border: 1px solid; background: var(--surface); }
+    .ly-v small { display: block; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .ly-v b { font-size: 17px; font-weight: 800; }
+    .ly-v em { display: block; font-style: normal; font-size: 13px; color: var(--muted); margin-top: 2px; }
+    .ly-v.red   { border-color: rgba(251,77,109,.4); }  .ly-v.red b { color: var(--ly-crimson); }
+    .ly-v.amber { border-color: rgba(255,196,61,.4); }  .ly-v.amber b { color: var(--ly-amber); }
+    .ly-v.green { border-color: rgba(20,196,143,.4); }  .ly-v.green b { color: var(--ly-emerald); }
+
+    /* Assumptions table */
+    .ly-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 18px; }
+    .ly-table th { text-align: left; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    .ly-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); color: var(--muted); vertical-align: top; }
+    .ly-table td:first-child { color: var(--text); font-weight: 600; white-space: nowrap; }
+    .ly-table tr:last-child td { border-bottom: none; }
+    .ly-table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+
+    .ly-honest { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+    .ly-honest .h { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+    .ly-honest h3 { margin: 0 0 8px; font-size: 16px; }
+    .ly-honest ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14px; line-height: 1.7; }
+
+    @media (max-width: 780px) {
+      .ly-spot, .ly-spot.flip { grid-template-columns: 1fr; gap: 32px; }
+      .ly-spot .ly-shot, .ly-spot.flip .ly-shot { order: 1; }
+      .ly-spot .ly-copy, .ly-spot.flip .ly-copy { order: 2; }
+      .ly-spot p { max-width: 100%; }
+      .ly-problem, .ly-honest { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/">Aniket Shetty</a>
+      <nav class="nav">
+        <a href="/#apps">Apps</a>
+        <a href="/#story">The Story</a>
+        <a href="/support/">Support</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="wrap">
+      <div class="app-hero">
+        <div class="big-icon" style="background:none;padding:0;overflow:hidden;"><img src="/assets/icons/loanyieldiq.png" alt="LoanYield IQ app icon" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+        <div>
+          <span class="os-tag">iPhone &amp; iPad · iOS 18+</span>
+          <h1>LoanYield IQ</h1>
+          <p class="lede">Should I buy this flat? LoanYield IQ is a free, offline app that answers that question honestly for Indian home buyers. Type in the agreement value, the rent it would fetch, and your loan — and it works out the <em>all-in</em> cost with stamp duty, registration and GST for your state, the cash you'll burn on pre-EMI before an under-construction flat is handed over, the Section 24 tax shield on your rent and interest, your true 10-year return with the loan in the picture, and what the very same cheques would have earned in a Nifty SIP or by prepaying debt. Then it gives you a one-line verdict — Buy, Marginal, or Rent + SIP instead — under three price-growth scenarios, so you can see exactly what the decision hinges on. Every number has an ⓘ that explains it in plain English. No account, no ads, nothing leaves your phone.</p>
+          <div class="btn-row">
+            <a class="btn soon" href="#">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 1.5c.1 1-.3 2-.9 2.8-.7.8-1.7 1.4-2.7 1.3-.1-1 .4-2 1-2.7.6-.8 1.7-1.3 2.6-1.4zM19 17.3c-.5 1.1-.7 1.6-1.3 2.6-.9 1.4-2.1 3.1-3.6 3.1-1.3 0-1.7-.9-3.5-.8-1.8 0-2.2.8-3.5.8-1.5 0-2.6-1.5-3.5-2.9-2.5-3.9-2.8-8.5-1.2-11 1-1.6 2.6-2.5 4.1-2.5 1.5 0 2.5.9 3.7.9 1.2 0 1.9-.9 3.7-.9 1.3 0 2.7.7 3.7 2-3.3 1.8-2.8 6.5.9 8.6z"/></svg>
+              Coming soon on the App Store
+            </a>
+            <a class="btn secondary" href="/loanyieldiq/guide/">User Guide</a>
+            <a class="btn secondary" href="/loanyieldiq/privacy/">Privacy</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE PROBLEM -->
+    <section class="pad pad-t">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>The bank calculator tells you the EMI. It doesn't tell you the truth.</h2>
+          <p>A ₹85 lakh flat in Pune is not an ₹85 lakh decision. Here's what a typical brochure leaves out.</p>
+        </div>
+        <div class="ly-problem">
+          <div class="p red"><b>+ ₹16 L</b><span>Stamp duty, registration, GST, builder extras and loan charges on top of the agreement value. The bank finances none of it — it's your cheque on day one.</span></div>
+          <div class="p amber"><b>₹5.7 L</b><span>Pre-EMI interest you pay during 18 months of construction while also paying rent somewhere else and receiving nothing. Nobody puts this on the cost sheet.</span></div>
+          <div class="p green"><b>2.8%</b><span>The rent yield after vacancy and property tax — against a loan that costs 8.5%. That gap is the real question, and it's the one the app is built to answer.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE GRID -->
+    <section class="pad pad-t">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Everything a good CA would check, in one screen.</h2>
+          <p>Three tabs. A deal studio, a loan vault, and the benchmarks that keep the verdict honest.</p>
+        </div>
+        <div class="features">
+          <div class="feature">
+            <h3>✅ A verdict, not a dashboard</h3>
+            <p>Buy · Marginal · Rent + SIP instead — with one plain-English sentence on why, the three numbers that drive it, and a colour that means something.</p>
+          </div>
+          <div class="feature">
+            <h3>🎯 Three price-growth scenarios</h3>
+            <p>The verdict is shown under Cautious, Base and Hopeful appreciation. If it only turns to "Buy" under Hopeful, you're betting on the market, not the flat — and the app says so.</p>
+          </div>
+          <div class="feature">
+            <h3>🧾 All-in cost, state by state</h3>
+            <p>Stamp duty with the women's rebate, Maharashtra's ₹30,000 registration cap, GST at 5% / 1% / 0% depending on OC and affordable-housing status, floor rise, PLC, advance maintenance, MODT and franking.</p>
+          </div>
+          <div class="feature">
+            <h3>🏗️ Under-construction economics</h3>
+            <p>Months to handover, progressive disbursement, pre-EMI drag and the cash cushion you need before keys — the part every other calculator skips.</p>
+          </div>
+          <div class="feature">
+            <h3>🏦 A real loan model</h3>
+            <p>EMI, a 10% annual step-up that closes a 20-year loan in about 10, lump-sum prepayments in any month, joint-borrower tax caps, and MaxGain-style overdraft offset.</p>
+          </div>
+          <div class="feature">
+            <h3>📉 Section 24 done properly</h3>
+            <p>30% standard repair deduction on net rent (24a) and the ₹2 L / ₹4 L interest shield (24b), at your marginal slab, feeding the true post-tax cash flow.</p>
+          </div>
+          <div class="feature">
+            <h3>⚖️ Benchmarks &amp; risk</h3>
+            <p>Your leveraged 10-year XIRR against a Nifty 50 SIP (post-LTCG), a commercial REIT, and the guaranteed return of prepaying debt — plus rate, rent, vacancy and delay shocks.</p>
+          </div>
+          <div class="feature">
+            <h3>💬 Ask in plain English</h3>
+            <p>"Prepay 5 lakhs at month 18", "50 bps hike", "delay handover 12 months" — type it or tap a chip, and every curve on screen morphs.</p>
+          </div>
+          <div class="feature">
+            <h3>🔀 Compare two deals</h3>
+            <p>Save as many deals as you like, then put two side by side — winner highlighted on every row.</p>
+          </div>
+          <div class="feature">
+            <h3>📤 Share the verdict</h3>
+            <p>One tap renders a card with the verdict, all three scenarios and the key numbers — made for the family WhatsApp group where these decisions actually get made.</p>
+          </div>
+          <div class="feature">
+            <h3>📷 Scan the cost sheet</h3>
+            <p>Point the camera at a builder cost sheet or bank sanction letter; amounts and rates are picked out and assigned to fields with a tap.</p>
+          </div>
+          <div class="feature">
+            <h3>🔒 Free, offline, yours</h3>
+            <p>All the maths runs on your phone. The AI memo uses Apple's on-device model. No account, no analytics, no ads. Ever.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPOTLIGHTS -->
+    <section class="pad-t">
+      <div class="wrap">
+
+        <div class="ly-spot">
+          <div class="ly-copy">
+            <div class="ly-eyebrow">The verdict</div>
+            <h2>One call. Three futures. Zero jargon.</h2>
+            <p>The hero card tells you what to do and why, in a sentence a first-time buyer can read. Tap Cautious, Base or Hopeful to see how the call changes with price growth — each pill is coloured by its own answer, so the whole picture is visible before you tap anything.</p>
+            <p>Colours encode <strong>judgement, not sign</strong>: a 2.8% yield is shown red because your loan costs 8.5%, not green because it's a positive number.</p>
+            <div class="ly-verdicts">
+              <div class="ly-v red"><small>Cautious · 4%</small><b>Rent + SIP instead</b><em>3.3% / yr</em></div>
+              <div class="ly-v red"><small>Base · 6.5%</small><b>Rent + SIP instead</b><em>6.6% / yr</em></div>
+              <div class="ly-v amber"><small>Hopeful · 9%</small><b>Marginal</b><em>9.7% / yr</em></div>
+            </div>
+          </div>
+          <div class="ly-shot"><img src="/assets/screenshots/loanyieldiq/01-verdict.jpg" alt="LoanYield IQ verdict card showing Rent + SIP instead with three growth scenarios" loading="lazy"></div>
+        </div>
+
+        <div class="ly-spot flip">
+          <div class="ly-shot"><img src="/assets/screenshots/loanyieldiq/03-benchmarks.jpg" alt="Benchmarks tab comparing the property's return with a Nifty SIP, REIT and prepaying debt" loading="lazy"></div>
+          <div class="ly-copy">
+            <div class="ly-eyebrow">Benchmarks &amp; risk</div>
+            <h2>The same cheques, four ways.</h2>
+            <p>Every benchmark receives the identical money — the day-one equity plus every EMI, pre-EMI and prepayment — so terminal wealth is genuinely comparable. Then the risk table shocks the deal: rate +100/200 bps, rent −20%, vacancy 15%, handover delayed a year, step-up switched off.</p>
+            <div class="ly-tags">
+              <span class="ly-tag purple">Nifty 50 SIP · 12% less LTCG</span>
+              <span class="ly-tag sky">Commercial REIT · 7.8%</span>
+              <span class="ly-tag amber">Prepay debt · 8.5% guaranteed</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ly-spot">
+          <div class="ly-copy">
+            <div class="ly-eyebrow">Compare deals</div>
+            <h2>The 2BHK in Hinjewadi or the one in Wakad?</h2>
+            <p>Duplicate a deal, change what's different, and put the two head to head. All-in cost, day-one cash, EMI, yield, cash before handover, year-one cash flow, annual return, break-even month and total interest — the better value is highlighted on every row.</p>
+            <div class="ly-tags">
+              <span class="ly-tag green">Winner per row</span>
+              <span class="ly-tag">Unlimited saved deals</span>
+            </div>
+          </div>
+          <div class="ly-shot"><img src="/assets/screenshots/loanyieldiq/04-compare.jpg" alt="Compare two deals side by side" loading="lazy"></div>
+        </div>
+
+        <div class="ly-spot flip">
+          <div class="ly-shot"><img class="card" src="/assets/screenshots/loanyieldiq/05-sharecard.jpg" alt="Shareable verdict card image" loading="lazy"></div>
+          <div class="ly-copy">
+            <div class="ly-eyebrow">Share</div>
+            <h2>Built for the family group chat.</h2>
+            <p>Property decisions in India are made with a spouse, parents and a CA over WhatsApp. One tap renders a single image with the deal, the verdict, all three scenarios, six key numbers, the loan curve and the assumptions — and hands it to the share sheet.</p>
+            <p>It looks the same on every phone, whatever theme the recipient uses.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- HOW THE MATHS WORKS -->
+    <section class="pad pad-t">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Every assumption is on the table.</h2>
+          <p>A verdict is only as honest as the defaults behind it. These are the ones the app uses — and every one you can change is marked.</p>
+        </div>
+        <div class="ly-table-wrap">
+          <table class="ly-table">
+            <thead><tr><th>Assumption</th><th>Default</th><th>Where it comes from</th></tr></thead>
+            <tbody>
+              <tr><td>Price growth</td><td>6.5% a year (you can change it)</td><td>Long-run Indian residential average. The verdict is shown at −2.5% and +2.5% around your figure.</td></tr>
+              <tr><td>Nifty 50 SIP</td><td>12% CAGR, less 12.5% LTCG</td><td>The alternative to buying: same day-one equity and every EMI go into an index fund.</td></tr>
+              <tr><td>Prepayment hurdle</td><td>8.5% post-tax, risk-free</td><td>Paying off existing debt earns its rate with no risk; any investment that can't beat it should lose.</td></tr>
+              <tr><td>REIT proxy</td><td>7.8% distribution yield</td><td>Listed commercial office trusts — property income without a loan.</td></tr>
+              <tr><td>Pre-EMI draw</td><td>62% of sanctioned loan</td><td>Average progressive disbursement across a typical construction-linked plan.</td></tr>
+              <tr><td>Stamp duty</td><td>MH 6% (5% women) · KA 5.6% · DL 6% (4% women)</td><td>State schedules. Registration capped at ₹30,000 in Maharashtra, 1% elsewhere.</td></tr>
+              <tr><td>GST</td><td>5% under construction · 1% affordable · 0% with OC · 18% commercial</td><td>Without input tax credit, as applies to residential buyers.</td></tr>
+              <tr><td>Verdict thresholds</td><td>Buy ≥ Nifty · Marginal ≥ 8.5% · else Pass</td><td>Return judged against the equity alternative and the risk-free hurdle; yield judged against your loan rate.</td></tr>
+              <tr><td>Break-even</td><td>First month selling would return everything paid in</td><td>Property value minus the full loan obligation plus cumulative cash flow ≥ 0. Selling costs excluded.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- HONESTY -->
+    <section class="pad pad-t">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>What it is — and what it isn't.</h2>
+        </div>
+        <div class="ly-honest">
+          <div class="h">
+            <h3>It is</h3>
+            <ul>
+              <li>A second opinion that shows its working — tap ⓘ on any number for the plain-English explanation.</li>
+              <li>Built for the under-construction purchase, which is where Indian buyers lose the most money quietly.</li>
+              <li>Free, with no upsell. There is no Pro tier and there won't be one.</li>
+              <li>Private by construction: SwiftData on your device, Keychain for any optional API key, no network calls unless you add one.</li>
+            </ul>
+          </div>
+          <div class="h">
+            <h3>It isn't</h3>
+            <ul>
+              <li>Financial advice. It's a model with visible assumptions; your CA and your own judgement come first.</li>
+              <li>A rate feed. Stamp duty and GST schedules are built in with the dates shown; states change them and so will the app.</li>
+              <li>Complete for every state yet — Maharashtra, Karnataka and Delhi are modelled in detail; others use a generic 6% until added.</li>
+              <li>A substitute for reading the agreement. Selling costs, brokerage and society transfer fees are not modelled.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREENSHOT GALLERY -->
+    <section class="pad pad-t">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Take a look</h2>
+          <p>Dark and light, iPhone and the two-column iPad studio.</p>
+        </div>
+        <div class="shots">
+          <div class="shot"><img src="/assets/screenshots/loanyieldiq/01-verdict.jpg" alt="Verdict hero in dark mode" loading="lazy"></div>
+          <div class="shot"><img src="/assets/screenshots/loanyieldiq/02-light.jpg" alt="Verdict hero in light mode" loading="lazy"></div>
+          <div class="shot"><img src="/assets/screenshots/loanyieldiq/03-benchmarks.jpg" alt="Benchmarks and risk" loading="lazy"></div>
+          <div class="shot"><img src="/assets/screenshots/loanyieldiq/04-compare.jpg" alt="Compare two deals" loading="lazy"></div>
+          <div class="shot"><img src="/assets/screenshots/loanyieldiq/06-ipad.jpg" alt="iPad two-column studio" loading="lazy"></div>
+        </div>
+        <p class="shots-hint">← swipe to see more →</p>
+      </div>
+    </section>
+
+    <!-- STORY -->
+    <section class="pad pad-t">
+      <div class="wrap">
+        <div class="story">
+          <div class="text">
+            <h2>The spreadsheet I kept rebuilding.</h2>
+            <p>Every time someone I know was about to book a flat, the same spreadsheet came out: stamp duty, GST, what the rent would cover, what the pre-EMI would cost during construction, and the awkward column at the end — what the same money would have done in a plain index fund. Every builder's cost sheet skipped half of it. Every bank calculator skipped all of it.</p>
+            <p>LoanYield IQ is that spreadsheet, made honest and made shareable. It won't tell you what you want to hear. It will tell you what the decision actually hinges on — usually price growth — and let you see the answer under a cautious view as well as a hopeful one.</p>
+            <p class="muted">No account. No subscription. Everything on your phone, yours completely.</p>
+            <p><a href="/#story">Read the full story →</a></p>
+          </div>
+          <figure class="photo">
+            <img src="/assets/family.jpg" alt="Aniket Shetty">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>
+        <a href="/#apps">Apps</a>
+        <a href="/support/">Support</a>
+        <a href="/loanyieldiq/guide/">User Guide</a>
+        <a href="/loanyieldiq/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+      </div>
+      <div>© <span id="year"></span> Aniket Shetty</div>
+    </div>
+  </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

@@ -29,5 +29,14 @@
     "icon": "/assets/icons/scatteredbrain.png",
     "accent": "#2d1c6e",
     "collectsData": false
+  },
+  {
+    "slug": "loanyieldiq",
+    "name": "LoanYield IQ",
+    "tagline": "Should I buy this flat? An honest verdict for Indian home buyers — all-in cost, pre-EMI cash, tax shield, true return vs a Nifty SIP. Free, offline.",
+    "platform": "iOS 18+",
+    "icon": "/assets/icons/loanyieldiq.png",
+    "accent": "#0f766e",
+    "collectsData": false
   }
 ]

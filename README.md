@@ -13,6 +13,9 @@ Live domain: **https://aniketshetty.com** · GitHub repo: **shettyaniket**
 /forehead-flip/privacy/ Privacy policy   ← Privacy URL for App Store Connect
 /ozora/                 App landing page
 /ozora/privacy/         Privacy policy   ← Privacy URL for App Store Connect
+/loanyieldiq/           App landing page (product synopsis)
+/loanyieldiq/guide/     User guide
+/loanyieldiq/privacy/   Privacy policy   ← Privacy URL for App Store Connect
 /support/               Shared support    ← Support URL (works for every app)
 /terms/                 Shared terms / Apple EULA
 apps.json               ⭐ edit this to add apps to the home gallery

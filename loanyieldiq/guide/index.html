@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="How to use LoanYield IQ: the verdict, three growth scenarios, property and loan inputs, prepayments, benchmarks, comparing deals, sharing, the scanner, and how every number is calculated.">
+<title>LoanYield IQ User Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --bg:        #0C0C14;
+    --bg-raised: #161622;
+    --bg-card:   #1E1E2E;
+    --border:    #2A2A3E;
+    --accent:    #14C48F;
+    --accent-lo: rgba(20,196,143,.12);
+    --teal:      #4CC3FB;
+    --teal-lo:   rgba(76,195,251,.12);
+    --coral:     #FF7A5C;
+    --coral-lo:  rgba(255,122,92,.12);
+    --gold:      #F5C842;
+    --gold-lo:   rgba(245,200,66,.1);
+    --text:      #F0EEF8;
+    --text-2:    #8A88A0;
+    --text-3:    #555470;
+    --radius:    12px;
+    --radius-sm: 7px;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg:        #F2F6F5;
+      --bg-raised: #FFFFFF;
+      --bg-card:   #EAF3F0;
+      --border:    #D5E5DF;
+      --accent-lo: rgba(20,196,143,.08);
+      --teal-lo:   rgba(76,195,251,.1);
+      --coral-lo:  rgba(255,122,92,.08);
+      --gold-lo:   rgba(245,200,66,.08);
+      --text:      #0F1A17;
+      --text-2:    #55685F;
+      --text-3:    #93A59D;
+    }
+  }
+
+  :root[data-theme="light"] {
+    --bg:        #F2F6F5;
+    --bg-raised: #FFFFFF;
+    --bg-card:   #EAF3F0;
+    --border:    #D5E5DF;
+    --accent-lo: rgba(20,196,143,.08);
+    --teal-lo:   rgba(76,195,251,.1);
+    --coral-lo:  rgba(255,122,92,.08);
+    --gold-lo:   rgba(245,200,66,.08);
+    --text:      #0F1A17;
+    --text-2:    #55685F;
+    --text-3:    #93A59D;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    grid-template-rows: auto 1fr;
+    min-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .topbar {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 32px;
+    height: 60px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-raised);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .topbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -.3px;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .topbar-logo .app-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    background: linear-gradient(135deg, #14C48F, #0284C7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .topbar-badge {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-2);
+    background: var(--border);
+    padding: 2px 8px;
+    border-radius: 20px;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+  }
+
+  .topbar-right { margin-left: auto; display: flex; align-items: center; gap: 16px; }
+
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 5px 10px;
+    color: var(--text-2);
+    font-size: 13px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: border-color .2s, color .2s;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+  .sidebar {
+    position: sticky;
+    top: 60px;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+    border-right: 1px solid var(--border);
+    padding: 24px 0 40px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-track { background: transparent; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  .nav-section { padding: 0 20px; margin-bottom: 6px; }
+
+  .nav-section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-3);
+    padding: 16px 0 6px;
+    display: block;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text-2);
+    text-decoration: none;
+    transition: background .15s, color .15s;
+    cursor: pointer;
+  }
+  .nav-link:hover { background: var(--accent-lo); color: var(--accent); }
+  .nav-link.active { background: var(--accent-lo); color: var(--accent); font-weight: 600; }
+  .nav-icon { font-size: 14px; width: 18px; text-align: center; flex-shrink: 0; }
+
+  .main { padding: 48px 64px 80px 64px; max-width: 780px; min-width: 0; }
+
+  .guide-section {
+    padding-bottom: 64px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 64px;
+  }
+  .guide-section:last-child { border-bottom: none; }
+
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -.8px;
+    color: var(--text);
+    text-wrap: balance;
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(20px, 3vw, 26px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -.4px;
+    color: var(--text);
+    text-wrap: balance;
+    margin-bottom: 14px;
+  }
+
+  h3 {
+    font-family: 'Sora', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -.2px;
+    color: var(--text);
+    margin-bottom: 10px;
+    margin-top: 28px;
+  }
+  h3:first-child { margin-top: 0; }
+
+  p {
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--text-2);
+    max-width: 62ch;
+    margin-bottom: 14px;
+  }
+  p:last-child { margin-bottom: 0; }
+
+  .guide-intro {
+    padding-bottom: 64px;
+    margin-bottom: 64px;
+    border-bottom: 1px solid var(--border);
+  }
+  .guide-intro p {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text-2);
+    max-width: 58ch;
+  }
+
+  .intro-meta { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+
+  .meta-pill {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--text-2);
+    letter-spacing: .3px;
+  }
+  .meta-pill.accent { border-color: var(--accent); color: var(--accent); background: var(--accent-lo); }
+
+  .steps { list-style: none; display: flex; flex-direction: column; gap: 16px; margin: 18px 0; }
+
+  .step { display: grid; grid-template-columns: 32px 1fr; gap: 14px; align-items: start; }
+
+  .step-num {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--accent-lo);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-size: 13px; font-weight: 700;
+    font-family: 'Sora', sans-serif;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+
+  .step-body { min-width: 0; }
+  .step-title { font-size: 14.5px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .step-desc { font-size: 14px; color: var(--text-2); line-height: 1.6; margin: 0; }
+
+  .callout {
+    display: flex; gap: 14px; padding: 16px 18px;
+    border-radius: var(--radius); border-left: 3px solid; margin: 20px 0;
+  }
+  .callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .callout-body { min-width: 0; }
+  .callout-title {
+    font-size: 13px; font-weight: 700; letter-spacing: .3px;
+    text-transform: uppercase; margin-bottom: 4px;
+  }
+  .callout p { font-size: 14px; margin: 0; max-width: none; }
+
+  .callout.tip  { background: var(--teal-lo);   border-color: var(--teal);  }
+  .callout.tip  .callout-title { color: var(--teal); }
+  .callout.note { background: var(--accent-lo); border-color: var(--accent); }
+  .callout.note .callout-title { color: var(--accent); }
+  .callout.warn { background: var(--coral-lo);  border-color: var(--coral); }
+  .callout.warn .callout-title { color: var(--coral); }
+  .callout.gold { background: var(--gold-lo);   border-color: var(--gold);  }
+  .callout.gold .callout-title { color: var(--gold); }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px; margin: 18px 0;
+  }
+  .feature-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+  .feature-card .fc-icon { font-size: 20px; margin-bottom: 8px; display: block; }
+  .feature-card .fc-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .feature-card .fc-desc { font-size: 13px; color: var(--text-2); line-height: 1.5; }
+
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+
+  .pill {
+    font-size: 13px; font-weight: 600; padding: 5px 13px;
+    border-radius: 20px; display: flex; align-items: center; gap: 5px;
+  }
+  .pill.violet { background: var(--accent-lo); color: var(--accent); border: 1px solid var(--accent); }
+  .pill.teal   { background: var(--teal-lo);   color: var(--teal);   border: 1px solid var(--teal); }
+  .pill.coral  { background: var(--coral-lo);  color: var(--coral);  border: 1px solid var(--coral); }
+  .pill.neutral{ background: var(--bg-card);   color: var(--text-2); border: 1px solid var(--border); }
+
+  .table-wrap { overflow-x: auto; margin: 18px 0; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 400px; }
+
+  th {
+    text-align: left; padding: 10px 14px;
+    font-weight: 600; font-size: 12px; letter-spacing: .5px;
+    text-transform: uppercase; color: var(--text-3);
+    border-bottom: 1px solid var(--border); white-space: nowrap;
+  }
+
+  td {
+    padding: 11px 14px; border-bottom: 1px solid var(--border);
+    color: var(--text-2); vertical-align: top; line-height: 1.5;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--accent-lo); }
+  td strong { color: var(--text); font-weight: 600; }
+
+  .divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+  .swipe-diagram {
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden; margin: 18px 0; font-size: 14px;
+  }
+  .swipe-side { padding: 16px; display: flex; flex-direction: column; gap: 6px; }
+  .swipe-side.left  { background: var(--teal-lo); border-right: 1px solid var(--border); }
+  .swipe-side.right { background: var(--coral-lo); }
+  .swipe-center {
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 12px; background: var(--bg-card); color: var(--text-3);
+    font-size: 22px; flex-direction: column; gap: 4px;
+  }
+  .swipe-center small { font-size: 10px; letter-spacing: .5px; text-transform: uppercase; color: var(--text-3); }
+  .swipe-dir { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+  .swipe-side.left .swipe-dir  { color: var(--teal); }
+  .swipe-side.right .swipe-dir { color: var(--coral); }
+  .swipe-action { display: flex; align-items: center; gap: 6px; color: var(--text-2); font-size: 13.5px; }
+
+  .tab-row {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden; margin: 18px 0;
+  }
+  .tab-item {
+    padding: 14px 8px; text-align: center; font-size: 12px;
+    color: var(--text-2); border-right: 1px solid var(--border);
+  }
+  .tab-item:last-child { border-right: none; }
+  .tab-item.active { background: var(--accent-lo); color: var(--accent); font-weight: 600; }
+  .tab-item .ti-icon { font-size: 20px; display: block; margin-bottom: 4px; }
+  .tab-item .ti-label { font-size: 11px; font-weight: 500; }
+
+  .path-display {
+    font-family: 'Inter', monospace; font-size: 13px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 10px 14px;
+    color: var(--teal); margin: 12px 0; word-break: break-all;
+  }
+  .path-display span { color: var(--text-2); }
+
+  .toast-demo {
+    display: flex; flex-direction: column; gap: 8px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 16px; margin: 18px 0;
+  }
+  .toast {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--bg-raised); border: 1px solid var(--border);
+    border-radius: 12px; padding: 10px 14px;
+  }
+  .toast-icon { font-size: 18px; flex-shrink: 0; }
+  .toast-body { flex: 1; min-width: 0; }
+  .toast-title { font-size: 13px; font-weight: 600; color: var(--text); }
+  .toast-sub { font-size: 12px; color: var(--text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .toast-btn {
+    font-size: 12px; font-weight: 700; color: white;
+    padding: 5px 11px; border-radius: 20px; flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .toast-btn.green { background: #22a86e; }
+  .toast-btn.teal  { background: var(--teal); }
+  .toast-caption {
+    font-size: 12px; color: var(--text-3); text-align: center;
+    font-style: italic; margin-top: 4px;
+  }
+
+  .mobile-nav-toggle {
+    display: none;
+    background: none; border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 6px 10px;
+    color: var(--text-2); font-family: 'Inter', sans-serif;
+    font-size: 13px; cursor: pointer; gap: 6px; align-items: center;
+  }
+
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar {
+      position: fixed; top: 60px; left: 0; width: 260px; z-index: 90;
+      background: var(--bg-raised); transform: translateX(-100%);
+      transition: transform .25s ease; border-right: 1px solid var(--border);
+    }
+    .sidebar.open { transform: translateX(0); }
+    .main { padding: 32px 24px 60px; grid-column: 1; }
+    .mobile-nav-toggle { display: flex; }
+    .feature-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 500px) {
+    .feature-grid { grid-template-columns: 1fr; }
+    .swipe-diagram { grid-template-columns: 1fr; }
+    .swipe-center { display: none; }
+    .swipe-side { border-right: none !important; border-bottom: 1px solid var(--border); }
+    .tab-row { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+<header class="topbar">
+  <a class="topbar-logo" href="https://aniketshetty.com/loanyieldiq/">
+    <span class="app-icon">📈</span>
+    LoanYield IQ
+  </a>
+  <span class="topbar-badge">User Guide</span>
+  <div class="topbar-right">
+    <button class="mobile-nav-toggle" id="menuToggle" aria-label="Toggle navigation">☰ Menu</button>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle colour scheme">🌓 Theme</button>
+  </div>
+</header>
+
+<nav class="sidebar" id="sidebar" aria-label="Guide navigation">
+  <div class="nav-section">
+    <span class="nav-section-label">Start here</span>
+    <a class="nav-link active" href="#welcome" onclick="closeMobileNav()"><span class="nav-icon">👋</span> Welcome</a>
+    <a class="nav-link" href="#first-minute" onclick="closeMobileNav()"><span class="nav-icon">⏱️</span> Your first minute</a>
+    <a class="nav-link" href="#tabs" onclick="closeMobileNav()"><span class="nav-icon">📱</span> The three tabs</a>
+  </div>
+  <div class="nav-section">
+    <span class="nav-section-label">The Studio</span>
+    <a class="nav-link" href="#verdict" onclick="closeMobileNav()"><span class="nav-icon">✅</span> The verdict</a>
+    <a class="nav-link" href="#scenarios" onclick="closeMobileNav()"><span class="nav-icon">🎯</span> Three scenarios</a>
+    <a class="nav-link" href="#kpis" onclick="closeMobileNav()"><span class="nav-icon">🔢</span> The four numbers</a>
+    <a class="nav-link" href="#chart" onclick="closeMobileNav()"><span class="nav-icon">📉</span> The chart</a>
+    <a class="nav-link" href="#dock" onclick="closeMobileNav()"><span class="nav-icon">💬</span> What-if in plain English</a>
+    <a class="nav-link" href="#property" onclick="closeMobileNav()"><span class="nav-icon">🏢</span> Property inputs</a>
+    <a class="nav-link" href="#loan" onclick="closeMobileNav()"><span class="nav-icon">🏦</span> Home loan inputs</a>
+    <a class="nav-link" href="#prepay" onclick="closeMobileNav()"><span class="nav-icon">⚡</span> Step-up &amp; prepayments</a>
+    <a class="nav-link" href="#waterfall" onclick="closeMobileNav()"><span class="nav-icon">🧾</span> Where the money goes</a>
+    <a class="nav-link" href="#memo" onclick="closeMobileNav()"><span class="nav-icon">🤖</span> AI memo</a>
+  </div>
+  <div class="nav-section">
+    <span class="nav-section-label">Deals</span>
+    <a class="nav-link" href="#deals" onclick="closeMobileNav()"><span class="nav-icon">🗂️</span> Saving &amp; switching deals</a>
+    <a class="nav-link" href="#compare" onclick="closeMobileNav()"><span class="nav-icon">🔀</span> Compare two deals</a>
+    <a class="nav-link" href="#share" onclick="closeMobileNav()"><span class="nav-icon">📤</span> Share the verdict</a>
+    <a class="nav-link" href="#scan" onclick="closeMobileNav()"><span class="nav-icon">📷</span> Scan a cost sheet</a>
+  </div>
+  <div class="nav-section">
+    <span class="nav-section-label">Other tabs</span>
+    <a class="nav-link" href="#loaniq" onclick="closeMobileNav()"><span class="nav-icon">💳</span> LoanIQ · My Loans</a>
+    <a class="nav-link" href="#benchmarks" onclick="closeMobileNav()"><span class="nav-icon">⚖️</span> Benchmarks &amp; Risk</a>
+    <a class="nav-link" href="#settings" onclick="closeMobileNav()"><span class="nav-icon">⚙️</span> Settings</a>
+  </div>
+  <div class="nav-section">
+    <span class="nav-section-label">Under the hood</span>
+    <a class="nav-link" href="#maths" onclick="closeMobileNav()"><span class="nav-icon">🧮</span> How the maths works</a>
+    <a class="nav-link" href="#glossary" onclick="closeMobileNav()"><span class="nav-icon">📖</span> Glossary</a>
+    <a class="nav-link" href="#faq" onclick="closeMobileNav()"><span class="nav-icon">❓</span> FAQ</a>
+    <a class="nav-link" href="#privacy" onclick="closeMobileNav()"><span class="nav-icon">🔒</span> Privacy</a>
+  </div>
+</nav>
+
+<main class="main" id="main">
+
+  <!-- ── Welcome ── -->
+  <section class="guide-intro" id="welcome">
+    <div class="section-eyebrow">LoanYield IQ · User Guide</div>
+    <h1>An honest second opinion on the flat you're about to buy</h1>
+    <p>LoanYield IQ takes the handful of numbers you already know — the agreement value, the rent it would fetch, the loan you'd take — and turns them into the numbers nobody shows you: what the flat really costs once stamp duty, GST and builder charges are in, how much cash you'll burn before an under-construction flat is handed over, what the tax rules give back, and whether the whole thing beats simply investing the same cheques. Then it says, in one sentence, what it thinks you should do.</p>
+    <p>This guide walks through every screen. If you only read one section, read <a href="#scenarios">Three scenarios</a> — it's the part that keeps the app honest.</p>
+    <div class="intro-meta">
+      <span class="meta-pill accent">iPhone &amp; iPad · iOS 18+</span>
+      <span class="meta-pill">Free · no account</span>
+      <span class="meta-pill">100% offline</span>
+      <span class="meta-pill">Not financial advice</span>
+    </div>
+  </section>
+
+  <!-- ── First minute ── -->
+  <section class="guide-section" id="first-minute">
+    <div class="section-eyebrow">Getting started</div>
+    <h2>Your first minute</h2>
+    <p>The app opens with a sample deal already filled in — a 2BHK in Pune — so you see a complete verdict before typing anything. Replace the sample numbers with yours:</p>
+    <ol class="steps">
+      <li class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Type the agreement value</div><p class="step-desc">Under <strong>Property</strong>, tap the box next to Agreement value, type <code>85</code> and leave the unit chip on <strong>L</strong> for lakhs (or switch to <strong>Cr</strong>). Tapping a box clears it so you can type straight away; leave it empty and the old value comes back.</p></div></li>
+      <li class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Ready or under construction?</div><p class="step-desc">Use the switch at the top of the Property card. Under construction adds a <strong>Months to handover</strong> control and charges 5% GST; Ready (with Occupancy Certificate) charges none.</p></div></li>
+      <li class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Expected monthly rent</div><p class="step-desc">What the flat would rent for today. The app escalates it 5% a year and allows 5% vacancy — both adjustable under <em>More</em>.</p></div></li>
+      <li class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">The loan</div><p class="step-desc">Under <strong>Home loan</strong>, set the down payment (or type the loan amount — they stay in sync), the interest rate and the tenure.</p></div></li>
+      <li class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Scroll up</div><p class="step-desc">The verdict at the top has already recomputed. Everything updates live as you change any input.</p></div></li>
+    </ol>
+    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><div class="callout-title">Every ⓘ is a plain-English explanation</div><p>Next to nearly every label and number there's a small ⓘ. Tap it for a two-line explanation of what the term means and why it matters — PLC, MODT, Section 24(b), XIRR, all of it.</p></div></div>
+  </section>
+
+  <!-- ── Tabs ── -->
+  <section class="guide-section" id="tabs">
+    <div class="section-eyebrow">Getting started</div>
+    <h2>The three tabs</h2>
+    <div class="feature-grid">
+      <div class="feature-card"><span class="fc-icon">🏢</span><div class="fc-title">LoanYield Studio</div><div class="fc-desc">One property plus its loan. The verdict, the chart, the inputs, the schedule and the AI memo. This is where you'll spend your time.</div></div>
+      <div class="feature-card"><span class="fc-icon">💳</span><div class="fc-title">LoanIQ · My Loans</div><div class="fc-desc">A vault for loans that aren't tied to a property deal — an existing home loan, a car loan, a LAP. Track them and simulate prepayments.</div></div>
+      <div class="feature-card"><span class="fc-icon">⚖️</span><div class="fc-title">Benchmarks &amp; Risk</div><div class="fc-desc">The selected deal's return against a Nifty SIP, a REIT and prepaying debt, plus a table of shocks: rates up, rent down, handover late.</div></div>
+    </div>
+    <p>On iPad the Studio becomes two columns — inputs on the left, verdict, chart and tables on the right — and the tab bar moves to the top.</p>
+  </section>
+
+  <!-- ── Verdict ── -->
+  <section class="guide-section" id="verdict">
+    <div class="section-eyebrow">The Studio</div>
+    <h2>The verdict</h2>
+    <p>The card at the top of the Studio is the whole app in one glance. It gives one of three calls:</p>
+    <div class="pill-row">
+      <span class="pill teal">● Buy</span>
+      <span class="pill neutral" style="color:#FFC43D;border-color:#FFC43D;background:rgba(255,196,61,.1)">● Marginal</span>
+      <span class="pill coral">● Rent + SIP instead</span>
+    </div>
+    <p>Under the call is one sentence explaining it — the annual return, how it compares to a Nifty SIP, how much cash you need to park before handover, and the month from which selling would return your money. Below that are the three numbers that drive the call:</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Driver</th><th>What it is</th><th>Green when</th><th>Red when</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Return / yr</strong></td><td>Your 10-year leveraged XIRR — every cheque out, every rupee of rent in, and the flat's value less the loan at the end.</td><td>At or above the Nifty SIP</td><td>Below the 8.5% prepayment hurdle</td></tr>
+        <tr><td><strong>Yield vs loan</strong></td><td>Rent after vacancy and property tax, divided by the all-in cost, judged against your loan rate.</td><td>≥ 75% of the loan rate</td><td>&lt; 40% of the loan rate</td></tr>
+        <tr><td><strong>Cash needed</strong></td><td>Pre-EMI plus property tax during construction (or day-one cash for a ready flat), relative to your day-one cheque.</td><td>≤ 10% of day-one cash</td><td>&gt; 30% of day-one cash</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout note"><div class="callout-icon">🎨</div><div class="callout-body"><div class="callout-title">Colours mean judgement, not sign</div><p>A 2.8% rent yield is a positive number, but it's shown red because your loan costs 8.5% — the flat loses money every month it's rented. Everywhere in the app, green / amber / red answer "is this good?", never "is this above zero?".</p></div></div>
+  </section>
+
+  <!-- ── Scenarios ── -->
+  <section class="guide-section" id="scenarios">
+    <div class="section-eyebrow">The Studio</div>
+    <h2>Three scenarios</h2>
+    <p>The single assumption that swings a property decision more than any other is how fast prices grow. So the verdict is never shown once — it's shown three times, and each pill is coloured by its own answer:</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Pill</th><th>Price growth used</th><th>Read it as</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Cautious</strong></td><td>Your assumption − 2.5% (never below 2%)</td><td>"What if the market goes sideways?"</td></tr>
+        <tr><td><strong>Base</strong></td><td>Your assumption (default 6.5%)</td><td>The headline verdict</td></tr>
+        <tr><td><strong>Hopeful</strong></td><td>Your assumption + 2.5%</td><td>"What if the builder's brochure is right?"</td></tr>
+      </tbody>
+    </table></div>
+    <p>Tap any pill to swap the headline, drivers and break-even for that scenario. Underneath, a one-line summary says what the decision hinges on — for the sample deal: <em>"Marginal at 9%+ price growth; a clear pass below that."</em></p>
+    <div class="callout warn"><div class="callout-icon">⚠️</div><div class="callout-body"><div class="callout-title">If it only turns green under Hopeful</div><p>You're betting on the market, not the flat. The app will say so. Change the Base assumption under Property › More › <em>Price growth per year</em> if you have a better local number.</p></div></div>
+  </section>
+
+  <!-- ── KPIs ── -->
+  <section class="guide-section" id="kpis">
+    <div class="section-eyebrow">The Studio</div>
+    <h2>The four numbers</h2>
+    <p>A strip of four tiles stays pinned at the top as you scroll:</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Tile</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><strong>All-in cost</strong></td><td>Agreement value + stamp duty + registration + GST + builder extras + loan charges. The real price.</td></tr>
+        <tr><td><strong>Day-one cash</strong></td><td>Down payment plus every statutory and one-time charge. The bank finances none of this.</td></tr>
+        <tr><td><strong>Rent yield</strong></td><td>Annual rent after vacancy and property tax, over the all-in cost. Coloured against your loan rate.</td></tr>
+        <tr><td><strong>Pre-EMI cash</strong></td><td>For under-construction: the total you'll pay before handover with no rent coming in. For a ready flat this tile becomes <strong>Cash / month</strong> — your year-one post-tax monthly cash flow.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ── Chart ── -->
+  <section class="guide-section" id="chart">
+    <div class="section-eyebrow">The Studio</div>
+    <h2>The chart</h2>
+    <p>Ten years, month by month. Two things are drawn on one canvas:</p>
+    <ul style="color:var(--text-2);font-size:15px;line-height:1.75;padding-left:20px;margin-bottom:14px">
+      <li><strong>Cash flow</strong> (left axis) — rent in, minus EMI, property tax and income tax. Red below zero, green above. The shaded block at the start is the pre-EMI period before handover.</li>
+      <li><strong>Loan balance</strong> (right axis, dashed blue) — what you still owe. It steps up at handover when the full loan is disbursed and steps down at every lump-sum prepayment (marked with a green diamond).</li>
+    </ul>
+    <p>Two vertical markers: <strong>Handover</strong>, and <strong>Break-even</strong> — the first month from which selling the flat would return everything you've paid in. Drag a finger across the chart to read any month's cash flow and outstanding loan.</p>
+    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><div class="callout-title">Lump sums are not on the cash line</div><p>A ₹5 L prepayment would dwarf every monthly bar, so the cash line shows recurring cash only. Prepayments are shown as diamonds on the loan curve, and they <em>are</em> included in the return and break-even calculations.</p></div></div>
+  </section>
+
+  <!-- ── Dock ── -->
+  <section class="guide-section" id="dock">
+    <div class="section-eyebrow">The Studio</div>
+    <h2>What-if in plain English</h2>
+    <p>The ✨ bar under the chart understands short commands. Type one or tap a suggestion chip; the whole screen recomputes.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Say</th><th>What happens</th></tr></thead>
+      <tbody>
+        <tr><td><code>prepay 5 lakhs at month 18</code></td><td>Adds a ₹5 L lump sum in loan month 18 (also: <code>prepay 2.5L at year 3</code>)</td></tr>
+        <tr><td><code>50 bps hike</code> · <code>25 bps cut</code></td><td>Moves the interest rate up or down</td></tr>
+        <tr><td><code>rate 9.2</code></td><td>Sets the rate</td></tr>
+        <tr><td><code>rent 30k</code> · <code>rent -20%</code></td><td>Sets or scales the monthly rent</td></tr>
+        <tr><td><code>tenure 15 years</code></td><td>Changes the loan tenure</td></tr>
+        <tr><td><code>down 25</code></td><td>Sets the down payment %</td></tr>
+        <tr><td><code>delay handover 12 months</code></td><td>Pushes handover out (under-construction only)</td></tr>
+        <tr><td><code>step-up off</code> / <code>on</code></td><td>Toggles the annual EMI step-up</td></tr>
+        <tr><td><code>clear prepayments</code></td><td>Removes every lump sum</td></tr>
+      </tbody>
+    </table></div>
+    <p>Commands change the deal permanently (they're just a faster way of moving the sliders). Use <em>Duplicate</em> from the Deals menu first if you want to keep the original.</p>
+  </section>
+
+  <!-- ── Property ── -->
+  <section class="guide-section" id="property">
+    <div class="section-eyebrow">The Studio</div>
+    <h2>Property inputs</h2>
+    <h3>The three you always need</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Input</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Agreement value</strong></td><td>The price in the registered agreement (base cost; floor rise and PLC are added under More). Stamp duty and GST are charged on this. The hint underneath shows your state's duty, the registration fee and the GST rate live.</td></tr>
+        <tr><td><strong>Months to handover</strong></td><td>Shown only for under-construction. Drives pre-EMI, the shaded gestation block, and the "Cash before handover" tile.</td></tr>
+        <tr><td><strong>Expected monthly rent</strong></td><td>Today's rent for this flat. Escalates yearly; vacancy is deducted.</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Every control works the same way</h3>
+    <p>Label on the first line, slider plus a typed box on the second. The slider is for what-ifs; the box is for the exact number you know. Money boxes have ₹ / L / Cr unit chips; you can also type <code>85L</code> or <code>1.2Cr</code> directly.</p>
+    <h3>More: builder charges, state &amp; tax</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Group</th><th>Inputs</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Statutory</strong></td><td>State (Maharashtra, Karnataka, Delhi, Other) · Female sole owner (1–2% duty rebate) · GST category (Ready with OC 0% · Under construction 5% · Affordable housing 1% · Commercial 18%)</td></tr>
+        <tr><td><strong>Builder charges</strong></td><td>Floor rise · PLC · Advance maintenance (12–24 months collected upfront) · Electric / water infra · Legal &amp; franking</td></tr>
+        <tr><td><strong>Running the flat &amp; tax</strong></td><td>Rent escalation per year · Vacancy allowance · Property tax (annual) · Your income-tax slab (0 / 5 / 20 / 30 / 39%) · Price growth per year</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout note"><div class="callout-icon">🏛️</div><div class="callout-body"><div class="callout-title">State coverage</div><p>Maharashtra (6%, 5% for women, registration capped at ₹30,000), Karnataka (5.6%, 1% registration) and Delhi (6% / 4% for women, 1% registration) are modelled. "Other" uses 6% and 1% until more states are added — override the result mentally if your state differs.</p></div></div>
+  </section>
+
+  <!-- ── Loan ── -->
+  <section class="guide-section" id="loan">
+    <div class="section-eyebrow">The Studio</div>
+    <h2>Home loan inputs</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Input</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Down payment</strong></td><td>Your own money as a % of agreement value (5–90%).</td></tr>
+        <tr><td><strong>Loan amount</strong></td><td>The same number the other way round. Type the sanctioned amount and the down-payment % follows, or vice versa. Banks usually cap at 75–90% LTV.</td></tr>
+        <tr><td><strong>Interest rate</strong></td><td>Repo-linked floating rate. Rule of thumb: every 25 bps changes a ₹70 L / 20-year EMI by about ₹1,100.</td></tr>
+        <tr><td><strong>Monthly EMI</strong></td><td>Read-only — the plain EMI before any step-up.</td></tr>
+        <tr><td><strong>Tenure</strong></td><td>5–30 years. Longer = smaller EMI but far more total interest.</td></tr>
+      </tbody>
+    </table></div>
+    <h3>More: loan charges, MaxGain &amp; joint loan</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Input</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>MODT</strong></td><td>Stamp duty on the mortgage itself, 0.2–0.5% of the loan. Tap the 0.2% / 0.3% / 0.5% buttons to fill it from the loan amount.</td></tr>
+        <tr><td><strong>Franking · Loan insurance · Processing fee</strong></td><td>One-time bank charges. They're part of the all-in cost and day-one cash.</td></tr>
+        <tr><td><strong>Step-up rate</strong></td><td>How much the EMI rises each year when the step-up is on (default 10%).</td></tr>
+        <tr><td><strong>Joint loan with spouse</strong></td><td>Doubles the Section 24(b) interest deduction cap from ₹2 L to ₹4 L.</td></tr>
+        <tr><td><strong>Overdraft home loan (MaxGain)</strong></td><td>Interest accrues only on loan − parked balance. Set the average balance you'd keep parked.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ── Prepay ── -->
+  <section class="guide-section" id="prepay">
+    <div class="section-eyebrow">The Studio</div>
+    <h2>Step-up &amp; prepayments</h2>
+    <h3>Raise EMI 10% every year</h3>
+    <p>One switch. When it's on, each year's EMI is 10% higher than the last (compounding), which typically closes a 20-year loan in nine or ten years. The line under the switch shows the interest saved and the months shaved against a plain schedule.</p>
+    <h3>Lump-sum prepayment</h3>
+    <p>Pick a loan month and an amount. The loan curve steps down at that month and the verdict recomputes. You can add as many as you like — the quick control edits one month at a time; the full schedule lets you edit every month.</p>
+    <h3>The month-by-month schedule</h3>
+    <p>Tap <strong>Schedule</strong> on the Home loan card (or the table icon in the toolbar). Every month of the loan is listed: opening balance, EMI, interest, prepayment and closing balance. <strong>Tap the “+ Prepay” cell on any row</strong> to enter a lump sum for that month — type <code>5L</code>, <code>2.5L</code> or <code>5,00,000</code>. Rows with a prepayment are highlighted green.</p>
+    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><div class="callout-title">Loan months vs. calendar months</div><p>Prepayment months count from the first full EMI, i.e. from handover. On an under-construction flat with 18 months to handover, "month 18" of the loan is month 36 on the chart.</p></div></div>
+  </section>
+
+  <!-- ── Waterfall ── -->
+  <section class="guide-section" id="waterfall">
+    <div class="section-eyebrow">The Studio</div>
+    <h2>Where the money goes</h2>
+    <p>The cost waterfall, line by line: agreement value → stamp duty → registration → GST → builder extras → loan charges → <strong>all-in cost</strong>, then day-one cash, then (for under-construction) the pre-EMI total and cash before handover. Underneath, four secondary tiles: monthly EMI, return per year, interest saved, and break-even.</p>
+  </section>
+
+  <!-- ── Memo ── -->
+  <section class="guide-section" id="memo">
+    <div class="section-eyebrow">The Studio</div>
+    <h2>AI underwriting memo</h2>
+    <p>Tap <strong>Generate</strong> for a four-bullet memo: all-in cost and day-one cash, the gestation cushion, what the step-up saves, and a verdict on the return against the benchmarks. It runs on-device with Apple Intelligence on supported iPhones (iOS 26+); otherwise the app writes the same four bullets from its rules engine. Nothing is sent anywhere unless you add your own API key under <a href="#settings">Settings</a>.</p>
+  </section>
+
+  <!-- ── Deals ── -->
+  <section class="guide-section" id="deals">
+    <div class="section-eyebrow">Deals</div>
+    <h2>Saving &amp; switching deals</h2>
+    <p>Every change is saved automatically. The <strong>Deals</strong> menu (archive icon, top left) lists every saved deal and lets you:</p>
+    <ul style="color:var(--text-2);font-size:15px;line-height:1.75;padding-left:20px">
+      <li><strong>New deal</strong> — starts from the sample numbers.</li>
+      <li><strong>Duplicate</strong> — copies the current deal, loan and prepayments included. The fastest way to test a variation without losing the original.</li>
+      <li><strong>Rename</strong> · <strong>Delete</strong>.</li>
+      <li><strong>Compare two deals</strong> — see below.</li>
+    </ul>
+    <p>The Benchmarks tab always shows the deal selected here.</p>
+  </section>
+
+  <!-- ── Compare ── -->
+  <section class="guide-section" id="compare">
+    <div class="section-eyebrow">Deals</div>
+    <h2>Compare two deals</h2>
+    <p>Pick deal A and deal B from the two menus at the top. You get each deal's verdict, a head-to-head table with the better value highlighted on every row, and a chart of both returns against the benchmarks.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Row</th><th>Better is</th></tr></thead>
+      <tbody>
+        <tr><td>All-in cost · Day-one cash · Monthly EMI · Cash before handover · Break-even month · Total interest paid</td><td>Lower</td></tr>
+        <tr><td>Rent yield · Cash flow per month · Annual return</td><td>Higher</td></tr>
+      </tbody>
+    </table></div>
+    <p>You need at least two saved deals; <em>Duplicate</em> is the quickest way to get a second one.</p>
+  </section>
+
+  <!-- ── Share ── -->
+  <section class="guide-section" id="share">
+    <div class="section-eyebrow">Deals</div>
+    <h2>Share the verdict</h2>
+    <p>Tap <strong>Share</strong> on the verdict card. The app renders a single image — deal name and terms, the verdict and headline, all three scenarios with their returns, six key numbers, the loan curve with break-even, and the assumptions — shows you a preview, and hands it to the iOS share sheet. Send it to WhatsApp, Messages, Mail, or save it to Photos.</p>
+    <p>The card uses fixed colours, so it looks identical on every recipient's phone regardless of their theme.</p>
+  </section>
+
+  <!-- ── Scan ── -->
+  <section class="guide-section" id="scan">
+    <div class="section-eyebrow">Deals</div>
+    <h2>Scan a cost sheet</h2>
+    <p>Tap the scan icon in the toolbar and point the camera at a builder's cost sheet or a bank sanction letter. Rupee amounts (with Indian commas, or "L" / "Cr" suffixes) and percentages are picked out as you go. Tap any detected amount and choose where it belongs — agreement value, rent, interest rate, property tax, floor rise, PLC or loan principal — and the field fills in.</p>
+    <div class="callout note"><div class="callout-icon">📷</div><div class="callout-body"><div class="callout-title">Needs a camera</div><p>Live text scanning requires a physical iPhone or iPad. On devices without camera access the sheet offers a paste box instead. Check every number it fills — OCR is a head start, not a source of truth.</p></div></div>
+  </section>
+
+  <!-- ── LoanIQ ── -->
+  <section class="guide-section" id="loaniq">
+    <div class="section-eyebrow">Other tabs</div>
+    <h2>LoanIQ · My Loans</h2>
+    <p>A separate vault for loans that aren't attached to a property deal — the home loan you already have, a car loan, a personal loan, a loan against property, or a MaxGain overdraft. Add one with the + button (name, type, outstanding principal, rate, remaining tenure). The list shows your total debt, combined EMI, lifetime interest and the date you'll be debt-free.</p>
+    <p>Tap a loan for its detail screen: EMI and closing month versus the plain schedule, a balance chart, all the structure controls (step-up, MaxGain, joint borrower), and the same tap-to-prepay schedule as the Studio.</p>
+    <div class="callout tip"><div class="callout-icon">🗣️</div><div class="callout-body"><div class="callout-title">Siri</div><p>"Ask LoanYield IQ what happens if I prepay" — Siri asks for the amount in lakhs and the month, and tells you the interest and months saved on your first standalone loan.</p></div></div>
+  </section>
+
+  <!-- ── Benchmarks ── -->
+  <section class="guide-section" id="benchmarks">
+    <div class="section-eyebrow">Other tabs</div>
+    <h2>Benchmarks &amp; Risk</h2>
+    <h3>10-year annualized return</h3>
+    <p>Four bars: this property (leveraged), a Nifty 50 SIP (12% CAGR, post 12.5% LTCG), a commercial REIT (7.8% distribution yield), and prepaying existing debt (8.5% risk-free, post-tax).</p>
+    <h3>Terminal wealth on the same cheques</h3>
+    <p>Every strategy receives the identical money — day-one equity plus each monthly EMI, pre-EMI and prepayment — so the rupee outcomes are directly comparable. The property's wealth is its value minus the loan outstanding, plus all the net rent it collected.</p>
+    <h3>Risk: sensitivity shocks</h3>
+    <p>The deal recomputed under: rate +100 bps and +200 bps, rent −20%, vacancy 15%, price growth 4% and 9%, handover delayed 12 months, and step-up switched off. Each row shows the return and year-one monthly cash flow, coloured green if the return still clears 8.5%.</p>
+  </section>
+
+  <!-- ── Settings ── -->
+  <section class="guide-section" id="settings">
+    <div class="section-eyebrow">Other tabs</div>
+    <h2>Settings</h2>
+    <p>Gear icon in the Studio toolbar.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Appearance</strong></td><td>System · Light · Dark.</td></tr>
+        <tr><td><strong>AI engine</strong></td><td>On-device (Apple Intelligence, default) or bring your own key for Anthropic Claude, Google Gemini or OpenAI. Keys are stored in the iOS Keychain (after-first-unlock, this device only) and used only to call that provider directly. The model name is editable.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout warn"><div class="callout-icon">🔐</div><div class="callout-body"><div class="callout-title">You don't need a key</div><p>The memo works without one. Cloud keys are for people who already have them; the app never sends your deal anywhere unless you add a key and press Generate.</p></div></div>
+  </section>
+
+  <!-- ── Maths ── -->
+  <section class="guide-section" id="maths">
+    <div class="section-eyebrow">Under the hood</div>
+    <h2>How the maths works</h2>
+    <p>Everything is computed on your phone from the formulas below. Nothing is fetched.</p>
+    <h3>All-in cost</h3>
+    <p>Agreement value = base cost + floor rise + PLC.<br>Statutory levies = stamp duty (state rate × AV) + registration (1% of AV, capped at ₹30,000 in Maharashtra) + GST (rate × AV).<br><strong>All-in cost</strong> = AV + statutory levies + builder extras + loan charges.<br><strong>Day-one cash</strong> = AV × down payment % + statutory levies + builder extras + loan charges.</p>
+    <h3>Pre-EMI during construction</h3>
+    <p>Each month before handover: 62% of the sanctioned loan × monthly rate. Cash before handover = the sum of those months plus property tax for the period. No rent is assumed until handover.</p>
+    <h3>The loan</h3>
+    <p>EMI = P·r·(1+r)ᴺ ÷ ((1+r)ᴺ − 1), with r the monthly rate and N the months.<br>Step-up: EMI in year y = base EMI × (1 + step-up)^(y−1).<br>Prepayments reduce principal in the month entered. MaxGain: interest each month accrues on max(0, balance − parked balance).</p>
+    <h3>Tax</h3>
+    <p>Net annual value = rent × 12 × (1 − vacancy) − property tax.<br>Section 24(a): 30% of NAV is deductible.<br>Section 24(b): interest is deductible up to ₹2 L (₹4 L if joint).<br>Taxable rent = max(0, NAV − 24(a) − 24(b)), taxed at your slab.<br>Monthly cash flow = rent − EMI − property tax − tax.</p>
+    <h3>Return and break-even</h3>
+    <p><strong>Return per year</strong> is the XIRR of: −day-one cash, then each month's cash flow (lump sums included), then in month 120 the flat's value at your growth rate minus the loan still outstanding.<br><strong>Break-even</strong> is the first month where value − loan obligation + cumulative cash flow ≥ 0. Before handover the obligation is the full sanctioned loan, not just the part drawn, because the rest is still owed to the builder.</p>
+    <h3>Benchmarks</h3>
+    <p>The same contribution stream — day-one cash and every monthly outflow — is grown at 12% (Nifty, then 12.5% LTCG on the gain), 7.8% (REIT) and 8.5% (prepaying debt). Their annualized figures are the XIRR of that stream.</p>
+    <h3>The verdict rules</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Call</th><th>Rule</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Buy</strong></td><td>Return ≥ the Nifty SIP figure, and cash before handover ≤ 30% of day-one cash</td></tr>
+        <tr><td><strong>Marginal</strong></td><td>Return ≥ 8.5% but below the Nifty SIP — or Buy on return but a heavy pre-handover cash burden</td></tr>
+        <tr><td><strong>Rent + SIP instead</strong></td><td>Return below the 8.5% risk-free prepayment hurdle</td></tr>
+      </tbody>
+    </table></div>
+    <p>These thresholds are deliberately simple and visible. They are one reasonable opinion, not the only one.</p>
+  </section>
+
+  <!-- ── Glossary ── -->
+  <section class="guide-section" id="glossary">
+    <div class="section-eyebrow">Under the hood</div>
+    <h2>Glossary</h2>
+    <div class="table-wrap"><table>
+      <tbody>
+        <tr><td><strong>Agreement value</strong></td><td>The registered price; stamp duty and GST are charged on it.</td></tr>
+        <tr><td><strong>PLC</strong></td><td>Preferential Location Charge — extra for a corner, park-facing or high-floor unit.</td></tr>
+        <tr><td><strong>Floor rise</strong></td><td>Builder premium per floor for higher storeys.</td></tr>
+        <tr><td><strong>Advance maintenance</strong></td><td>12–24 months of society charges collected upfront at possession.</td></tr>
+        <tr><td><strong>MODT</strong></td><td>Memorandum of Deposit of Title Deed — stamp duty on the mortgage, 0.2–0.5% of the loan.</td></tr>
+        <tr><td><strong>Franking</strong></td><td>Bank charge for stamping the loan agreement.</td></tr>
+        <tr><td><strong>Gestation</strong></td><td>Months between booking and handover on an under-construction flat.</td></tr>
+        <tr><td><strong>Pre-EMI</strong></td><td>Interest-only payments on the disbursed part of the loan during construction.</td></tr>
+        <tr><td><strong>Step-up</strong></td><td>Raising the EMI by a fixed % every year as income grows.</td></tr>
+        <tr><td><strong>MaxGain</strong></td><td>Home-loan overdraft where parked money offsets interest while staying withdrawable.</td></tr>
+        <tr><td><strong>Section 24(a)</strong></td><td>Flat 30% deduction on net rental income for repairs.</td></tr>
+        <tr><td><strong>Section 24(b)</strong></td><td>Home-loan interest deductible against rent, up to ₹2 L (₹4 L joint).</td></tr>
+        <tr><td><strong>XIRR</strong></td><td>Annualized return that accounts for the timing of every cheque in and out.</td></tr>
+        <tr><td><strong>LTCG</strong></td><td>Long-term capital gains tax — 12.5% on equity gains, applied to the Nifty benchmark.</td></tr>
+        <tr><td><strong>Break-even</strong></td><td>The month from which selling would return everything you've paid in.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section class="guide-section" id="faq">
+    <div class="section-eyebrow">Under the hood</div>
+    <h2>FAQ</h2>
+    <h3>Why is my yield red when it's a positive number?</h3>
+    <p>Because it's judged against your loan rate. A 3% yield on money borrowed at 8.5% means the flat costs you 5.5% a year to hold, before price growth. Red is the honest colour.</p>
+    <h3>The verdict says Rent + SIP. Is the app anti-property?</h3>
+    <p>No — it's anti-assumption. Set price growth to 9% and most Indian metro deals turn Marginal or Buy. The point of the three scenarios is to show you exactly how much of the decision is riding on that number.</p>
+    <h3>Does "Cash before handover" include my rent elsewhere?</h3>
+    <p>No. It's the pre-EMI interest plus property tax on the new flat. Whatever you pay in rent to live somewhere meanwhile is on top.</p>
+    <h3>Why does the loan curve jump up at handover?</h3>
+    <p>During construction the bank disburses progressively (modelled at 62% on average). At handover the full sanctioned amount is outstanding and the real EMI begins.</p>
+    <h3>My state isn't Maharashtra, Karnataka or Delhi.</h3>
+    <p>Choose <em>Other</em> (6% stamp duty, 1% registration) and adjust mentally, or tell me your state's schedule and I'll add it.</p>
+    <h3>Is my data backed up?</h3>
+    <p>Deals are stored on the device. There's no cloud sync yet, so deleting the app deletes your deals. Share the verdict card to keep a record.</p>
+    <h3>Is this financial advice?</h3>
+    <p>No. It's a model with visible assumptions. Talk to your CA, and read the agreement.</p>
+  </section>
+
+  <!-- ── Privacy ── -->
+  <section class="guide-section" id="privacy">
+    <div class="section-eyebrow">Under the hood</div>
+    <h2>Privacy</h2>
+    <p>No account, no analytics, no ads, no crash-reporting SDKs. Deals and loans live in SwiftData on your device. Any AI key you add lives in the Keychain and is used only to call that provider directly from your phone. Full policy: <a href="/loanyieldiq/privacy/">aniketshetty.com/loanyieldiq/privacy</a>.</p>
+    <p>Questions or a state schedule to add? <a href="mailto:aniket.shetty@gmail.com">aniket.shetty@gmail.com</a></p>
+  </section>
+
+</main>
+</div>
+
+<script>
+  const root = document.documentElement;
+  const toggle = document.getElementById('themeToggle');
+  const saved = localStorage.getItem('ly-guide-theme');
+  if (saved) root.setAttribute('data-theme', saved);
+
+  toggle.addEventListener('click', () => {
+    const current = root.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('ly-guide-theme', next);
+  });
+
+  const menuToggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+  menuToggle.addEventListener('click', () => sidebar.classList.toggle('open'));
+  window.closeMobileNav = function() { sidebar.classList.remove('open'); };
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth <= 860 && sidebar.classList.contains('open') &&
+        !sidebar.contains(e.target) && e.target !== menuToggle) {
+      sidebar.classList.remove('open');
+    }
+  });
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
