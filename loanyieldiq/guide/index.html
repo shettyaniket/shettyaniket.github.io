@@ -514,6 +514,7 @@
     <span class="nav-section-label">Other tabs</span>
     <a class="nav-link" href="#loaniq" onclick="closeMobileNav()"><span class="nav-icon">💳</span> My Loans</a>
     <a class="nav-link" href="#import" onclick="closeMobileNav()"><span class="nav-icon">📄</span> Import a statement</a>
+    <a class="nav-link" href="#advisor" onclick="closeMobileNav()"><span class="nav-icon">💬</span> Ask about my loans</a>
     <a class="nav-link" href="#benchmarks" onclick="closeMobileNav()"><span class="nav-icon">⚖️</span> Benchmarks &amp; Risk</a>
     <a class="nav-link" href="#settings" onclick="closeMobileNav()"><span class="nav-icon">⚙️</span> Settings</a>
   </div>
@@ -878,6 +879,27 @@
     </ol>
 <figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-import-review.jpg" alt="Import review: what was read, the EMI cross-check, and years-left derived from the statement's EMI." loading="lazy"><figcaption>Import review: what was read, the EMI cross-check, and years-left derived from the statement's EMI.</figcaption></figure>
     <div class="callout note"><div class="callout-icon">🔒</div><div class="callout-body"><div class="callout-title">Privacy</div><p>The statement text never leaves your phone unless you have added your own AI key in Settings, in which case it is sent only to that provider, only for this extraction.</p></div></div>
+  </section>
+
+  <!-- ── Advisor ── -->
+  <section class="guide-section" id="advisor">
+    <div class="section-eyebrow">Other tabs</div>
+    <h2>Ask about my loans</h2>
+    <p>My Loans → the <strong>Ask about my loans</strong> card (or the chat icon top-left). A chat that answers questions across every loan in your vault. The important design choice: <strong>every number comes from the amortization engine, never from a language model.</strong> The model — Apple's on-device one, or your own key — only phrases answers, adds a short takeaway, and handles free-form questions from a fact sheet the engine wrote. Without any model the chat still answers everything below.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Ask</th><th>You get</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Which loan should I close first?</strong></td><td>The avalanche order by <em>effective</em> rate — home-loan interest is deductible under Sec 24(b), so a 8.5% home loan can be cheaper money than a 10% car loan. If rates are within 1% of each other it recommends the snowball instead (smallest balance first, for the cash-flow win).</td></tr>
+        <tr><td><strong>I want to be loan-free in 5 years</strong> (or "by 2030")</td><td>Two routes, per loan and in total: the extra EMI from now, or the lump sum today that keeps EMIs unchanged — plus the interest avoided and which loan to start with.</td></tr>
+        <tr><td><strong>I have ₹5 L to prepay — where?</strong></td><td>Interest saved and months saved on each loan; the best one is named, with the runner-up's shortfall.</td></tr>
+        <tr><td><strong>What if I pay ₹10,000 more every month?</strong></td><td>Same comparison for a recurring top-up.</td></tr>
+        <tr><td><strong>Rates rise 50 bps?</strong></td><td>New EMI and extra interest per loan, with the tip to keep the tenure and raise the EMI.</td></tr>
+        <tr><td><strong>How much interest this year?</strong></td><td>Next-12-month and remaining interest, per loan.</td></tr>
+        <tr><td><strong>Where do I stand?</strong> / a loan's name</td><td>Totals, EMIs, debt-free month; or one loan's details.</td></tr>
+      </tbody>
+    </table></div>
+    <p>Answers that point at a loan carry an <strong>Open this loan</strong> button that jumps to its workspace, where you can turn the suggestion into a scenario and save it. Suggestion chips under the chat cover the common questions.</p>
+    <div class="callout note"><div class="callout-icon">🔒</div><div class="callout-body"><div class="callout-title">Privacy</div><p>Computed answers never leave your phone. Free-form questions and takeaways go to Apple's on-device model, or to your own cloud key if you added one — and only as the engine's fact sheet plus your question.</p></div></div>
   </section>
 
   <!-- ── Benchmarks ── -->
