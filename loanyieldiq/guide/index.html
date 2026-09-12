@@ -535,6 +535,7 @@
     <div class="section-eyebrow">LoanYield IQ · User Guide</div>
     <h1>An honest second opinion on the flat you're about to buy</h1>
     <p>LoanYield IQ takes the handful of numbers you already know — the agreement value, the rent it would fetch, the loan you'd take — and turns them into the numbers nobody shows you: what the flat really costs once stamp duty, GST and builder charges are in, how much cash you'll burn before an under-construction flat is handed over, what the tax rules give back, and whether the whole thing beats simply investing the same cheques. Then it says, in one sentence, what it thinks you should do.</p>
+    <p>It has a second job too: the loan you already have. Import the bank's statement or amortization schedule, see exactly where you stand, plan prepayments and step-ups as scenarios, and ask the built-in advisor which loan to close first or what being debt-free in five years takes.</p>
     <p>This guide walks through every screen. If you only read one section, read <a href="#scenarios">Three scenarios</a> — it's the part that keeps the app honest.</p>
     <div class="intro-meta">
       <span class="meta-pill accent">iPhone &amp; iPad · iOS 18+</span>
@@ -574,6 +575,9 @@
       <div class="c"><b>Cautious · Base · Hopeful</b><span>The verdict under three price-growth assumptions. Tap a pill to switch.</span></div>
       <div class="c"><b>✨ What-if bar</b><span>Type a change in plain English or tap a chip; the whole screen recomputes.</span></div>
       <div class="c"><b>+ in the Prepay column</b><span>Tap any month in a schedule to add a lump sum that month.</span></div>
+      <div class="c"><b>Chart tabs</b><span>Cash flow · Loan left · Wealth · By year — one chart at a time; the app remembers your tab.</span></div>
+      <div class="c"><b>Scenario, then Save</b><span>In a loan's workspace, changes are analysis-only until you tap Save. Reset discards.</span></div>
+      <div class="c"><b>Ask about my loans</b><span>A chat in My Loans that computes answers — close-first order, debt-free by a date, where a lump sum should go.</span></div>
       <div class="c"><b>Deals menu (top-left)</b><span>Switch, duplicate, delete or compare saved deals; start a new one.</span></div>
       <div class="c"><b>Share</b><span>A WhatsApp verdict card, or an A4 PDF report — your choice.</span></div>
       <div class="c"><b>Everything is saved</b><span>Automatically, on the device. Nothing is uploaded.</span></div>
@@ -586,7 +590,7 @@
     <h2>The three tabs</h2>
     <div class="feature-grid">
       <div class="feature-card"><span class="fc-icon">🏢</span><div class="fc-title">Deal</div><div class="fc-desc">One property plus its loan. The verdict, the chart, the inputs, the schedule and the AI memo. This is where you'll spend your time.</div></div>
-      <div class="feature-card"><span class="fc-icon">💳</span><div class="fc-title">My Loans</div><div class="fc-desc">A vault for loans that aren't tied to a property deal — an existing home loan, a car loan, a LAP. Track them and simulate prepayments.</div></div>
+      <div class="feature-card"><span class="fc-icon">💳</span><div class="fc-title">My Loans</div><div class="fc-desc">The loans you already have. Import a statement or schedule, see outstanding today and your debt-free month, plan prepayments and step-ups as scenarios, and ask the advisor what to do.</div></div>
       <div class="feature-card"><span class="fc-icon">⚖️</span><div class="fc-title">Benchmarks &amp; Risk</div><div class="fc-desc">The selected deal's return against a Nifty SIP, a REIT and prepaying debt, plus a table of shocks: rates up, rent down, handover late.</div></div>
     </div>
     <p>On iPad the Deal tab becomes two columns — inputs on the left, verdict, chart and tables on the right — and the tab bar moves to the top.</p>
@@ -945,6 +949,10 @@
     <p>Each month before handover: 62% of the sanctioned loan × monthly rate. Cash before handover = the sum of those months plus property tax for the period. No rent is assumed until handover.</p>
     <h3>The loan</h3>
     <p>EMI = P·r·(1+r)ᴺ ÷ ((1+r)ᴺ − 1), with r the monthly rate and N the months.<br>Step-up: EMI in year y = base EMI × (1 + step-up)^(y−1).<br>Prepayments reduce principal in the month entered. MaxGain: interest each month accrues on max(0, balance − parked balance).</p>
+    <h3>Payoff plans</h3>
+    <p>Step-up: EMI in year y = base EMI × (1 + step-up)^(y − first-raise-year + 1), for y ≥ the first-raise year. Recurring prepayments expand into one amount per scheduled month and add to any one-off in the same month. Imported schedule rows replace the engine for months 1…k; the projection starts from the last row's closing balance with the remaining months, and your plan applies to the projection months.</p>
+    <h3>Advisor solvers</h3>
+    <p>Close-first order: effective rate = rate × (1 − slab × shielded share), where shielded share = min(annual interest, ₹2 L) ÷ annual interest for home loans and 0 otherwise. Debt-free in N months: needed EMI = EMI(outstanding, rate, N); extra = needed − current EMI; or lump sum = outstanding − present value of the current EMI over N months. Where a lump sum goes: interest saved per loan from a schedule with that sum prepaid in month 1.</p>
     <h3>Tax</h3>
     <p>Net annual value = rent × 12 × (1 − vacancy) − property tax.<br>Section 24(a): 30% of NAV is deductible.<br>Section 24(b): interest is deductible up to ₹2 L (₹4 L if joint).<br>Taxable rent = max(0, NAV − 24(a) − 24(b)), taxed at your slab.<br>Monthly cash flow = rent − EMI − property tax − tax.</p>
     <h3>Return and break-even</h3>
@@ -984,6 +992,13 @@
         <tr><td><strong>XIRR</strong></td><td>Annualized return that accounts for the timing of every cheque in and out.</td></tr>
         <tr><td><strong>LTCG</strong></td><td>Long-term capital gains tax — 12.5% on equity gains, applied to the Nifty benchmark.</td></tr>
         <tr><td><strong>Break-even</strong></td><td>The month from which selling would return everything you've paid in.</td></tr>
+        <tr><td><strong>First EMI date</strong></td><td>When the first full EMI was (or will be) debited; anchors the schedule to calendar months.</td></tr>
+        <tr><td><strong>Amount basis</strong></td><td>Whether the amount you typed for an existing loan is the original sanction or today's outstanding.</td></tr>
+        <tr><td><strong>Scenario</strong></td><td>Unsaved changes in a loan's workspace, computed against the saved plan; Save commits, Reset discards.</td></tr>
+        <tr><td><strong>Recurring prepayment</strong></td><td>A lump sum repeated every month / quarter / 6 months / year between two loan months.</td></tr>
+        <tr><td><strong>Row-level import</strong></td><td>Reading an amortization schedule's actual rows as history, including prepayments and rate changes visible in the numbers.</td></tr>
+        <tr><td><strong>Effective rate</strong></td><td>A loan's rate after the Sec 24(b) tax shield — what the money really costs you; the advisor ranks loans by it.</td></tr>
+        <tr><td><strong>Avalanche · snowball</strong></td><td>Paying off the highest-rate loan first (saves the most) vs the smallest balance first (frees cash flow soonest).</td></tr>
       </tbody>
     </table></div>
   </section>
@@ -1002,6 +1017,12 @@
     <p>During construction the bank disburses progressively (modelled at 62% on average). At handover the full sanctioned amount is outstanding and the real EMI begins.</p>
     <h3>My state isn't Maharashtra, Karnataka or Delhi.</h3>
     <p>Choose <em>Other</em> (6% stamp duty, 1% registration) and adjust mentally, or tell me your state's schedule and I'll add it.</p>
+    <h3>Can I import my existing loan?</h3>
+    <p>Yes — My Loans → + → Import from a statement. A PDF, photo or scan of a statement, sanction letter or amortization schedule. Schedules are read row by row, so paid months, prepayments and rate resets come from the bank's own numbers. You review before anything is saved.</p>
+    <h3>Are the chat's answers trustworthy?</h3>
+    <p>The numbers are — they come from the same amortization engine as every screen in the app, and each answer shows a table you can check. A language model, when available, only phrases the answer and handles free-form questions from a fact sheet the engine wrote; it never invents figures. The strategy it gives (avalanche by effective rate) is the standard one; your circumstances may argue otherwise.</p>
+    <h3>I changed things in a loan and they vanished when I came back.</h3>
+    <p>That's by design: workspace changes are scenarios until you tap Save. If you meant to keep them, make the change again and tap Save.</p>
     <h3>Is my data backed up?</h3>
     <p>Deals are stored on the device. There's no cloud sync yet, so deleting the app deletes your deals. Share the verdict card to keep a record.</p>
     <h3>Is this financial advice?</h3>
