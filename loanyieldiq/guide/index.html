@@ -502,6 +502,7 @@
   <div class="nav-section">
     <span class="nav-section-label">Other tabs</span>
     <a class="nav-link" href="#loaniq" onclick="closeMobileNav()"><span class="nav-icon">💳</span> My Loans</a>
+    <a class="nav-link" href="#import" onclick="closeMobileNav()"><span class="nav-icon">📄</span> Import a statement</a>
     <a class="nav-link" href="#benchmarks" onclick="closeMobileNav()"><span class="nav-icon">⚖️</span> Benchmarks &amp; Risk</a>
     <a class="nav-link" href="#settings" onclick="closeMobileNav()"><span class="nav-icon">⚙️</span> Settings</a>
   </div>
@@ -760,8 +761,15 @@
   <section class="guide-section" id="share">
     <div class="section-eyebrow">Deals</div>
     <h2>Share the verdict</h2>
-    <p>Tap <strong>Share</strong> on the verdict card. The app renders a single image — deal name and terms, the verdict and headline, all three scenarios with their returns, six key numbers, the loan curve with break-even, and the assumptions — shows you a preview, and hands it to the iOS share sheet. Send it to WhatsApp, Messages, Mail, or save it to Photos.</p>
-    <p>The card uses fixed colours, so it looks identical on every recipient's phone regardless of their theme.</p>
+    <p>Tap <strong>Share</strong> on the verdict card and choose one of two formats:</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Format</th><th>What's in it</th><th>Best for</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Verdict card</strong></td><td>One image: deal name and terms, the verdict and headline, all three scenarios with their returns, six key numbers, the loan curve with break-even, and the assumptions. Fixed colours, identical on every phone.</td><td>WhatsApp, Messages, the family group</td></tr>
+        <tr><td><strong>PDF report</strong></td><td>An A4 document: summary with scenarios and assumptions; where the money goes, loan and tax on rent; ten-year cash-flow table; benchmarks and the what-if table; the full month-by-month loan schedule with calendar dates.</td><td>Your CA, the bank, your own records</td></tr>
+      </tbody>
+    </table></div>
+    <p>Both are generated on your phone and handed to the iOS share sheet — Mail, Files, AirDrop, print, anything.</p>
   </section>
 
   <!-- ── Scan ── -->
@@ -776,9 +784,32 @@
   <section class="guide-section" id="loaniq">
     <div class="section-eyebrow">Other tabs</div>
     <h2>My Loans</h2>
-    <p>A separate vault for loans that aren't attached to a property deal — the home loan you already have, a car loan, a personal loan, a loan against property, or a MaxGain overdraft. Add one with the + button (name, type, outstanding principal, rate, remaining tenure). The list shows your total debt, combined EMI, lifetime interest and the date you'll be debt-free.</p>
+    <p>A separate vault for loans that aren't attached to a property deal — the home loan you already have, a car loan, a personal loan, a loan against property, or a MaxGain overdraft. Add one with the + button, either by importing a statement (next section) or by hand.</p>
+    <h3>Where you are in the loan</h3>
+    <p>Because these loans already exist, each one asks for its <strong>first EMI date</strong> and what the amount you're typing represents:</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Amount below is…</th><th>Enter</th><th>The app then</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Original loan amount</strong></td><td>The sanctioned amount and the full tenure</td><td>Works out how many EMIs you've paid since the first EMI date, dims them in the schedule, and shows the balance outstanding today</td></tr>
+        <tr><td><strong>Outstanding today</strong></td><td>The balance on your latest statement and the years left</td><td>Starts the schedule from your next EMI date</td></tr>
+      </tbody>
+    </table></div>
+    <p>With a date set, every schedule row is labelled with its calendar month, the list shows when each loan closes, and the portfolio tiles show outstanding today, interest still to pay and the month you'll be debt-free.</p>
     <p>Tap a loan for its detail screen: EMI and closing month versus the plain schedule, a balance chart, all the structure controls (step-up, MaxGain, joint borrower), and the same tap-to-prepay schedule as the Studio.</p>
     <div class="callout tip"><div class="callout-icon">🗣️</div><div class="callout-body"><div class="callout-title">Siri</div><p>"Ask LoanYield IQ what happens if I prepay" — Siri asks for the amount in lakhs and the month, and tells you the interest and months saved on your first standalone loan.</p></div></div>
+  </section>
+
+  <!-- ── Import ── -->
+  <section class="guide-section" id="import">
+    <div class="section-eyebrow">Other tabs</div>
+    <h2>Import a statement</h2>
+    <p>My Loans → <strong>+</strong> → <strong>Import from a statement</strong>. Pick a PDF or image from Files, a photo or screenshot from Photos, or scan the paper with the camera (multiple pages are fine).</p>
+    <ol class="steps">
+      <li class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">The text is read on your phone</div><p class="step-desc">PDFs with selectable text are read directly; scans and photos go through on-device OCR.</p></div></li>
+      <li class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">The loan details are picked out</div><p class="step-desc">Loan amount, outstanding balance, interest rate, tenure, EMI, first EMI date and lender — by Apple's on-device model where available (or your own cloud key if you added one), with a pattern-matcher as backup. The two are cross-checked: if they disagree on an amount, the one that's physically plausible wins (the EMI must cover the interest; outstanding can't exceed the original loan).</p></div></li>
+      <li class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">You review, then add</div><p class="step-desc">A form shows what was read. "Years left" is derived from the EMI on the statement, and a green tick confirms the EMI matches the terms — an amber warning means something was misread; adjust and the tick returns. Nothing is saved until you tap Add loan. "Text that was read" shows the raw OCR if you want to check.</p></div></li>
+    </ol>
+    <div class="callout note"><div class="callout-icon">🔒</div><div class="callout-body"><div class="callout-title">Privacy</div><p>The statement text never leaves your phone unless you have added your own AI key in Settings, in which case it is sent only to that provider, only for this extraction.</p></div></div>
   </section>
 
   <!-- ── Benchmarks ── -->
