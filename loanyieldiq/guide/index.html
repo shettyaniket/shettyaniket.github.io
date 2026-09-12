@@ -508,12 +508,14 @@
     <a class="nav-link" href="#deals" onclick="closeMobileNav()"><span class="nav-icon">🗂️</span> Saving &amp; switching deals</a>
     <a class="nav-link" href="#compare" onclick="closeMobileNav()"><span class="nav-icon">🔀</span> Compare two deals</a>
     <a class="nav-link" href="#share" onclick="closeMobileNav()"><span class="nav-icon">📤</span> Share the verdict</a>
+    <a class="nav-link" href="#pdf" onclick="closeMobileNav()"><span class="nav-icon">📑</span> The PDF report</a>
     <a class="nav-link" href="#scan" onclick="closeMobileNav()"><span class="nav-icon">📷</span> Scan a cost sheet</a>
   </div>
   <div class="nav-section">
     <span class="nav-section-label">Other tabs</span>
     <a class="nav-link" href="#loaniq" onclick="closeMobileNav()"><span class="nav-icon">💳</span> My Loans</a>
     <a class="nav-link" href="#import" onclick="closeMobileNav()"><span class="nav-icon">📄</span> Import a statement</a>
+    <a class="nav-link" href="#schedule-upload" onclick="closeMobileNav()"><span class="nav-icon">📋</span> Upload an amortization schedule</a>
     <a class="nav-link" href="#advisor" onclick="closeMobileNav()"><span class="nav-icon">💬</span> Ask about my loans</a>
     <a class="nav-link" href="#benchmarks" onclick="closeMobileNav()"><span class="nav-icon">⚖️</span> Benchmarks &amp; Risk</a>
     <a class="nav-link" href="#settings" onclick="closeMobileNav()"><span class="nav-icon">⚙️</span> Settings</a>
@@ -822,11 +824,30 @@
       <thead><tr><th>Format</th><th>What's in it</th><th>Best for</th></tr></thead>
       <tbody>
         <tr><td><strong>Verdict card</strong></td><td>One image: deal name and terms, the verdict and headline, all three scenarios with their returns, six key numbers, the loan curve with break-even, and the assumptions. Fixed colours, identical on every phone.</td><td>WhatsApp, Messages, the family group</td></tr>
-        <tr><td><strong>PDF report</strong></td><td>An A4 document: summary with scenarios and assumptions; where the money goes, loan and tax on rent; ten-year cash-flow table; benchmarks and the what-if table; the full month-by-month loan schedule with calendar dates.</td><td>Your CA, the bank, your own records</td></tr>
+        <tr><td><strong>PDF report</strong></td><td>An A4 document: summary with scenarios and assumptions; where the money goes, loan and tax on rent; ten-year cash-flow table; benchmarks and the what-if table; the full month-by-month loan schedule with calendar dates. <a href="#pdf">Page by page →</a></td><td>Your CA, the bank, your own records</td></tr>
       </tbody>
     </table></div>
     <p>Both are generated on your phone and handed to the iOS share sheet — Mail, Files, AirDrop, print, anything.</p>
     <div class="fig-row"><figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-share.jpg" alt="The share hub with the verdict card selected." loading="lazy"><figcaption>The share hub with the verdict card selected.</figcaption></figure><figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-pdf.jpg" alt="The PDF report, page 1 of 10, previewed before sharing." loading="lazy"><figcaption>The PDF report, page 1 of 10, previewed before sharing.</figcaption></figure></div>
+  </section>
+
+  <!-- ── PDF report ── -->
+  <section class="guide-section" id="pdf">
+    <div class="section-eyebrow">Deals</div>
+    <h2>The PDF report</h2>
+    <p>Share → <strong>PDF report</strong>. An A4 document generated on your phone (about 10 pages for a 20-year loan), previewed in-app before you send it. It's the version of the analysis to give a CA, a bank, a co-buyer or your own records — everything the app computed, laid out to be read on paper.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Page</th><th>Contents</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1 · Summary</strong></td><td>Deal name and terms (agreement value, down payment, rate, tenure, state, GST category). The verdict in large type with its one-sentence rationale. <em>All three</em> price-growth scenarios side by side — call, return per year, break-even month — and the one-line summary of what the decision hinges on. Six key numbers: all-in cost, money out on day one, monthly EMI, rent yield after costs, cash before handover (or year-1 cash flow for a ready flat), return per year. Every assumption used: price growth, rent escalation and vacancy, tax slab, pre-EMI draw, the three benchmark rates, step-up and prepayments.</td></tr>
+        <tr><td><strong>2 · Costs, loan &amp; tax</strong></td><td><em>Where the money goes</em>: agreement value, stamp duty at the state rate, registration, GST, builder extras, loan charges → all-in cost and day-one cash. <em>Before handover</em> (under-construction only): months to handover, pre-EMI per month, property tax during construction, cash needed before handover. <em>The loan</em>: amount, rate and tenure, base EMI, first full EMI date, months to close vs scheduled, total interest, interest saved by step-up/prepayments, MaxGain balance, joint-loan cap. <em>Tax on rent, year 1</em>: gross rent after vacancy → net annual value → Section 24(a) 30% deduction → Section 24(b) interest (capped) → taxable rent → income tax at your slab.</td></tr>
+        <tr><td><strong>3 · Ten-year cash flow</strong></td><td>A year-by-year table after handover: rent in, EMI out (incl. prepayments), tax (property + income), net cash, loan left, flat value, equity. Followed by the break-even statement in words.</td></tr>
+        <tr><td><strong>4 · Benchmarks &amp; risk</strong></td><td>The same cheques four ways — this property, Nifty 50 SIP, commercial REIT, prepaying debt — with return per year, wealth after 10 years and the basis of each. The what-if table: rate +100/+200 bps, rent 20% lower, empty 15% of the year, prices growing 4% and 9%, handover 12 months late — each with return, year-1 monthly cash and break-even. A paragraph stating how the verdict is decided.</td></tr>
+        <tr><td><strong>5+ · Loan schedule</strong></td><td>Every month to closure: opening balance, EMI, interest, prepayment, closing balance, ~44 rows a page. With a first-EMI date set, each row carries its calendar month; months already paid are dimmed.</td></tr>
+      </tbody>
+    </table></div>
+    <p>Every page carries the deal name, a page count, the generation date and the note that it is a model with visible assumptions, not financial advice. Amounts use the same ₹ / L / Cr formatting as the app.</p>
+    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><div class="callout-title">Two deals, two reports</div><p>The report is for the deal currently selected. To compare on paper, switch deals from the Deals menu and export again — or use the in-app Compare screen for the side-by-side.</p></div></div>
   </section>
 
   <!-- ── Scan ── -->
@@ -880,11 +901,52 @@
     <ol class="steps">
       <li class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">The text is read on your phone</div><p class="step-desc">PDFs with selectable text are read directly; scans and photos go through on-device OCR.</p></div></li>
       <li class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">The loan details are picked out</div><p class="step-desc">Loan amount, outstanding balance, interest rate, tenure, EMI, first EMI date and lender — by Apple's on-device model where available (or your own cloud key if you added one), with a pattern-matcher as backup. The two are cross-checked: if they disagree on an amount, the one that's physically plausible wins (the EMI must cover the interest; outstanding can't exceed the original loan).</p></div></li>
-      <li class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">If it's an amortization schedule, the rows are read too</div><p class="step-desc">Month-by-month tables are recognised whatever the bank's column order — the app works out which column is the balance (it falls), which is the EMI, and which are interest and principal (they add up to the EMI; interest falls, principal rises). Those rows become <strong>history</strong>: the months already paid are taken from the bank's numbers, including any <strong>prepayments</strong> (a balance drop bigger than the principal component) and <strong>rate changes</strong> (a lasting shift in interest ÷ balance) it can see. The app then projects forward only from the last row. A card on the review form shows what was found — rows and dates, opening → closing balance, latest EMI and implied rate, prepayments, rate changes — with a switch to use or ignore them.</p></div></li>
+      <li class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">If it's an amortization schedule, the rows are read too (<a href="#schedule-upload">details</a>)</div><p class="step-desc">Month-by-month tables are recognised whatever the bank's column order — the app works out which column is the balance (it falls), which is the EMI, and which are interest and principal (they add up to the EMI; interest falls, principal rises). Those rows become <strong>history</strong>: the months already paid are taken from the bank's numbers, including any <strong>prepayments</strong> (a balance drop bigger than the principal component) and <strong>rate changes</strong> (a lasting shift in interest ÷ balance) it can see. The app then projects forward only from the last row. A card on the review form shows what was found — rows and dates, opening → closing balance, latest EMI and implied rate, prepayments, rate changes — with a switch to use or ignore them.</p></div></li>
       <li class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">You review, then add</div><p class="step-desc">A form shows what was read. "Years left" is derived from the EMI on the statement, and a green tick confirms the EMI matches the terms — an amber warning means something was misread; adjust and the tick returns. Nothing is saved until you tap Add loan. "Text that was read" shows the raw OCR if you want to check.</p></div></li>
     </ol>
 <figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-import-review.jpg" alt="Import review: what was read, the EMI cross-check, and years-left derived from the statement's EMI." loading="lazy"><figcaption>Import review: what was read, the EMI cross-check, and years-left derived from the statement's EMI.</figcaption></figure>
     <div class="callout note"><div class="callout-icon">🔒</div><div class="callout-body"><div class="callout-title">Privacy</div><p>The statement text never leaves your phone unless you have added your own AI key in Settings, in which case it is sent only to that provider, only for this extraction.</p></div></div>
+  </section>
+
+  <!-- ── Schedule upload ── -->
+  <section class="guide-section" id="schedule-upload">
+    <div class="section-eyebrow">Other tabs</div>
+    <h2>Upload an amortization schedule</h2>
+    <p>The most accurate way to add an existing loan. Banks issue a repayment schedule (HDFC, SBI, ICICI, LIC HFL and others all do, from net-banking or on request) — a table with one row per month. Upload it via <strong>My Loans → + → Import from a statement</strong> and the app reads the <em>rows themselves</em>, not just the headline terms.</p>
+    <h3>What to upload</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Source</th><th>How</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>PDF from net-banking</strong></td><td>Save to Files (or share from Mail/WhatsApp to Files), then <em>Choose a PDF or image</em></td><td>Best results — text is read directly, no OCR errors.</td></tr>
+        <tr><td><strong>Scanned PDF</strong></td><td>Same</td><td>Pages are rasterised and OCR'd on-device (first 6 pages).</td></tr>
+        <tr><td><strong>Screenshot / photo</strong></td><td><em>Pick from Photos</em></td><td>One page per image; crop to the table for best accuracy.</td></tr>
+        <tr><td><strong>Paper</strong></td><td><em>Scan with the camera</em></td><td>Multi-page scanning; hold steady, good light.</td></tr>
+      </tbody>
+    </table></div>
+    <h3>What the app reads from the rows</h3>
+    <p>Column order doesn't matter and headers aren't required — columns are identified by how the numbers behave:</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Column</th><th>Recognised because</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Closing balance</strong></td><td>It falls across the rows and is the largest figure.</td></tr>
+        <tr><td><strong>Opening balance</strong> (if present)</td><td>It equals the previous row's closing balance.</td></tr>
+        <tr><td><strong>EMI · Interest · Principal</strong></td><td>Two of them add up to the third on most rows; interest falls over time while principal rises.</td></tr>
+        <tr><td><strong>Date</strong></td><td>Any of the usual Indian formats (05/03/2024, 05-Mar-24, Mar 2024 …).</td></tr>
+        <tr><td><strong>Serial / month number</strong></td><td>Ignored (small integers without commas).</td></tr>
+      </tbody>
+    </table></div>
+    <p>From those rows it derives:</p>
+    <ul style="color:var(--text-2);font-size:15px;line-height:1.75;padding-left:20px;margin-bottom:14px">
+      <li><strong>Months already paid</strong> — exactly the rows in the table, so "outstanding today" and "EMIs paid" match the bank.</li>
+      <li><strong>Prepayments</strong> — any row where the balance fell by more than the principal component of the EMI.</li>
+      <li><strong>Rate changes</strong> — a lasting shift in interest ÷ opening balance (the implied annual rate), typical of repo-linked resets.</li>
+      <li><strong>Latest EMI and implied rate</strong> — used to project the remaining months, and to derive <em>years left</em> from the EMI rather than trusting a printed tenure.</li>
+      <li><strong>First EMI date</strong> — the first row's date, which anchors every schedule month to a calendar month.</li>
+    </ul>
+    <h3>Review before saving</h3>
+    <p>The review form shows a green <strong>schedule rows</strong> card: how many rows and their date range, opening → closing balance, latest EMI and implied rate, prepayments found, rate changes found — and a switch to use the rows as history or ignore them. The usual EMI cross-check (green tick / amber warning) still applies. Tap <strong>Add loan</strong> and the loan opens with a banner, <em>"N months from your bank's schedule"</em>; its schedule uses the actual rows for those months (dimmed, with a TODAY marker) and projects only from the last row's balance. Your payoff plan — step-ups, prepayments — applies to the projected months.</p>
+    <div class="callout warn"><div class="callout-icon">⚠️</div><div class="callout-body"><div class="callout-title">When it can't read the rows</div><p>Tables with fewer than three usable rows, or where the balance doesn't fall, are ignored and the import falls back to headline terms (amount, rate, tenure, EMI, first EMI date). The "Text that was read" panel on the review form shows the raw text so you can see why.</p></div></div>
+    <div class="callout note"><div class="callout-icon">🔒</div><div class="callout-body"><div class="callout-title">Privacy</div><p>Row parsing is entirely on-device and never uses a language model. Only the headline extraction touches a model (Apple's on-device one, or your own key if you added it).</p></div></div>
   </section>
 
   <!-- ── Advisor ── -->
