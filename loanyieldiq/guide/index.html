@@ -452,6 +452,16 @@
     .tab-row { grid-template-columns: repeat(2, 1fr); }
   }
 
+  .fig { margin: 18px 0; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .fig img { width: 260px; max-width: 100%; border-radius: 28px; border: 1.5px solid var(--border); box-shadow: 0 16px 40px rgba(0,0,0,.35); }
+  .fig figcaption { font-size: 12.5px; color: var(--text-3); text-align: center; max-width: 320px; }
+  .fig-row { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+  .fig-row .fig { flex: 1 1 240px; }
+  .cheat { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; margin: 18px 0; }
+  .cheat .c { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; }
+  .cheat .c b { display: block; font-size: 13.5px; color: var(--text); margin-bottom: 4px; }
+  .cheat .c span { font-size: 13px; color: var(--text-2); line-height: 1.5; }
+
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     * { transition: none !important; }
@@ -477,6 +487,7 @@
     <span class="nav-section-label">Start here</span>
     <a class="nav-link active" href="#welcome" onclick="closeMobileNav()"><span class="nav-icon">👋</span> Welcome</a>
     <a class="nav-link" href="#first-minute" onclick="closeMobileNav()"><span class="nav-icon">⏱️</span> Your first minute</a>
+    <a class="nav-link" href="#cheatsheet" onclick="closeMobileNav()"><span class="nav-icon">🗒️</span> Cheat sheet</a>
     <a class="nav-link" href="#tabs" onclick="closeMobileNav()"><span class="nav-icon">📱</span> The three tabs</a>
   </div>
   <div class="nav-section">
@@ -511,6 +522,7 @@
     <a class="nav-link" href="#maths" onclick="closeMobileNav()"><span class="nav-icon">🧮</span> How the maths works</a>
     <a class="nav-link" href="#glossary" onclick="closeMobileNav()"><span class="nav-icon">📖</span> Glossary</a>
     <a class="nav-link" href="#faq" onclick="closeMobileNav()"><span class="nav-icon">❓</span> FAQ</a>
+    <a class="nav-link" href="#troubleshooting" onclick="closeMobileNav()"><span class="nav-icon">🛠️</span> Troubleshooting</a>
     <a class="nav-link" href="#privacy" onclick="closeMobileNav()"><span class="nav-icon">🔒</span> Privacy</a>
   </div>
 </nav>
@@ -542,7 +554,29 @@
       <li class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">See my verdict</div><p class="step-desc">The deal is saved and you land on its verdict. Everything — stamp-duty details, builder charges, prepayments, tax slab — can be changed later from the deal screen, and every change recomputes live.</p></div></li>
     </ol>
     <p>The same Quick Start runs whenever you choose <strong>New deal</strong> from the Deals menu. To rename a deal, just tap its name above the verdict and type.</p>
+    <div class="fig-row"><figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-welcome.jpg" alt="First launch: what the app does, in three lines." loading="lazy"><figcaption>First launch: what the app does, in three lines.</figcaption></figure><figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-quickstart.jpg" alt="Quick Start, page 1 of 2 — the flat." loading="lazy"><figcaption>Quick Start, page 1 of 2 — the flat.</figcaption></figure></div>
     <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><div class="callout-title">Every ⓘ is a plain-English explanation</div><p>Next to nearly every label and number there's a small ⓘ. Tap it for a two-line explanation of what the term means and why it matters — PLC, MODT, Section 24(b), XIRR, all of it.</p></div></div>
+  </section>
+
+  <!-- ── Cheat sheet ── -->
+  <section class="guide-section" id="cheatsheet">
+    <div class="section-eyebrow">Getting started</div>
+    <h2>Cheat sheet</h2>
+    <p>Everything in the app follows a handful of conventions. Learn these and no screen will surprise you.</p>
+    <div class="cheat">
+      <div class="c"><b>ⓘ next to anything</b><span>Tap for a plain-English explanation of that term.</span></div>
+      <div class="c"><b>Tap a number tile</b><span>Opens a card with the full label, the full value, its caption and the explanation. On larger tiles, press and hold.</span></div>
+      <div class="c"><b>Slider + box</b><span>Every number has both. Drag for what-ifs; type the exact figure you know. Typing is never limited to the slider's range.</span></div>
+      <div class="c"><b>Boxes clear when you tap them</b><span>Like a calculator: the old value becomes the placeholder, typing replaces it, leaving it empty restores it. <em>Done</em> above the keyboard commits.</span></div>
+      <div class="c"><b>₹ · L · Cr chips</b><span>Choose the unit for a money box, or type <code>85L</code> / <code>1.2Cr</code> directly.</span></div>
+      <div class="c"><b>Green · amber · red</b><span>Always a judgement — good, caution, poor — never just "positive or negative".</span></div>
+      <div class="c"><b>Cautious · Base · Hopeful</b><span>The verdict under three price-growth assumptions. Tap a pill to switch.</span></div>
+      <div class="c"><b>✨ What-if bar</b><span>Type a change in plain English or tap a chip; the whole screen recomputes.</span></div>
+      <div class="c"><b>+ in the Prepay column</b><span>Tap any month in a schedule to add a lump sum that month.</span></div>
+      <div class="c"><b>Deals menu (top-left)</b><span>Switch, duplicate, delete or compare saved deals; start a new one.</span></div>
+      <div class="c"><b>Share</b><span>A WhatsApp verdict card, or an A4 PDF report — your choice.</span></div>
+      <div class="c"><b>Everything is saved</b><span>Automatically, on the device. Nothing is uploaded.</span></div>
+    </div>
   </section>
 
   <!-- ── Tabs ── -->
@@ -576,6 +610,7 @@
         <tr><td><strong>Cash needed</strong></td><td>Pre-EMI plus property tax during construction (or day-one cash for a ready flat), relative to your day-one cheque.</td><td>≤ 10% of day-one cash</td><td>&gt; 30% of day-one cash</td></tr>
       </tbody>
     </table></div>
+<div class="fig-row"><figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-verdict.jpg" alt="The verdict card: the call, three growth pills, the sentence, and the three drivers." loading="lazy"><figcaption>The verdict card: the call, three growth pills, the sentence, and the three drivers.</figcaption></figure><figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-hover.jpg" alt="Tap any tile for its hover card — full label, value, caption and explanation." loading="lazy"><figcaption>Tap any tile for its hover card — full label, value, caption and explanation.</figcaption></figure></div>
     <div class="callout note"><div class="callout-icon">🎨</div><div class="callout-body"><div class="callout-title">Colours mean judgement, not sign</div><p>A 2.8% rent yield is a positive number, but it's shown red because your loan costs 8.5% — the flat loses money every month it's rented. Everywhere in the app, green / amber / red answer "is this good?", never "is this above zero?".</p></div></div>
   </section>
 
@@ -662,6 +697,15 @@
     </table></div>
     <h3>Every control works the same way</h3>
     <p>Label on the first line, slider plus a typed box on the second. The slider is for what-ifs; the box is for the exact number you know. Money boxes have ₹ / L / Cr unit chips; you can also type <code>85L</code> or <code>1.2Cr</code> directly.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Behaviour</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Tapping a box clears it</strong></td><td>The old value shows as a placeholder so you can type straight away. Leave it empty and the old value comes back. <em>Done</em> above the keyboard commits.</td></tr>
+        <tr><td><strong>No slider limits on typing</strong></td><td>Sliders cover the usual range (e.g. 6.5–13% for a rate) but you can type anything sensible — 5.5%, a 3-year tenure, a ₹12 L flat — and the slider stretches to it.</td></tr>
+        <tr><td><strong>Hard bounds</strong></td><td>Money 0–₹100 Cr, percentages 0–100%, months/years 0–1200 — only to catch typos.</td></tr>
+        <tr><td><strong>Two views of one number</strong></td><td>Down payment % and loan amount are linked: type either and the other follows.</td></tr>
+      </tbody>
+    </table></div>
     <h3>More: builder charges, state &amp; tax</h3>
     <div class="table-wrap"><table>
       <thead><tr><th>Group</th><th>Inputs</th></tr></thead>
@@ -686,8 +730,10 @@
         <tr><td><strong>Interest rate</strong></td><td>Repo-linked floating rate. Rule of thumb: every 25 bps changes a ₹70 L / 20-year EMI by about ₹1,100.</td></tr>
         <tr><td><strong>Monthly EMI</strong></td><td>Read-only — the plain EMI before any step-up.</td></tr>
         <tr><td><strong>Loan tenure</strong></td><td>5–30 years. Longer = smaller EMI but far more total interest.</td></tr>
+        <tr><td><strong>First full EMI (at handover)</strong></td><td>The month the real EMI starts — for under-construction it defaults to today plus the months to handover. Lets the schedule show calendar dates and the prepayment control say which month "loan month 18" actually is.</td></tr>
       </tbody>
     </table></div>
+    <figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-loan-card.jpg" alt="The Home loan card: linked down payment and loan amount, rate, tenure, the step-up switch, and the schedule button." loading="lazy"><figcaption>The Home loan card: linked down payment and loan amount, rate, tenure, the step-up switch, and the schedule button.</figcaption></figure>
     <h3>More: loan charges, MaxGain &amp; joint loan</h3>
     <div class="table-wrap"><table>
       <thead><tr><th>Input</th><th>Notes</th></tr></thead>
@@ -755,6 +801,7 @@
       </tbody>
     </table></div>
     <p>You need at least two saved deals; <em>Duplicate</em> is the quickest way to get a second one.</p>
+    <figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-compare.jpg" alt="Compare: the better value is highlighted on every row." loading="lazy"><figcaption>Compare: the better value is highlighted on every row.</figcaption></figure>
   </section>
 
   <!-- ── Share ── -->
@@ -770,6 +817,7 @@
       </tbody>
     </table></div>
     <p>Both are generated on your phone and handed to the iOS share sheet — Mail, Files, AirDrop, print, anything.</p>
+    <div class="fig-row"><figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-share.jpg" alt="The share hub with the verdict card selected." loading="lazy"><figcaption>The share hub with the verdict card selected.</figcaption></figure><figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-pdf.jpg" alt="The PDF report, page 1 of 10, previewed before sharing." loading="lazy"><figcaption>The PDF report, page 1 of 10, previewed before sharing.</figcaption></figure></div>
   </section>
 
   <!-- ── Scan ── -->
@@ -795,6 +843,7 @@
       </tbody>
     </table></div>
     <p>With a date set, every schedule row is labelled with its calendar month, the list shows when each loan closes, and the portfolio tiles show outstanding today, interest still to pay and the month you'll be debt-free.</p>
+    <figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-my-loans.jpg" alt="My Loans after importing a statement: outstanding today, combined EMI, interest still to pay, and the debt-free month." loading="lazy"><figcaption>My Loans after importing a statement: outstanding today, combined EMI, interest still to pay, and the debt-free month.</figcaption></figure>
     <p>Tap a loan for its detail screen: EMI and closing month versus the plain schedule, a balance chart, all the structure controls (step-up, MaxGain, joint borrower), and the same tap-to-prepay schedule as the Studio.</p>
     <div class="callout tip"><div class="callout-icon">🗣️</div><div class="callout-body"><div class="callout-title">Siri</div><p>"Ask LoanYield IQ what happens if I prepay" — Siri asks for the amount in lakhs and the month, and tells you the interest and months saved on your first standalone loan.</p></div></div>
   </section>
@@ -809,6 +858,7 @@
       <li class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">The loan details are picked out</div><p class="step-desc">Loan amount, outstanding balance, interest rate, tenure, EMI, first EMI date and lender — by Apple's on-device model where available (or your own cloud key if you added one), with a pattern-matcher as backup. The two are cross-checked: if they disagree on an amount, the one that's physically plausible wins (the EMI must cover the interest; outstanding can't exceed the original loan).</p></div></li>
       <li class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">You review, then add</div><p class="step-desc">A form shows what was read. "Years left" is derived from the EMI on the statement, and a green tick confirms the EMI matches the terms — an amber warning means something was misread; adjust and the tick returns. Nothing is saved until you tap Add loan. "Text that was read" shows the raw OCR if you want to check.</p></div></li>
     </ol>
+<figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-import-review.jpg" alt="Import review: what was read, the EMI cross-check, and years-left derived from the statement's EMI." loading="lazy"><figcaption>Import review: what was read, the EMI cross-check, and years-left derived from the statement's EMI.</figcaption></figure>
     <div class="callout note"><div class="callout-icon">🔒</div><div class="callout-body"><div class="callout-title">Privacy</div><p>The statement text never leaves your phone unless you have added your own AI key in Settings, in which case it is sent only to that provider, only for this extraction.</p></div></div>
   </section>
 
@@ -818,7 +868,8 @@
     <h2>Benchmarks &amp; Risk</h2>
     <h3>10-year annualized return</h3>
     <p>Four bars: this property (leveraged), a Nifty 50 SIP (12% CAGR, post 12.5% LTCG), a commercial REIT (7.8% distribution yield), and prepaying existing debt (8.5% risk-free, post-tax).</p>
-    <h3>Terminal wealth on the same cheques</h3>
+    <figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-benchmarks.jpg" alt="Benchmarks: return per year and what you'd have after 10 years, on identical cheques." loading="lazy"><figcaption>Benchmarks: return per year and what you'd have after 10 years, on identical cheques.</figcaption></figure>
+    <h3>What you'd have after 10 years</h3>
     <p>Every strategy receives the identical money — day-one equity plus each monthly EMI, pre-EMI and prepayment — so the rupee outcomes are directly comparable. The property's wealth is its value minus the loan outstanding, plus all the net rent it collected.</p>
     <h3>Risk: sensitivity shocks</h3>
     <p>Titled <em>What if things go wrong?</em> — the deal recomputed under: rate +100 and +200 bps, rent 20% lower, empty 15% of the year, prices growing only 4% (and 9%), handover 12 months late, and no EMI step-up. Each row shows the return per year and monthly cash flow, coloured green if the return still clears 8.5%.</p>
@@ -913,6 +964,26 @@
     <p>Deals are stored on the device. There's no cloud sync yet, so deleting the app deletes your deals. Share the verdict card to keep a record.</p>
     <h3>Is this financial advice?</h3>
     <p>No. It's a model with visible assumptions. Talk to your CA, and read the agreement.</p>
+  </section>
+
+  <!-- ── Troubleshooting ── -->
+  <section class="guide-section" id="troubleshooting">
+    <div class="section-eyebrow">Under the hood</div>
+    <h2>Troubleshooting</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Symptom</th><th>What's going on</th></tr></thead>
+      <tbody>
+        <tr><td><strong>A label at the top looks cut off</strong></td><td>It shouldn't — labels wrap to two lines. If one still does at your text size, tap the tile: the hover card shows the full label and value. Please email a screenshot.</td></tr>
+        <tr><td><strong>I typed a value and it snapped back</strong></td><td>Only if it was outside the hard bounds (e.g. a 150% rate). Anything sensible is accepted; the slider stretches to it.</td></tr>
+        <tr><td><strong>The verdict changed when I only changed the rent</strong></td><td>Rent feeds the yield, the tax and the ten-year return; a small rent change can move the return across the 8.5% or Nifty line. Check the three pills — usually only one scenario flipped.</td></tr>
+        <tr><td><strong>Builder extras says "not added"</strong></td><td>Quick Start doesn't guess builder charges. Add floor rise, PLC, advance maintenance and infra under Property › More; the all-in cost will rise.</td></tr>
+        <tr><td><strong>Import read the wrong amount</strong></td><td>OCR and language models both occasionally misread Indian comma grouping. The review form flags an EMI mismatch in amber; correct the amount and the tick turns green. Nothing is saved until you tap Add loan.</td></tr>
+        <tr><td><strong>Scanner / camera option missing</strong></td><td>Live scanning needs a physical iPhone or iPad with a camera. Use Files or Photos instead.</td></tr>
+        <tr><td><strong>AI memo says "Built-in rules engine"</strong></td><td>Apple Intelligence isn't available on this device or iOS version. The memo still works; it's written from the same numbers by the rules engine.</td></tr>
+        <tr><td><strong>My deals disappeared</strong></td><td>Deals live only on the device. Deleting the app deletes them; there's no cloud sync yet. Share the PDF report to keep a copy.</td></tr>
+        <tr><td><strong>My state isn't listed</strong></td><td>Choose <em>Other</em> (6% duty, 1% registration) and email me the schedule for your state — I'll add it.</td></tr>
+      </tbody>
+    </table></div>
   </section>
 
   <!-- ── Privacy ── -->
