@@ -495,7 +495,7 @@
     <a class="nav-link" href="#verdict" onclick="closeMobileNav()"><span class="nav-icon">✅</span> The verdict</a>
     <a class="nav-link" href="#scenarios" onclick="closeMobileNav()"><span class="nav-icon">🎯</span> Three scenarios</a>
     <a class="nav-link" href="#kpis" onclick="closeMobileNav()"><span class="nav-icon">🔢</span> The four numbers</a>
-    <a class="nav-link" href="#chart" onclick="closeMobileNav()"><span class="nav-icon">📉</span> The chart</a>
+    <a class="nav-link" href="#chart" onclick="closeMobileNav()"><span class="nav-icon">📉</span> The charts</a>
     <a class="nav-link" href="#dock" onclick="closeMobileNav()"><span class="nav-icon">💬</span> What-if in plain English</a>
     <a class="nav-link" href="#property" onclick="closeMobileNav()"><span class="nav-icon">🏢</span> Property inputs</a>
     <a class="nav-link" href="#loan" onclick="closeMobileNav()"><span class="nav-icon">🏦</span> Home loan inputs</a>
@@ -650,13 +650,17 @@
   <!-- ── Chart ── -->
   <section class="guide-section" id="chart">
     <div class="section-eyebrow">The Studio</div>
-    <h2>The chart</h2>
-    <p>Ten years, month by month. Two things are drawn on one canvas:</p>
-    <ul style="color:var(--text-2);font-size:15px;line-height:1.75;padding-left:20px;margin-bottom:14px">
-      <li><strong>Cash flow</strong> (left axis) — rent in, minus EMI, property tax and income tax. Red below zero, green above. The shaded block at the start is the pre-EMI period before handover.</li>
-      <li><strong>Loan balance</strong> (right axis, dashed blue) — what you still owe. It steps up at handover when the full loan is disbursed and steps down at every lump-sum prepayment (marked with a green diamond).</li>
-    </ul>
-    <p>Two vertical markers: <strong>Handover</strong>, and <strong>Break-even</strong> — the first month from which selling the flat would return everything you've paid in. Drag a finger across the chart to read any month's cash flow and outstanding loan.</p>
+    <h2>The charts</h2>
+    <p>One card, one chart at a time — pick a tab. Each shows a single thing on a single axis, and the app remembers which tab you left it on. Drag a finger across any of them to read a month or year.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Tab</th><th>Shows</th><th>Look for</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Cash flow</strong></td><td>Rent minus EMI, property tax and income tax, every month for 10 years. Red below zero, green above.</td><td>The shaded block before handover (pre-EMI, no rent). Whether the line ever crosses into green.</td></tr>
+        <tr><td><strong>Loan left</strong></td><td>Principal still owed.</td><td>The step up at handover when the full loan is disbursed; green diamonds where a prepayment knocks it down.</td></tr>
+        <tr><td><strong>Wealth</strong></td><td>What the flat is worth (green) vs what you still owe (dashed blue), year by year; the shaded gap is your equity.</td><td>The <strong>Break-even</strong> marker — the year from which selling would return everything paid in.</td></tr>
+        <tr><td><strong>By year</strong></td><td>Net cash flow for each year after handover, as bars.</td><td>How many years you top up from salary, and by how much.</td></tr>
+      </tbody>
+    </table></div>
     <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><div class="callout-title">Lump sums are not on the cash line</div><p>A ₹5 L prepayment would dwarf every monthly bar, so the cash line shows recurring cash only. Prepayments are shown as diamonds on the loan curve, and they <em>are</em> included in the return and break-even calculations.</p></div></div>
   </section>
 
