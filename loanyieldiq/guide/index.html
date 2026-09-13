@@ -553,7 +553,7 @@
     <h2>Your first minute</h2>
     <p>On first launch the app walks you through <strong>Quick Start</strong> — a welcome page and two short screens that ask for the six things a verdict needs. If you'd rather explore first, tap <em>Use sample deal</em> and play with the built-in 2BHK (it carries a SAMPLE badge until you rename it).</p>
     <ol class="steps">
-      <li class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">About the flat</div><p class="step-desc">Name the deal (e.g. <em>2BHK, Hinjewadi</em>), pick the state, say whether it's ready or under construction (and months until handover), and type the flat price and the rent it would fetch. Money boxes have ₹ / L / Cr chips; tapping a box clears it so you can type straight away.</p></div></li>
+      <li class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">About the property</div><p class="step-desc">Choose what you're buying — <strong>Flat / house</strong>, <strong>Shop / office</strong> or <strong>Plot / open land</strong> — name the deal, pick the state, say whether it's ready or under construction, and say whether the price you were quoted is the <strong>agreement value</strong> or the builder's <strong>all-in</strong> figure (taxes included — the app backs them out). Then the price and the rent it would fetch. A plot skips the loan page: it's modelled as bought outright.</p></div></li>
       <li class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">About the loan</div><p class="step-desc">Down payment %, interest rate and loan tenure. The loan amount is shown as you go.</p></div></li>
       <li class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">See my verdict</div><p class="step-desc">The deal is saved and you land on its verdict. Everything — stamp-duty details, builder charges, prepayments, tax slab — can be changed later from the deal screen, and every change recomputes live.</p></div></li>
     </ol>
@@ -701,7 +701,9 @@
     <div class="table-wrap"><table>
       <thead><tr><th>Input</th><th>Notes</th></tr></thead>
       <tbody>
-        <tr><td><strong>Flat price (agreement value)</strong></td><td>The price in the registered agreement (base cost; floor rise and PLC are added under More). Stamp duty and GST are charged on this. The hint underneath shows your state's duty, the registration fee and the GST rate live.</td></tr>
+        <tr><td><strong>Buying a</strong></td><td>Flat / house, Shop / office, or Plot / open land. Sets GST (5% / 18% / none), whether a loan applies (plots: no), defaults for rate, down payment and vacancy, and the words on screen.</td></tr>
+        <tr><td><strong>Price quoted as</strong></td><td><em>Agreement value</em> — the registered price, taxes on top. <em>All-in (incl. taxes)</em> — the builder's bundled figure; type it and the app solves for the agreement value beneath it (stamp duty, registration and GST backed out, builder extras included, bank charges never). The hint line shows the split.</td></tr>
+        <tr><td><strong>Price (agreement value)</strong></td><td>The price in the registered agreement (base cost; floor rise and PLC are added under More). Stamp duty and GST are charged on this. The hint underneath shows your state's duty, the registration fee and the GST rate live.</td></tr>
         <tr><td><strong>Months to handover</strong></td><td>Shown only for under-construction. Drives pre-EMI, the shaded gestation block, and the "Cash before handover" tile.</td></tr>
         <tr><td><strong>Expected monthly rent</strong></td><td>Today's rent for this flat. Escalates yearly; vacancy is deducted.</td></tr>
       </tbody>
@@ -992,6 +994,8 @@
       <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
       <tbody>
         <tr><td><strong>Appearance</strong></td><td>System · Light · Dark.</td></tr>
+        <tr><td><strong>Your data · Sync with iCloud</strong></td><td>On by default. Deals and loans live in the private database of your own iCloud — encrypted, under your Apple ID, unreadable by anyone else including me — and sync to your other devices. Changing it takes effect at the next launch. The Status line says what's actually in use.</td></tr>
+        <tr><td><strong>Backup · Export / Import</strong></td><td>Export writes every deal and loan to a readable JSON file and hands it to the share sheet (Files, iCloud Drive, AirDrop, Mail). Import reads such a file back and adds anything not already present — re-importing never duplicates.</td></tr>
         <tr><td><strong>Help</strong></td><td>Links to this guide, the privacy policy, and email.</td></tr>
         <tr><td><strong>AI memo</strong></td><td>Shows whether the memo runs on-device (Apple Intelligence) or via the built-in rules engine.</td></tr>
         <tr><td><strong>Advanced: bring your own AI key</strong></td><td>Optional. Expand to pick Anthropic Claude, Google Gemini or OpenAI and paste a key. Keys are stored in the iOS Keychain (after-first-unlock, this device only) and used only to call that provider directly. The model name is editable.</td></tr>
@@ -1059,6 +1063,8 @@
         <tr><td><strong>Scenario</strong></td><td>Unsaved changes in a loan's workspace, computed against the saved plan; Save commits, Reset discards.</td></tr>
         <tr><td><strong>Recurring prepayment</strong></td><td>A lump sum repeated every month / quarter / 6 months / year between two loan months.</td></tr>
         <tr><td><strong>Row-level import</strong></td><td>Reading an amortization schedule's actual rows as history, including prepayments and rate changes visible in the numbers.</td></tr>
+        <tr><td><strong>Property kind</strong></td><td>Flat / house, shop / office, or plot — sets GST, whether a loan applies, and defaults.</td></tr>
+        <tr><td><strong>Price basis</strong></td><td>Whether a quoted price is the agreement value or a builder's all-in figure with taxes bundled.</td></tr>
         <tr><td><strong>Effective rate</strong></td><td>A loan's rate after the Sec 24(b) tax shield — what the money really costs you; the advisor ranks loans by it.</td></tr>
         <tr><td><strong>Avalanche · snowball</strong></td><td>Paying off the highest-rate loan first (saves the most) vs the smallest balance first (frees cash flow soonest).</td></tr>
       </tbody>
@@ -1086,7 +1092,9 @@
     <h3>I changed things in a loan and they vanished when I came back.</h3>
     <p>That's by design: workspace changes are scenarios until you tap Save. If you meant to keep them, make the change again and tap Save.</p>
     <h3>Is my data backed up?</h3>
-    <p>Deals are stored on the device. There's no cloud sync yet, so deleting the app deletes your deals. Share the verdict card to keep a record.</p>
+    <p>Two ways. With iCloud sync on (the default), deals and loans live in your own private iCloud and come back on a new device or reinstall. And Settings → Backup exports everything as a JSON file you keep wherever you like, and imports it again without duplicating.</p>
+    <h3>Can I model a plot with a loan?</h3>
+    <p>Plots are modelled as bought outright, which is how most plot purchases work and keeps the maths honest (no Section 24 shield, no pre-EMI). To test a plot loan, choose Flat / house as the kind and set the terms — only GST differs, and land has none.</p>
     <h3>Is this financial advice?</h3>
     <p>No. It's a model with visible assumptions. Talk to your CA, and read the agreement.</p>
   </section>
@@ -1105,7 +1113,7 @@
         <tr><td><strong>Import read the wrong amount</strong></td><td>OCR and language models both occasionally misread Indian comma grouping. The review form flags an EMI mismatch in amber; correct the amount and the tick turns green. Nothing is saved until you tap Add loan.</td></tr>
         <tr><td><strong>Scanner / camera option missing</strong></td><td>Live scanning needs a physical iPhone or iPad with a camera. Use Files or Photos instead.</td></tr>
         <tr><td><strong>AI memo says "Built-in rules engine"</strong></td><td>Apple Intelligence isn't available on this device or iOS version. The memo still works; it's written from the same numbers by the rules engine.</td></tr>
-        <tr><td><strong>My deals disappeared</strong></td><td>Deals live only on the device. Deleting the app deletes them; there's no cloud sync yet. Share the PDF report to keep a copy.</td></tr>
+        <tr><td><strong>My deals aren't on my other device</strong></td><td>Check Settings → Your data on both: sync must be on, both signed into the same Apple ID with iCloud Drive enabled, and the app launched once after turning it on. Sync is usually seconds but can take longer after a fresh install. A JSON backup works regardless.</td></tr>
         <tr><td><strong>My state isn't listed</strong></td><td>Choose <em>Other</em> (6% duty, 1% registration) and email me the schedule for your state — I'll add it.</td></tr>
       </tbody>
     </table></div>

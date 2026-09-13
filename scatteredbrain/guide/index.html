@@ -618,7 +618,7 @@
     </div>
 
     <h3>Swiping task cards</h3>
-    <p>Every task card is swipeable — no need to open it to act on it.</p>
+    <p>Every task card is swipeable — no need to open it to act on it. What the swipe reveals depends on whether the task is still active.</p>
 
     <div class="swipe-diagram">
       <div class="swipe-side left">
@@ -633,15 +633,23 @@
       <div class="swipe-side right">
         <div class="swipe-dir">Swipe right →</div>
         <div class="swipe-action">✅ <span>Mark done</span></div>
-        <div class="swipe-action">💤 <span>Snooze 2 hrs</span></div>
+        <div class="swipe-action">💤 <span>Snooze</span></div>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <span class="callout-icon">↩️</span>
+      <div class="callout-body">
+        <div class="callout-title">Swiping a finished task</div>
+        <p>Done doesn't make sense for a task that's already done — so on a completed, skipped, or ignored task, both swipe directions show <strong>↩ Reopen</strong> instead of Done and Snooze. It puts the task back to pending on its original date. The same option is in the task's detail screen under Actions.</p>
       </div>
     </div>
 
     <div class="callout tip">
       <span class="callout-icon">💡</span>
       <div class="callout-body">
-        <div class="callout-title">Snooze undo</div>
-        <p>Accidentally snoozed something? A banner appears right after — tap <strong>Undo</strong> to put it back immediately.</p>
+        <div class="callout-title">Snooze undo — and custom snooze</div>
+        <p>Accidentally snoozed something? A banner appears right after — tap <strong>Undo</strong> to put it back immediately. Need longer than the presets (15 min, 30 min, 1 hr, 2 hr, tomorrow morning)? Open the task and choose <strong>Snooze → Custom…</strong> to pick an exact number of hours and minutes.</p>
       </div>
     </div>
 
@@ -653,13 +661,24 @@
         <tbody>
           <tr><td><strong>⊙ Focus</strong></td><td>Enter distraction-free Focus Mode — one task at a time, swipe to complete or skip.</td></tr>
           <tr><td><strong>🔍 Search</strong></td><td>Search across all tasks, including completed and skipped ones. Filter by category, persona, or status.</td></tr>
-          <tr><td><strong>⋯ More</strong></td><td>Task History, toggle Light/Dark mode, and Settings.</td></tr>
+          <tr><td><strong>⋯ More</strong></td><td>Annual Tasks, toggle Light/Dark mode, and Settings.</td></tr>
         </tbody>
       </table>
     </div>
 
-    <h3>Quick-access chip</h3>
-    <p>Below the header, a <strong>🏆 Wins</strong> chip opens the Wins journal directly from the Home tab without navigating to the Notes tab.</p>
+    <h3>Quick-access chips</h3>
+    <p>Below the header, four chips jump straight to the thing you need without digging through menus:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Chip</th><th>Opens</th></tr></thead>
+        <tbody>
+          <tr><td><strong>🏆 Wins</strong></td><td>The Wins journal, without navigating to the Notes tab.</td></tr>
+          <tr><td><strong>🧠 AI Add</strong></td><td>AI Quick-Add, for typing a task in plain English.</td></tr>
+          <tr><td><strong>📝 Detailed Task</strong></td><td>The full task form directly — category, date, repeats, priority, all in one go.</td></tr>
+          <tr><td><strong>🕘 History</strong></td><td>Every completed task, most recent first.</td></tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 
   <!-- ── Adding Tasks ── -->
@@ -895,11 +914,38 @@
     <h3>AI prompts for bills</h3>
     <p>In the AI Quick-Add view (tap the AI button in QuickCapture), typing keywords like <strong>"pay"</strong>, <strong>"bill"</strong>, <strong>"insurance"</strong>, <strong>"renewal"</strong>, or <strong>"service my car"</strong> shows a row of chips for common recurring activities. Tap one to pre-fill the task input with the right title and category.</p>
 
+    <h3>Managing the list — Annual Tasks screen</h3>
+    <p>Open <strong>⋯ More → Annual Tasks</strong> from the Home tab to see and edit every recurring activity — one row per task, showing what it is and when it's due.</p>
+
+    <ol class="steps">
+      <li class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Tap a row to edit it</div>
+          <div class="step-desc">Change the title, emoji, priority, how often it repeats (yearly, every 3 months, or monthly), and the month and day it falls on.</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Tap + to add your own</div>
+          <div class="step-desc">Not everything is a bill — anything that comes around every year works: a passport renewal, a pet's vaccination, an annual check-up.</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Swipe to disable or delete</div>
+          <div class="step-desc">Built-in activities can be switched off but not removed — swipe to toggle. Your own custom ones can be deleted outright.</div>
+        </div>
+      </li>
+    </ol>
+
     <div class="callout tip">
       <span class="callout-icon">💡</span>
       <div class="callout-body">
-        <div class="callout-title">Enabling and disabling activities</div>
-        <p>The scheduling prompt only shows activities you've enabled. To customise the list — disable activities you don't need, change due dates, or add your own — go to <strong>Settings → Recurring Activities</strong>.</p>
+        <div class="callout-title">Adding a task mid-year</div>
+        <p>Added or edited something after the yearly prompt already ran? A banner appears at the bottom of the Annual Tasks list — <strong>"Add N to 2026's tasks"</strong> — that schedules just the new or changed ones without waiting for next January.</p>
       </div>
     </div>
   </section>
@@ -965,30 +1011,28 @@
       </div>
     </div>
 
-    <h3>Quick-add a birthday or special date</h3>
-    <p>Inside the AI view, tap <strong>People</strong> in the segmented picker at the top. Type a date in plain English — the app figures out the name, date, and occasion type automatically.</p>
+    <h3>Adding notes with @notes</h3>
+    <p>Need to capture some context along with the task — a phone number, what to ask about, a link? Type <strong>@notes</strong> anywhere in your sentence, and everything after it is saved as the task's notes instead of being parsed as part of the task itself.</p>
 
     <div class="table-wrap">
       <table>
-        <thead>
-          <tr><th>What you type</th><th>What gets saved</th></tr>
-        </thead>
+        <thead><tr><th>What you type</th><th>Task title</th><th>Notes</th></tr></thead>
         <tbody>
-          <tr><td><em>Today is Anayna's birthday</em></td><td>Birthday for Anayna on today's date</td></tr>
-          <tr><td><em>Our anniversary is June 12</em></td><td>Wedding Anniversary on 12 Jun</td></tr>
-          <tr><td><em>Rajan turns 30 today</em></td><td>Birthday for Rajan, birth year recorded</td></tr>
-          <tr><td><em>Dad's birthday is March 5 1960</em></td><td>Birthday for Dad on 5 Mar 1960</td></tr>
+          <tr><td><em>Call dentist tomorrow at 3pm @notes ask about the crown on the left molar</em></td><td>Call dentist tomorrow at 3pm</td><td>ask about the crown on the left molar</td></tr>
+          <tr><td><em>Renew passport @notes appointment slot was next Friday, I declined it</em></td><td>Renew passport</td><td>appointment slot was next Friday, I declined it</td></tr>
         </tbody>
       </table>
     </div>
 
     <div class="callout tip">
-      <span class="callout-icon">📸</span>
+      <span class="callout-icon">✍️</span>
       <div class="callout-body">
-        <div class="callout-title">Great for Instagram birthdays</div>
-        <p>Spotted a birthday wish on Instagram? Open AI Quick-Add → switch to People → type the name and "birthday today" → it's saved in two seconds.</p>
+        <div class="callout-title">Autocomplete inside the box</div>
+        <p>Start typing <strong>@</strong> at the end of your sentence and a small <strong>@notes</strong> chip appears inside the text field — tap it to complete the marker instead of typing the rest.</p>
       </div>
     </div>
+
+    <p>For a birthday or special date rather than a task, use the dedicated quick-add on the <a href="#people" style="color:var(--teal)">People tab</a> instead — see below.</p>
   </section>
 
   <!-- ── People Tab ── -->
@@ -1020,6 +1064,39 @@
         </div>
       </li>
     </ol>
+
+    <h3>Quick-add with the 🎂 button</h3>
+    <p>For a fast one-line entry, tap the pink <strong>🎂</strong> floating button at the bottom right of the People tab. Type a sentence in plain English and it figures out the name, date, and occasion — no form to fill in.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>What you type</th><th>What gets saved</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><em>Today is Anayna's birthday</em></td><td>Birthday for Anayna on today's date</td></tr>
+          <tr><td><em>Our anniversary is June 12</em></td><td>Wedding Anniversary on 12 Jun</td></tr>
+          <tr><td><em>Rajan turns 30 today</em></td><td>Birthday for Rajan, birth year recorded</td></tr>
+          <tr><td><em>Dad's birthday is March 5 1960</em></td><td>Birthday for Dad on 5 Mar 1960</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout tip">
+      <span class="callout-icon">@</span>
+      <div class="callout-body">
+        <div class="callout-title">Type @ to tag someone by name</div>
+        <p>Start typing <strong>@</strong> inside the sentence and a live list of matching names appears — people already saved in the app, and anyone in your phone's Contacts app. Pick one and the date is attached to them directly instead of creating a duplicate entry.</p>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <span class="callout-icon">📸</span>
+      <div class="callout-body">
+        <div class="callout-title">Great for Instagram birthdays</div>
+        <p>Spotted a birthday wish on Instagram? Tap 🎂 → type the name and "birthday today" → it's saved in two seconds.</p>
+      </div>
+    </div>
 
     <h3>Viewing a contact's details</h3>
     <p><strong>Tap anywhere on a contact row</strong> to open their detail view. It shows:</p>
@@ -1292,7 +1369,6 @@
           <tr><td><strong>Categories</strong></td><td>Add, edit, or delete task categories. Pick an emoji and colour for each.</td></tr>
           <tr><td><strong>Personas</strong></td><td>Add people tags for filtering tasks — "Wife", "Kids", "Work".</td></tr>
           <tr><td><strong>AI Engine</strong></td><td>Choose on-device (default) or a cloud provider. Paste your API key for Gemini, OpenAI, or Claude.</td></tr>
-          <tr><td><strong>Recurring Activities</strong></td><td>Enable or disable built-in bills and renewals. Customise due dates. Add your own.</td></tr>
           <tr><td><strong>Auto-Ignore</strong></td><td>Tasks overdue past a threshold are auto-hidden to keep the dashboard clean. Set the threshold here (default: 15 days).</td></tr>
           <tr><td><strong>Backup</strong></td><td>Create a manual backup, share it, restore from a file, and see when the last auto-backup ran.</td></tr>
           <tr><td><strong>Import from Contacts</strong></td><td>Pull birthdays from your phone's Contacts app into the People tab.</td></tr>
@@ -1335,6 +1411,14 @@
       <div class="callout-body">
         <div class="callout-title">Schedule bills for the rest of the year, not from January</div>
         <p>If you open the Bills &amp; Renewals prompt in, say, August, it shows "Schedule remaining Aug–Dec" — so only tasks from now through December are created. No duplicate tasks for months already past.</p>
+      </div>
+    </div>
+
+    <div class="callout gold">
+      <span class="callout-icon">✨</span>
+      <div class="callout-body">
+        <div class="callout-title">Stash context with @notes</div>
+        <p>In AI Quick-Add, anything after <strong>@notes</strong> in your sentence is saved as the task's notes instead of being parsed as the task itself — handy for a phone number, a link, or a reminder of what to ask.</p>
       </div>
     </div>
 
