@@ -668,6 +668,7 @@
         <tr><td><strong>By year</strong></td><td>Net cash flow for each year after handover, as bars.</td><td>How many years you top up from salary, and by how much.</td></tr>
       </tbody>
     </table></div>
+    <div class="fig-row"><figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-chart-cashflow.jpg" alt="The Cash flow tab: rent minus EMI, property tax and income tax, month by month." loading="lazy"><figcaption>Cash flow — the shaded block is the pre-EMI gestation period.</figcaption></figure><figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-chart-wealth.jpg" alt="The Wealth tab: property value vs loan left, with the break-even year marked." loading="lazy"><figcaption>Wealth — property value, loan left, and the break-even marker.</figcaption></figure></div>
     <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><div class="callout-title">Lump sums are not on the cash line</div><p>A ₹5 L prepayment would dwarf every monthly bar, so the cash line shows recurring cash only. Prepayments are shown as diamonds on the loan curve, and they <em>are</em> included in the return and break-even calculations.</p></div></div>
   </section>
 
@@ -708,6 +709,7 @@
         <tr><td><strong>Expected monthly rent</strong></td><td>Today's rent for this flat. Escalates yearly; vacancy is deducted.</td></tr>
       </tbody>
     </table></div>
+    <figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-property-kind.jpg" alt="Buying a Flat, Shop or Plot, and Price quoted as Agreement value or All-in." loading="lazy"><figcaption>Buying a flat, shop or plot — and whether the price you have is the agreement value or the builder's all-in figure.</figcaption></figure>
     <h3>Every control works the same way</h3>
     <p>Label on the first line, slider plus a typed box on the second. The slider is for what-ifs; the box is for the exact number you know. Money boxes have ₹ / L / Cr unit chips; you can also type <code>85L</code> or <code>1.2Cr</code> directly.</p>
     <div class="table-wrap"><table>
@@ -876,7 +878,7 @@
     </table></div>
     <p>With a date set, every schedule row is labelled with its calendar month, the list shows when each loan closes, and the portfolio tiles show outstanding today, interest still to pay and the month you'll be debt-free.</p>
     <p>A loan imported with schedule rows shows a green banner in its workspace — "N months from your bank's schedule" — and its schedule uses those actual rows for the paid months (dimmed, with a TODAY marker) before projecting the rest. The ⋯ menu on the banner removes the imported rows if you'd rather use the headline terms.</p>
-    <figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-my-loans.jpg" alt="My Loans after importing a statement: outstanding today, combined EMI, interest still to pay, and the debt-free month." loading="lazy"><figcaption>My Loans after importing a statement: outstanding today, combined EMI, interest still to pay, and the debt-free month.</figcaption></figure>
+    <figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-my-loans.jpg" alt="My Loans: outstanding today, combined EMI, interest still to pay, the debt-free month, and the Ask about my loans card." loading="lazy"><figcaption>My Loans: the portfolio tiles and the Ask about my loans card.</figcaption></figure>
     <h3>The payoff workspace</h3>
     <p>Tap a loan to open its workspace. Everything you change here is a <strong>scenario</strong>: the impact is computed live against your saved plan, but the loan itself isn't touched until you tap <strong>Save</strong>. Leave the screen or tap <strong>Reset</strong> and it stays analysis-only — so you can ask "what if I prepaid ₹2 L this Diwali?" without committing to it.</p>
     <div class="table-wrap"><table>
@@ -891,6 +893,7 @@
         <tr><td><strong>Schedule</strong></td><td>First 12 months inline; the full month-by-month schedule in a sheet, both reflecting the scenario.</td></tr>
       </tbody>
     </table></div>
+    <div class="fig-row"><figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-workspace.jpg" alt="The payoff workspace: impact tiles, the plain-vs-scenario balance chart, and the step-up switch." loading="lazy"><figcaption>The payoff workspace — impact tiles, the balance chart, and step-up.</figcaption></figure><figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-schedule-prepay.jpg" alt="The month-by-month schedule with a plus button in the Prepay column on every row." loading="lazy"><figcaption>The schedule — tap "+" in Prepay on any month.</figcaption></figure></div>
     <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><div class="callout-title">Two ways to use it</div><p><em>Planning:</em> add your realistic prepayments and step-up, tap Save, and the loan's debt-free month becomes the one you're actually tracking. <em>Analysis:</em> pile on aggressive what-ifs, read the impact, and walk away — nothing is stored.</p></div></div>
     <div class="callout tip"><div class="callout-icon">🗣️</div><div class="callout-body"><div class="callout-title">Siri</div><p>"Ask LoanYield IQ what happens if I prepay" — Siri asks for the amount in lakhs and the month, and tells you the interest and months saved on your first standalone loan.</p></div></div>
   </section>
@@ -969,6 +972,7 @@
       </tbody>
     </table></div>
     <p>Answers that point at a loan carry an <strong>Open this loan</strong> button that jumps to its workspace, where you can turn the suggestion into a scenario and save it. Suggestion chips under the chat cover the common questions.</p>
+    <div class="fig-row"><figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-advisor-intro.jpg" alt="Ask about my loans: the questions it can answer, all computed from the amortization engine." loading="lazy"><figcaption>What it can answer — every number from the engine, not a guess.</figcaption></figure><figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-advisor-answer.jpg" alt="An answer to 'Which loan should I close first?' with the avalanche-order table and an Open this loan button." loading="lazy"><figcaption>"Which loan should I close first?" — with the avalanche order and an Open this loan button.</figcaption></figure></div>
     <div class="callout note"><div class="callout-icon">🔒</div><div class="callout-body"><div class="callout-title">Privacy</div><p>Computed answers never leave your phone. Free-form questions and takeaways go to Apple's on-device model, or to your own cloud key if you added one — and only as the engine's fact sheet plus your question.</p></div></div>
   </section>
 
@@ -1001,6 +1005,7 @@
         <tr><td><strong>Advanced: bring your own AI key</strong></td><td>Optional. Expand to pick Anthropic Claude, Google Gemini or OpenAI and paste a key. Keys are stored in the iOS Keychain (after-first-unlock, this device only) and used only to call that provider directly. The model name is editable.</td></tr>
       </tbody>
     </table></div>
+    <figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-settings.jpg" alt="Settings: Sync with iCloud toggle and status, and Export backup / Import backup." loading="lazy"><figcaption>Your data: iCloud sync and JSON backup, side by side.</figcaption></figure>
     <div class="callout warn"><div class="callout-icon">🔐</div><div class="callout-body"><div class="callout-title">You don't need a key</div><p>The memo works without one. Cloud keys are for people who already have them; the app never sends your deal anywhere unless you add a key and press Generate.</p></div></div>
   </section>
 
