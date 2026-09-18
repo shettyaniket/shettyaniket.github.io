@@ -612,8 +612,8 @@
     <div class="table-wrap"><table>
       <thead><tr><th>Driver</th><th>What it is</th><th>Green when</th><th>Red when</th></tr></thead>
       <tbody>
-        <tr><td><strong>Return / yr</strong></td><td>Your 10-year leveraged XIRR — every cheque out, every rupee of rent in, and the flat's value less the loan at the end.</td><td>At or above the Nifty SIP</td><td>Below the 8.5% prepayment hurdle</td></tr>
-        <tr><td><strong>Yield vs loan</strong></td><td>Rent after vacancy and property tax, divided by the all-in cost, judged against your loan rate.</td><td>≥ 75% of the loan rate</td><td>&lt; 40% of the loan rate</td></tr>
+        <tr><td><strong>Return / yr</strong></td><td>Your 10-year leveraged XIRR — every cheque out, every rupee of rent in, and the flat's value less capital-gains tax on the sale and the loan at the end.</td><td>At or above the Nifty SIP</td><td>Below the 8.5% prepayment hurdle</td></tr>
+        <tr><td><strong>Yield vs loan</strong></td><td>Rent after vacancy, property tax and maintenance, divided by the all-in cost, judged against your loan rate.</td><td>≥ 75% of the loan rate</td><td>&lt; 40% of the loan rate</td></tr>
         <tr><td><strong>Cash needed</strong></td><td>Pre-EMI plus property tax during construction (or day-one cash for a ready flat), relative to your day-one cheque.</td><td>≤ 10% of day-one cash</td><td>&gt; 30% of day-one cash</td></tr>
       </tbody>
     </table></div>
@@ -648,7 +648,7 @@
       <tbody>
         <tr><td><strong>All-in cost</strong></td><td>Agreement value + stamp duty + registration + GST + builder extras + loan charges. The real price.</td></tr>
         <tr><td><strong>Day-one cash</strong></td><td>Down payment plus every statutory and one-time charge. The bank finances none of this.</td></tr>
-        <tr><td><strong>Rent yield</strong></td><td>Annual rent after vacancy and property tax, over the all-in cost. Coloured against your loan rate.</td></tr>
+        <tr><td><strong>Rent yield</strong></td><td>Annual rent after vacancy, property tax and maintenance, over the all-in cost. Coloured against your loan rate.</td></tr>
         <tr><td><strong>Pre-EMI cash</strong></td><td>For under-construction: the total you'll pay before handover with no rent coming in. For a ready flat this tile becomes <strong>Cash / month</strong> — your year-one post-tax monthly cash flow.</td></tr>
       </tbody>
     </table></div>
@@ -698,6 +698,7 @@
   <section class="guide-section" id="property">
     <div class="section-eyebrow">The Studio</div>
     <h2>Property inputs</h2>
+    <p>Property and loan inputs live behind one <strong>Edit deal</strong> row, collapsed by default once a deal has values — these are "fill in once" details, not something you need open every time you check on a deal. Tap it (or tap the loan line in the verdict) to expand both cards; the row's own subtitle keeps the gist ("Flat · ₹85.00 L · 20% down · 9.00% for 20y") visible while it's closed.</p>
     <h3>The three you always need</h3>
     <div class="table-wrap"><table>
       <thead><tr><th>Input</th><th>Notes</th></tr></thead>
@@ -725,12 +726,12 @@
     <div class="table-wrap"><table>
       <thead><tr><th>Group</th><th>Inputs</th></tr></thead>
       <tbody>
-        <tr><td><strong>Statutory</strong></td><td>State (Maharashtra, Karnataka, Delhi, Other) · Female sole owner (1–2% duty rebate) · GST category (Ready with OC 0% · Under construction 5% · Affordable housing 1% · Commercial 18%)</td></tr>
+        <tr><td><strong>Statutory</strong></td><td>State (Maharashtra, Karnataka, Delhi, Other) · Female sole owner (1–2% duty rebate) · GST category (Ready with OC 0% · Under construction 5% · Affordable housing 1% · Commercial 18%) · <strong>Override stamp duty</strong> — switch it on to type the exact rupee amount (or 0) instead of the state-computed rate, for an exempt transfer, gift deed, resale, or a state whose actual duty differs from the four modelled</td></tr>
         <tr><td><strong>Builder charges</strong></td><td>Floor rise · PLC · Advance maintenance (12–24 months collected upfront) · Electric / water infra · Legal &amp; franking</td></tr>
-        <tr><td><strong>Running the flat &amp; tax</strong></td><td>Rent escalation per year · Vacancy allowance · Property tax (annual) · Your income-tax slab (0 / 5 / 20 / 30 / 39%) · Price growth per year</td></tr>
+        <tr><td><strong>Running the flat &amp; tax</strong></td><td>Rent escalation per year · Vacancy allowance · Property tax (annual) · <strong>Maintenance / society charges (monthly)</strong> — what you pay the society from handover, reduces cash in pocket every month but isn't separately tax-deductible since the flat 30% repair deduction already covers it · Your income-tax slab (0 / 5 / 20 / 30 / 39%) · Price growth per year</td></tr>
       </tbody>
     </table></div>
-    <div class="callout note"><div class="callout-icon">🏛️</div><div class="callout-body"><div class="callout-title">State coverage</div><p>Maharashtra (6%, 5% for women, registration capped at ₹30,000), Karnataka (5.6%, 1% registration) and Delhi (6% / 4% for women, 1% registration) are modelled. "Other" uses 6% and 1% until more states are added — override the result mentally if your state differs.</p></div></div>
+    <div class="callout note"><div class="callout-icon">🏛️</div><div class="callout-body"><div class="callout-title">State coverage</div><p>Maharashtra (6%, 5% for women, registration capped at ₹30,000), Karnataka (5.6%, 1% registration) and Delhi (6% / 4% for women, 1% registration) are modelled. "Other" uses 6% and 1% until more states are added — if your state or situation differs, switch on <strong>Override stamp duty</strong> above and type the real figure.</p></div></div>
   </section>
 
   <!-- ── Loan ── -->
@@ -866,7 +867,10 @@
   <section class="guide-section" id="loaniq">
     <div class="section-eyebrow">Other tabs</div>
     <h2>My Loans</h2>
-    <p>A separate vault for loans that aren't attached to a property deal — the home loan you already have, a car loan, a personal loan, a loan against property, or a MaxGain overdraft. Add one with the + button, either by importing a statement (next section) or by hand.</p>
+    <p>A separate vault for loans that aren't attached to a property deal — the home loan you already have, a car loan, a personal loan, a loan against property, or a MaxGain overdraft. Add one with the + button, either by importing a statement (next section) or by hand — or, if it's the loan behind a deal you're already tracking on the Deal tab, pull it in with zero re-entry (below).</p>
+    <h3>Bringing in a deal's loan once it closes</h3>
+    <p>A deal you're evaluating already has a full loan — rate, tenure, prepayments, everything — long before you'd want to plan its payoff here. Once the purchase is real, open the deal, expand <strong>Edit deal</strong>, and scroll to <strong>Deal closed? Track this loan</strong> at the bottom of the loan card. Confirm, and it appears in My Loans immediately.</p>
+    <p>It isn't a copy — it's the exact same loan record, now visible in both places. A prepayment or step-up you add from the My Loans workspace applies to the deal's numbers too, and vice versa. If you ever want it out of this list without touching the deal, delete it here and the app offers <strong>Remove from My Loans</strong> instead of a hard delete, since the deal still needs it.</p>
     <h3>Where you are in the loan</h3>
     <p>Because these loans already exist, each one asks for its <strong>first EMI date</strong> and what the amount you're typing represents:</p>
     <div class="table-wrap"><table>
@@ -981,12 +985,12 @@
     <div class="section-eyebrow">Other tabs</div>
     <h2>Benchmarks &amp; Risk</h2>
     <h3>10-year annualized return</h3>
-    <p>Four bars: this property (leveraged), a Nifty 50 SIP (12% CAGR, post 12.5% LTCG), a commercial REIT (7.8% distribution yield), and prepaying existing debt (8.5% risk-free, post-tax).</p>
+    <p>Four bars: this property (leveraged, net of capital-gains tax on the eventual sale), a Nifty 50 SIP (12% CAGR, post 12.5% LTCG), a commercial REIT (7.8% distribution yield), and prepaying existing debt (8.5% risk-free, post-tax).</p>
     <figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-benchmarks.jpg" alt="Benchmarks: return per year and what you'd have after 10 years, on identical cheques." loading="lazy"><figcaption>Benchmarks: return per year and what you'd have after 10 years, on identical cheques.</figcaption></figure>
     <h3>What you'd have after 10 years</h3>
-    <p>Every strategy receives the identical money — day-one equity plus each monthly EMI, pre-EMI and prepayment — so the rupee outcomes are directly comparable. The property's wealth is its value minus the loan outstanding, plus all the net rent it collected.</p>
+    <p>Every strategy receives the identical money — day-one equity plus each monthly EMI, pre-EMI and prepayment — so the rupee outcomes are directly comparable. The property's wealth is its value minus capital-gains tax on selling and the loan outstanding, plus all the net rent it collected.</p>
     <h3>Risk: sensitivity shocks</h3>
-    <p>Titled <em>What if things go wrong?</em> — the deal recomputed under: rate +100 and +200 bps, rent 20% lower, empty 15% of the year, prices growing only 4% (and 9%), handover 12 months late, and no EMI step-up. Each row shows the return per year and monthly cash flow, coloured green if the return still clears 8.5%.</p>
+    <p>Titled <em>What if things go wrong?</em> — the deal recomputed under: rate +100 and +200 bps, rent 20% lower, empty 15% of the year, prices growing only 4% (and 9%), handover 12 months late, and no EMI step-up. Each row shows the return per year and monthly cash flow, coloured <strong>relative to your base case</strong> above it — not an absolute bar. A shock reads red only if it actually makes the deal worse than what you're already looking at; identical-to-base rows (a late handover often changes nothing about the 10-year return) stay neutral, and a shock that happens to help reads green.</p>
   </section>
 
   <!-- ── Settings ── -->
@@ -1015,7 +1019,7 @@
     <h2>How the maths works</h2>
     <p>Everything is computed on your phone from the formulas below. Nothing is fetched.</p>
     <h3>All-in cost</h3>
-    <p>Agreement value = base cost + floor rise + PLC.<br>Statutory levies = stamp duty (state rate × AV) + registration (1% of AV, capped at ₹30,000 in Maharashtra) + GST (rate × AV).<br><strong>All-in cost</strong> = AV + statutory levies + builder extras + loan charges.<br><strong>Day-one cash</strong> = AV × down payment % + statutory levies + builder extras + loan charges.</p>
+    <p>Agreement value = base cost + floor rise + PLC.<br>Statutory levies = stamp duty (state rate × AV, or your own override amount) + registration (1% of AV, capped at ₹30,000 in Maharashtra) + GST (rate × AV).<br><strong>All-in cost</strong> = AV + statutory levies + builder extras + loan charges.<br><strong>Day-one cash</strong> = AV × down payment % + statutory levies + builder extras + loan charges.</p>
     <h3>Pre-EMI during construction</h3>
     <p>Each month before handover: 62% of the sanctioned loan × monthly rate. Cash before handover = the sum of those months plus property tax for the period. No rent is assumed until handover.</p>
     <h3>The loan</h3>
@@ -1025,9 +1029,9 @@
     <h3>Advisor solvers</h3>
     <p>Close-first order: effective rate = rate × (1 − slab × shielded share), where shielded share = min(annual interest, ₹2 L) ÷ annual interest for home loans and 0 otherwise. Debt-free in N months: needed EMI = EMI(outstanding, rate, N); extra = needed − current EMI; or lump sum = outstanding − present value of the current EMI over N months. Where a lump sum goes: interest saved per loan from a schedule with that sum prepaid in month 1.</p>
     <h3>Tax</h3>
-    <p>Net annual value = rent × 12 × (1 − vacancy) − property tax.<br>Section 24(a): 30% of NAV is deductible.<br>Section 24(b): interest is deductible up to ₹2 L (₹4 L if joint).<br>Taxable rent = max(0, NAV − 24(a) − 24(b)), taxed at your slab.<br>Monthly cash flow = rent − EMI − property tax − tax.</p>
+    <p>Net annual value = rent × 12 × (1 − vacancy) − property tax.<br>Section 24(a): 30% of NAV is deductible — this is treated as covering maintenance too, so maintenance / society charges aren't separately deducted from taxable rent.<br>Section 24(b): interest is deductible up to ₹2 L (₹4 L if joint).<br>Taxable rent = max(0, NAV − 24(a) − 24(b)), taxed at your slab.<br>Monthly cash flow = rent − EMI − property tax − maintenance − tax.</p>
     <h3>Return and break-even</h3>
-    <p><strong>Return per year</strong> is the XIRR of: −day-one cash, then each month's cash flow (lump sums included), then in month 120 the flat's value at your growth rate minus the loan still outstanding.<br><strong>Break-even</strong> is the first month where value − loan obligation + cumulative cash flow ≥ 0. Before handover the obligation is the full sanctioned loan, not just the part drawn, because the rest is still owed to the builder.</p>
+    <p><strong>Capital-gains tax on sale</strong> = 12.5% × max(0, sale value − cost of acquisition), where cost of acquisition is the agreement value plus statutory levies and builder extras (loan charges are financing costs, not part of the property's cost, so they're excluded) — the flat rate for a purchase made today, with indexation no longer available. This is subtracted wherever the app assumes a sale.<br><strong>Return per year</strong> is the XIRR of: −day-one cash, then each month's cash flow (lump sums included), then in month 120 the flat's value at your growth rate minus capital-gains tax on that value minus the loan still outstanding.<br><strong>Break-even</strong> is the first month where value − capital-gains tax − loan obligation + cumulative cash flow ≥ 0. Before handover the obligation is the full sanctioned loan, not just the part drawn, because the rest is still owed to the builder.</p>
     <h3>Benchmarks</h3>
     <p>The same contribution stream — day-one cash and every monthly outflow — is grown at 12% (Nifty, then 12.5% LTCG on the gain), 7.8% (REIT) and 8.5% (prepaying debt). Their annualized figures are the XIRR of that stream.</p>
     <h3>The verdict rules</h3>
@@ -1061,8 +1065,9 @@
         <tr><td><strong>Section 24(a)</strong></td><td>Flat 30% deduction on net rental income for repairs.</td></tr>
         <tr><td><strong>Section 24(b)</strong></td><td>Home-loan interest deductible against rent, up to ₹2 L (₹4 L joint).</td></tr>
         <tr><td><strong>XIRR</strong></td><td>Annualized return that accounts for the timing of every cheque in and out.</td></tr>
-        <tr><td><strong>LTCG</strong></td><td>Long-term capital gains tax — 12.5% on equity gains, applied to the Nifty benchmark.</td></tr>
-        <tr><td><strong>Break-even</strong></td><td>The month from which selling would return everything you've paid in.</td></tr>
+        <tr><td><strong>LTCG</strong></td><td>Long-term capital gains tax — 12.5% flat, no indexation, on equity gains (the Nifty benchmark) and on the property's own gain over its cost of acquisition whenever the app assumes a sale.</td></tr>
+        <tr><td><strong>Break-even</strong></td><td>The month from which selling — after capital-gains tax — would return everything you've paid in.</td></tr>
+        <tr><td><strong>Recurring charges</strong></td><td>Monthly society / maintenance charges from handover onward. Cuts cash flow, not taxable income — the flat 30% repair deduction already covers it.</td></tr>
         <tr><td><strong>First EMI date</strong></td><td>When the first full EMI was (or will be) debited; anchors the schedule to calendar months.</td></tr>
         <tr><td><strong>Amount basis</strong></td><td>Whether the amount you typed for an existing loan is the original sanction or today's outstanding.</td></tr>
         <tr><td><strong>Scenario</strong></td><td>Unsaved changes in a loan's workspace, computed against the saved plan; Save commits, Reset discards.</td></tr>
@@ -1089,7 +1094,11 @@
     <h3>Why does the loan curve jump up at handover?</h3>
     <p>During construction the bank disburses progressively (modelled at 62% on average). At handover the full sanctioned amount is outstanding and the real EMI begins.</p>
     <h3>My state isn't Maharashtra, Karnataka or Delhi.</h3>
-    <p>Choose <em>Other</em> (6% stamp duty, 1% registration) and adjust mentally, or tell me your state's schedule and I'll add it.</p>
+    <p>Choose <em>Other</em> (6% stamp duty, 1% registration), then switch on <strong>Override stamp duty</strong> under Property › More and type your actual figure — no more adjusting mentally. Or tell me your state's schedule and I'll add it properly.</p>
+    <h3>Does the return account for tax on selling the flat?</h3>
+    <p>Yes. Every return figure, terminal wealth number and the break-even month already subtract capital-gains tax (12.5%, no indexation — the current rule for a purchase made today) on the gain over cost of acquisition, wherever the app assumes a sale at the end of the horizon or at break-even. The Nifty benchmark was always taxed this way; the property side now is too, so the two are comparable.</p>
+    <h3>Can I add my society maintenance?</h3>
+    <p>Yes — Property › More › <em>Maintenance / society charges (monthly)</em>. It reduces your monthly cash flow and the rent-yield tile, but not your taxable rental income, since the flat 30% repair deduction already stands in for actual maintenance spend under Indian tax rules.</p>
     <h3>Can I import my existing loan?</h3>
     <p>Yes — My Loans → + → Import from a statement. A PDF, photo or scan of a statement, sanction letter or amortization schedule. Schedules are read row by row, so paid months, prepayments and rate resets come from the bank's own numbers. You review before anything is saved.</p>
     <h3>Are the chat's answers trustworthy?</h3>
@@ -1119,7 +1128,7 @@
         <tr><td><strong>Scanner / camera option missing</strong></td><td>Live scanning needs a physical iPhone or iPad with a camera. Use Files or Photos instead.</td></tr>
         <tr><td><strong>AI memo says "Built-in rules engine"</strong></td><td>Apple Intelligence isn't available on this device or iOS version. The memo still works; it's written from the same numbers by the rules engine.</td></tr>
         <tr><td><strong>My deals aren't on my other device</strong></td><td>Check Settings → Your data on both: sync must be on, both signed into the same Apple ID with iCloud Drive enabled, and the app launched once after turning it on. Sync is usually seconds but can take longer after a fresh install. A JSON backup works regardless.</td></tr>
-        <tr><td><strong>My state isn't listed</strong></td><td>Choose <em>Other</em> (6% duty, 1% registration) and email me the schedule for your state — I'll add it.</td></tr>
+        <tr><td><strong>My state isn't listed</strong></td><td>Choose <em>Other</em> (6% duty, 1% registration), or switch on Override stamp duty under Property › More and type the real figure. Email me the schedule for your state and I'll add it properly.</td></tr>
       </tbody>
     </table></div>
   </section>
