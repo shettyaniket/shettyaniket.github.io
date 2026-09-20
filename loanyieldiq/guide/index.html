@@ -618,6 +618,7 @@
       </tbody>
     </table></div>
 <div class="fig-row"><figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-verdict.jpg" alt="The verdict card: the call, three growth pills, the sentence, and the three drivers." loading="lazy"><figcaption>The verdict card: the call, three growth pills, the sentence, and the three drivers.</figcaption></figure><figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-hover.jpg" alt="Tap any tile for its hover card — full label, value, caption and explanation." loading="lazy"><figcaption>Tap any tile for its hover card — full label, value, caption and explanation.</figcaption></figure></div>
+    <p>Below the break-even line sits a second, tappable one: <strong>Return peaks around year N at X%/yr</strong>. Tap it for the full year-by-year table — the annualised return and terminal wealth if you sold at the end of each year instead of riding out the full ten, useful for deciding how long you actually need to hold before the deal pays off.</p>
     <div class="callout note"><div class="callout-icon">🎨</div><div class="callout-body"><div class="callout-title">Colours mean judgement, not sign</div><p>A 2.8% rent yield is a positive number, but it's shown red because your loan costs 8.5% — the flat loses money every month it's rented. Everywhere in the app, green / amber / red answer "is this good?", never "is this above zero?".</p></div></div>
   </section>
 
@@ -648,7 +649,7 @@
       <tbody>
         <tr><td><strong>All-in cost</strong></td><td>Agreement value + stamp duty + registration + GST + builder extras + loan charges. The real price.</td></tr>
         <tr><td><strong>Day-one cash</strong></td><td>Down payment plus every statutory and one-time charge. The bank finances none of this.</td></tr>
-        <tr><td><strong>Rent yield</strong></td><td>Annual rent after vacancy, property tax and maintenance, over the all-in cost. Coloured against your loan rate.</td></tr>
+        <tr><td><strong>Rent yield</strong></td><td>Annual rent after vacancy, property tax and maintenance, over the all-in cost. Coloured against your loan rate. The smaller line underneath is <strong>cash-on-cash return</strong> — the same year's cash flow divided by just the cash you put in on day one, not the full price; tap or hold the tile for both.</td></tr>
         <tr><td><strong>Pre-EMI cash</strong></td><td>For under-construction: the total you'll pay before handover with no rent coming in. For a ready flat this tile becomes <strong>Cash / month</strong> — your year-one post-tax monthly cash flow.</td></tr>
       </tbody>
     </table></div>
@@ -780,7 +781,7 @@
   <section class="guide-section" id="waterfall">
     <div class="section-eyebrow">The Studio</div>
     <h2>Where the money goes</h2>
-    <p>The cost waterfall, line by line: agreement value → stamp duty → registration → GST → builder extras → loan charges → <strong>all-in cost</strong>, then day-one cash, then (for under-construction) the pre-EMI total and cash before handover. Underneath, four secondary tiles: monthly EMI, return per year, interest saved, and break-even.</p>
+    <p>The cost waterfall, line by line: agreement value → stamp duty → registration → GST → builder extras → loan charges → <strong>all-in cost</strong>, then day-one cash, then (for under-construction) the pre-EMI total and cash before handover. Underneath, two secondary tiles: monthly EMI and interest saved. For a shop or office bought with a loan, a third tile appears — <strong>DSCR</strong> (Debt Service Coverage Ratio), net operating income over the annual EMI, the standard check a commercial lender runs. Below 1.2× reads amber, below 1.0× (rent can't cover the EMI) reads red.</p>
   </section>
 
   <!-- ── Memo ── -->
@@ -847,7 +848,7 @@
         <tr><td><strong>1 · Summary</strong></td><td>Deal name and terms (agreement value, down payment, rate, tenure, state, GST category). The verdict in large type with its one-sentence rationale. <em>All three</em> price-growth scenarios side by side — call, return per year, break-even month — and the one-line summary of what the decision hinges on. Six key numbers: all-in cost, money out on day one, monthly EMI, rent yield after costs, cash before handover (or year-1 cash flow for a ready flat), return per year. Every assumption used: price growth, rent escalation and vacancy, tax slab, pre-EMI draw, the three benchmark rates, step-up and prepayments.</td></tr>
         <tr><td><strong>2 · Costs, loan &amp; tax</strong></td><td><em>Where the money goes</em>: agreement value, stamp duty at the state rate, registration, GST, builder extras, loan charges → all-in cost and day-one cash. <em>Before handover</em> (under-construction only): months to handover, pre-EMI per month, property tax during construction, cash needed before handover. <em>The loan</em>: amount, rate and tenure, base EMI, first full EMI date, months to close vs scheduled, total interest, interest saved by step-up/prepayments, MaxGain balance, joint-loan cap. <em>Tax on rent, year 1</em>: gross rent after vacancy → net annual value → Section 24(a) 30% deduction → Section 24(b) interest (capped) → taxable rent → income tax at your slab.</td></tr>
         <tr><td><strong>3 · Ten-year cash flow</strong></td><td>A year-by-year table after handover: rent in, EMI out (incl. prepayments), tax (property + income), net cash, loan left, flat value, equity. Followed by the break-even statement in words.</td></tr>
-        <tr><td><strong>4 · Benchmarks &amp; risk</strong></td><td>The same cheques four ways — this property, Nifty 50 SIP, commercial REIT, prepaying debt — with return per year, wealth after 10 years and the basis of each. The what-if table: rate +100/+200 bps, rent 20% lower, empty 15% of the year, prices growing 4% and 9%, handover 12 months late — each with return, year-1 monthly cash and break-even. A paragraph stating how the verdict is decided.</td></tr>
+        <tr><td><strong>4 · Benchmarks &amp; risk</strong></td><td>The same cheques five ways — this property leveraged, this property all-cash, Nifty 50 SIP, commercial REIT, prepaying debt — with return per year, wealth after 10 years and the basis of each. The what-if table: rate +100/+200 bps, rent 20% lower, empty 15% of the year, prices growing 4% and 9%, handover 12 months late — each with return, year-1 monthly cash and break-even. A paragraph stating how the verdict is decided.</td></tr>
         <tr><td><strong>5+ · Loan schedule</strong></td><td>Every month to closure: opening balance, EMI, interest, prepayment, closing balance, ~44 rows a page. With a first-EMI date set, each row carries its calendar month; months already paid are dimmed.</td></tr>
       </tbody>
     </table></div>
@@ -859,8 +860,8 @@
   <section class="guide-section" id="scan">
     <div class="section-eyebrow">Deals</div>
     <h2>Scan a cost sheet</h2>
-    <p>Tap the scan icon in the toolbar and point the camera at a builder's cost sheet or a bank sanction letter. Rupee amounts (with Indian commas, or "L" / "Cr" suffixes) and percentages are picked out as you go. Tap any detected amount and choose where it belongs — agreement value, rent, interest rate, property tax, floor rise, PLC or loan principal — and the field fills in.</p>
-    <div class="callout note"><div class="callout-icon">📷</div><div class="callout-body"><div class="callout-title">Needs a camera</div><p>Live text scanning requires a physical iPhone or iPad. On devices without camera access the sheet offers a paste box instead. Check every number it fills — OCR is a head start, not a source of truth.</p></div></div>
+    <p>Tap the scan icon in the toolbar and pick a source: <strong>scan with the camera</strong> (multiple pages in one go), <strong>choose from Photos</strong> (one or more images at once), or <strong>choose a file</strong> (a PDF or image from Files). Each page is read on-device; rupee amounts (with Indian commas, or "L" / "Cr" suffixes) and percentages are picked out and listed below. Tap any detected amount and choose where it belongs — agreement value, rent, interest rate, property tax, floor rise, PLC or loan principal — and the field fills in.</p>
+    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><div class="callout-title">Works everywhere, no camera required</div><p>Already have a photo of the cost sheet, or a PDF someone emailed you? Skip the camera entirely — Photos and Files work exactly the same way, and read multiple pages at once. Check every number it fills — OCR is a head start, not a source of truth.</p></div></div>
   </section>
 
   <!-- ── LoanIQ ── -->
@@ -985,7 +986,8 @@
     <div class="section-eyebrow">Other tabs</div>
     <h2>Benchmarks &amp; Risk</h2>
     <h3>10-year annualized return</h3>
-    <p>Four bars: this property (leveraged, net of capital-gains tax on the eventual sale), a Nifty 50 SIP (12% CAGR, post 12.5% LTCG), a commercial REIT (7.8% distribution yield), and prepaying existing debt (8.5% risk-free, post-tax).</p>
+    <p>Five bars: this property leveraged (net of capital-gains tax on the eventual sale), the <strong>same property bought all-cash</strong> — same rent, same price growth, but no loan and no interest deduction, so it isolates what the leverage itself is adding or costing you — a Nifty 50 SIP (12% CAGR, post 12.5% LTCG), a commercial REIT (7.8% distribution yield), and prepaying existing debt (8.5% risk-free, post-tax).</p>
+    <p>On a deal with an expensive loan, the all-cash bar can come out <em>ahead</em> of the leveraged one — a clear sign the loan is what's dragging the return down, not the property itself.</p>
     <figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-benchmarks.jpg" alt="Benchmarks: return per year and what you'd have after 10 years, on identical cheques." loading="lazy"><figcaption>Benchmarks: return per year and what you'd have after 10 years, on identical cheques.</figcaption></figure>
     <h3>What you'd have after 10 years</h3>
     <p>Every strategy receives the identical money — day-one equity plus each monthly EMI, pre-EMI and prepayment — so the rupee outcomes are directly comparable. The property's wealth is its value minus capital-gains tax on selling and the loan outstanding, plus all the net rent it collected.</p>
@@ -1033,7 +1035,13 @@
     <h3>Return and break-even</h3>
     <p><strong>Capital-gains tax on sale</strong> = 12.5% × max(0, sale value − cost of acquisition), where cost of acquisition is the agreement value plus statutory levies and builder extras (loan charges are financing costs, not part of the property's cost, so they're excluded) — the flat rate for a purchase made today, with indexation no longer available. This is subtracted wherever the app assumes a sale.<br><strong>Return per year</strong> is the XIRR of: −day-one cash, then each month's cash flow (lump sums included), then in month 120 the flat's value at your growth rate minus capital-gains tax on that value minus the loan still outstanding.<br><strong>Break-even</strong> is the first month where value − capital-gains tax − loan obligation + cumulative cash flow ≥ 0. Before handover the obligation is the full sanctioned loan, not just the part drawn, because the rest is still owed to the builder.</p>
     <h3>Benchmarks</h3>
-    <p>The same contribution stream — day-one cash and every monthly outflow — is grown at 12% (Nifty, then 12.5% LTCG on the gain), 7.8% (REIT) and 8.5% (prepaying debt). Their annualized figures are the XIRR of that stream.</p>
+    <p>The same contribution stream — day-one cash and every monthly outflow — is grown at 12% (Nifty, then 12.5% LTCG on the gain), 7.8% (REIT) and 8.5% (prepaying debt). Their annualized figures are the XIRR of that stream. The <strong>all-cash</strong> comparison instead reruns the full property model with the loan removed: day-one outflow becomes the entire cost of acquisition (no down-payment split, no loan charges), monthly cash flow drops the EMI, and taxable income drops the Section 24(b) interest deduction it would no longer be entitled to — same rent, same escalation, same vacancy, same price growth and the same 12.5% capital-gains tax on exit as the leveraged version.</p>
+    <h3>Cash-on-cash return</h3>
+    <p>Year-one net cash flow (after handover) × 12, divided by day-one cash — not the all-in cost, which is what rent yield divides by. The two agree only when there's no loan.</p>
+    <h3>DSCR</h3>
+    <p>Net operating income in year one (effective rent minus property tax minus maintenance, before EMI and before income tax) divided by that year's total EMI. Shown only for a commercial purchase with a loan.</p>
+    <h3>Return by exit year</h3>
+    <p>For each year 1…10: the same XIRR construction as the ten-year return above, but truncated — flows only up to that year's last month, with the terminal add-on (value minus capital-gains tax minus loan outstanding) applied at that month instead of month 120. The year with the highest resulting XIRR is what "Return peaks around year N" reports.</p>
     <h3>The verdict rules</h3>
     <div class="table-wrap"><table>
       <thead><tr><th>Call</th><th>Rule</th></tr></thead>
@@ -1077,6 +1085,10 @@
         <tr><td><strong>Price basis</strong></td><td>Whether a quoted price is the agreement value or a builder's all-in figure with taxes bundled.</td></tr>
         <tr><td><strong>Effective rate</strong></td><td>A loan's rate after the Sec 24(b) tax shield — what the money really costs you; the advisor ranks loans by it.</td></tr>
         <tr><td><strong>Avalanche · snowball</strong></td><td>Paying off the highest-rate loan first (saves the most) vs the smallest balance first (frees cash flow soonest).</td></tr>
+        <tr><td><strong>Cash-on-cash return</strong></td><td>Year-one net cash flow divided by the cash you actually put in on day one — distinct from rent yield, which divides by the full all-in cost.</td></tr>
+        <tr><td><strong>This property (all-cash)</strong></td><td>The same deal bought outright — same rent, same price growth, no loan — shown as a benchmark bar to isolate what leverage itself is adding or costing you.</td></tr>
+        <tr><td><strong>DSCR</strong></td><td>Debt Service Coverage Ratio — net operating income over the annual EMI. Below 1.0 means rent alone can't cover the loan payment; commercial lenders typically want 1.2+. Shown only for a commercial purchase with a loan.</td></tr>
+        <tr><td><strong>Return by exit year</strong></td><td>The annualised return and terminal wealth if you sold at the end of each year instead of the full ten — tap "Return peaks around year N" on the verdict card.</td></tr>
       </tbody>
     </table></div>
   </section>
@@ -1107,6 +1119,8 @@
     <p>That's by design: workspace changes are scenarios until you tap Save. If you meant to keep them, make the change again and tap Save.</p>
     <h3>Is my data backed up?</h3>
     <p>Two ways. With iCloud sync on (the default), deals and loans live in your own private iCloud and come back on a new device or reinstall. And Settings → Backup exports everything as a JSON file you keep wherever you like, and imports it again without duplicating.</p>
+    <h3>Why is there a "this property (all-cash)" bar in Benchmarks now?</h3>
+    <p>It's the same property, same rent, same price growth — just bought outright instead of with a loan. Comparing it to the leveraged bar right above it tells you whether the loan itself is helping or hurting: if all-cash returns more, the loan's rate is higher than what the property is actually earning you, and leverage is working against you on this specific deal.</p>
     <h3>Can I model a plot with a loan?</h3>
     <p>Plots are modelled as bought outright, which is how most plot purchases work and keeps the maths honest (no Section 24 shield, no pre-EMI). To test a plot loan, choose Flat / house as the kind and set the terms — only GST differs, and land has none.</p>
     <h3>Is this financial advice?</h3>
@@ -1125,7 +1139,7 @@
         <tr><td><strong>The verdict changed when I only changed the rent</strong></td><td>Rent feeds the yield, the tax and the ten-year return; a small rent change can move the return across the 8.5% or Nifty line. Check the three pills — usually only one scenario flipped.</td></tr>
         <tr><td><strong>Builder extras says "not added"</strong></td><td>Quick Start doesn't guess builder charges. Add floor rise, PLC, advance maintenance and infra under Property › More; the all-in cost will rise.</td></tr>
         <tr><td><strong>Import read the wrong amount</strong></td><td>OCR and language models both occasionally misread Indian comma grouping. The review form flags an EMI mismatch in amber; correct the amount and the tick turns green. Nothing is saved until you tap Add loan.</td></tr>
-        <tr><td><strong>Scanner / camera option missing</strong></td><td>Live scanning needs a physical iPhone or iPad with a camera. Use Files or Photos instead.</td></tr>
+        <tr><td><strong>Scan found no amounts</strong></td><td>OCR needs a reasonably sharp, well-lit page. Recrop to just the numbers, or try Choose a file if you have the cost sheet as a PDF — text-native PDFs read most accurately.</td></tr>
         <tr><td><strong>AI memo says "Built-in rules engine"</strong></td><td>Apple Intelligence isn't available on this device or iOS version. The memo still works; it's written from the same numbers by the rules engine.</td></tr>
         <tr><td><strong>My deals aren't on my other device</strong></td><td>Check Settings → Your data on both: sync must be on, both signed into the same Apple ID with iCloud Drive enabled, and the app launched once after turning it on. Sync is usually seconds but can take longer after a fresh install. A JSON backup works regardless.</td></tr>
         <tr><td><strong>My state isn't listed</strong></td><td>Choose <em>Other</em> (6% duty, 1% registration), or switch on Override stamp duty under Property › More and type the real figure. Email me the schedule for your state and I'll add it properly.</td></tr>
