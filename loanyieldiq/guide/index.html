@@ -728,7 +728,7 @@
       <thead><tr><th>Group</th><th>Inputs</th></tr></thead>
       <tbody>
         <tr><td><strong>Statutory</strong></td><td>State (Maharashtra, Karnataka, Delhi, Other) · Female sole owner (1–2% duty rebate) · GST category (Ready with OC 0% · Under construction 5% · Affordable housing 1% · Commercial 18%) · <strong>Override stamp duty</strong> — switch it on to type the exact rupee amount (or 0) instead of the state-computed rate, for an exempt transfer, gift deed, resale, or a state whose actual duty differs from the four modelled</td></tr>
-        <tr><td><strong>Builder charges</strong></td><td>Floor rise · PLC · Advance maintenance (12–24 months collected upfront) · Electric / water infra · Legal &amp; franking</td></tr>
+        <tr><td><strong>Builder charges</strong></td><td>Floor rise · PLC · Advance maintenance (12–24 months collected upfront) · Electric / water infra · Legal &amp; franking · <strong>Fit-out / interior setup</strong> — flooring, electrical, HVAC and ceiling for a bare-shell unit, commonly 15–25% of the price for a bare-shell shop or office · <strong>Brokerage</strong> — as a flat amount or a % of the price, whichever the broker actually quoted</td></tr>
         <tr><td><strong>Running the flat &amp; tax</strong></td><td>Rent escalation per year · Vacancy allowance · Property tax (annual) · <strong>Maintenance / society charges (monthly)</strong> — what you pay the society from handover, reduces cash in pocket every month but isn't separately tax-deductible since the flat 30% repair deduction already covers it · Your income-tax slab (0 / 5 / 20 / 30 / 39%) · Price growth per year</td></tr>
       </tbody>
     </table></div>
@@ -758,7 +758,8 @@
         <tr><td><strong>MODT</strong></td><td>Stamp duty on the mortgage itself, 0.2–0.5% of the loan. Tap the 0.2% / 0.3% / 0.5% buttons to fill it from the loan amount.</td></tr>
         <tr><td><strong>Franking · Loan insurance · Processing fee</strong></td><td>One-time bank charges, part of the all-in cost and day-one cash. Quick Start fills in typical values (MODT 0.3%, ₹10,000 processing, ₹5,000 franking) so the cost isn't understated — edit them to match your sanction letter.</td></tr>
         <tr><td><strong>Step-up rate</strong></td><td>How much the EMI rises each year when the step-up is on (default 10%).</td></tr>
-        <tr><td><strong>Joint loan with spouse</strong></td><td>Doubles the Section 24(b) interest deduction cap from ₹2 L to ₹4 L.</td></tr>
+        <tr><td><strong>Full Section 24(b) deduction (let-out, no cap)</strong></td><td>On by default — every deal here has rent, i.e. is legally let-out, where 100% of the interest is deductible with no cap. Switch it off to model the more conservative self-occupied-style ₹2 L cap instead.</td></tr>
+        <tr><td><strong>Joint loan with spouse</strong></td><td>Only matters with the cap above switched off: doubles the Section 24(b) interest deduction cap from ₹2 L to ₹4 L. With the full deduction on, a joint loan makes no tax difference since 100% is already deductible either way.</td></tr>
         <tr><td><strong>Overdraft home loan (MaxGain)</strong></td><td>Interest accrues only on loan − parked balance. Set the average balance you'd keep parked.</td></tr>
       </tbody>
     </table></div>
@@ -878,7 +879,7 @@
       <thead><tr><th>Amount below is…</th><th>Enter</th><th>The app then</th></tr></thead>
       <tbody>
         <tr><td><strong>Original loan amount</strong></td><td>The sanctioned amount and the full tenure</td><td>Works out how many EMIs you've paid since the first EMI date, dims them in the schedule, and shows the balance outstanding today</td></tr>
-        <tr><td><strong>Outstanding today</strong></td><td>The balance on your latest statement and the years left</td><td>Starts the schedule from your next EMI date</td></tr>
+        <tr><td><strong>Outstanding today</strong></td><td>The balance on your latest statement and the years left — switch the Years / Months tab to type the exact number of months (e.g. 105) if that's what you know, since it's almost never a whole number of years</td><td>Starts the schedule from your next EMI date</td></tr>
       </tbody>
     </table></div>
     <p>With a date set, every schedule row is labelled with its calendar month, the list shows when each loan closes, and the portfolio tiles show outstanding today, interest still to pay and the month you'll be debt-free.</p>
@@ -889,12 +890,13 @@
     <div class="table-wrap"><table>
       <thead><tr><th>Section</th><th>What you can do</th></tr></thead>
       <tbody>
+        <tr><td><strong>Loan name</strong></td><td>Right at the top of the workspace, styled like a proper title field — rename any time, saves immediately.</td></tr>
         <tr><td><strong>Scenario banner</strong></td><td>Appears as soon as anything differs from the saved plan: "saves ₹X · N months earlier" versus what's saved. Save and Reset live in the top-right.</td></tr>
         <tr><td><strong>Impact tiles</strong></td><td>Outstanding today, debt-free month, interest saved versus a plain EMI, interest still to pay and the total you'd prepay.</td></tr>
-        <tr><td><strong>Balance chart</strong></td><td>Three lines: plain EMI (grey), your saved plan (blue, only while a scenario differs) and the scenario (green). Diamonds mark prepayments; a Today marker shows where you are.</td></tr>
+        <tr><td><strong>Charts</strong></td><td>Two tabs. <strong>Payoff</strong>: three lines — plain EMI (grey), your saved plan (blue, only while a scenario differs) and the scenario (green); diamonds mark prepayments, a Today marker shows where you are. <strong>EMI split</strong>: a stacked bar per year showing how much of that year's EMI is interest versus principal, so you can watch the mix tip over as the loan matures.</td></tr>
         <tr><td><strong>Step up the EMI every year</strong></td><td>Switch it on, choose the yearly increase (1–25%) and the first year it applies (default: year 2). The caption always tells you what turning it on or off is worth.</td></tr>
         <tr><td><strong>Prepayments</strong></td><td><strong>One-off</strong>: a lump sum in a specific loan month (shown with its calendar month). <strong>Recurring</strong>: an amount every month / quarter / 6 months / year, starting from a month you choose and optionally stopping after another — the "bonus every year" pattern. Add as many of each as you like; the list shows every one with a remove button and the total you'd prepay. You can also tap any month in the schedule.</td></tr>
-        <tr><td><strong>Loan terms</strong></td><td>Amount, rate, tenure, MaxGain balance and joint-borrower are part of the scenario. Name, type, first EMI date and amount basis save immediately.</td></tr>
+        <tr><td><strong>Loan terms</strong></td><td>Amount, rate, tenure, MaxGain balance and joint-borrower are part of the scenario. Type, first EMI date and amount basis save immediately (name saves immediately too, from its own field at the top).</td></tr>
         <tr><td><strong>Schedule</strong></td><td>First 12 months inline; the full month-by-month schedule in a sheet, both reflecting the scenario.</td></tr>
       </tbody>
     </table></div>
@@ -1031,7 +1033,7 @@
     <h3>Advisor solvers</h3>
     <p>Close-first order: effective rate = rate × (1 − slab × shielded share), where shielded share = min(annual interest, ₹2 L) ÷ annual interest for home loans and 0 otherwise. Debt-free in N months: needed EMI = EMI(outstanding, rate, N); extra = needed − current EMI; or lump sum = outstanding − present value of the current EMI over N months. Where a lump sum goes: interest saved per loan from a schedule with that sum prepaid in month 1.</p>
     <h3>Tax</h3>
-    <p>Net annual value = rent × 12 × (1 − vacancy) − property tax.<br>Section 24(a): 30% of NAV is deductible — this is treated as covering maintenance too, so maintenance / society charges aren't separately deducted from taxable rent.<br>Section 24(b): interest is deductible up to ₹2 L (₹4 L if joint).<br>Taxable rent = max(0, NAV − 24(a) − 24(b)), taxed at your slab.<br>Monthly cash flow = rent − EMI − property tax − maintenance − tax.</p>
+    <p>Net annual value = rent × 12 × (1 − vacancy) − property tax.<br>Section 24(a): 30% of NAV is deductible — this is treated as covering maintenance too, so maintenance / society charges aren't separately deducted from taxable rent.<br>Section 24(b): by default the full interest is deductible with no cap — every deal here is modelled with rent, i.e. let-out, where the law allows 100%. Switch off <strong>Full Section 24(b) deduction</strong> to instead cap it at ₹2 L (₹4 L if joint), the more conservative self-occupied-style rule.<br>Taxable rent = max(0, NAV − 24(a) − 24(b)), taxed at your slab.<br>Monthly cash flow = rent − EMI − property tax − maintenance − tax.</p>
     <h3>Return and break-even</h3>
     <p><strong>Capital-gains tax on sale</strong> = 12.5% × max(0, sale value − cost of acquisition), where cost of acquisition is the agreement value plus statutory levies and builder extras (loan charges are financing costs, not part of the property's cost, so they're excluded) — the flat rate for a purchase made today, with indexation no longer available. This is subtracted wherever the app assumes a sale.<br><strong>Return per year</strong> is the XIRR of: −day-one cash, then each month's cash flow (lump sums included), then in month 120 the flat's value at your growth rate minus capital-gains tax on that value minus the loan still outstanding.<br><strong>Break-even</strong> is the first month where value − capital-gains tax − loan obligation + cumulative cash flow ≥ 0. Before handover the obligation is the full sanctioned loan, not just the part drawn, because the rest is still owed to the builder.</p>
     <h3>Benchmarks</h3>
@@ -1071,7 +1073,9 @@
         <tr><td><strong>Step-up</strong></td><td>Raising the EMI by a fixed % every year as income grows.</td></tr>
         <tr><td><strong>MaxGain</strong></td><td>Home-loan overdraft where parked money offsets interest while staying withdrawable.</td></tr>
         <tr><td><strong>Section 24(a)</strong></td><td>Flat 30% deduction on net rental income for repairs.</td></tr>
-        <tr><td><strong>Section 24(b)</strong></td><td>Home-loan interest deductible against rent, up to ₹2 L (₹4 L joint).</td></tr>
+        <tr><td><strong>Section 24(b)</strong></td><td>Home-loan interest deductible against rent — 100% of it, uncapped, by default, since every deal here is let-out. Switch off <strong>Full Section 24(b) deduction</strong> to cap it at ₹2 L (₹4 L joint) instead, the self-occupied-style rule.</td></tr>
+        <tr><td><strong>Fit-out cost</strong></td><td>What it costs to fit out a bare-shell shop or office — flooring, wiring, ceiling, HVAC — before it can open for business. Commonly 15–25% of the purchase price; easy to leave out of the maths.</td></tr>
+        <tr><td><strong>Brokerage</strong></td><td>The agent's fee, entered as a flat amount or a % of the price. Part of the all-in cost and day-one cash, same as any other builder extra.</td></tr>
         <tr><td><strong>XIRR</strong></td><td>Annualized return that accounts for the timing of every cheque in and out.</td></tr>
         <tr><td><strong>LTCG</strong></td><td>Long-term capital gains tax — 12.5% flat, no indexation, on equity gains (the Nifty benchmark) and on the property's own gain over its cost of acquisition whenever the app assumes a sale.</td></tr>
         <tr><td><strong>Break-even</strong></td><td>The month from which selling — after capital-gains tax — would return everything you've paid in.</td></tr>
