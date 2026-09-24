@@ -1,5 +1,14 @@
 [
   {
+    "slug": "muhurtha",
+    "name": "Muhurtha",
+    "tagline": "Panchang, festivals and muhurat — worked out on your phone, explained in plain English. Free, offline, no account.",
+    "platform": "iOS 18+",
+    "icon": "/assets/icons/muhurtha.png",
+    "accent": "#8b5cf6",
+    "collectsData": false
+  },
+  {
     "slug": "forehead-flip",
     "name": "Forehead Flip",
     "tagline": "The free charades game for families — with AI-powered word decks.",

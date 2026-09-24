@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="How to use Muhurtha: reading the Panchang, the day's good and bad windows, festivals and traditions, the muhurat finder, tithi birthdays, the offline assistant, reminders and widgets, and how every number is worked out.">
+<title>Muhurtha User Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --bg:        #0A0715;
+    --bg-raised: #14102A;
+    --bg-card:   #1B1536;
+    --border:    #2E2550;
+    --accent:    #a78bfa;
+    --accent-lo: rgba(167,139,250,.14);
+    --teal:      #22ffb8;
+    --teal-lo:   rgba(34,255,184,.12);
+    --coral:     #ff5c85;
+    --coral-lo:  rgba(255,92,133,.12);
+    --gold:      #ffd133;
+    --gold-lo:   rgba(255,209,51,.12);
+    --text:      #F2EEFC;
+    --text-2:    #9990B5;
+    --text-3:    #5F5580;
+    --radius:    12px;
+    --radius-sm: 7px;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg:        #FAF7FF;
+      --bg-raised: #FFFFFF;
+      --bg-card:   #F2ECFF;
+      --border:    #E3DAF7;
+      --accent-lo: rgba(167,139,250,.10);
+      --teal-lo:   rgba(34,255,184,.10);
+      --coral-lo:  rgba(255,92,133,.08);
+      --gold-lo:   rgba(255,209,51,.09);
+      --text:      #1A1230;
+      --text-2:    #5C5178;
+      --text-3:    #9A90B5;
+    }
+  }
+
+  :root[data-theme="light"] {
+    --bg:        #FAF7FF;
+    --bg-raised: #FFFFFF;
+    --bg-card:   #F2ECFF;
+    --border:    #E3DAF7;
+    --accent-lo: rgba(167,139,250,.10);
+    --teal-lo:   rgba(34,255,184,.10);
+    --coral-lo:  rgba(255,92,133,.08);
+    --gold-lo:   rgba(255,209,51,.09);
+    --text:      #1A1230;
+    --text-2:    #5C5178;
+    --text-3:    #9A90B5;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    grid-template-rows: auto 1fr;
+    min-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .topbar {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 32px;
+    height: 60px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-raised);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .topbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -.3px;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .topbar-logo .app-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    background: linear-gradient(135deg, #a78bfa, #ffd133);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .topbar-badge {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-2);
+    background: var(--border);
+    padding: 2px 8px;
+    border-radius: 20px;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+  }
+
+  .topbar-right { margin-left: auto; display: flex; align-items: center; gap: 16px; }
+
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 5px 10px;
+    color: var(--text-2);
+    font-size: 13px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: border-color .2s, color .2s;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+  .sidebar {
+    position: sticky;
+    top: 60px;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+    border-right: 1px solid var(--border);
+    padding: 24px 0 40px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-track { background: transparent; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  .nav-section { padding: 0 20px; margin-bottom: 6px; }
+
+  .nav-section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-3);
+    padding: 16px 0 6px;
+    display: block;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text-2);
+    text-decoration: none;
+    transition: background .15s, color .15s;
+    cursor: pointer;
+  }
+  .nav-link:hover { background: var(--accent-lo); color: var(--accent); }
+  .nav-link.active { background: var(--accent-lo); color: var(--accent); font-weight: 600; }
+  .nav-icon { font-size: 14px; width: 18px; text-align: center; flex-shrink: 0; }
+
+  .main { padding: 48px 64px 80px 64px; max-width: 780px; min-width: 0; }
+
+  .guide-section {
+    padding-bottom: 64px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 64px;
+  }
+  .guide-section:last-child { border-bottom: none; }
+
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -.8px;
+    color: var(--text);
+    text-wrap: balance;
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(20px, 3vw, 26px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -.4px;
+    color: var(--text);
+    text-wrap: balance;
+    margin-bottom: 14px;
+  }
+
+  h3 {
+    font-family: 'Sora', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -.2px;
+    color: var(--text);
+    margin-bottom: 10px;
+    margin-top: 28px;
+  }
+  h3:first-child { margin-top: 0; }
+
+  p {
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--text-2);
+    max-width: 62ch;
+    margin-bottom: 14px;
+  }
+  p:last-child { margin-bottom: 0; }
+
+  .guide-intro {
+    padding-bottom: 64px;
+    margin-bottom: 64px;
+    border-bottom: 1px solid var(--border);
+  }
+  .guide-intro p {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text-2);
+    max-width: 58ch;
+  }
+
+  .intro-meta { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+
+  .meta-pill {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--text-2);
+    letter-spacing: .3px;
+  }
+  .meta-pill.accent { border-color: var(--accent); color: var(--accent); background: var(--accent-lo); }
+
+  .steps { list-style: none; display: flex; flex-direction: column; gap: 16px; margin: 18px 0; }
+
+  .step { display: grid; grid-template-columns: 32px 1fr; gap: 14px; align-items: start; }
+
+  .step-num {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--accent-lo);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-size: 13px; font-weight: 700;
+    font-family: 'Sora', sans-serif;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+
+  .step-body { min-width: 0; }
+  .step-title { font-size: 14.5px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .step-desc { font-size: 14px; color: var(--text-2); line-height: 1.6; margin: 0; }
+
+  .callout {
+    display: flex; gap: 14px; padding: 16px 18px;
+    border-radius: var(--radius); border-left: 3px solid; margin: 20px 0;
+  }
+  .callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .callout-body { min-width: 0; }
+  .callout-title {
+    font-size: 13px; font-weight: 700; letter-spacing: .3px;
+    text-transform: uppercase; margin-bottom: 4px;
+  }
+  .callout p { font-size: 14px; margin: 0; max-width: none; }
+
+  .callout.tip  { background: var(--teal-lo);   border-color: var(--teal);  }
+  .callout.tip  .callout-title { color: var(--teal); }
+  .callout.note { background: var(--accent-lo); border-color: var(--accent); }
+  .callout.note .callout-title { color: var(--accent); }
+  .callout.warn { background: var(--coral-lo);  border-color: var(--coral); }
+  .callout.warn .callout-title { color: var(--coral); }
+  .callout.gold { background: var(--gold-lo);   border-color: var(--gold);  }
+  .callout.gold .callout-title { color: var(--gold); }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px; margin: 18px 0;
+  }
+  .feature-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+  .feature-card .fc-icon { font-size: 20px; margin-bottom: 8px; display: block; }
+  .feature-card .fc-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .feature-card .fc-desc { font-size: 13px; color: var(--text-2); line-height: 1.5; }
+
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+
+  .pill {
+    font-size: 13px; font-weight: 600; padding: 5px 13px;
+    border-radius: 20px; display: flex; align-items: center; gap: 5px;
+  }
+  .pill.violet { background: var(--accent-lo); color: var(--accent); border: 1px solid var(--accent); }
+  .pill.teal   { background: var(--teal-lo);   color: var(--teal);   border: 1px solid var(--teal); }
+  .pill.coral  { background: var(--coral-lo);  color: var(--coral);  border: 1px solid var(--coral); }
+  .pill.neutral{ background: var(--bg-card);   color: var(--text-2); border: 1px solid var(--border); }
+
+  .table-wrap { overflow-x: auto; margin: 18px 0; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 400px; }
+
+  th {
+    text-align: left; padding: 10px 14px;
+    font-weight: 600; font-size: 12px; letter-spacing: .5px;
+    text-transform: uppercase; color: var(--text-3);
+    border-bottom: 1px solid var(--border); white-space: nowrap;
+  }
+
+  td {
+    padding: 11px 14px; border-bottom: 1px solid var(--border);
+    color: var(--text-2); vertical-align: top; line-height: 1.5;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--accent-lo); }
+  td strong { color: var(--text); font-weight: 600; }
+
+  .divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+  .swipe-diagram {
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden; margin: 18px 0; font-size: 14px;
+  }
+  .swipe-side { padding: 16px; display: flex; flex-direction: column; gap: 6px; }
+  .swipe-side.left  { background: var(--teal-lo); border-right: 1px solid var(--border); }
+  .swipe-side.right { background: var(--coral-lo); }
+  .swipe-center {
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 12px; background: var(--bg-card); color: var(--text-3);
+    font-size: 22px; flex-direction: column; gap: 4px;
+  }
+  .swipe-center small { font-size: 10px; letter-spacing: .5px; text-transform: uppercase; color: var(--text-3); }
+  .swipe-dir { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+  .swipe-side.left .swipe-dir  { color: var(--teal); }
+  .swipe-side.right .swipe-dir { color: var(--coral); }
+  .swipe-action { display: flex; align-items: center; gap: 6px; color: var(--text-2); font-size: 13.5px; }
+
+  .tab-row {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden; margin: 18px 0;
+  }
+  .tab-item {
+    padding: 14px 8px; text-align: center; font-size: 12px;
+    color: var(--text-2); border-right: 1px solid var(--border);
+  }
+  .tab-item:last-child { border-right: none; }
+  .tab-item.active { background: var(--accent-lo); color: var(--accent); font-weight: 600; }
+  .tab-item .ti-icon { font-size: 20px; display: block; margin-bottom: 4px; }
+  .tab-item .ti-label { font-size: 11px; font-weight: 500; }
+
+  .path-display {
+    font-family: 'Inter', monospace; font-size: 13px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 10px 14px;
+    color: var(--teal); margin: 12px 0; word-break: break-all;
+  }
+  .path-display span { color: var(--text-2); }
+
+  .toast-demo {
+    display: flex; flex-direction: column; gap: 8px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 16px; margin: 18px 0;
+  }
+  .toast {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--bg-raised); border: 1px solid var(--border);
+    border-radius: 12px; padding: 10px 14px;
+  }
+  .toast-icon { font-size: 18px; flex-shrink: 0; }
+  .toast-body { flex: 1; min-width: 0; }
+  .toast-title { font-size: 13px; font-weight: 600; color: var(--text); }
+  .toast-sub { font-size: 12px; color: var(--text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .toast-btn {
+    font-size: 12px; font-weight: 700; color: white;
+    padding: 5px 11px; border-radius: 20px; flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .toast-btn.green { background: #22a86e; }
+  .toast-btn.teal  { background: var(--teal); }
+  .toast-caption {
+    font-size: 12px; color: var(--text-3); text-align: center;
+    font-style: italic; margin-top: 4px;
+  }
+
+  .mobile-nav-toggle {
+    display: none;
+    background: none; border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 6px 10px;
+    color: var(--text-2); font-family: 'Inter', sans-serif;
+    font-size: 13px; cursor: pointer; gap: 6px; align-items: center;
+  }
+
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar {
+      position: fixed; top: 60px; left: 0; width: 260px; z-index: 90;
+      background: var(--bg-raised); transform: translateX(-100%);
+      transition: transform .25s ease; border-right: 1px solid var(--border);
+    }
+    .sidebar.open { transform: translateX(0); }
+    .main { padding: 32px 24px 60px; grid-column: 1; }
+    .mobile-nav-toggle { display: flex; }
+    .feature-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 500px) {
+    .feature-grid { grid-template-columns: 1fr; }
+    .swipe-diagram { grid-template-columns: 1fr; }
+    .swipe-center { display: none; }
+    .swipe-side { border-right: none !important; border-bottom: 1px solid var(--border); }
+    .tab-row { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .fig { margin: 18px 0; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .fig img { width: 260px; max-width: 100%; border-radius: 28px; border: 1.5px solid var(--border); box-shadow: 0 16px 40px rgba(0,0,0,.35); }
+  .fig figcaption { font-size: 12.5px; color: var(--text-3); text-align: center; max-width: 320px; }
+  .fig-row { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+  .fig-row .fig { flex: 1 1 240px; }
+  .cheat { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; margin: 18px 0; }
+  .cheat .c { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; }
+  .cheat .c b { display: block; font-size: 13.5px; color: var(--text); margin-bottom: 4px; }
+  .cheat .c span { font-size: 13px; color: var(--text-2); line-height: 1.5; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+<header class="topbar">
+  <a class="topbar-logo" href="https://aniketshetty.com/muhurtha/">
+    <span class="app-icon">🪔</span>
+    Muhurtha
+  </a>
+  <span class="topbar-badge">User Guide</span>
+  <div class="topbar-right">
+    <button class="mobile-nav-toggle" id="menuToggle" aria-label="Toggle navigation">☰ Menu</button>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle colour scheme">🌓 Theme</button>
+  </div>
+</header>
+
+<nav class="sidebar" id="sidebar" aria-label="Guide navigation">
+  <div class="nav-section">
+    <span class="nav-section-label">Start here</span>
+    <a class="nav-link active" href="#welcome" onclick="closeMobileNav()"><span class="nav-icon">👋</span> Welcome</a>
+    <a class="nav-link" href="#first-minute" onclick="closeMobileNav()"><span class="nav-icon">⏱️</span> Your first minute</a>
+    <a class="nav-link" href="#cheatsheet" onclick="closeMobileNav()"><span class="nav-icon">🗒️</span> Cheat sheet</a>
+    <a class="nav-link" href="#tabs" onclick="closeMobileNav()"><span class="nav-icon">📱</span> The four tabs</a>
+  </div>
+  <div class="nav-section">
+    <span class="nav-section-label">Today</span>
+    <a class="nav-link" href="#reading-today" onclick="closeMobileNav()"><span class="nav-icon">🌅</span> Reading the day</a>
+    <a class="nav-link" href="#plan" onclick="closeMobileNav()"><span class="nav-icon">🕐</span> Plan your day</a>
+    <a class="nav-link" href="#override" onclick="closeMobileNav()"><span class="nav-icon">⚠️</span> When Rahu Kaal wins</a>
+    <a class="nav-link" href="#limbs" onclick="closeMobileNav()"><span class="nav-icon">🌙</span> The five limbs</a>
+    <a class="nav-link" href="#yogas" onclick="closeMobileNav()"><span class="nav-icon">⭐</span> Favourable yogas</a>
+    <a class="nav-link" href="#place" onclick="closeMobileNav()"><span class="nav-icon">📍</span> Changing the place or date</a>
+  </div>
+  <div class="nav-section">
+    <span class="nav-section-label">Year</span>
+    <a class="nav-link" href="#year" onclick="closeMobileNav()"><span class="nav-icon">📆</span> A year at a time</a>
+    <a class="nav-link" href="#traditions" onclick="closeMobileNav()"><span class="nav-icon">🎭</span> Choosing your traditions</a>
+    <a class="nav-link" href="#contested" onclick="closeMobileNav()"><span class="nav-icon">⚖️</span> When two days disagree</a>
+    <a class="nav-link" href="#muhurat" onclick="closeMobileNav()"><span class="nav-icon">💍</span> Finding a muhurat</a>
+  </div>
+  <div class="nav-section">
+    <span class="nav-section-label">Personal</span>
+    <a class="nav-link" href="#family" onclick="closeMobileNav()"><span class="nav-icon">👨‍👩‍👧</span> You &amp; family</a>
+    <a class="nav-link" href="#tithi-birthday" onclick="closeMobileNav()"><span class="nav-icon">🎂</span> Tithi birthdays</a>
+    <a class="nav-link" href="#shraddha" onclick="closeMobileNav()"><span class="nav-icon">💧</span> Shraddha</a>
+  </div>
+  <div class="nav-section">
+    <span class="nav-section-label">Ask &amp; Learn</span>
+    <a class="nav-link" href="#ask" onclick="closeMobileNav()"><span class="nav-icon">✨</span> Asking questions</a>
+    <a class="nav-link" href="#learn" onclick="closeMobileNav()"><span class="nav-icon">📖</span> The Learn tab</a>
+    <a class="nav-link" href="#prayers" onclick="closeMobileNav()"><span class="nav-icon">🔥</span> Prayers &amp; aartis</a>
+  </div>
+  <div class="nav-section">
+    <span class="nav-section-label">Set up</span>
+    <a class="nav-link" href="#reminders" onclick="closeMobileNav()"><span class="nav-icon">🔔</span> Reminders</a>
+    <a class="nav-link" href="#widgets" onclick="closeMobileNav()"><span class="nav-icon">📲</span> Widgets &amp; Live Activity</a>
+    <a class="nav-link" href="#calendar-sync" onclick="closeMobileNav()"><span class="nav-icon">📅</span> Apple Calendar</a>
+    <a class="nav-link" href="#month-system" onclick="closeMobileNav()"><span class="nav-icon">🌗</span> Amanta or Purnimanta</a>
+  </div>
+  <div class="nav-section">
+    <span class="nav-section-label">Under the hood</span>
+    <a class="nav-link" href="#method" onclick="closeMobileNav()"><span class="nav-icon">🧮</span> How it's worked out</a>
+    <a class="nav-link" href="#glossary" onclick="closeMobileNav()"><span class="nav-icon">📚</span> Glossary</a>
+    <a class="nav-link" href="#faq" onclick="closeMobileNav()"><span class="nav-icon">❓</span> FAQ</a>
+    <a class="nav-link" href="#limits" onclick="closeMobileNav()"><span class="nav-icon">🚧</span> Known limits</a>
+    <a class="nav-link" href="#privacy" onclick="closeMobileNav()"><span class="nav-icon">🔒</span> Privacy</a>
+  </div>
+</nav>
+
+<main class="main">
+
+  <div class="guide-intro" id="welcome">
+    <div class="section-eyebrow">User Guide</div>
+    <h1>Muhurtha, explained</h1>
+    <p>Muhurtha is a Hindu calendar and Panchang that assumes you were never taught one. It gives you
+    the same numbers a good printed panchanga gives — computed from the actual positions of the Sun
+    and Moon, not copied from a list — and puts a sentence of plain English next to every one of them.</p>
+    <p>This guide walks through the whole app. You do not need to read it in order; if you only want
+    to know what Rahu Kaal is and when to avoid it, jump to <a href="#plan">Plan your day</a>.</p>
+    <div class="intro-meta">
+      <span class="meta-pill accent">iOS 18+</span>
+      <span class="meta-pill">iPhone &amp; iPad</span>
+      <span class="meta-pill">Fully offline</span>
+      <span class="meta-pill">No account</span>
+      <span class="meta-pill">Free</span>
+    </div>
+  </div>
+
+  <!-- FIRST MINUTE -->
+  <section class="guide-section" id="first-minute">
+    <div class="section-eyebrow">Start here</div>
+    <h2>Your first minute</h2>
+    <p>There is no sign-up and no onboarding questionnaire. The app opens on today.</p>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Allow location, or pick a city</div>
+          <p class="step-desc">Every number in a Panchang depends on your sunrise, so the app needs to
+          know where you are. Allow location once, or tap the city pill under the date and choose one
+          by hand — search works offline against a bundled list, and reaches Apple's geocoder only if
+          you look for somewhere it doesn't carry.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Read the first two cards</div>
+          <p class="step-desc">Anything notable about today comes first — a fast, a festival, an
+          eclipse. Then <strong>Plan your day</strong> tells you, in one sentence, when the next good
+          window opens and which hours to leave alone.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Tap anything you don't recognise</div>
+          <p class="step-desc">Every term in the app opens a short explainer: what it is, what
+          tradition says it's for, and what people do and avoid. That is the whole point of the app.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-title">Pick your traditions</div>
+          <p class="step-desc">Tap the gear on Today → <strong>Which festivals to show</strong>. Ninety-six
+          festivals is a lot if half of them aren't yours. Turn on the regions you actually keep.</p>
+        </div>
+      </li>
+    </ol>
+    <div class="callout note">
+      <span class="callout-icon">💡</span>
+      <div class="callout-body">
+        <div class="callout-title">Nothing to buy</div>
+        <p>There is no Pro tier, no subscription and no advertising. Everything described in this guide
+        is in the free app.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHEAT SHEET -->
+  <section class="guide-section" id="cheatsheet">
+    <div class="section-eyebrow">Start here</div>
+    <h2>Cheat sheet</h2>
+    <p>If you remember only these, you can use the app.</p>
+    <div class="cheat">
+      <div class="c"><b>Green means go</b><span>Abhijit, Amrit Kaal and the auspicious Choghadiya. Traditional windows for starting something.</span></div>
+      <div class="c"><b>Red means wait</b><span>Rahu Kaal, Yamaganda, Gulika, Dur Muhurat. Finish things in them; don't begin things.</span></div>
+      <div class="c"><b>Struck through means void</b><span>A green window that a red one has swallowed. The app tells you which one overrode it.</span></div>
+      <div class="c"><b>The day starts at sunrise</b><span>Not midnight. 3 AM on Thursday still belongs to Wednesday's Panchang.</span></div>
+      <div class="c"><b>Tithi ≠ date</b><span>A tithi can start mid-afternoon and end the next morning. The app shows when it began and ends.</span></div>
+      <div class="c"><b>Tap to learn</b><span>Anything with a ⓘ or a ? opens a plain-English explanation.</span></div>
+    </div>
+  </section>
+
+  <!-- TABS -->
+  <section class="guide-section" id="tabs">
+    <div class="section-eyebrow">Start here</div>
+    <h2>The four tabs</h2>
+    <div class="tab-row">
+      <div class="tab-item active"><span class="ti-icon">🌅</span><span class="ti-label">Today</span></div>
+      <div class="tab-item"><span class="ti-icon">📆</span><span class="ti-label">Year</span></div>
+      <div class="tab-item"><span class="ti-icon">✨</span><span class="ti-label">Ask</span></div>
+      <div class="tab-item"><span class="ti-icon">📖</span><span class="ti-label">Learn</span></div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Tab</th><th>What lives there</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Today</strong></td><td>One day at a time. Festivals, fasts, the day's windows, the full Panchang, sun and moon. Step to any date. The gear here opens Settings.</td></tr>
+          <tr><td><strong>Year</strong></td><td>Every notable day of a year in one list — festivals, ekadashis, purnimas, amavasyas, shraddha days, eclipses. Search across years, and find a muhurat.</td></tr>
+          <tr><td><strong>Ask</strong></td><td>Questions in your own words, answered offline from the app's own Panchang.</td></tr>
+          <tr><td><strong>Learn</strong></td><td>Reading material: how the calendar works, every tithi, every nakshatra, every window, every fast, and the prayers.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- READING TODAY -->
+  <section class="guide-section" id="reading-today">
+    <div class="section-eyebrow">Today</div>
+    <h2>Reading the day</h2>
+    <p>The heading gives you the weekday, the date and the year, and under it the Hindu month, the
+    paksha and the Vikram Samvat year — so <em>Bhadrapada · Shukla Paksha · Vikram 2083</em> means the
+    bright half of Bhadrapada.</p>
+    <p>Below that, the cards appear only when they apply, most important first:</p>
+    <div class="feature-grid">
+      <div class="feature-card"><span class="fc-icon">🎉</span><div class="fc-title">Festival</div><div class="fc-desc">What it is, the moon day it sits on, and the story behind it.</div></div>
+      <div class="feature-card"><span class="fc-icon">🌿</span><div class="fc-title">Fast today</div><div class="fc-desc">Which vrat, how it's kept, and the hours that matter — puja or parana.</div></div>
+      <div class="feature-card"><span class="fc-icon">🎂</span><div class="fc-title">Tithi birthday</div><div class="fc-desc">Someone you've added whose janma tithi falls today.</div></div>
+      <div class="feature-card"><span class="fc-icon">💧</span><div class="fc-title">Pitru Paksha</div><div class="fc-desc">The shraddha day and its kutup and aparahna windows.</div></div>
+      <div class="feature-card"><span class="fc-icon">🌒</span><div class="fc-title">Eclipse</div><div class="fc-desc">Whether it's visible from where you are, and what that means for sutak.</div></div>
+      <div class="feature-card"><span class="fc-icon">🕐</span><div class="fc-title">Plan your day</div><div class="fc-desc">The windows, good and bad, as times you can act on.</div></div>
+      <div class="feature-card"><span class="fc-icon">⭐</span><div class="fc-title">Favourable today</div><div class="fc-desc">Sarvartha Siddhi, Amrit Siddhi, Ravi Yoga and the Pushya combinations.</div></div>
+      <div class="feature-card"><span class="fc-icon">🌙</span><div class="fc-title">Tithi &amp; Panchang</div><div class="fc-desc">The lunar day with its progress bar, the moon phase, and the full five limbs.</div></div>
+    </div>
+    <div class="fig">
+      <img src="/assets/screenshots/muhurtha/01-today.jpg" alt="The Today screen">
+      <figcaption>A fast, a tithi birthday and the start of Plan your day.</figcaption>
+    </div>
+  </section>
+
+  <!-- PLAN -->
+  <section class="guide-section" id="plan">
+    <div class="section-eyebrow">Today</div>
+    <h2>Plan your day</h2>
+    <p>This is the card most people open the app for. It answers one question — <em>is now a good time
+    to start something?</em> — and it answers it relative to the current moment.</p>
+    <p>The first line names the window you are in, or the next one and how long until it opens. The
+    second line is Rahu Kaal: on now, coming up in so long, or already over. Below them sit the day's
+    windows as chips you can read at a glance.</p>
+
+    <h3>The green windows</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Window</th><th>What it is</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Abhijit</strong></td><td>Roughly 48 minutes centred on local midday — the "victorious" muhurat, traditionally good for almost anything.</td></tr>
+          <tr><td><strong>Amrit Kaal</strong></td><td>Derived from the nakshatra, about 96 minutes. Considered especially favourable.</td></tr>
+          <tr><td><strong>Choghadiya</strong></td><td>The day split into eight parts, each named. Amrit, Shubh, Labh and Char are the usable ones.</td></tr>
+          <tr><td><strong>Brahma Muhurat</strong></td><td>The 48 minutes ending shortly before sunrise. For study, prayer and anything that wants a quiet mind.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>The red ones</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Window</th><th>What it is</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Rahu Kaal</strong></td><td>One eighth of the daylight, in a slot that depends on the weekday. The best known of them.</td></tr>
+          <tr><td><strong>Yamaganda</strong></td><td>Another eighth, another weekday slot. Same idea.</td></tr>
+          <tr><td><strong>Gulika Kaal</strong></td><td>And a third. Often treated as the mildest of the three.</td></tr>
+          <tr><td><strong>Dur Muhurat</strong></td><td>One or two fifteenths of the day, by weekday. Short and specific.</td></tr>
+          <tr><td><strong>Varjyam</strong></td><td>A nakshatra-derived stretch to avoid, about 96 minutes.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout tip">
+      <span class="callout-icon">🕐</span>
+      <div class="callout-body">
+        <div class="callout-title">These are not fixed clock times</div>
+        <p>Rahu Kaal is an eighth of the time between <em>your</em> sunrise and <em>your</em> sunset. It
+        is not "always 4:30 to 6:00 on a Saturday". Move city, or move six months through the year, and
+        it moves with you — which is exactly why an app that computes it beats one that tabulates it.</p>
+      </div>
+    </div>
+    <div class="fig">
+      <img src="/assets/screenshots/muhurtha/02-windows.jpg" alt="The day's windows, favourable yogas and the tithi">
+      <figcaption>Green and red windows, then what's favourable, then the tithi itself.</figcaption>
+    </div>
+  </section>
+
+  <!-- OVERRIDE -->
+  <section class="guide-section" id="override">
+    <div class="section-eyebrow">Today</div>
+    <h2>When Rahu Kaal wins</h2>
+    <p>Good and bad windows are worked out separately, so they sometimes land on top of each other.
+    The most common case is Wednesday: Abhijit sits at midday, and Wednesday's Rahu Kaal is the fifth
+    eighth of the day, which also sits at midday.</p>
+    <p>Muhurtha treats the red window as overriding. When that happens you will see:</p>
+    <div class="callout warn">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-body">
+        <div class="callout-title">Rahu Kaal sits on top of Abhijit today</div>
+        <p>So Abhijit does not count. Use another window.</p>
+      </div>
+    </div>
+    <p>The Abhijit chip stays on the card but goes grey, its hours are struck through, and it carries
+    a line saying which window overrode it. Rahu Kaal takes the highlight instead. The headline will
+    never offer you an eclipsed window as the day's best.</p>
+    <p>Auspicious Choghadiya and Amrit Kaal are handled the same way, except that they are dropped from
+    the card entirely rather than shown struck through — one Labh window is much like another, so a
+    dead one is only clutter, whereas Abhijit's silent absence at midday would look like a bug.</p>
+    <div class="fig">
+      <img src="/assets/screenshots/muhurtha/03-override.jpg" alt="Abhijit struck through with Rahu Kaal overrides beneath it">
+      <figcaption>A Wednesday in Mumbai: Abhijit struck out, Rahu Kaal leading.</figcaption>
+    </div>
+  </section>
+
+  <!-- FIVE LIMBS -->
+  <section class="guide-section" id="limbs">
+    <div class="section-eyebrow">Today</div>
+    <h2>The five limbs</h2>
+    <p><em>Panchang</em> literally means five limbs. Scroll down on Today and you'll find all five with
+    their start and end times. Every one of them is tappable.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Limb</th><th>What it measures</th><th>Why you'd care</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Tithi</strong></td><td>The Moon gaining 12° on the Sun. Thirty per lunar month, fifteen per paksha.</td><td>Every festival and fast is dated by one.</td></tr>
+          <tr><td><strong>Nakshatra</strong></td><td>The Moon's position among 27 star-groups, each 13°20′ wide.</td><td>Your "birth star". Also decides Amrit Kaal and Varjyam.</td></tr>
+          <tr><td><strong>Yoga</strong></td><td>Sun and Moon longitudes added, divided into 27.</td><td>A few — Vyatipata, Vaidhriti — are traditionally avoided.</td></tr>
+          <tr><td><strong>Karana</strong></td><td>Half a tithi. Two each day.</td><td>Vishti (Bhadra) is the one to sit out.</td></tr>
+          <tr><td><strong>Vaar</strong></td><td>The weekday, sunrise to sunrise.</td><td>Decides where Rahu Kaal, Yamaganda and Gulika fall.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout note">
+      <span class="callout-icon">🌅</span>
+      <div class="callout-body">
+        <div class="callout-title">The day begins at sunrise</div>
+        <p>This trips everyone up. If something happens at 3 AM on Thursday morning, the Panchang still
+        calls it Wednesday. It matters for birth details, for fasts, and for which tithi "today" is.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- YOGAS -->
+  <section class="guide-section" id="yogas">
+    <div class="section-eyebrow">Today</div>
+    <h2>Favourable yogas</h2>
+    <p>These are combinations of weekday and nakshatra that tradition treats as lucky in their own
+    right. They are the usual reason to check a Panchang on an ordinary Tuesday rather than only
+    around festivals.</p>
+    <div class="pill-row">
+      <span class="pill violet">Sarvartha Siddhi</span>
+      <span class="pill violet">Amrit Siddhi</span>
+      <span class="pill teal">Ravi Yoga</span>
+      <span class="pill teal">Guru Pushya</span>
+      <span class="pill teal">Ravi Pushya</span>
+    </div>
+    <p><strong>Sarvartha Siddhi</strong> — "accomplishing every purpose" — is the broadest.
+    <strong>Guru Pushya</strong> is Pushya nakshatra landing on a Thursday, and is the day people buy
+    gold. <strong>Amrit Siddhi</strong> is rarer and is double-edged in some traditions, which the app
+    notes rather than hiding.</p>
+    <p>The card shows which are running, when they start and end, and a line on what each one is.</p>
+  </section>
+
+  <!-- PLACE -->
+  <section class="guide-section" id="place">
+    <div class="section-eyebrow">Today</div>
+    <h2>Changing the place or the date</h2>
+    <h3>A different day</h3>
+    <p>The arrows either side of the title step a day at a time. Tap the year beside the date to jump
+    to any date at all. "Today" returns you to the present.</p>
+    <h3>A different place</h3>
+    <p>Tap the city pill. You can use your current location, pick from cities you've saved, or search.
+    The bundled list covers India, the diaspora and the wider Hindu world and works with no network;
+    anything else is geocoded by Apple on your device if you're online.</p>
+    <div class="callout tip">
+      <span class="callout-icon">✈️</span>
+      <div class="callout-body">
+        <div class="callout-title">The dates really do move</div>
+        <p>If you're in New Jersey and your family is in Mangaluru, some festivals genuinely fall on
+        different days for the two of you — because the tithi has to be running at a particular moment
+        of the local day. Switch the city and watch it happen. That's not a bug in either calendar.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- YEAR -->
+  <section class="guide-section" id="year">
+    <div class="section-eyebrow">Year</div>
+    <h2>A year at a time</h2>
+    <p>The Year tab lists everything notable in a year, grouped by month. Tap any entry to read about
+    it or jump to that day on Today. The year picker sits in the middle of the toolbar; the list opens
+    at the current month rather than at January.</p>
+    <p>The filter button on the right chooses which categories appear:</p>
+    <div class="pill-row">
+      <span class="pill neutral">Festivals</span>
+      <span class="pill neutral">Ekadashi</span>
+      <span class="pill neutral">Purnima</span>
+      <span class="pill neutral">Amavasya</span>
+      <span class="pill neutral">Sankashti</span>
+      <span class="pill neutral">Pradosh</span>
+      <span class="pill neutral">Shraddha</span>
+      <span class="pill neutral">Eclipses</span>
+    </div>
+    <p>It also switches the grouping between Gregorian months and Hindu months, which is worth trying
+    once: seeing Bhadrapada as a block, rather than split across August and September, is how the
+    calendar actually thinks.</p>
+    <p>The floating search button finds anything by name across whatever years you've browsed.</p>
+    <div class="fig">
+      <img src="/assets/screenshots/muhurtha/04-year.jpg" alt="A year of festivals">
+      <figcaption>September 2026, with the Muhurat button top-left and search bottom-right.</figcaption>
+    </div>
+  </section>
+
+  <!-- TRADITIONS -->
+  <section class="guide-section" id="traditions">
+    <div class="section-eyebrow">Year</div>
+    <h2>Choosing your traditions</h2>
+    <p>Muhurtha carries 96 festivals. Most households keep perhaps twenty. Settings →
+    <strong>Which festivals to show</strong> lets you turn regions on and off:</p>
+    <div class="pill-row">
+      <span class="pill violet">Pan-Hindu</span>
+      <span class="pill neutral">North India</span>
+      <span class="pill neutral">Maharashtra</span>
+      <span class="pill neutral">Gujarat</span>
+      <span class="pill neutral">Bengal &amp; East</span>
+      <span class="pill neutral">Tamil Nadu</span>
+      <span class="pill neutral">Kerala</span>
+      <span class="pill neutral">Karnataka</span>
+      <span class="pill neutral">Tulu Nadu</span>
+      <span class="pill neutral">Andhra &amp; Telangana</span>
+    </div>
+    <p>Tap the count beside a tradition to see exactly which festivals it would add before you commit —
+    no guessing from the name. There's also a switch for minor observances, if you want the
+    well-known days only.</p>
+    <div class="callout gold">
+      <span class="callout-icon">🥥</span>
+      <div class="callout-body">
+        <div class="callout-title">Tulu Nadu</div>
+        <p>Bisu Parba, Aati Amavasya, Keddasa and Pattanaje are in here, dated against the Tulu solar
+        calendar. Very little else carries them.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTESTED -->
+  <section class="guide-section" id="contested">
+    <div class="section-eyebrow">Year</div>
+    <h2>When two days disagree</h2>
+    <p>Some years a festival genuinely falls on two different days depending on where you are and which
+    rule your community follows. Diwali is the classic case: it wants Amavasya at twilight, and some
+    years the tithi straddles the boundary.</p>
+    <p>Rather than silently picking one, Muhurtha flags the day and explains the alternative — which
+    other date has a claim, and why. If your family keeps the other one, you'll at least know why the
+    app said what it said.</p>
+    <div class="callout note">
+      <span class="callout-icon">⚖️</span>
+      <div class="callout-body">
+        <div class="callout-title">A real example</div>
+        <p>Diwali 2024 was contested in Delhi and not in San Francisco. Same festival, same rule,
+        different sunsets.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MUHURAT -->
+  <section class="guide-section" id="muhurat">
+    <div class="section-eyebrow">Year</div>
+    <h2>Finding a muhurat</h2>
+    <p>Tap <strong>Muhurat</strong> at the top left of the Year tab. Pick what you're planning and a
+    year, and the app walks the whole year looking for days that clear the traditional shortlist.</p>
+    <div class="feature-grid">
+      <div class="feature-card"><span class="fc-icon">💍</span><div class="fc-title">Wedding</div><div class="fc-desc">Vivah muhurat — the day itself.</div></div>
+      <div class="feature-card"><span class="fc-icon">🏠</span><div class="fc-title">Housewarming</div><div class="fc-desc">Griha pravesh.</div></div>
+      <div class="feature-card"><span class="fc-icon">🚗</span><div class="fc-title">Vehicle</div><div class="fc-desc">Taking delivery.</div></div>
+      <div class="feature-card"><span class="fc-icon">🏢</span><div class="fc-title">Property</div><div class="fc-desc">Registration or possession.</div></div>
+      <div class="feature-card"><span class="fc-icon">💼</span><div class="fc-title">Starting something</div><div class="fc-desc">A venture, a shop, a first day.</div></div>
+      <div class="feature-card"><span class="fc-icon">👶</span><div class="fc-title">Naming</div><div class="fc-desc">Namakaran.</div></div>
+    </div>
+
+    <h3>What it checks</h3>
+    <p>A day has to clear three lists at once — the tithi, the nakshatra and the weekday — each of them
+    specific to the purpose. Weddings and housewarmings also respect the seasons tradition sets aside:
+    <strong>Kharmas</strong>, when the Sun is in Sagittarius or Pisces, and <strong>Chaturmas</strong>,
+    Vishnu's four months of sleep. Buying a car is not bound by either, so the app doesn't pretend it is.</p>
+
+    <h3>The hours it gives you</h3>
+    <p>Tap a day to open it. The app works out the stretches when a shortlisted tithi and a shortlisted
+    nakshatra are both actually running, then cuts out Rahu Kaal, Yamaganda, Gulika and Dur Muhurat,
+    rejoins anything a tithi change had split, and discards fragments under 45 minutes. What's left is
+    what you're shown, with the nakshatra running through each stretch.</p>
+    <div class="callout warn">
+      <span class="callout-icon">🙏</span>
+      <div class="callout-body">
+        <div class="callout-title">A starting list, not a verdict</div>
+        <p>A family priest also weighs the couple's own charts and the lagna at the intended hour.
+        Neither of those is something an almanac alone can supply. Use this to narrow a year down to a
+        handful of candidate dates, then take those to whoever your family asks.</p>
+      </div>
+    </div>
+    <div class="fig">
+      <img src="/assets/screenshots/muhurtha/05-muhurat.jpg" alt="Wedding muhurat dates for a year">
+      <figcaption>Wedding dates for 2026, with what makes each one strong.</figcaption>
+    </div>
+  </section>
+
+  <!-- FAMILY -->
+  <section class="guide-section" id="family">
+    <div class="section-eyebrow">Personal</div>
+    <h2>You &amp; family</h2>
+    <p>Settings → <strong>You &amp; family</strong>. Add a person with their date, time and place of
+    birth, and the app reads their Panchang back to you.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>It tells you</th><th>Which is</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Nakshatra &amp; pada</strong></td><td>The birth star and which quarter of it. The pada decides the naming syllable.</td></tr>
+          <tr><td><strong>Moon rashi</strong></td><td>What people mean by "my rashi" — the sidereal sign the Moon was in.</td></tr>
+          <tr><td><strong>Sun rashi</strong></td><td>The sidereal sun sign, usually one step behind the Western one.</td></tr>
+          <tr><td><strong>Tithi &amp; masa</strong></td><td>The lunar day and month — what the annual tithi anniversary is based on.</td></tr>
+          <tr><td><strong>Vaar</strong></td><td>The weekday, measured from sunrise. A 2 AM birth belongs to the day before.</td></tr>
+          <tr><td><strong>Yoga &amp; karana</strong></td><td>The remaining two limbs at that moment.</td></tr>
+          <tr><td><strong>Naming syllable</strong></td><td>The sound a name traditionally starts with, from the nakshatra pada.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout tip">
+      <span class="callout-icon">🕰️</span>
+      <div class="callout-body">
+        <div class="callout-title">If you don't know the time</div>
+        <p>Untick "I know the time" and the app assumes sunrise, which is where the Panchang day starts
+        anyway. The tithi and rashi will usually still be right; the nakshatra can be one step out,
+        because the Moon moves through one roughly every 24 hours. The app says so on the person's page
+        rather than quietly presenting a guess as fact.</p>
+      </div>
+    </div>
+    <div class="callout note">
+      <span class="callout-icon">🔒</span>
+      <div class="callout-body">
+        <div class="callout-title">It stays on your phone</div>
+        <p>Names, dates and places are stored on the device and never sent anywhere. There is no server
+        to send them to.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TITHI BIRTHDAY -->
+  <section class="guide-section" id="tithi-birthday">
+    <div class="section-eyebrow">Personal</div>
+    <h2>Tithi birthdays</h2>
+    <p>Your janma tithi is the birthday the Panchang keeps: the same tithi, in the same lunar month,
+    coming round each year. Because the lunar year is about eleven days shorter than the solar one, it
+    lands on a different Gregorian date almost every year — which is exactly why families forget it.</p>
+    <p>Muhurtha works out the next one and puts a card on Today when it arrives. It's computed where
+    you are now, not where you were born, because a birthday is kept where you live.</p>
+    <div class="callout note">
+      <span class="callout-icon">📅</span>
+      <div class="callout-body">
+        <div class="callout-title">Adhika months are skipped</div>
+        <p>A leap month doesn't carry an anniversary, so the app looks past it to the real one.</p>
+      </div>
+    </div>
+    <div class="fig">
+      <img src="/assets/screenshots/muhurtha/08-family.jpg" alt="A birth reading">
+      <figcaption>The reading, and when the tithi next comes round.</figcaption>
+    </div>
+  </section>
+
+  <!-- SHRADDHA -->
+  <section class="guide-section" id="shraddha">
+    <div class="section-eyebrow">Personal</div>
+    <h2>Shraddha</h2>
+    <p>Add someone as a <strong>Remembrance</strong> rather than a birthday and the app tracks their
+    varshik shraddha — the annual tithi on which they passed — the same way.</p>
+    <p>Separately, the Year tab lists all sixteen days of Pitru Paksha with the tithi each one belongs
+    to, and Today shows the kutup and aparahna windows when one falls.</p>
+  </section>
+
+  <!-- ASK -->
+  <section class="guide-section" id="ask">
+    <div class="section-eyebrow">Ask &amp; Learn</div>
+    <h2>Asking questions</h2>
+    <p>Type a question in ordinary English. The assistant works the answer out from the same engine the
+    rest of the app uses, then offers to open the day or read more.</p>
+    <div class="pill-row">
+      <span class="pill neutral">When is Diwali 2026?</span>
+      <span class="pill neutral">Rahu Kaal today</span>
+      <span class="pill neutral">What is Ekadashi?</span>
+      <span class="pill neutral">Next Purnima</span>
+      <span class="pill neutral">Festivals in October</span>
+      <span class="pill neutral">Why is Holi celebrated?</span>
+    </div>
+    <div class="callout note">
+      <span class="callout-icon">📴</span>
+      <div class="callout-body">
+        <div class="callout-title">There is no AI service behind this</div>
+        <p>It's rules over the app's own Panchang, which is why it works with the phone in airplane
+        mode and why nothing you type is sent anywhere. It also means it can only answer about dates,
+        festivals, windows and terms — ask it about the weather and it will say so.</p>
+      </div>
+    </div>
+    <div class="fig">
+      <img src="/assets/screenshots/muhurtha/06-ask.jpg" alt="Asking when Diwali 2026 falls">
+      <figcaption>An answer, with the tithi it rests on and where to go next.</figcaption>
+    </div>
+  </section>
+
+  <!-- LEARN -->
+  <section class="guide-section" id="learn">
+    <div class="section-eyebrow">Ask &amp; Learn</div>
+    <h2>The Learn tab</h2>
+    <p>Reading material, and nothing else. Start with <strong>How to read today</strong> — the
+    sixty-second version — then browse:</p>
+    <div class="feature-grid">
+      <div class="feature-card"><span class="fc-icon">📘</span><div class="fc-title">The basics</div><div class="fc-desc">How the Hindu calendar works, tithi, paksha, nakshatra, months, samvats, eclipses, shraddha.</div></div>
+      <div class="feature-card"><span class="fc-icon">📋</span><div class="fc-title">How festivals are dated</div><div class="fc-desc">Every festival and the moon day it sits on.</div></div>
+      <div class="feature-card"><span class="fc-icon">🕐</span><div class="fc-title">Windows of the day</div><div class="fc-desc">All eight named windows, plus Choghadiya and the favourable yogas.</div></div>
+      <div class="feature-card"><span class="fc-icon">🌿</span><div class="fc-title">Fasts &amp; observances</div><div class="fc-desc">Each vrat, what it's for and how it's kept.</div></div>
+      <div class="feature-card"><span class="fc-icon">🌓</span><div class="fc-title">The 15 tithis</div><div class="fc-desc">Each with a one-line character and what it suits.</div></div>
+      <div class="feature-card"><span class="fc-icon">✨</span><div class="fc-title">The 27 nakshatras</div><div class="fc-desc">And the 7 weekdays, with their ruling planets.</div></div>
+    </div>
+  </section>
+
+  <!-- PRAYERS -->
+  <section class="guide-section" id="prayers">
+    <div class="section-eyebrow">Ask &amp; Learn</div>
+    <h2>Prayers &amp; aartis</h2>
+    <p>The aartis, chalisas and mantras people actually reach for on a festival morning, with their
+    meanings beside them. Today also surfaces the relevant one on the day it's wanted — Ganesh's aarti
+    on Ganesh Chaturthi, without you going looking.</p>
+  </section>
+
+  <!-- REMINDERS -->
+  <section class="guide-section" id="reminders">
+    <div class="section-eyebrow">Set up</div>
+    <h2>Reminders</h2>
+    <p>All off until you allow notifications, and then each one is separate:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Reminder</th><th>When it arrives</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Rahu Kaal starting</strong></td><td>Thirty minutes before it opens.</td></tr>
+          <tr><td><strong>Fasts and parana</strong></td><td>The morning a fast begins, and when its parana window opens.</td></tr>
+          <tr><td><strong>Festivals</strong></td><td>The evening before, while there's still time to prepare.</td></tr>
+          <tr><td><strong>Brahma Muhurat</strong></td><td>The quiet hour before sunrise.</td></tr>
+          <tr><td><strong>Sunrise Panchang</strong></td><td>Today's tithi and nakshatra, at sunrise.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>They're scheduled a fortnight ahead by your own device and refreshed whenever you open the app.
+    There are no push notifications, so there's no server sending you anything.</p>
+  </section>
+
+  <!-- WIDGETS -->
+  <section class="guide-section" id="widgets">
+    <div class="section-eyebrow">Set up</div>
+    <h2>Widgets &amp; Live Activity</h2>
+    <p>Long-press the Home Screen, tap +, and search for Muhurtha. The widgets show today's tithi and
+    nakshatra and the next window, and update through the day.</p>
+    <p>The <strong>Live Activity</strong> is opt-in, under Settings. Turn it on and a countdown appears
+    on the Lock Screen and in the Dynamic Island while Rahu Kaal or Abhijit is running, then clears
+    itself when the window closes. If iOS has Live Activities switched off for the app, Settings says so
+    instead of failing silently.</p>
+  </section>
+
+  <!-- CALENDAR -->
+  <section class="guide-section" id="calendar-sync">
+    <div class="section-eyebrow">Set up</div>
+    <h2>Apple Calendar</h2>
+    <p>Settings → <strong>Add to Apple Calendar</strong> writes a year of festivals and fasts into a
+    calendar you choose, as all-day events. It asks for write-only access, so it cannot read anything
+    already in your calendar — and iOS enforces that, not just the app.</p>
+  </section>
+
+  <!-- MONTH SYSTEM -->
+  <section class="guide-section" id="month-system">
+    <div class="section-eyebrow">Set up</div>
+    <h2>Amanta or Purnimanta</h2>
+    <p>North and south India disagree about when a lunar month ends. <strong>Amanta</strong> months end
+    at the new moon and are used across the south and west. <strong>Purnimanta</strong> months end at
+    the full moon and are used across the north.</p>
+    <p>The festivals land on the same days either way — only the month <em>name</em> for the dark
+    fortnight differs. Muhurtha defaults to Amanta and shows both on a person's birth reading. Switch in
+    the Year tab's options, or see which you're on in Settings.</p>
+  </section>
+
+  <!-- METHOD -->
+  <section class="guide-section" id="method">
+    <div class="section-eyebrow">Under the hood</div>
+    <h2>How it's worked out</h2>
+    <p>Muhurtha uses <strong>Drik Ganita</strong> — computed positions — rather than the older tabulated
+    approximations. It carries its own ephemeris written in Swift:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Part</th><th>Method</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Sun</strong></td><td>Truncated VSOP87D, accurate to about one arcsecond.</td></tr>
+          <tr><td><strong>Moon</strong></td><td>ELP-2000/82, accurate to about ten arcseconds.</td></tr>
+          <tr><td><strong>Nutation, ΔT, sidereal time</strong></td><td>After Meeus, <em>Astronomical Algorithms</em>.</td></tr>
+          <tr><td><strong>Ayanamsa</strong></td><td>Lahiri (Chitrapaksha) — the one the Indian civil calendar uses.</td></tr>
+          <tr><td><strong>Limb boundaries</strong></td><td>Root-finding on the real angles, not equal division of a day.</td></tr>
+          <tr><td><strong>Eclipses</strong></td><td>Meeus chapter 54, with local visibility from your horizon.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The engine is checked against Drik Panchang for New Delhi — all five limbs, both karanas, sunrise
+    and sunset, the months and the samvats — and that comparison is a permanent automated test, so it
+    can't quietly drift. Eclipse times and magnitudes are checked against the NASA canon.</p>
+    <p>Elevation is off by default, because published panchangs compute sunrise at sea level and turning
+    it on would put the app a couple of minutes out from what your family is reading. You can switch it
+    on if you want the physically accurate time for a hill station.</p>
+    <div class="callout note">
+      <span class="callout-icon">📴</span>
+      <div class="callout-body">
+        <div class="callout-title">Nothing is downloaded</div>
+        <p>There's no calendar to fetch and no server to be down. The app computes 1900 to 2100 from
+        first principles, on your phone, in milliseconds.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GLOSSARY -->
+  <section class="guide-section" id="glossary">
+    <div class="section-eyebrow">Under the hood</div>
+    <h2>Glossary</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Panchang</strong></td><td>"Five limbs" — tithi, nakshatra, yoga, karana, vaar.</td></tr>
+          <tr><td><strong>Tithi</strong></td><td>Lunar day. 1/30th of a lunation.</td></tr>
+          <tr><td><strong>Paksha</strong></td><td>Fortnight. Shukla is waxing, Krishna is waning.</td></tr>
+          <tr><td><strong>Nakshatra</strong></td><td>One of 27 lunar mansions.</td></tr>
+          <tr><td><strong>Pada</strong></td><td>A quarter of a nakshatra. Decides the naming syllable.</td></tr>
+          <tr><td><strong>Rashi</strong></td><td>Zodiac sign, sidereal. Moon rashi is the everyday "my rashi".</td></tr>
+          <tr><td><strong>Masa</strong></td><td>Lunar month. Chaitra through Phalguna.</td></tr>
+          <tr><td><strong>Adhika masa</strong></td><td>The leap month, roughly every three years.</td></tr>
+          <tr><td><strong>Kshaya tithi</strong></td><td>A tithi that begins and ends within one day, so no sunrise falls in it.</td></tr>
+          <tr><td><strong>Samvat</strong></td><td>Era year. Vikram Samvat, or Shaka Samvat.</td></tr>
+          <tr><td><strong>Sankranti</strong></td><td>The Sun entering a new rashi. Basis of the solar calendars.</td></tr>
+          <tr><td><strong>Vrat</strong></td><td>A fast or observance.</td></tr>
+          <tr><td><strong>Parana</strong></td><td>The window in which a fast is broken.</td></tr>
+          <tr><td><strong>Muhurat</strong></td><td>An auspicious span of time for doing something.</td></tr>
+          <tr><td><strong>Lagna</strong></td><td>The rising sign at a given moment. A priest sets this; the app does not.</td></tr>
+          <tr><td><strong>Kharmas</strong></td><td>Sun in Sagittarius or Pisces. Weddings are avoided.</td></tr>
+          <tr><td><strong>Chaturmas</strong></td><td>Vishnu's four months of sleep. Weddings are avoided.</td></tr>
+          <tr><td><strong>Shraddha</strong></td><td>Rites for ancestors. Varshik shraddha is the annual one.</td></tr>
+          <tr><td><strong>Sutak</strong></td><td>The observance period around an eclipse.</td></tr>
+          <tr><td><strong>Ayanamsa</strong></td><td>The offset between the tropical and sidereal zodiacs.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="guide-section" id="faq">
+    <div class="section-eyebrow">Under the hood</div>
+    <h2>FAQ</h2>
+
+    <h3>Why don't the dates match the calendar on my wall?</h3>
+    <p>Usually the month system or the tradition. Check whether your calendar uses Amanta or
+    Purnimanta, and whether the festival you're looking at belongs to a region you've turned off. If
+    it's a genuinely contested date, the app will say so on the day.</p>
+
+    <h3>Why is Rahu Kaal a different time than I remember?</h3>
+    <p>Because it's computed from your sunrise and sunset, not looked up. It moves with the city and
+    with the season. The remembered "always 4:30 on a Saturday" is a rule of thumb for one latitude at
+    one time of year.</p>
+
+    <h3>Does it need internet?</h3>
+    <p>No. Never, for anything in the Panchang. The only optional network call in the app is Apple's
+    geocoder, and only if you search for a city that isn't in the bundled list.</p>
+
+    <h3>Will it drain my battery?</h3>
+    <p>No. A day's Panchang takes a few milliseconds to compute and nothing runs in the background
+    except the notifications you asked for.</p>
+
+    <h3>Is there a kundli or horoscope?</h3>
+    <p>No, and there won't be. Muhurtha reports what the almanac records. It makes no predictions and
+    reads no charts.</p>
+
+    <h3>What years does it cover?</h3>
+    <p>1900 to 2100. Everything in that span is computed, not tabulated.</p>
+
+    <h3>Can I use it outside India?</h3>
+    <p>Yes — that's a large part of why it exists. Pick your city and the whole calendar re-derives for
+    your sunrise. The bundled city list covers the diaspora specifically.</p>
+
+    <h3>Is my data backed up?</h3>
+    <p>Saved places and family details live on the device only. There is no cloud sync, so reinstalling
+    the app starts fresh.</p>
+  </section>
+
+  <!-- LIMITS -->
+  <section class="guide-section" id="limits">
+    <div class="section-eyebrow">Under the hood</div>
+    <h2>Known limits</h2>
+    <p>Worth being honest about.</p>
+    <ul style="color:var(--text-2);font-size:15px;line-height:1.8;padding-left:20px">
+      <li><strong>Languages.</strong> English is complete. Hindi, Marathi, Gujarati, Bengali, Tamil, Telugu, Kannada and Malayalam are partway through and fall back to English for anything not yet translated, until a native speaker has reviewed them.</li>
+      <li><strong>Devotional texts.</strong> The aartis and chalisas need a proofread against an authoritative printed source before they can be called final. The Hanuman Chalisa is currently partial.</li>
+      <li><strong>Naming syllables.</strong> The nakshatra-pada table is the commonly published one, but families use it to name children, so it deserves checking against a printed source rather than being taken on trust.</li>
+      <li><strong>A few regional dates.</strong> Keddasa and Pattanaje are placed from published dates rather than from a computed rule, and the Tulu month-start convention follows the Tamil one. A local panchanga should have the last word.</li>
+      <li><strong>Solar eclipse visibility.</strong> The app can tell you the Sun is above your horizon at greatest eclipse, but not whether you're inside the shadow path — so it says exactly that, rather than claiming a visibility it can't establish.</li>
+      <li><strong>No lagna.</strong> Muhurat suggestions are day-level and window-level. The rising sign at a particular hour is a priest's job.</li>
+    </ul>
+  </section>
+
+  <!-- PRIVACY -->
+  <section class="guide-section" id="privacy">
+    <div class="section-eyebrow">Under the hood</div>
+    <h2>Privacy</h2>
+    <p>No accounts, no analytics, no ads, no tracking SDKs, no server. Locations, family details and
+    preferences are stored on your device and never transmitted. Notifications are scheduled locally.
+    Calendar access is write-only. There are no purchases.</p>
+    <p>The full policy is at <a href="/muhurtha/privacy/">aniketshetty.com/muhurtha/privacy</a>, and
+    questions are welcome via <a href="/support/">Support</a>.</p>
+  </section>
+
+</main>
+</div>
+
+<script>
+  const root = document.documentElement;
+  const toggle = document.getElementById('themeToggle');
+  const saved = localStorage.getItem('mh-guide-theme');
+  if (saved) root.setAttribute('data-theme', saved);
+
+  toggle.addEventListener('click', () => {
+    const current = root.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('mh-guide-theme', next);
+  });
+
+  const menuToggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+  menuToggle.addEventListener('click', () => sidebar.classList.toggle('open'));
+  window.closeMobileNav = function() { sidebar.classList.remove('open'); };
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth <= 860 && sidebar.classList.contains('open') &&
+        !sidebar.contains(e.target) && e.target !== menuToggle) {
+      sidebar.classList.remove('open');
+    }
+  });
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

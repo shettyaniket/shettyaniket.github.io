@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy — Muhurtha</title>
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/">Aniket Shetty</a>
+      <nav class="nav">
+        <a href="/#apps">Apps</a>
+        <a href="/support/">Support</a>
+        <a href="/terms/">Terms</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content">
+    <div class="wrap">
+      <h1>Muhurtha — Privacy Policy</h1>
+      <p class="updated">Last updated: 24 September 2026</p>
+
+      <h2>The short version</h2>
+      <p><strong>Muhurtha collects no personal data.</strong> There are no accounts, no analytics, no ads, and
+      no third-party tracking or crash-reporting SDKs. The app makes no network calls at all for the Panchang.
+      Every calculation runs on your device, and nothing you enter leaves it unless you explicitly share it.</p>
+
+      <h2>There is no server</h2>
+      <p>Muhurtha carries its own astronomical engine and its own festival rules. It does not download a
+      calendar, check for dates, or call an API to answer a question. There is no backend for me to run, which
+      means there is nothing for me to store about you and nothing to be breached.</p>
+
+      <h2>Your data stays on your device</h2>
+      <p>Saved locations, the birth details you enter under <em>You &amp; family</em>, which festival traditions
+      you follow, your reminder preferences and your chosen month system are stored in the app's own storage on
+      your iPhone or iPad. They are never sent anywhere, and I cannot access them. Deleting the app removes them.</p>
+
+      <h2>Birth details</h2>
+      <p>The dates, times, places and names you enter for yourself or your family are treated like any other
+      setting: stored locally, never transmitted, never backed up to a service of mine. They exist so the app
+      can work out a nakshatra and tell you when a tithi comes round. That calculation happens on the device.</p>
+
+      <h2>Location</h2>
+      <p>Sunrise, sunset and every window in the Panchang depend on where you are, so the app asks for your
+      location <em>while in use</em>. The coordinates are used on the device to compute the day and are not sent
+      anywhere. You can refuse the permission and pick a city by hand instead — the app is fully usable that way,
+      and ships with a bundled list of cities so search works offline.</p>
+
+      <h2>City search</h2>
+      <p>Searching the bundled city list is entirely offline. If you search for somewhere not in that list and
+      you have a network connection, the app asks Apple's own geocoder on your device to resolve the name. That
+      request goes to Apple, not to me, under Apple's privacy policy. Nothing else about you accompanies it.</p>
+
+      <h2>Notifications and Live Activities</h2>
+      <p>Reminders for Rahu Kaal, fasts, festivals, Brahma Muhurat and the sunrise Panchang are scheduled locally
+      by your device using Apple's UserNotifications framework. There are no push notifications, so there is no
+      device token and no server sending you anything. The optional Lock Screen countdown uses ActivityKit and
+      runs entirely on the device.</p>
+
+      <h2>Apple Calendar</h2>
+      <p>If you choose to add festivals and fasts to Apple Calendar, the app asks for write-only calendar access
+      and creates the events in a calendar you pick. It cannot read your existing events, and the permission iOS
+      grants it does not allow that.</p>
+
+      <h2>Widgets</h2>
+      <p>The Home Screen widgets read the same locally computed Panchang through a private App Group shared with
+      the app. That data never leaves your device.</p>
+
+      <h2>Sharing</h2>
+      <p>Anything you share from the app is handed to the iOS share sheet. Where it goes from there — Messages,
+      WhatsApp, Notes — is entirely your choice. The app never sends it anywhere itself.</p>
+
+      <h2>Purchases</h2>
+      <p>There are none. Muhurtha is free, with no in-app purchases, no subscription and no advertising.</p>
+
+      <h2>Children</h2>
+      <p>The app collects nothing from anyone, of any age.</p>
+
+      <h2>Changes</h2>
+      <p>If this policy ever changes, the updated version will appear on this page with a new date. Since the app
+      has no server, any change would come with an app update you choose to install.</p>
+
+      <h2>Contact</h2>
+      <p>Questions about this policy, or about the app: <a href="/support/">Support</a>.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>
+        <a href="/#apps">Apps</a>
+        <a href="/support/">Support</a>
+        <a href="/muhurtha/">Muhurtha</a>
+        <a href="/muhurtha/guide/">User Guide</a>
+        <a href="/terms/">Terms</a>
+      </div>
+      <div>© <span id="year"></span> Aniket Shetty</div>
+    </div>
+  </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
