@@ -579,6 +579,7 @@
       <div class="c"><b>+ in the Prepay column</b><span>Tap any month in a schedule to add a lump sum that month.</span></div>
       <div class="c"><b>Chart tabs</b><span>Cash flow · Loan left · Wealth · By year — one chart at a time; the app remembers your tab.</span></div>
       <div class="c"><b>Scenario, then Save</b><span>In a loan's workspace, changes are analysis-only until you tap Save. Reset discards.</span></div>
+      <div class="c"><b>Rate change?</b><span>On the My Loans list: apply a repo move to every floating loan at once, with same-EMI and same-tenure outcomes side by side.</span></div>
       <div class="c"><b>Ask about my loans</b><span>A chat in My Loans that computes answers — close-first order, debt-free by a date, where a lump sum should go.</span></div>
       <div class="c"><b>Deals menu (top-left)</b><span>Switch, duplicate, delete or compare saved deals; start a new one.</span></div>
       <div class="c"><b>Share</b><span>A WhatsApp verdict card, or an A4 PDF report — your choice.</span></div>
@@ -896,6 +897,7 @@
         <tr><td><strong>Charts</strong></td><td>Two tabs. <strong>Payoff</strong>: three lines — plain EMI (grey), your saved plan (blue, only while a scenario differs) and the scenario (green); diamonds mark prepayments, a Today marker shows where you are. <strong>EMI split</strong>: a stacked bar per year showing how much of that year's EMI is interest versus principal, so you can watch the mix tip over as the loan matures.</td></tr>
         <tr><td><strong>Step up the EMI every year</strong></td><td>Switch it on, choose the yearly increase (1–25%) and the first year it applies (default: year 2). Couldn't manage a raise one year, or stopped for a while? Tap <strong>Missed or skipped a raise</strong> to pause it for a year range (or indefinitely) instead of turning the whole thing off — years before and after the pause still count, and it can resume on its own later. The caption always tells you what turning step-up on or off is worth.</td></tr>
         <tr><td><strong>Prepayments</strong></td><td><strong>One-off</strong>: a lump sum in a specific loan month (shown with its calendar month). <strong>Recurring</strong>: an amount every month / quarter / 6 months / year, starting from a month you choose and optionally stopping after another — the "bonus every year" pattern. Add as many of each as you like; <strong>tap a recurring one to edit it</strong> — e.g. set an end month to stop it, or change the amount for when it starts again after a gap — instead of deleting and re-entering it. The list shows every one with a remove button and the total you'd prepay. You can also tap any month in the schedule.</td></tr>
+        <tr><td><strong>Floating-rate resets</strong></td><td>Log a rate change the bank actually applied (or one you expect) for this loan, with the month it takes effect. A switch at the top says what your bank does when the rate moves: <strong>keeps the EMI and moves the tenure</strong> (what most Indian lenders do) or <strong>raises the EMI and keeps the tenure</strong>. To apply one move to several loans at once, use <a href="#ratechange">Rate change?</a> on the My Loans list instead.</td></tr>
         <tr><td><strong>Loan terms</strong></td><td>Amount, rate, tenure, MaxGain balance and joint-borrower are part of the scenario. Type, first EMI date and amount basis save immediately (name saves immediately too, from its own field at the top).</td></tr>
         <tr><td><strong>Schedule</strong></td><td>First 12 months inline; the full month-by-month schedule in a sheet, both reflecting the scenario.</td></tr>
       </tbody>
@@ -903,6 +905,32 @@
     <div class="fig-row"><figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-workspace.jpg" alt="The payoff workspace: impact tiles, the plain-vs-scenario balance chart, and the step-up switch." loading="lazy"><figcaption>The payoff workspace — impact tiles, the balance chart, and step-up.</figcaption></figure><figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-schedule-prepay.jpg" alt="The month-by-month schedule with a plus button in the Prepay column on every row." loading="lazy"><figcaption>The schedule — tap "+" in Prepay on any month.</figcaption></figure></div>
     <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><div class="callout-title">Two ways to use it</div><p><em>Planning:</em> add your realistic prepayments and step-up, tap Save, and the loan's debt-free month becomes the one you're actually tracking. <em>Analysis:</em> pile on aggressive what-ifs, read the impact, and walk away — nothing is stored.</p></div></div>
     <div class="callout tip"><div class="callout-icon">🗣️</div><div class="callout-body"><div class="callout-title">Siri</div><p>"Ask LoanYield IQ what happens if I prepay" — Siri asks for the amount in lakhs and the month, and tells you the interest and months saved on your first standalone loan.</p></div></div>
+    <h3 id="ratechange">When rates move: floating vs fixed, and applying a change to every loan</h3>
+    <p>Every loan has a <strong>Rate type</strong> — Floating or Fixed — inside its workspace. Home, MaxGain and loan-against-property loans start as floating; car and personal loans as fixed. A repo or lending-rate move only touches floating loans; fixed ones are listed as <em>not affected</em>. The loan list shows each loan's current rate and type ("8.75% floating").</p>
+    <p>On the My Loans list, <strong>Rate change?</strong> opens one screen for the whole portfolio, so you don't open each loan to log the same move:</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Control</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Hike or cut, and bps</strong></td><td>Pick direction, tap 25 / 50 / 75 / 100 or set any size.</td></tr>
+        <tr><td><strong>Takes effect after</strong></td><td>How many EMIs are paid at the old rate first (0 = from your next EMI). Banks pass a repo change on at each loan's own reset date, so set it if yours has told you.</td></tr>
+        <tr><td><strong>What your bank does</strong></td><td><em>Keeps the EMI, stretches the tenure</em> or <em>raises the EMI, keeps the tenure</em>. Saved on each loan.</td></tr>
+        <tr><td><strong>Per-loan preview</strong></td><td>Old rate → new rate and the result under your bank's behaviour — plus the other option underneath, so you can compare. Switch a loan off to leave it out.</td></tr>
+        <tr><td><strong>Summary</strong></td><td>Both outcomes totalled across the loans — <strong>same EMI</strong> (tenure and interest change) and <strong>same tenure</strong> (EMI and interest change) — followed by <strong>What I'd do</strong>.</td></tr>
+        <tr><td><strong>Apply</strong></td><td>Logs the change on every included floating loan as a normal rate reset. You can still edit or remove it in a loan's Floating-rate resets card.</td></tr>
+      </tbody>
+    </table></div>
+    <p>You can also just ask the chat — <em>"RBI raised repo by 25 bps"</em> — and tap <strong>Review &amp; apply to floating loans</strong> on the answer, which opens the same screen with the move filled in.</p>
+    <h3>Why "same EMI" costs more</h3>
+    <p>When the bank keeps your EMI after a hike, the extra interest has to be paid off by running the loan longer, and the extra months themselves accrue interest. Raising the EMI instead pays that interest down sooner. For example, +25 bps on a ₹1.27 Cr loan at 7.15% with 108 EMIs left and a ₹95 L loan at 7.9% with 96 left:</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th></th><th>Same EMI</th><th>Same tenure</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Monthly EMI (both loans)</strong></td><td>₹2,93,612, unchanged</td><td>₹2,96,438 (+₹2,826)</td></tr>
+        <tr><td><strong>Tenure</strong></td><td>+2 months on each</td><td>unchanged</td></tr>
+        <tr><td><strong>Extra interest</strong></td><td>+₹4.13 L</td><td>+₹2.91 L</td></tr>
+      </tbody>
+    </table></div>
+    <p>So paying the extra ₹2,826 a month avoids about ₹1.2 L of interest — effectively a guaranteed return at the loan's own rate. The app's advice follows from that: if the higher EMI fits your budget, ask the bank for it; if cash is tight, keep the EMI and prepay a single lump sum (about ₹2.1 L here, computed per loan) to win the months back, putting spare money into the loan with the highest rate first. On a rate <em>cut</em> it says the reverse: keep paying the old EMI so the loan finishes sooner. Figures assume monthly compounding and that the new rate applies from the chosen EMI.</p>
     <div class="callout tip"><div class="callout-icon">🔔</div><div class="callout-body"><div class="callout-title">Reminders</div><p>Turn on <strong>Remind me about my loans</strong> in Settings and each tracked loan nudges you 6, 3 and 1 month before it's debt-free, and again the month it closes. Home and MaxGain loans also get a reminder every few months to log a rate reset, so the payoff plan doesn't quietly drift out of date. Everything is computed and scheduled on your device — nothing is sent anywhere, and it's off by default.</p></div></div>
   </section>
 
@@ -974,13 +1002,20 @@
         <tr><td><strong>I want to be loan-free in 5 years</strong> (or "by 2030")</td><td>Two routes, per loan and in total: the extra EMI from now, or the lump sum today that keeps EMIs unchanged — plus the interest avoided and which loan to start with.</td></tr>
         <tr><td><strong>I have ₹5 L to prepay — where?</strong></td><td>Interest saved and months saved on each loan; the best one is named, with the runner-up's shortfall.</td></tr>
         <tr><td><strong>What if I pay ₹10,000 more every month?</strong></td><td>Same comparison for a recurring top-up.</td></tr>
-        <tr><td><strong>Rates rise 50 bps?</strong></td><td>New EMI and extra interest per loan, with the tip to keep the tenure and raise the EMI.</td></tr>
+        <tr><td><strong>Rates rise 25 bps?</strong> / "RBI raised repo by 25 bps"</td><td>Floating loans only. For each: the result if your bank keeps the EMI (tenure and interest change) and if it raises the EMI (EMI and interest change), then a combined <strong>Summary</strong>, a <strong>What I'd do</strong> recommendation, and a button that opens <a href="#ratechange">Rate change</a> to apply it to all of them.</td></tr>
+        <tr><td><strong>Prepay or invest ₹5 L?</strong></td><td>The engine compares two futures to your loan's original end date: prepay and invest every rupee of EMI you no longer owe, or keep the loan and invest the lump sum. Equity gains are taxed at 12.5% LTCG; the assumed market return (12%) is shown, with the <strong>break-even return</strong> — the yearly return at which the two tie. A one-tap <strong>Add prepayment</strong> follows if prepaying wins.</td></tr>
+        <tr><td><strong>Cheaper lender at 7.4%?</strong></td><td>Monthly saving, the one-time cost of switching (fee % plus 18% GST) and the <strong>break-even in months</strong> against how long the loan has left. It always ends with the cheapest move first: ask your own bank for a spread cut — it costs nothing.</td></tr>
+        <tr><td><strong>Prepay ₹2 L in March</strong> / "pause my step-up in year 4"</td><td>The chat <em>proposes</em> the change with before/after numbers and a confirm button. Nothing is edited until you tap it; a missing detail (which loan? how much?) is asked back.</td></tr>
         <tr><td><strong>How much interest this year?</strong></td><td>Next-12-month and remaining interest, per loan.</td></tr>
         <tr><td><strong>Where do I stand?</strong> / a loan's name</td><td>Totals, EMIs, debt-free month; or one loan's details.</td></tr>
       </tbody>
     </table></div>
     <p>Answers that point at a loan carry an <strong>Open this loan</strong> button that jumps to its workspace, where you can turn the suggestion into a scenario and save it. Suggestion chips under the chat cover the common questions.</p>
     <div class="fig-row"><figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-advisor-intro.jpg" alt="Ask about my loans: the questions it can answer, all computed from the amortization engine." loading="lazy"><figcaption>What it can answer — every number from the engine, not a guess.</figcaption></figure><figure class="fig"><img src="/assets/screenshots/loanyieldiq/guide-advisor-answer.jpg" alt="An answer to 'Which loan should I close first?' with the avalanche-order table and an Open this loan button." loading="lazy"><figcaption>"Which loan should I close first?" — with the avalanche order and an Open this loan button.</figcaption></figure></div>
+    <h3>It remembers, and it understands how you talk</h3>
+    <p>Short follow-ups reuse the last question: "and at 50 bps?", "just Loan 2", "what about ₹10 L". Write the way you speak — including Hindi or Hinglish ("RBI ne repo badhaya, mera EMI kitna badhega"). The on-device model only turns your sentence into a structured request (which question, which loan, how much); <strong>the engine does all the arithmetic</strong>, and anything that would change a loan waits for your tap. A rate move with no size is read as RBI's usual 25 bps.</p>
+    <h3>Do this next</h3>
+    <p>At the top of My Loans, a card names the single best next move — for example putting spare money on the loan with the highest effective rate — and tapping it opens the chat with that question already asked.</p>
     <div class="callout note"><div class="callout-icon">🔒</div><div class="callout-body"><div class="callout-title">Privacy</div><p>Computed answers never leave your phone. Free-form questions and takeaways go to Apple's on-device model, or to your own cloud key if you added one — and only as the engine's fact sheet plus your question.</p></div></div>
   </section>
 
@@ -1011,6 +1046,7 @@
         <tr><td><strong>Backup · Export / Import</strong></td><td>Export writes every deal and loan to a readable JSON file and hands it to the share sheet (Files, iCloud Drive, AirDrop, Mail). Import reads such a file back and adds anything not already present — re-importing never duplicates.</td></tr>
         <tr><td><strong>Notifications · Remind me about my loans</strong></td><td>Off by default. Turning it on asks for notification permission, then schedules local, on-device reminders for every tracked loan in My Loans — see <a href="#loaniq">My Loans → Reminders</a>.</td></tr>
         <tr><td><strong>Help</strong></td><td>Links to this guide, the privacy policy, and email.</td></tr>
+        <tr><td><strong>About</strong></td><td>Version, the developer (Aniket Shetty, linking to aniketshetty.com) and more apps. The WhatsApp verdict card and the PDF carry a small "Made with LoanYield IQ · by Aniket Shetty" line; nothing else is branded.</td></tr>
         <tr><td><strong>AI memo</strong></td><td>Shows whether the memo runs on-device (Apple Intelligence) or via the built-in rules engine.</td></tr>
         <tr><td><strong>Advanced: bring your own AI key</strong></td><td>Optional. Expand to pick Anthropic Claude, Google Gemini or OpenAI. Each provider has a <strong>Get a key</strong> link straight to its console and three numbered steps for generating one, so you don't need to leave the app to figure out where to start. Paste the key in; it's stored in the iOS Keychain (after-first-unlock, this device only) and used only to call that provider directly. The model name is editable.</td></tr>
       </tbody>
@@ -1090,6 +1126,7 @@
         <tr><td><strong>Row-level import</strong></td><td>Reading an amortization schedule's actual rows as history, including prepayments and rate changes visible in the numbers.</td></tr>
         <tr><td><strong>Property kind</strong></td><td>Flat / house, shop / office, or plot — sets GST, whether a loan applies, and defaults.</td></tr>
         <tr><td><strong>Price basis</strong></td><td>Whether a quoted price is the agreement value or a builder's all-in figure with taxes bundled.</td></tr>
+        <tr><td><strong>Floating rate</strong></td><td>A rate tied to a benchmark (the RBI repo rate, a bank's MCLR) that moves when the benchmark does — most home loans. A fixed-rate loan ignores those moves. Set each loan's Rate type so a rate change only touches the right ones.</td></tr>
         <tr><td><strong>Effective rate</strong></td><td>A loan's rate after the Sec 24(b) tax shield — what the money really costs you; the advisor ranks loans by it.</td></tr>
         <tr><td><strong>Avalanche · snowball</strong></td><td>Paying off the highest-rate loan first (saves the most) vs the smallest balance first (frees cash flow soonest).</td></tr>
         <tr><td><strong>Cash-on-cash return</strong></td><td>Year-one net cash flow divided by the cash you actually put in on day one — distinct from rent yield, which divides by the full all-in cost.</td></tr>
