@@ -495,6 +495,9 @@
     <a class="nav-link" href="#ai" onclick="closeMobileNav()">
       <span class="nav-icon">🤖</span> AI Quick-Add
     </a>
+    <a class="nav-link" href="#braindump" onclick="closeMobileNav()">
+      <span class="nav-icon">🎙️</span> Brain Dump
+    </a>
     <a class="nav-link" href="#people" onclick="closeMobileNav()">
       <span class="nav-icon">🎂</span> People Tab
     </a>
@@ -611,7 +614,7 @@
           </tr>
           <tr>
             <td><strong>📅 Upcoming</strong></td>
-            <td>Future tasks grouped by date. Includes a calendar picker so you can tap any day to jump ahead.</td>
+            <td>Future tasks grouped by date. Includes a calendar picker so you can tap any day to jump ahead — month-end boundaries are marked so you can always tell which month you're scrolling through.</td>
           </tr>
         </tbody>
       </table>
@@ -1035,6 +1038,95 @@
     <p>For a birthday or special date rather than a task, use the dedicated quick-add on the <a href="#people" style="color:var(--teal)">People tab</a> instead — see below.</p>
   </section>
 
+  <!-- ── Brain Dump ── -->
+  <section class="guide-section" id="braindump">
+    <h2>Brain Dump</h2>
+    <p>The teal <strong>🎙️</strong> button stacked above the <strong>+</strong> on the Today tab lets you talk instead of type. Ramble out everything on your mind in one go — several unrelated to-dos, a birthday you just remembered, whatever — and it comes back as a reviewable list, not a single garbled task.</p>
+
+    <div class="callout warn">
+      <span class="callout-icon">🔒</span>
+      <div class="callout-body">
+        <div class="callout-title">First time: a privacy disclosure</div>
+        <p>Before your first recording, the app explains exactly what happens to your voice: it's transcribed on-device and the audio itself never leaves your phone. If you've chosen a Cloud AI provider in Settings, only the resulting <em>text</em> transcript is sent there to be turned into tasks — On-Device AI keeps everything on the phone. You have to tap <strong>I Understand</strong> before recording is enabled.</p>
+      </div>
+    </div>
+
+    <h3>Recording</h3>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Tap the mic button</div>
+          <div class="step-desc">The app grants itself Microphone and Speech Recognition permission on first use, then starts listening. Your words appear on screen as you speak.</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Say everything at once</div>
+          <div class="step-desc">"Call the bank about the dispute, pick up dry cleaning tomorrow, and today is Anayna's birthday" — one breath, three different things, no need to separate them into different app screens.</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Tap stop</div>
+          <div class="step-desc">The transcript is handed to whichever AI engine is active in Settings — see the callout below — and comes back as a summary plus a reviewable list.</div>
+        </div>
+      </li>
+    </ol>
+
+    <h3>Reviewing before anything saves</h3>
+    <p>Nothing is written to your tasks or contacts until you tap <strong>Add These</strong>. Before that:</p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <span class="fc-icon">✅</span>
+        <div class="fc-title">To-dos, one card each</div>
+        <div class="fc-desc">Each detected action item gets its own card with an editable title, date, and priority, plus a checkbox to drop it from the batch if it's not actually useful.</div>
+      </div>
+      <div class="feature-card">
+        <span class="fc-icon">🎂</span>
+        <div class="fc-title">Special dates, matched to a contact</div>
+        <div class="fc-desc">A birthday, anniversary, or engagement mention is pulled out separately from the to-do list and checked against your saved People — "today is Anayna's birthday" is matched to your existing contact Anayna rather than filed as a plain task.</div>
+      </div>
+      <div class="feature-card">
+        <span class="fc-icon">➕</span>
+        <div class="fc-title">New person, if no match</div>
+        <div class="fc-desc">If the name doesn't match anyone saved, the card says so plainly — confirming it creates a brand-new People entry with that date instead of silently guessing.</div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <span class="callout-icon">⚙️</span>
+      <div class="callout-body">
+        <div class="callout-title">Same AI engine as AI Quick-Add</div>
+        <p>Brain Dump uses whatever engine you've picked under <strong>Settings → Tasks &amp; Automation → AI Engine</strong> — no separate toggle to configure. On-Device AI uses Apple's on-device Foundation Models where your hardware and iOS version support it, and otherwise the same offline extractor AI Quick-Add falls back to; a Cloud AI provider (Gemini, OpenAI, or Claude) is used if you've set one up, with an automatic fallback to on-device if that request ever fails.</p>
+      </div>
+    </div>
+
+    <h3>Ask Siri instead of opening the app</h3>
+    <p>ScatteredBrain adds an <strong>Add Birthday</strong> Siri Shortcut the moment it's installed — no setup screen to visit. Just talk to Siri directly:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>What you say</th><th>What happens</th></tr></thead>
+        <tbody>
+          <tr><td><em>"Hey Siri, add Anayna's birthday to ScatteredBrain on December 23rd"</em></td><td>App opens on the People tab, Add Birthday already filled in with the name and date</td></tr>
+          <tr><td><em>"Tell ScatteredBrain to add Rahul's birthday"</em></td><td>Same, with the date left for you to set on the review screen</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout note">
+      <span class="callout-icon">👀</span>
+      <div class="callout-body">
+        <div class="callout-title">Siri never saves anything by itself</div>
+        <p>Saying the phrase only opens the app to a pre-filled review screen — the same Add Birthday form you'd see tapping + or the pencil icon on an existing person. If the name matches someone already saved, their card opens with the new date added to their existing dates; if it doesn't match anyone, it opens as a new person. Either way, nothing is written until you tap <strong>Save</strong> yourself.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- ── People Tab ── -->
   <section class="guide-section" id="people">
     <h2>People tab</h2>
@@ -1066,7 +1158,7 @@
     </ol>
 
     <h3>Quick-add with the 🎂 button</h3>
-    <p>For a fast one-line entry, tap the pink <strong>🎂</strong> floating button at the bottom right of the People tab. Type a sentence in plain English and it figures out the name, date, and occasion — no form to fill in.</p>
+    <p>For a fast one-line entry, tap the pink <strong>🎂</strong> floating button at the bottom right of the People tab. It's built around typing as little as possible — a bare name is enough.</p>
 
     <div class="table-wrap">
       <table>
@@ -1074,7 +1166,7 @@
           <tr><th>What you type</th><th>What gets saved</th></tr>
         </thead>
         <tbody>
-          <tr><td><em>Today is Anayna's birthday</em></td><td>Birthday for Anayna on today's date</td></tr>
+          <tr><td><em>@Anayna</em></td><td>Birthday for Anayna, today's date — nothing else typed</td></tr>
           <tr><td><em>Our anniversary is June 12</em></td><td>Wedding Anniversary on 12 Jun</td></tr>
           <tr><td><em>Rajan turns 30 today</em></td><td>Birthday for Rajan, birth year recorded</td></tr>
           <tr><td><em>Dad's birthday is March 5 1960</em></td><td>Birthday for Dad on 5 Mar 1960</td></tr>
@@ -1086,7 +1178,23 @@
       <span class="callout-icon">@</span>
       <div class="callout-body">
         <div class="callout-title">Type @ to tag someone by name</div>
-        <p>Start typing <strong>@</strong> inside the sentence and a live list of matching names appears — people already saved in the app, and anyone in your phone's Contacts app. Pick one and the date is attached to them directly instead of creating a duplicate entry.</p>
+        <p>Start typing <strong>@</strong> and a live list of matching names appears — people already saved in the app, and anyone in your phone's Contacts app. Pick one and the date is attached to them directly instead of creating a duplicate entry. (If your phone's contacts aren't showing up, check that Contacts access is allowed for the app — a banner in the sheet links straight to that Settings toggle.)</p>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <span class="callout-icon">🎂💍</span>
+      <div class="callout-body">
+        <div class="callout-title">Correct the occasion with a tap, not by retyping</div>
+        <p>As soon as a name resolves, a row of chips appears — 🎂 Birthday, 💍 Anniversary, 💐 Engagement, 🐕 Pet Birthday. It's guessed as Birthday by default; tap a different chip to switch it instead of retyping the whole entry.</p>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <span class="callout-icon">📅</span>
+      <div class="callout-body">
+        <div class="callout-title">Not today? Override the date</div>
+        <p>Below the occasion chips, a date pill shows <strong>Assumed date · Today</strong>. Tap it to open an inline date picker and pick the real day — past or future, no restriction. Once you pick one it switches to <strong>Custom date</strong> and remembers the year too.</p>
       </div>
     </div>
 
@@ -1094,7 +1202,7 @@
       <span class="callout-icon">📸</span>
       <div class="callout-body">
         <div class="callout-title">Great for Instagram birthdays</div>
-        <p>Spotted a birthday wish on Instagram? Tap 🎂 → type the name and "birthday today" → it's saved in two seconds.</p>
+        <p>Spotted a birthday wish on Instagram? Tap 🎂 → type the name → save. That's it — it's already assumed to be their birthday today.</p>
       </div>
     </div>
 
@@ -1294,11 +1402,11 @@
       <span>Files app → On My iPhone →</span> ScatteredBrain <span>→</span> Backups <span>→ ScatteredBrain-YYYY-MM-DD-HHmm.json</span>
     </div>
 
-    <div class="callout warn">
-      <span class="callout-icon">⚠️</span>
+    <div class="callout note">
+      <span class="callout-icon">🛡️</span>
       <div class="callout-body">
-        <div class="callout-title">After an app update</div>
-        <p>iOS updates can rarely wipe app data during a SwiftData migration. Your most recent automatic backup is the fastest way to recover — open Files app, find the latest <code style="font-size:12px;background:var(--bg-card);padding:1px 5px;border-radius:4px;color:var(--teal)">.json</code> in the Backups folder, then follow the restore steps below.</p>
+        <div class="callout-title">Built to survive app updates</div>
+        <p>Every category the backup can restore — birthdays, warranties, wins, habits, waiting-on items, recurring bills and more — is decoded field by field with safe fallbacks, so a future update adding a new field to one record can never take down the whole category on restore. Backups remain your safety net regardless; the most recent automatic one is the fastest way to recover if anything ever does go wrong — open Files app, find the latest <code style="font-size:12px;background:var(--bg-card);padding:1px 5px;border-radius:4px;color:var(--teal)">.json</code> in the Backups folder, then follow the restore steps below.</p>
       </div>
     </div>
 
@@ -1356,23 +1464,61 @@
   <!-- ── Settings ── -->
   <section class="guide-section" id="settings">
     <h2>Settings</h2>
-    <p>Open Settings from the Home tab: tap the <strong>⋯ More</strong> icon in the top right, then <strong>Settings</strong>.</p>
+    <p>Open Settings from the Home tab: tap the <strong>⋯ More</strong> icon in the top right, then <strong>Settings</strong>. Everything is grouped into six collapsible panels — tap a panel's header to expand it — so the screen isn't one long scroll of every option at once.</p>
 
     <div class="table-wrap">
       <table>
         <thead>
-          <tr><th>Section</th><th>What you can do</th></tr>
+          <tr><th>Panel</th><th>What's inside</th></tr>
         </thead>
         <tbody>
-          <tr><td><strong>Appearance</strong></td><td>Light, dark, or system theme. Choose a region (India, US, UK, AU, Global) to adapt the app's tone and date formatting.</td></tr>
-          <tr><td><strong>Notifications</strong></td><td>Check notification permission status. All task and birthday reminders are set automatically.</td></tr>
-          <tr><td><strong>Categories</strong></td><td>Add, edit, or delete task categories. Pick an emoji and colour for each.</td></tr>
-          <tr><td><strong>Personas</strong></td><td>Add people tags for filtering tasks — "Wife", "Kids", "Work".</td></tr>
-          <tr><td><strong>AI Engine</strong></td><td>Choose on-device (default) or a cloud provider. Paste your API key for Gemini, OpenAI, or Claude.</td></tr>
-          <tr><td><strong>Auto-Ignore</strong></td><td>Tasks overdue past a threshold are auto-hidden to keep the dashboard clean. Set the threshold here (default: 15 days).</td></tr>
-          <tr><td><strong>Backup</strong></td><td>Create a manual backup, share it, restore from a file, and see when the last auto-backup ran.</td></tr>
-          <tr><td><strong>Import from Contacts</strong></td><td>Pull birthdays from your phone's Contacts app into the People tab.</td></tr>
-          <tr><td><strong>Purge data</strong></td><td>Delete specific data types (tasks, people, habits…) or everything at once. Irreversible — backup first.</td></tr>
+          <tr>
+            <td><strong>👤 Personalization</strong></td>
+            <td>Alter Ego (what the app calls you), Light/Dark/System theme, and your region (India, US, UK, AU, Global) — this adapts the app's tone and date formatting throughout.</td>
+          </tr>
+          <tr>
+            <td><strong>✨ Tasks &amp; Automation</strong></td>
+            <td>AI Engine (on-device or a cloud provider — paste your API key for Gemini, OpenAI, or Claude), default time slots, and Auto-Ignore's threshold for hiding stale overdue tasks (default: 15 days).</td>
+          </tr>
+          <tr>
+            <td><strong>📅 Calendar &amp; Birthdays</strong></td>
+            <td>Apple Calendar sync, <strong>Subscribe Calendars</strong> (see below), and birthday/anniversary reminder timing.</td>
+          </tr>
+          <tr>
+            <td><strong>▦ Organize</strong></td>
+            <td>Categories (emoji + colour per category) and Personas (people tags like "Wife", "Kids", "Work" for filtering tasks).</td>
+          </tr>
+          <tr>
+            <td><strong>💾 Data &amp; Backup</strong></td>
+            <td>Manual backup/restore, import birthdays from Contacts, and Purge data (delete specific data types or everything — irreversible, backup first).</td>
+          </tr>
+          <tr>
+            <td><strong>ℹ️ About</strong></td>
+            <td>App version and other app info.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Subscribe Calendars</h3>
+    <p>Under <strong>Calendar &amp; Birthdays → Subscribe Calendars</strong>, toggle on any of ten built-in calendars — their events show as banners on your dashboard when they're due. Fixed dates (like public holidays) work fully offline; the ones below with dates that move every year refresh automatically the first time you open the app in a new calendar year.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Calendar</th><th>Covers</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>🇮🇳 India Bank Holidays</td><td>National holidays, fixed dates</td></tr>
+          <tr><td>🎉 Indian Festivals</td><td>Diwali, Holi, Eid and more — movable dates, refreshed yearly</td></tr>
+          <tr><td>🇺🇸 US Holidays</td><td>Federal + state holidays, refreshed yearly</td></tr>
+          <tr><td>🇬🇧 UK Holidays</td><td>Bank holidays for England, Scotland, Wales &amp; NI, refreshed yearly</td></tr>
+          <tr><td>🇦🇺 Australia Holidays</td><td>National + state public holidays, refreshed yearly</td></tr>
+          <tr><td>🚫 Mumbai Dry Days</td><td>Fixed dates</td></tr>
+          <tr><td>📈 NSE/BSE Holidays</td><td>Indian stock market closures, refreshed yearly</td></tr>
+          <tr><td>💵 NYSE Holidays</td><td>US stock market closures — computed on-device from the official schedule, no internet needed</td></tr>
+          <tr><td>🕌 Religious Observances</td><td>Fixed dates</td></tr>
+          <tr><td>🏏 Sports Seasons</td><td>Reserved for a future season-schedule source</td></tr>
         </tbody>
       </table>
     </div>
