@@ -504,6 +504,7 @@
     <a class="nav-link" href="#year" onclick="closeMobileNav()"><span class="nav-icon">📆</span> A year at a time</a>
     <a class="nav-link" href="#traditions" onclick="closeMobileNav()"><span class="nav-icon">🎭</span> Choosing your traditions</a>
     <a class="nav-link" href="#contested" onclick="closeMobileNav()"><span class="nav-icon">⚖️</span> When two days disagree</a>
+    <a class="nav-link" href="#festival-rules" onclick="closeMobileNav()"><span class="nav-icon">📋</span> Every festival's rule</a>
     <a class="nav-link" href="#muhurat" onclick="closeMobileNav()"><span class="nav-icon">💍</span> Finding a muhurat</a>
   </div>
   <div class="nav-section">
@@ -523,6 +524,7 @@
     <a class="nav-link" href="#reminders" onclick="closeMobileNav()"><span class="nav-icon">🔔</span> Reminders</a>
     <a class="nav-link" href="#widgets" onclick="closeMobileNav()"><span class="nav-icon">📲</span> Widgets &amp; Live Activity</a>
     <a class="nav-link" href="#calendar-sync" onclick="closeMobileNav()"><span class="nav-icon">📅</span> Apple Calendar</a>
+    <a class="nav-link" href="#export" onclick="closeMobileNav()"><span class="nav-icon">📤</span> Export as CSV or PDF</a>
     <a class="nav-link" href="#month-system" onclick="closeMobileNav()"><span class="nav-icon">🌗</span> Amanta or Purnimanta</a>
   </div>
   <div class="nav-section">
@@ -591,7 +593,7 @@
         <div class="step-num">4</div>
         <div class="step-body">
           <div class="step-title">Pick your traditions</div>
-          <p class="step-desc">Tap the gear on Today → <strong>Which festivals to show</strong>. Ninety-six
+          <p class="step-desc">Tap the gear on Today → <strong>Which festivals to show</strong>. A hundred and twenty-five
           festivals is a lot if half of them aren't yours. Turn on the regions you actually keep.</p>
         </div>
       </li>
@@ -653,14 +655,15 @@
     bright half of Bhadrapada.</p>
     <p>Below that, the cards appear only when they apply, most important first:</p>
     <div class="feature-grid">
-      <div class="feature-card"><span class="fc-icon">🎉</span><div class="fc-title">Festival</div><div class="fc-desc">What it is, the moon day it sits on, and the story behind it.</div></div>
+      <div class="feature-card"><span class="fc-icon">🎉</span><div class="fc-title">Festival</div><div class="fc-desc">What it is, the rule that puts it on this day in its own highlighted box, and the story behind it.</div></div>
+      <div class="feature-card"><span class="fc-icon">🪷</span><div class="fc-title">Navratri</div><div class="fc-desc">Which of the nine forms of Durga is worshipped today, the colour of the day, and why that colour.</div></div>
       <div class="feature-card"><span class="fc-icon">🌿</span><div class="fc-title">Fast today</div><div class="fc-desc">Which vrat, how it's kept, and the hours that matter — puja or parana.</div></div>
       <div class="feature-card"><span class="fc-icon">🎂</span><div class="fc-title">Tithi birthday</div><div class="fc-desc">Someone you've added whose janma tithi falls today.</div></div>
       <div class="feature-card"><span class="fc-icon">💧</span><div class="fc-title">Pitru Paksha</div><div class="fc-desc">The shraddha day and its kutup and aparahna windows.</div></div>
       <div class="feature-card"><span class="fc-icon">🌒</span><div class="fc-title">Eclipse</div><div class="fc-desc">Whether it's visible from where you are, and what that means for sutak.</div></div>
       <div class="feature-card"><span class="fc-icon">🕐</span><div class="fc-title">Plan your day</div><div class="fc-desc">The windows, good and bad, as times you can act on.</div></div>
       <div class="feature-card"><span class="fc-icon">⭐</span><div class="fc-title">Favourable today</div><div class="fc-desc">Sarvartha Siddhi, Amrit Siddhi, Ravi Yoga and the Pushya combinations.</div></div>
-      <div class="feature-card"><span class="fc-icon">🌙</span><div class="fc-title">Tithi &amp; Panchang</div><div class="fc-desc">The lunar day with its progress bar, the moon phase, and the full five limbs.</div></div>
+      <div class="feature-card"><span class="fc-icon">🌙</span><div class="fc-title">Tithi &amp; Panchang</div><div class="fc-desc">The lunar day with its progress bar, the moon phase, and the full five limbs. When a day touches two tithis, both are shown: the one running now is bright, the other dimmed, each with the date it begins or ends.</div></div>
     </div>
     <div class="fig">
       <img src="/assets/screenshots/muhurtha/01-today.jpg" alt="The Today screen">
@@ -849,19 +852,19 @@
   <section class="guide-section" id="traditions">
     <div class="section-eyebrow">Year</div>
     <h2>Choosing your traditions</h2>
-    <p>Muhurtha carries 96 festivals. Most households keep perhaps twenty. Settings →
+    <p>Muhurtha carries 125 festivals. Most households keep perhaps twenty. Settings →
     <strong>Which festivals to show</strong> lets you turn regions on and off:</p>
     <div class="pill-row">
-      <span class="pill violet">Pan-Hindu</span>
+      <span class="pill violet">Celebrated everywhere</span>
       <span class="pill neutral">North India</span>
-      <span class="pill neutral">Maharashtra</span>
+      <span class="pill neutral">Punjab &amp; Sikh</span>
       <span class="pill neutral">Gujarat</span>
-      <span class="pill neutral">Bengal &amp; East</span>
+      <span class="pill neutral">Maharashtra</span>
+      <span class="pill neutral">Bengal &amp; Odisha</span>
+      <span class="pill neutral">Andhra, Telangana &amp; Karnataka</span>
       <span class="pill neutral">Tamil Nadu</span>
       <span class="pill neutral">Kerala</span>
-      <span class="pill neutral">Karnataka</span>
       <span class="pill neutral">Tulu Nadu</span>
-      <span class="pill neutral">Andhra &amp; Telangana</span>
     </div>
     <p>Tap the count beside a tradition to see exactly which festivals it would add before you commit —
     no guessing from the name. There's also a switch for minor observances, if you want the
@@ -870,7 +873,7 @@
       <span class="callout-icon">🥥</span>
       <div class="callout-body">
         <div class="callout-title">Tulu Nadu</div>
-        <p>Bisu Parba, Aati Amavasya, Keddasa and Pattanaje are in here, dated against the Tulu solar
+        <p>Bisu Parba, Aati Amavasya, Keddasa, Pattanaje and Mosaru Kudike are in here, dated against the Tulu solar
         calendar. Very little else carries them.</p>
       </div>
     </div>
@@ -894,6 +897,19 @@
         different sunsets.</p>
       </div>
     </div>
+  </section>
+
+  <!-- FESTIVAL RULES -->
+  <section class="guide-section" id="festival-rules">
+    <div class="section-eyebrow">Year</div>
+    <h2>Every festival's rule</h2>
+    <p>Each festival is a rule — a lunar month, a fortnight, a tithi, and the moment of the day it is
+    judged at — not a date typed into a list. The full list of rules lives on its own page, where you can
+    switch between Amanta and Purnimanta, filter by region, search, and pick a year from 2026 to 2040 to see the
+    date each festival lands on.</p>
+    <p><a href="/muhurtha/festival-rules/"><strong>Open the festival rules →</strong></a></p>
+    <p>Inside the app, the same rule sits on every festival card under <em>The rule</em>, and
+    Learn → <strong>How festivals are dated</strong> lists them all.</p>
   </section>
 
   <!-- MUHURAT -->
@@ -1022,6 +1038,9 @@
       <span class="pill neutral">Next Purnima</span>
       <span class="pill neutral">Festivals in October</span>
       <span class="pill neutral">Why is Holi celebrated?</span>
+      <span class="pill neutral">What colour is Navratri today?</span>
+      <span class="pill neutral">Which form of Durga is today?</span>
+      <span class="pill neutral">When is Gatari Amavasya?</span>
     </div>
     <div class="callout note">
       <span class="callout-icon">📴</span>
@@ -1046,7 +1065,7 @@
     sixty-second version — then browse:</p>
     <div class="feature-grid">
       <div class="feature-card"><span class="fc-icon">📘</span><div class="fc-title">The basics</div><div class="fc-desc">How the Hindu calendar works, tithi, paksha, nakshatra, months, samvats, eclipses, shraddha.</div></div>
-      <div class="feature-card"><span class="fc-icon">📋</span><div class="fc-title">How festivals are dated</div><div class="fc-desc">Every festival and the moon day it sits on.</div></div>
+      <div class="feature-card"><span class="fc-icon">📋</span><div class="fc-title">How festivals are dated</div><div class="fc-desc">Every festival and the rule that fixes its date.</div></div>
       <div class="feature-card"><span class="fc-icon">🕐</span><div class="fc-title">Windows of the day</div><div class="fc-desc">All eight named windows, plus Choghadiya and the favourable yogas.</div></div>
       <div class="feature-card"><span class="fc-icon">🌿</span><div class="fc-title">Fasts &amp; observances</div><div class="fc-desc">Each vrat, what it's for and how it's kept.</div></div>
       <div class="feature-card"><span class="fc-icon">🌓</span><div class="fc-title">The 15 tithis</div><div class="fc-desc">Each with a one-line character and what it suits.</div></div>
@@ -1074,13 +1093,15 @@
         <tbody>
           <tr><td><strong>Rahu Kaal starting</strong></td><td>Thirty minutes before it opens.</td></tr>
           <tr><td><strong>Fasts and parana</strong></td><td>The morning a fast begins, and when its parana window opens.</td></tr>
-          <tr><td><strong>Festivals</strong></td><td>The evening before, while there's still time to prepare.</td></tr>
+          <tr><td><strong>Festivals</strong></td><td>The evening before, while there's still time to prepare. If several fall on the day, the alert names all of them.</td></tr>
+          <tr><td><strong>Purnima &amp; Amavasya</strong></td><td>The evening before each full moon and new moon.</td></tr>
+          <tr><td><strong>Navratri colour</strong></td><td>The evening before each of days two to nine: which colour to wear, and the form of Durga.</td></tr>
           <tr><td><strong>Brahma Muhurat</strong></td><td>The quiet hour before sunrise.</td></tr>
           <tr><td><strong>Sunrise Panchang</strong></td><td>Today's tithi and nakshatra, at sunrise.</td></tr>
         </tbody>
       </table>
     </div>
-    <p>They're scheduled a fortnight ahead by your own device and refreshed whenever you open the app.
+    <p>Festival, Purnima/Amavasya and Navratri alerts follow the traditions and month system you chose. They're scheduled a fortnight ahead by your own device and refreshed whenever you open the app or return to it.
     There are no push notifications, so there's no server sending you anything.</p>
   </section>
 
@@ -1103,6 +1124,26 @@
     <p>Settings → <strong>Add to Apple Calendar</strong> writes a year of festivals and fasts into a
     calendar you choose, as all-day events. It asks for write-only access, so it cannot read anything
     already in your calendar — and iOS enforces that, not just the app.</p>
+  </section>
+
+  <!-- EXPORT -->
+  <section class="guide-section" id="export">
+    <div class="section-eyebrow">Set up</div>
+    <h2>Export as CSV or PDF</h2>
+    <p>Settings → <strong>Export festival calendar</strong> builds a year of festivals for your city and
+    month system, and gives you three ways to take it with you:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Option</th><th>Good for</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Save CSV to Files</strong></td><td>A spreadsheet in Excel, Numbers or Sheets. One row per festival per region, with the tithi that decides it and a note where the date is a judgement call.</td></tr>
+          <tr><td><strong>Copy CSV</strong> / <strong>Share CSV</strong></td><td>Pasting straight into a sheet, or sending it by AirDrop or Mail.</td></tr>
+          <tr><td><strong>Share PDF</strong></td><td>Something to read or print: month by month, with the major festivals starred and each region colour-coded.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Dates are worked out for the city shown at the top of Today, so change the place first if you want
+    someone else's calendar.</p>
   </section>
 
   <!-- MONTH SYSTEM -->
@@ -1230,7 +1271,8 @@
     <h2>Known limits</h2>
     <p>Worth being honest about.</p>
     <ul style="color:var(--text-2);font-size:15px;line-height:1.8;padding-left:20px">
-      <li><strong>Languages.</strong> English is complete. Hindi, Marathi, Gujarati, Bengali, Tamil, Telugu, Kannada and Malayalam are partway through and fall back to English for anything not yet translated, until a native speaker has reviewed them.</li>
+      <li><strong>Languages.</strong> Hindi, Marathi, Gujarati, Bengali, Tamil, Telugu, Kannada and Malayalam now cover the festivals, Navratri and the export screen as well as the Panchang itself. They have not yet been read through by native speakers, so expect the odd awkward phrase; long explanatory texts fall back to English where a translation is missing.</li>
+      <li><strong>Days that depend on convention.</strong> Varalakshmi Vratam, Attukal Pongala and the Sant Dnyaneshwar and Tukaram observances are dated by the usual convention, and almanacs can differ by a day. Where the app knows a date is split, it says so on the day.</li>
       <li><strong>Devotional texts.</strong> The aartis and chalisas need a proofread against an authoritative printed source before they can be called final. The Hanuman Chalisa is currently partial.</li>
       <li><strong>Naming syllables.</strong> The nakshatra-pada table is the commonly published one, but families use it to name children, so it deserves checking against a printed source rather than being taken on trust.</li>
       <li><strong>A few regional dates.</strong> Keddasa and Pattanaje are placed from published dates rather than from a computed rule, and the Tulu month-start convention follows the Tamil one. A local panchanga should have the last word.</li>
