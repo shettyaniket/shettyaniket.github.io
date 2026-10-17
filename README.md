@@ -1,6 +1,6 @@
 # aniketshetty.com
 
-A single static site for all my iOS apps — home page, per-app landing pages, support,
+A single static site for all my apps (iPhone, iPad and Android) — home page, per-app landing pages, support,
 terms, and per-app privacy policies. Plain HTML/CSS, no build step. Free to host.
 
 Live domain: **https://aniketshetty.com** · GitHub repo: **shettyaniket**
@@ -29,6 +29,7 @@ CNAME                   aniketshetty.com  (for GitHub/Cloudflare Pages custom do
    ```json
    { "slug": "newapp", "name": "New App", "tagline": "…",
      "platform": "iOS", "appStoreId": "1234567890",
+     "android": "soon",   // or "playStoreUrl": "https://play.google.com/store/apps/details?id=…" once live
      "icon": "/assets/icons/newapp.png", "accent": "#6366f1", "collectsData": false }
    ```
 2. Add an icon at `assets/icons/newapp.png` (optional; falls back to a letter tile).

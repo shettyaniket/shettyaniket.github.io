@@ -4,6 +4,7 @@
     "name": "Muhurtha",
     "tagline": "Panchang, festivals and muhurat — worked out on your phone, explained in plain English. Free, offline, no account.",
     "platform": "iOS 18+",
+    "android": "soon",
     "icon": "/assets/icons/muhurtha.png",
     "accent": "#8b5cf6",
     "collectsData": false
