@@ -21,10 +21,10 @@
   <main class="content">
     <div class="wrap">
       <h1>Muhurtha — Privacy Policy</h1>
-      <p class="updated">Last updated: 24 September 2026</p>
+      <p class="updated">Last updated: 17 October 2026</p>
 
       <h2>The short version</h2>
-      <p><strong>Muhurtha collects no personal data.</strong> There are no accounts, no analytics, no ads, and
+      <p>This policy covers Muhurtha on iPhone, iPad and Android. <strong>Muhurtha collects no personal data.</strong> There are no accounts, no analytics, no ads, and
       no third-party tracking or crash-reporting SDKs. The app makes no network calls at all for the Panchang.
       Every calculation runs on your device, and nothing you enter leaves it unless you explicitly share it.</p>
 
@@ -36,7 +36,7 @@
       <h2>Your data stays on your device</h2>
       <p>Saved locations, the birth details you enter under <em>You &amp; family</em>, which festival traditions
       you follow, your reminder preferences and your chosen month system are stored in the app's own storage on
-      your iPhone or iPad. They are never sent anywhere, and I cannot access them. Deleting the app removes them.</p>
+      your iPhone, iPad or Android phone. They are never sent anywhere, and I cannot access them. Deleting the app removes them.</p>
 
       <h2>Birth details</h2>
       <p>The dates, times, places and names you enter for yourself or your family are treated like any other
@@ -49,33 +49,55 @@
       anywhere. You can refuse the permission and pick a city by hand instead — the app is fully usable that way,
       and ships with a bundled list of cities so search works offline.</p>
 
-      <h2>City search</h2>
-      <p>Searching the bundled city list is entirely offline. If you search for somewhere not in that list and
-      you have a network connection, the app asks Apple's own geocoder on your device to resolve the name. That
-      request goes to Apple, not to me, under Apple's privacy policy. Nothing else about you accompanies it.</p>
+      <h2>City search and naming your location</h2>
+      <p>Searching the bundled city list is entirely offline.</p>
+      <p><strong>iPhone and iPad:</strong> if you search for somewhere not in that list and you have a network
+      connection, the app asks Apple's own geocoder on your device to resolve the name. That request goes to Apple,
+      not to me, under Apple's privacy policy. Nothing else about you accompanies it.</p>
+      <p><strong>Android:</strong> when you tap <em>Use my location</em>, the app asks Android's built-in geocoder
+      for the name of the place you are in, so it can show "Mumbai" rather than coordinates. On most phones that
+      lookup is handled by Google Play services, so your coordinates may be sent to Google, under Google's privacy
+      policy, and not to me. If it cannot be reached, the app falls back to the nearest city in its bundled list.</p>
 
-      <h2>Notifications and Live Activities</h2>
-      <p>Reminders for Rahu Kaal, fasts, festivals, Brahma Muhurat and the sunrise Panchang are scheduled locally
-      by your device using Apple's UserNotifications framework. There are no push notifications, so there is no
-      device token and no server sending you anything. The optional Lock Screen countdown uses ActivityKit and
-      runs entirely on the device.</p>
+      <h2>Notifications and countdowns</h2>
+      <p>Reminders for Rahu Kaal, fasts, festivals, Brahma Muhurat, moonrise and the sunrise Panchang are scheduled
+      locally by your device: with Apple's UserNotifications framework on iPhone and iPad, and with Android's alarm
+      and notification system on Android. There are no push notifications, so there is no device token and no
+      server sending you anything. The optional countdown while a window such as Rahu Kaal is running is a Lock
+      Screen Live Activity on iPhone and an ongoing notification on Android; both run entirely on the device.
+      On Android the app also asks to be told when the phone restarts, only so it can schedule your reminders
+      again.</p>
 
-      <h2>Apple Calendar</h2>
-      <p>If you choose to add festivals and fasts to Apple Calendar, the app asks for write-only calendar access
-      and creates the events in a calendar you pick. It cannot read your existing events, and the permission iOS
-      grants it does not allow that.</p>
+      <h2>Calendar</h2>
+      <p>Adding festivals and fasts to your calendar is optional and happens only when you ask for it.</p>
+      <p><strong>iPhone and iPad:</strong> the app asks for write-only calendar access and creates the events in a
+      calendar you pick. It cannot read your existing events, and the permission iOS grants it does not allow that.</p>
+      <p><strong>Android:</strong> Android has no write-only calendar permission, so the app asks for calendar
+      read and write access. It uses it for exactly two things: to find a calendar on your phone it can add events
+      to, and to add, update or remove the events it created itself (each is tagged with the app's name). It does
+      not read the titles, times or details of your other events, and nothing it reads leaves your device.</p>
 
       <h2>Widgets</h2>
-      <p>The Home Screen widgets read the same locally computed Panchang through a private App Group shared with
-      the app. That data never leaves your device.</p>
+      <p>The Home Screen and Lock Screen widgets on iPhone read the same locally computed Panchang through a private
+      App Group shared with the app. The Android home-screen widget is drawn by the app itself from the same local
+      calculation. That data never leaves your device.</p>
+      <h2>Backups</h2>
+      <p>Your phone's own backup may include the app's settings, such as saved places and birth details, if you have
+      backup turned on: iCloud Backup on iPhone and iPad, Google's backup on Android. That is a feature of your
+      device and your Apple or Google account, under their terms, and is separate from the app. I never receive a
+      copy and cannot read it. You can turn it off in your device's settings.</p>
 
       <h2>Sharing</h2>
-      <p>Anything you share from the app is handed to the iOS share sheet. Where it goes from there — Messages,
+      <p>Anything you share from the app, including share cards, CSV and PDF files, is handed to the iOS or Android share sheet. Where it goes from there — Messages,
       WhatsApp, Notes — is entirely your choice. The app never sends it anywhere itself.</p>
 
       <h2>Purchases</h2>
       <p>There are none. Muhurtha is free, with no in-app purchases, no subscription and no advertising.</p>
 
+      <h2>Permissions, in one place</h2>
+      <p>Approximate location (to find your sunrise), notifications (for reminders), and calendar access (only if you
+      use Add to Calendar). Every one is optional and the app works without it. On Android there is also the
+      permission to be told when the phone has restarted, used only to reschedule reminders.</p>
       <h2>Children</h2>
       <p>The app collects nothing from anyone, of any age.</p>
 
