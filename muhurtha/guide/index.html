@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png">
+  <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
 <meta name="description" content="How to use Muhurtha: reading the Panchang, the day's good and bad windows, festivals and traditions, the muhurat finder, tithi birthdays, the offline assistant, reminders and widgets, and how every number is worked out.">
 <title>Muhurtha User Guide</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -523,8 +525,8 @@
   <div class="nav-section">
     <span class="nav-section-label">Set up</span>
     <a class="nav-link" href="#reminders" onclick="closeMobileNav()"><span class="nav-icon">🔔</span> Reminders</a>
-    <a class="nav-link" href="#widgets" onclick="closeMobileNav()"><span class="nav-icon">📲</span> Widgets &amp; Live Activity</a>
-    <a class="nav-link" href="#calendar-sync" onclick="closeMobileNav()"><span class="nav-icon">📅</span> Apple Calendar</a>
+    <a class="nav-link" href="#widgets" onclick="closeMobileNav()"><span class="nav-icon">📲</span> Widgets &amp; countdown</a>
+    <a class="nav-link" href="#calendar-sync" onclick="closeMobileNav()"><span class="nav-icon">📅</span> Calendar</a>
     <a class="nav-link" href="#export" onclick="closeMobileNav()"><span class="nav-icon">📤</span> Export as CSV or PDF</a>
     <a class="nav-link" href="#month-system" onclick="closeMobileNav()"><span class="nav-icon">🌗</span> Amanta or Purnimanta</a>
     <a class="nav-link" href="#languages" onclick="closeMobileNav()"><span class="nav-icon">🌐</span> Languages</a>
@@ -553,6 +555,7 @@
     <div class="intro-meta">
       <span class="meta-pill accent">iOS 18+</span>
       <span class="meta-pill">iPhone &amp; iPad</span>
+      <span class="meta-pill">Android: coming soon</span>
       <span class="meta-pill">Fully offline</span>
       <span class="meta-pill">No account</span>
       <span class="meta-pill">Free</span>
@@ -571,8 +574,8 @@
           <div class="step-title">Allow location, or pick a city</div>
           <p class="step-desc">Every number in a Panchang depends on your sunrise, so the app needs to
           know where you are. Allow location once, or tap the city pill under the date and choose one
-          by hand — search works offline against a bundled list, and reaches Apple's geocoder only if
-          you look for somewhere it doesn't carry.</p>
+          by hand — search works offline against a bundled list, and reaches Apple's geocoder (on Android, the phone's own
+          geocoder) only if you look for somewhere it doesn't carry.</p>
         </div>
       </li>
       <li class="step">
@@ -814,7 +817,7 @@
     <h3>A different place</h3>
     <p>Tap the city pill. You can use your current location, pick from cities you've saved, or search.
     The bundled list covers India, the diaspora and the wider Hindu world and works with no network;
-    anything else is geocoded by Apple on your device if you're online.</p>
+    anything else is geocoded by Apple on your device if you're online. On Android, "Use my location" asks the phone's own geocoder to name the place, and falls back to the nearest bundled city when offline.</p>
     <div class="callout tip">
       <span class="callout-icon">✈️</span>
       <div class="callout-body">
@@ -1191,22 +1194,29 @@
   <!-- WIDGETS -->
   <section class="guide-section" id="widgets">
     <div class="section-eyebrow">Set up</div>
-    <h2>Widgets &amp; Live Activity</h2>
+    <h2>Widgets &amp; countdown</h2>
     <p>Long-press the Home Screen, tap +, and search for Muhurtha. The widgets show today's tithi and
     nakshatra and the next window, and update through the day.</p>
     <p>The <strong>Live Activity</strong> is opt-in, under Settings. Turn it on and a countdown appears
     on the Lock Screen and in the Dynamic Island while Rahu Kaal or Abhijit is running, then clears
     itself when the window closes. If iOS has Live Activities switched off for the app, Settings says so
     instead of failing silently.</p>
+    <p><strong>On Android</strong> there is a home-screen widget (long-press the home screen, choose Widgets,
+    and find Muhurtha), and the countdown is an ongoing notification. Turn on <em>Live window</em> in Settings and a
+    countdown sits in the notification shade while Rahu Kaal or Abhijit is running, then clears itself when the
+    window closes.</p>
   </section>
 
   <!-- CALENDAR -->
   <section class="guide-section" id="calendar-sync">
     <div class="section-eyebrow">Set up</div>
-    <h2>Apple Calendar</h2>
+    <h2>Calendar</h2>
     <p>Settings → <strong>Add to Apple Calendar</strong> writes a year of festivals and fasts into a
     calendar you choose, as all-day events. It asks for write-only access, so it cannot read anything
     already in your calendar — and iOS enforces that, not just the app.</p>
+    <p><strong>On Android</strong>, Settings → <strong>Add to Calendar</strong> does the same. Android has no
+    write-only calendar permission, so it asks for calendar access; the app uses it only to find a calendar to
+    write to and to replace the events it added itself, and it does not read your other events.</p>
   </section>
 
   <!-- EXPORT -->
@@ -1358,8 +1368,9 @@
     one time of year.</p>
 
     <h3>Does it need internet?</h3>
-    <p>No. Never, for anything in the Panchang. The only optional network call in the app is Apple's
-    geocoder, and only if you search for a city that isn't in the bundled list.</p>
+    <p>No. Never, for anything in the Panchang. The only optional network call in the app is the phone's
+    own geocoder: Apple's on iPhone, only if you search for a city that isn't in the bundled list; on Android, when you
+    tap "Use my location" and the phone is asked to name the place.</p>
 
     <h3>Will it drain my battery?</h3>
     <p>No. A day's Panchang takes a few milliseconds to compute and nothing runs in the background

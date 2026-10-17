@@ -16,11 +16,13 @@ function cardHTML(app) {
   const icon = app.icon
     ? `<img class="app-icon" src="${app.icon}" alt="${app.name} icon" style="background:${accent}" onerror="this.replaceWith(letterTile('${app.name}','${accent}'))">`
     : `<div class="app-icon" style="background:${accent}">${(app.name || "?")[0]}</div>`;
+  // Set "playStoreUrl" in apps.json when an Android version is live; "android": "soon" shows a coming-soon tag until then.
+  const android = app.playStoreUrl ? ` <span class="pill-os">Android</span>` : app.android === "soon" ? ` <span class="pill-os">Android soon</span>` : "";
   return `
     <a class="app-card" href="/${app.slug}/">
       ${icon}
       <div class="app-meta">
-        <h3>${app.name} <span class="pill-os">${app.platform || "iOS"}</span></h3>
+        <h3>${app.name} <span class="pill-os">${app.platform || "iOS"}</span>${android}</h3>
         <p>${app.tagline || ""}</p>
       </div>
     </a>`;
