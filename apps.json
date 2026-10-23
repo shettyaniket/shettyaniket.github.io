@@ -48,5 +48,14 @@
     "icon": "/assets/icons/loanyieldiq.png",
     "accent": "#0f766e",
     "collectsData": false
+  },
+  {
+    "slug": "paceandsip",
+    "name": "Pace & Sip",
+    "tagline": "The drinking buddy who wants you to slow down — pacing nudges, water reminders and a ride home. iPhone + Apple Watch. Free, offline, no account.",
+    "platform": "iOS 18+",
+    "icon": "/assets/icons/paceandsip.png",
+    "accent": "#34d399",
+    "collectsData": false
   }
 ]
