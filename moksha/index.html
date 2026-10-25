@@ -1,0 +1,2218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mokṣa Paṭam (मोक्ष पातम्) — 72-Square Advaita Vedanta Game of Self-Inquiry</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-parchment: #F6EFE2;
+      --bg-card: #FFFDF9;
+      --ink-deep: #1C1613;
+      --ink-muted: #5C5046;
+      --gold-brass: #B8860B;
+      --saffron: #C84B11;
+      --emerald-ladder: #0F6E56;
+      --crimson-snake: #991B1B;
+    }
+
+    * {
+      box-sizing: border-box;
+      user-select: none;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #EFE6D5;
+      background-image:
+        radial-gradient(at 15% 15%, rgba(200, 75, 17, 0.06) 0px, transparent 50%),
+        radial-gradient(at 85% 85%, rgba(184, 134, 11, 0.08) 0px, transparent 50%);
+      color: var(--ink-deep);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .font-cinzel { font-family: 'Cinzel', serif; }
+    .font-serif-editorial { font-family: 'Cormorant Garamond', Georgia, serif; }
+    .font-devanagari { font-family: 'Noto Sans Devanagari', sans-serif; }
+    .selectable-text { user-select: text; }
+
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(214, 199, 178, 0.25); }
+    ::-webkit-scrollbar-thumb { background: #B8A68E; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #8C7A62; }
+
+    /* 8x9 Board Grid Architecture */
+    .board-grid-compact {
+      display: grid;
+      grid-template-columns: repeat(9, minmax(0, 1fr));
+      grid-template-rows: repeat(8, minmax(0, 1fr));
+      gap: 3px;
+      background: #9E8565;
+      border: 3px solid #6E563B;
+      border-radius: 10px;
+      padding: 3px;
+      position: relative;
+      box-shadow: 0 12px 32px -8px rgba(28, 22, 19, 0.25);
+    }
+
+    /* Zoomable Poster Mode (Full Print Text inside every square) */
+    .board-grid-poster {
+      display: grid;
+      grid-template-columns: repeat(9, minmax(175px, 1fr));
+      grid-auto-rows: minmax(158px, auto);
+      gap: 4px;
+      background: #8C7355;
+      border: 4px solid #5A442B;
+      border-radius: 10px;
+      padding: 4px;
+      position: relative;
+      min-width: 1620px;
+    }
+
+    .board-cell {
+      position: relative;
+      background: #FAF5EC;
+      padding: 4px 5px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: background-color 0.14s ease, transform 0.12s ease, box-shadow 0.14s ease;
+      overflow: hidden;
+      border-radius: 3px;
+    }
+
+    .board-cell:hover {
+      background: #FFFDF9 !important;
+      z-index: 25;
+      box-shadow: 0 4px 14px rgba(28, 22, 19, 0.18);
+    }
+
+    .board-cell.selected-cell {
+      outline: 2.5px solid #C84B11;
+      outline-offset: -2px;
+      background: #FFF9F0 !important;
+      z-index: 26;
+    }
+
+    .board-cell.destination-preview {
+      outline: 2.5px dashed #0F6E56;
+      outline-offset: -2px;
+      background: #F0FDF4 !important;
+      z-index: 24;
+    }
+
+    .board-cell.destination-preview-snake {
+      outline: 2.5px dashed #991B1B;
+      outline-offset: -2px;
+      background: #FEF2F2 !important;
+      z-index: 24;
+    }
+
+    /* Central Column 5: Brahma-Nadi / Sushumna Spine */
+    .board-cell.brahma-nadi {
+      background: linear-gradient(180deg, #FDF8EB 0%, #F7EDD4 100%);
+      border-left: 1.5px solid rgba(184, 134, 11, 0.35);
+      border-right: 1.5px solid rgba(184, 134, 11, 0.35);
+    }
+
+    /* Square 68: Vaikuntha / Moksha */
+    .board-cell.cell-moksha {
+      background: radial-gradient(circle at 50% 25%, #FFFBEB 0%, #FDE68A 65%, #F59E0B 100%) !important;
+      border: 2px solid #B45309 !important;
+      box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.85);
+    }
+
+    /* Square 1 & 6: Entry Anchors */
+    .board-cell.cell-anchor {
+      background: linear-gradient(145deg, #FFFDF9 0%, #FDECD2 100%);
+    }
+
+    /* Square 72: Tamoguna Loop */
+    .board-cell.cell-tamas {
+      background: linear-gradient(145deg, #F3EFEA 0%, #E2D9CE 100%);
+    }
+
+    /* Token Markers */
+    .seeker-token {
+      width: 20px;
+      height: 20px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 800;
+      color: white;
+      border: 2px solid #FFFFFF;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.45);
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 35;
+    }
+
+    .seeker-token.active-turn {
+      animation: tokenPulse 1.6s infinite ease-in-out;
+    }
+
+    @keyframes tokenPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(200, 75, 17, 0.6); }
+      50% { transform: scale(1.16); box-shadow: 0 0 0 5px rgba(200, 75, 17, 0); }
+    }
+
+    /* Dice Roll Animation */
+    .dice-rolling {
+      animation: diceShake 0.42s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
+    }
+    @keyframes diceShake {
+      0% { transform: rotate(0deg) scale(1); }
+      25% { transform: rotate(-14deg) scale(1.08); }
+      50% { transform: rotate(14deg) scale(1.12); }
+      75% { transform: rotate(-10deg) scale(1.08); }
+      100% { transform: rotate(0deg) scale(1); }
+    }
+
+    /* Line clamping for Compact Mode */
+    .compact-desc {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body class="min-h-screen lg:h-screen lg:overflow-hidden flex flex-col">
+
+  <!-- TOP NAVIGATION & STATUS BAR -->
+  <header class="bg-[#1C1613] text-[#F9F4EB] border-b border-[#3D312A] px-3 sm:px-5 py-2 shrink-0 z-40">
+    <div class="max-w-[1920px] mx-auto flex flex-wrap items-center justify-between gap-2">
+
+      <!-- Brand Identity -->
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-500 to-orange-700 flex items-center justify-center text-white font-cinzel font-bold text-base shadow-inner border border-amber-300/30">
+          ॐ
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-cinzel font-bold text-sm sm:text-base tracking-wide text-amber-100">
+              MOKṢA PAṬAM <span class="font-devanagari text-amber-400 font-normal text-xs sm:text-sm">(मोक्ष पातम्)</span>
+            </h1>
+            <span class="hidden xl:inline-block text-[10px] uppercase tracking-widest px-2 py-0.5 rounded bg-amber-900/60 text-amber-300 border border-amber-700/50 font-semibold">
+              1700 AD Gyandev 8×9 · YesVedanta Ver 3.0
+            </span>
+          </div>
+          <p class="text-[11px] text-stone-400 hidden sm:block">
+            Every square contains Original Sanskrit (Devanagari + IAST), English Meaning &amp; Full Advaita Vedanta Board Teaching
+          </p>
+        </div>
+      </div>
+
+      <!-- Board View Mode & Game Controls -->
+      <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+
+        <!-- Board Density Switcher -->
+        <div class="flex items-center bg-stone-900 p-0.5 rounded-lg border border-stone-700 text-[11px]">
+          <button id="btnViewCompact" onclick="setBoardViewMode('compact')" class="px-2.5 py-1 rounded-md font-semibold bg-amber-600 text-white transition">
+            8×9 Fit Screen
+          </button>
+          <button id="btnViewPoster" onclick="setBoardViewMode('poster')" class="px-2.5 py-1 rounded-md font-semibold text-stone-300 hover:text-white transition" title="Read the entire multi-sentence text directly inside all 72 boxes at once">
+            Full Print Text in Boxes (Zoom)
+          </button>
+        </div>
+
+        <!-- SVG Vectors Toggle -->
+        <button id="btnToggleVectors" onclick="toggleVectorsOverlay()" class="px-2.5 py-1 rounded-lg bg-stone-800 hover:bg-stone-700 border border-stone-600 text-[11px] font-medium text-amber-200 transition flex items-center gap-1" title="Show or hide the SVG Ladders & Snakes over the text">
+          <span id="vectorEyeIcon">👁️</span> <span class="hidden md:inline">Lines:</span> <span id="vectorStatusText">Subtle</span>
+        </button>
+
+        <!-- Player Count Selector -->
+        <div class="flex items-center bg-stone-800/90 rounded-lg p-0.5 border border-stone-700 text-[11px]">
+          <span class="px-2 text-stone-400 hidden md:inline">Seekers:</span>
+          <button onclick="changePlayerCount(1)" id="pCount1" class="px-2 py-0.5 rounded font-semibold bg-amber-700 text-white">1</button>
+          <button onclick="changePlayerCount(2)" id="pCount2" class="px-2 py-0.5 rounded font-semibold text-stone-300 hover:text-white">2</button>
+          <button onclick="changePlayerCount(3)" id="pCount3" class="px-2 py-0.5 rounded font-semibold text-stone-300 hover:text-white">3</button>
+        </div>
+
+        <!-- Entry Rule Selector (Solo Strict 6 vs Group Any Roll) -->
+        <button id="btnStartRule" onclick="toggleEntryRule()" class="px-2.5 py-1 rounded-lg bg-stone-800 hover:bg-stone-700 border border-stone-700 text-[11px] text-stone-300 transition hidden sm:flex items-center gap-1" title="YesVedanta Rule: Solo requires rolling a 6 to enter; 2-3 players can optionally enter on any roll">
+          <span>Entry:</span> <strong id="entryRuleLabel" class="text-amber-300">Roll 6 (#68➔#1➔#6)</strong>
+        </button>
+
+        <!-- Sound Toggle -->
+        <button id="btnAudio" onclick="toggleAudio()" class="px-2 py-1 rounded-lg bg-stone-800 hover:bg-stone-700 border border-stone-700 text-xs text-amber-300 transition" title="Toggle Vedic Soundscapes">
+          🔊
+        </button>
+
+        <!-- Rules Guide Button -->
+        <button onclick="openRulesDrawer()" class="px-2.5 py-1 rounded-lg bg-amber-700/30 hover:bg-amber-700/50 border border-amber-500/40 text-amber-200 text-[11px] font-semibold transition">
+          How to Play
+        </button>
+
+        <!-- Reset -->
+        <button onclick="resetGame()" class="px-2 py-1 rounded-lg bg-stone-800 hover:bg-red-950/60 border border-stone-700 text-stone-300 hover:text-red-200 text-[11px] transition">
+          Reset
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN WORKSPACE: SPLIT SCREEN MASTER-DETAIL -->
+  <main class="flex-1 max-w-[1920px] w-full mx-auto grid grid-cols-1 lg:grid-cols-12 lg:overflow-hidden">
+
+    <!-- LEFT COLUMN (7 COLS): THE 72-SQUARE BOARD + DICE DOCK -->
+    <section class="lg:col-span-7 xl:col-span-7 flex flex-col justify-between p-2 sm:p-3 lg:overflow-hidden bg-[#EBE1CF]/60 border-b lg:border-b-0 lg:border-r border-[#C9B99F]">
+
+      <!-- Top Legend Strip -->
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5 px-1 text-[11px] text-stone-700 shrink-0">
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="inline-flex items-center gap-1 font-semibold text-amber-900">
+            <span class="w-2.5 h-2.5 rounded-sm bg-amber-400 border border-amber-700 inline-block"></span>
+            #68 Mokṣa (Start &amp; Goal)
+          </span>
+          <span class="inline-flex items-center gap-1 font-semibold text-emerald-800">
+            <span class="w-2.5 h-2.5 rounded-sm bg-emerald-600 inline-block"></span>
+            10 Virtues (Ladders ↑)
+          </span>
+          <span class="inline-flex items-center gap-1 font-semibold text-red-800">
+            <span class="w-2.5 h-2.5 rounded-sm bg-red-700 inline-block"></span>
+            10 Traps (Snakes ↓)
+          </span>
+          <span class="hidden sm:inline-flex items-center gap-1 text-stone-600">
+            <span class="w-2.5 h-2.5 rounded-sm bg-[#F7EDD4] border border-amber-700/50 inline-block"></span>
+            Col 5: Brahma-Nāḍī (Central Axis)
+          </span>
+        </div>
+        <div class="text-[11px] font-medium text-stone-600">
+          💡 <strong class="text-stone-900">Click any square</strong> to read its full box text &amp; commentary on the right ➔
+        </div>
+      </div>
+
+      <!-- BOARD CONTAINER (Scrollable when in Full Print Text / Poster Mode) -->
+      <div id="boardScrollContainer" class="flex-1 flex items-stretch gap-1.5 overflow-auto rounded-xl relative min-h-[480px]">
+
+        <!-- 8 Lokas Vertical Spine Indicator (Left Edge) -->
+        <div id="lokaSpineColumn" class="hidden sm:grid grid-rows-8 gap-1 py-1 shrink-0 w-16 text-center select-none">
+          <div class="bg-[#2C221E] text-amber-300 rounded px-1 flex flex-col justify-center items-center border border-amber-500/30" title="Row 8 (64-72): Vaikuntha / Satya / Gunas">
+            <span class="text-[9px] font-bold tracking-tighter uppercase opacity-75">Loka VIII</span>
+            <span class="font-devanagari text-[10px] font-semibold">वैकुण्ठ</span>
+            <span class="text-[8px] text-stone-300 leading-none">64–72</span>
+          </div>
+          <div class="bg-[#362A24] text-amber-200/90 rounded px-1 flex flex-col justify-center items-center" title="Row 7 (55-63): Satya-Loka (Plane of Reality)">
+            <span class="text-[9px] font-bold tracking-tighter uppercase opacity-75">Loka VII</span>
+            <span class="font-devanagari text-[10px]">सत्यलोक</span>
+            <span class="text-[8px] text-stone-300 leading-none">55–63</span>
+          </div>
+          <div class="bg-[#40322B] text-amber-100/90 rounded px-1 flex flex-col justify-center items-center" title="Row 6 (46-54): Tapo-Loka (Austerity & Devotion)">
+            <span class="text-[9px] font-bold tracking-tighter uppercase opacity-75">Loka VI</span>
+            <span class="font-devanagari text-[10px]">तपोलोक</span>
+            <span class="text-[8px] text-stone-300 leading-none">46–54</span>
+          </div>
+          <div class="bg-[#4B3B33] text-stone-100 rounded px-1 flex flex-col justify-center items-center" title="Row 5 (37-45): Jana-Loka (Human Birth & Knowledge)">
+            <span class="text-[9px] font-bold tracking-tighter uppercase opacity-75">Loka V</span>
+            <span class="font-devanagari text-[10px]">जनलोक</span>
+            <span class="text-[8px] text-stone-300 leading-none">37–45</span>
+          </div>
+          <div class="bg-[#57453C] text-stone-100 rounded px-1 flex flex-col justify-center items-center" title="Row 4 (28-36): Mahar-Loka (Balance & Dharma)">
+            <span class="text-[9px] font-bold tracking-tighter uppercase opacity-75">Loka IV</span>
+            <span class="font-devanagari text-[10px]">महर्लोक</span>
+            <span class="text-[8px] text-stone-300 leading-none">28–36</span>
+          </div>
+          <div class="bg-[#634F45] text-stone-100 rounded px-1 flex flex-col justify-center items-center" title="Row 3 (19-27): Swar-Loka (Karma & Celestial Plane)">
+            <span class="text-[9px] font-bold tracking-tighter uppercase opacity-75">Loka III</span>
+            <span class="font-devanagari text-[10px]">स्वर्लोक</span>
+            <span class="text-[8px] text-stone-300 leading-none">19–27</span>
+          </div>
+          <div class="bg-[#705A4F] text-stone-100 rounded px-1 flex flex-col justify-center items-center" title="Row 2 (10-18): Bhuvar-Loka (Astral / Mental Realm)">
+            <span class="text-[9px] font-bold tracking-tighter uppercase opacity-75">Loka II</span>
+            <span class="font-devanagari text-[10px]">भुवर्लोक</span>
+            <span class="text-[8px] text-stone-200 leading-none">10–18</span>
+          </div>
+          <div class="bg-[#7D6559] text-amber-100 rounded px-1 flex flex-col justify-center items-center" title="Row 1 (1-9): Bhur-Loka (Physical Birth & Six Passions)">
+            <span class="text-[9px] font-bold tracking-tighter uppercase opacity-75">Loka I</span>
+            <span class="font-devanagari text-[10px]">भूर्लोक</span>
+            <span class="text-[8px] text-stone-200 leading-none">1–9</span>
+          </div>
+        </div>
+
+        <!-- THE 8x9 BOARD WRAPPER -->
+        <div class="relative flex-1 flex flex-col">
+          <div id="boardGrid" class="board-grid-compact flex-1 w-full h-full">
+            <!-- Populated by JS -->
+          </div>
+          <!-- SVG Overlay for Ladders & Snakes -->
+          <svg id="boardSvgOverlay" class="absolute inset-0 w-full h-full pointer-events-none z-20 transition-opacity duration-300" style="opacity: 0.42;"></svg>
+        </div>
+      </div>
+
+      <!-- BOTTOM TACTILE DICE & PLAYER TURN DOCK -->
+      <div class="mt-2 bg-[#FFFDF9] border-2 border-[#C8B598] rounded-xl p-2.5 shadow-md shrink-0">
+
+        <!-- Pending Contemplative Step Banner (Appears when on Ladder Base or Snake Head) -->
+        <div id="pendingTransitionBanner" class="hidden mb-2 p-2.5 rounded-lg border-2 flex flex-wrap items-center justify-between gap-2">
+          <div class="flex items-center gap-2">
+            <span id="pendingIcon" class="text-xl">🪜</span>
+            <div>
+              <div id="pendingTitle" class="text-xs font-bold uppercase tracking-wider">Virtue Ladder Reached</div>
+              <div id="pendingDesc" class="text-xs text-stone-700">Read the teaching of this square first, then complete your transition.</div>
+            </div>
+          </div>
+          <button id="btnExecuteTransition" onclick="completePendingTransition()" class="px-4 py-1.5 rounded-lg font-bold text-xs text-white shadow-md transition transform active:scale-95">
+            Ascend Now ➔
+          </button>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-3">
+
+          <!-- Dice Roller Controls -->
+          <div class="flex items-center gap-3">
+            <button id="btnRollDice" onclick="handleRollDice()" class="group relative flex items-center gap-3 px-4 py-2 rounded-xl bg-gradient-to-r from-[#B83B0E] to-[#9A2C07] hover:from-[#D14512] hover:to-[#B0340A] text-white font-cinzel font-bold text-sm shadow-lg hover:shadow-xl transition active:scale-95 disabled:opacity-45 disabled:cursor-not-allowed">
+              <div id="diceFaceBox" class="w-9 h-9 rounded-lg bg-[#FFFDF9] text-[#1C1613] flex items-center justify-center text-xl font-bold shadow-inner border border-amber-300">
+                ⚄
+              </div>
+              <div class="text-left">
+                <div class="tracking-wider text-xs sm:text-sm">ROLL KARMA DICE</div>
+                <div id="rollSubPrompt" class="font-sans font-normal text-[10px] text-amber-200">
+                  Spacebar or Click · Start at #68
+                </div>
+              </div>
+            </button>
+
+            <!-- Last Roll Readout -->
+            <div id="turnStatusText" class="text-xs text-stone-700 max-w-xs leading-snug">
+              <span class="font-semibold text-stone-900">Ready for Self-Inquiry:</span> Place awareness at <strong class="text-amber-800">#68 Vaikuṇṭha</strong>. Roll <strong class="text-amber-800">6</strong> to take birth (#1 Janma ➔ #6 Moha).
+            </div>
+          </div>
+
+          <!-- Active Seekers Strip -->
+          <div id="seekersStrip" class="flex items-center gap-2 flex-wrap">
+            <!-- Dynamically rendered player badges -->
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- RIGHT COLUMN (5 COLS): UNABRIDGED SELF-INQUIRY INSPECTOR & 72-SQUARE DIRECTORY -->
+    <aside class="lg:col-span-5 xl:col-span-5 flex flex-col bg-[#FFFDF9] lg:overflow-hidden h-full">
+
+      <!-- Inspector Header Tabs -->
+      <div class="bg-[#F4ECE0] border-b border-[#D8C8B0] px-4 py-2 flex items-center justify-between gap-2 shrink-0">
+        <div class="flex items-center gap-1 bg-[#E5D8C5] p-1 rounded-lg">
+          <button id="tabBtnLive" onclick="switchInspectorTab('live')" class="px-3 py-1 rounded-md text-xs font-bold bg-[#1C1613] text-amber-100 shadow-sm transition">
+            📖 Square Teaching &amp; Box Text
+          </button>
+          <button id="tabBtnDirectory" onclick="switchInspectorTab('directory')" class="px-3 py-1 rounded-md text-xs font-bold text-stone-700 hover:text-stone-900 transition">
+            🗂️ All 72 Squares Index
+          </button>
+          <button id="tabBtnLog" onclick="switchInspectorTab('log')" class="px-3 py-1 rounded-md text-xs font-bold text-stone-700 hover:text-stone-900 transition">
+            📜 Journey Log
+          </button>
+        </div>
+
+        <!-- Quick Prev / Next Square Navigation -->
+        <div class="flex items-center gap-1">
+          <button onclick="navigateSquare(-1)" class="px-2 py-1 rounded bg-white hover:bg-amber-50 border border-stone-300 text-xs font-bold text-stone-700" title="Previous Square (Left Arrow)">
+            ◀
+          </button>
+          <span id="navSquareBadge" class="text-xs font-bold font-cinzel px-2 text-stone-800">#68</span>
+          <button onclick="navigateSquare(1)" class="px-2 py-1 rounded bg-white hover:bg-amber-50 border border-stone-300 text-xs font-bold text-stone-700" title="Next Square (Right Arrow)">
+            ▶
+          </button>
+        </div>
+      </div>
+
+      <!-- TAB 1: LIVE SQUARE TEACHING & COMPLETE IN-BOX TEXT -->
+      <div id="panelLiveTeaching" class="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4 selectable-text">
+
+        <!-- Special Birth Comparison Banner (Shown when a player just entered via #68 -> #1 -> #6) -->
+        <div id="birthSequenceBanner" class="hidden bg-gradient-to-r from-amber-50 via-orange-50 to-amber-50 border-2 border-amber-400 rounded-xl p-3.5 shadow-sm">
+          <div class="flex items-center justify-between gap-2 mb-1.5">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-amber-900 bg-amber-200/80 px-2 py-0.5 rounded">
+              ⚡ YesVedanta Birth Sequence (#68 ➔ #1 Janma ➔ #6 Moha)
+            </span>
+            <button onclick="document.getElementById('birthSequenceBanner').classList.add('hidden')" class="text-xs text-stone-500 hover:text-stone-800">✕</button>
+          </div>
+          <p class="text-xs text-stone-800 leading-relaxed mb-2">
+            <strong>Why do we move from #68 to #1 and immediately to #6?</strong> As Acharya Andre explains: <em>"When you're born (#1 Janma), you never arrive as a blank slate—you come with past impressions (saṃskāras). That is why birth immediately places you in #6 Moha (Delusion/Conditioning)."</em>
+          </p>
+          <div class="flex gap-2">
+            <button onclick="inspectSquare(1, false)" class="px-2.5 py-1 rounded bg-white border border-amber-400 text-xs font-semibold text-amber-900 hover:bg-amber-100 transition">
+              Inspect #1 जन्म (Janma · Birth)
+            </button>
+            <button onclick="inspectSquare(6, false)" class="px-2.5 py-1 rounded bg-amber-800 text-white text-xs font-semibold hover:bg-amber-900 transition">
+              Inspect #6 मोह (Moha · Delusion)
+            </button>
+          </div>
+        </div>
+
+        <!-- Square Header Card -->
+        <div id="inspectorHeaderCard" class="rounded-2xl border-2 border-[#D8C5A8] bg-gradient-to-br from-[#FFFDF9] to-[#F6EFE2] p-4 shadow-sm relative overflow-hidden">
+
+          <!-- Top Meta Row: Loka & Coordinates -->
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+            <div class="flex items-center gap-2">
+              <span id="inspNumberBadge" class="px-3 py-1 rounded-lg bg-[#1C1613] text-amber-300 font-cinzel font-bold text-base shadow">
+                #68
+              </span>
+              <span id="inspLokaBadge" class="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md bg-amber-100 text-amber-900 border border-amber-300">
+                Loka VIII · Vaikuṇṭha
+              </span>
+            </div>
+            <span id="inspTypeBadge" class="text-xs font-bold px-2.5 py-1 rounded-md">
+              <!-- Populated by JS -->
+            </span>
+          </div>
+
+          <!-- Original Sanskrit (Devanagari + IAST) & English Meaning -->
+          <div class="mt-2">
+            <div class="flex flex-wrap items-baseline gap-2.5">
+              <h2 id="inspDevanagari" class="font-devanagari text-2xl sm:text-3xl font-bold text-[#9A2C07]">
+                वैकुण्ठलोक (तुरीय)
+              </h2>
+              <span id="inspIAST" class="font-serif-editorial italic text-xl sm:text-2xl font-bold text-stone-800">
+                Vaikuṇṭha-Loka (Turīya / Mokṣa)
+              </span>
+            </div>
+            <div class="mt-1 flex items-center gap-2">
+              <span class="text-[11px] font-bold uppercase tracking-widest text-stone-500">English Meaning:</span>
+              <h3 id="inspEnglishMeaning" class="text-base sm:text-lg font-bold text-stone-900">
+                Cosmic Consciousness · Liberation from Rebuild
+              </h3>
+            </div>
+          </div>
+
+          <!-- Ladder / Snake Interactive Connection Pill -->
+          <div id="inspConnectionBox" class="hidden mt-3 pt-3 border-t border-[#E2D4BE] flex flex-wrap items-center justify-between gap-2">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- SECTION 1: VERBATIM / COMPLETE IN-BOX BOARD TEXT -->
+        <div class="rounded-xl border-2 border-amber-500/60 bg-[#FFFBEB] p-4 shadow-sm">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-[11px] font-bold uppercase tracking-widest text-amber-900 flex items-center gap-1.5">
+              <span>📜</span> Complete Text Inside This Board Square
+            </span>
+            <button onclick="toggleCustomEditBox()" class="text-[11px] font-semibold text-amber-800 hover:text-amber-950 underline">
+              ✏️ Edit / Paste Custom PDF Text
+            </button>
+          </div>
+          <p id="inspBoardBoxText" class="text-sm sm:text-[15px] font-medium text-stone-900 leading-relaxed">
+            <!-- Populated by JS -->
+          </p>
+
+          <!-- Optional Custom Text Editor (Persisted to localStorage) -->
+          <div id="customTextEditor" class="hidden mt-3 pt-3 border-t border-amber-300">
+            <label class="block text-xs font-bold text-stone-700 mb-1">
+              Customize or paste exact text from your printed sheet for this square:
+            </label>
+            <textarea id="customTextInput" rows="3" class="w-full rounded-lg border border-amber-400 p-2 text-xs text-stone-900 bg-white focus:outline-none focus:ring-2 focus:ring-amber-600"></textarea>
+            <div class="flex justify-end gap-2 mt-1.5">
+              <button onclick="resetCustomSquareText()" class="px-2.5 py-1 rounded text-xs text-stone-600 hover:bg-stone-200">Restore Default</button>
+              <button onclick="saveCustomSquareText()" class="px-3 py-1 rounded bg-amber-700 text-white text-xs font-bold hover:bg-amber-800">Save to Board</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: ADVAITA VEDANTA DEEP COMMENTARY & PSYCHOLOGY -->
+        <div class="rounded-xl border border-[#DFD2C0] bg-white p-4 shadow-sm space-y-2.5">
+          <div class="text-[11px] font-bold uppercase tracking-widest text-stone-500 flex items-center gap-1.5">
+            <span>🪷</span> Advaita Vedanta Teaching &amp; Life Application
+          </div>
+          <div id="inspDeepCommentary" class="text-xs sm:text-sm text-stone-800 leading-relaxed space-y-2">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- SECTION 3: UPANISHAD / GITA SCRIPTURAL ANCHOR -->
+        <div class="rounded-xl border-l-4 border-[#B8860B] bg-[#F8F3E8] p-3.5">
+          <div class="text-[10px] font-bold uppercase tracking-widest text-[#8B6508] mb-1">
+            Vedic Pramaṇa (Scriptural Source)
+          </div>
+          <blockquote id="inspScriptureQuote" class="font-serif-editorial italic text-base sm:text-lg text-stone-900 leading-snug">
+            <!-- Populated by JS -->
+          </blockquote>
+        </div>
+
+        <!-- SECTION 4: ATMA-VICHARA (SELF-INQUIRY CONTEMPLATION QUESTION) -->
+        <div class="rounded-xl border-2 border-[#C84B11]/30 bg-gradient-to-r from-[#FFF7ED] to-[#FFEDD5] p-4">
+          <div class="text-[11px] font-bold uppercase tracking-widest text-[#9A2C07] mb-1 flex items-center gap-1.5">
+            <span>🔥</span> Ātma-Vicāra (Self-Inquiry Prompt for Contemplation)
+          </div>
+          <p id="inspInquiryPrompt" class="text-xs sm:text-sm font-semibold text-stone-900 leading-relaxed">
+            <!-- Populated by JS -->
+          </p>
+        </div>
+
+      </div>
+
+      <!-- TAB 2: ALL 72 SQUARES SEARCHABLE & FILTERABLE DIRECTORY -->
+      <div id="panelDirectory" class="hidden flex-1 flex flex-col overflow-hidden p-4">
+        <div class="space-y-2 mb-3 shrink-0">
+          <input id="dirSearchInput" oninput="renderDirectoryList()" type="text" placeholder="Search by square #, Sanskrit (e.g. moha, bhakti), or English meaning..." class="w-full px-3 py-2 rounded-lg border border-stone-300 text-xs focus:outline-none focus:border-amber-600 bg-white" />
+          <div class="flex flex-wrap gap-1 text-[11px]">
+            <button onclick="setDirFilter('all')" id="dirFilter_all" class="px-2.5 py-1 rounded-md font-bold bg-stone-900 text-white">All 72</button>
+            <button onclick="setDirFilter('ladder')" id="dirFilter_ladder" class="px-2.5 py-1 rounded-md font-semibold bg-emerald-50 text-emerald-900 border border-emerald-300">10 Ladders ↑</button>
+            <button onclick="setDirFilter('snake')" id="dirFilter_snake" class="px-2.5 py-1 rounded-md font-semibold bg-red-50 text-red-900 border border-red-300">10 Snakes ↓</button>
+            <button onclick="setDirFilter('spine')" id="dirFilter_spine" class="px-2.5 py-1 rounded-md font-semibold bg-amber-50 text-amber-900 border border-amber-300">Col 5 Spine</button>
+          </div>
+        </div>
+        <div id="directoryListContainer" class="flex-1 overflow-y-auto space-y-2 pr-1">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- TAB 3: JOURNEY LOG (KARMA CHRONICLE) -->
+      <div id="panelJourneyLog" class="hidden flex-1 flex flex-col overflow-hidden p-4">
+        <div class="flex items-center justify-between mb-2 shrink-0">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-stone-600">Seeker Karma &amp; Contemplation History</h3>
+          <span class="text-[11px] text-stone-500">Click any entry to inspect square</span>
+        </div>
+        <div id="journeyLogContainer" class="flex-1 overflow-y-auto space-y-2 pr-1 text-xs">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+    </aside>
+  </main>
+
+  <!-- HOW TO PLAY & YESVEDANTA AUTHENTIC RULES DRAWER MODAL -->
+  <div id="rulesModal" class="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-[#FFFDF9] border-2 border-[#B8860B] rounded-2xl max-w-2xl w-full max-h-[88vh] flex flex-col shadow-2xl overflow-hidden">
+      <div class="bg-[#1C1613] text-amber-100 px-5 py-3.5 flex items-center justify-between">
+        <div>
+          <h2 class="font-cinzel font-bold text-base sm:text-lg text-amber-300">How to Play Mokṣa Paṭam (YesVedanta Ver 3.0 Rules)</h2>
+          <p class="text-xs text-stone-400">18th-Century 8×9 Gyandev Board · Game of Self-Inquiry</p>
+        </div>
+        <button onclick="closeRulesDrawer()" class="text-stone-400 hover:text-white text-lg font-bold px-2">✕</button>
+      </div>
+      <div class="p-5 overflow-y-auto space-y-4 text-xs sm:text-sm text-stone-800 leading-relaxed">
+        <div class="p-3.5 rounded-xl bg-amber-50 border border-amber-300">
+          <h3 class="font-bold text-amber-950 mb-1">1. Beginning the Game: Why Start at #68 ➔ #1 ➔ #6?</h3>
+          <ul class="list-disc pl-5 space-y-1">
+            <li><strong>Place your token on Square #68 (Vaikuṇṭha / Pure Consciousness):</strong> Before taking birth, your true nature is already whole, non-dual Awareness.</li>
+            <li><strong>Roll a 6 to Enter (Solo Play):</strong> When you roll a <strong>6</strong>, move your token first to <strong>#1 Janma (Birth)</strong>—pause to contemplate what it means to be born—and then immediately place your token on <strong>#6 Moha (Delusion / Past Conditioning)</strong>, because every human birth arrives carrying past impressions (<em>saṃskāras</em>).</li>
+            <li><strong>2–3 Players Note:</strong> As Acharya Andre notes in the comments, when playing with 2 or 3 people you can toggle the top bar to allow starting on <em>any</em> dice roll so players don't wait too long.</li>
+          </ul>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200">
+            <h4 class="font-bold text-emerald-950 mb-1">2. Virtues (10 Ladders ↑)</h4>
+            <p class="text-xs">Landing on the base of a ladder shows how discrimination, purity (<em>#10 Śuddhi</em>), compassion (<em>#17 Dayā</em>), dharma (<em>#22</em>), right knowledge (<em>#45 Suvidyā</em>), and devotion (<em>#54 Bhakti</em>) elevate your state of mind.</p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-red-50 border border-red-200">
+            <h4 class="font-bold text-red-950 mb-1">3. Pitfalls (10 Snakes ↓)</h4>
+            <p class="text-xs">No matter how high you climb—even to <em>#55 Ahaṃkāra</em> (Spiritual Ego) or <em>#63 Tamas</em>—you are never immune to a slip until realization. Snakes remind the seeker to stay humble and vigilant.</p>
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-stone-100 border border-stone-300">
+          <h3 class="font-bold text-stone-900 mb-1">4. Reaching #72 &amp; Finishing at #68</h3>
+          <ul class="list-disc pl-5 space-y-1">
+            <li><strong>If You Reach or Pass #72 (Tamoguṇa):</strong> In accordance with the board rules (<em>"If reach 72, continue counting from 51"</em>), overshooting #68 into the upper Guna squares (69–72) and reaching #72 wraps your remaining steps directly into <strong>#51 Pṛthvī (Earthly Rebirth)</strong>.</li>
+            <li><strong>Attaining Mokṣa (#68):</strong> You complete the game when you land squarely on <strong>#68 Vaikuṇṭha-Loka</strong> (either by exact dice roll or via the Ladder of Devotion from <strong>#54 Bhakti-Loka ➔ #68</strong>).</li>
+          </ul>
+        </div>
+      </div>
+      <div class="bg-stone-100 border-t border-stone-300 px-5 py-3 flex justify-end">
+        <button onclick="closeRulesDrawer()" class="px-4 py-1.5 rounded-lg bg-[#1C1613] text-amber-200 text-xs font-bold hover:bg-stone-800">
+          Return to Board
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPLETE 72-SQUARE CANONICAL DATABASE & APPLICATION LOGIC -->
+  <script>
+    /***************************************************************************
+     * CANONICAL 72-SQUARE MOKSHA PATAM / GYAN CHAUPAR DATABASE
+     * Every square includes:
+     * - num: Square number (1..72)
+     * - devanagari: Original Sanskrit in Devanagari script
+     * - sanskrit: IAST transliteration
+     * - english: Direct English translation of the box keyword
+     * - boxText: Full multi-sentence in-box board description (YesVedanta Advaita style)
+     * - commentary: Deep psychological & Vedantic commentary
+     * - scripture: Authentic Upanishad / Bhagavad Gita / Advaita pramaṇa
+     * - inquiry: Self-inquiry (Atma-Vichara) contemplation prompt
+     ***************************************************************************/
+    const SQUARES_DATA = [
+      {
+        num: 1, loka: 1, lokaName: "Bhūr-Loka (Physical Plane)",
+        devanagari: "जन्म", sanskrit: "Janma", english: "Birth / Genesis",
+        boxText: "Entry into physical embodiment. Born out of unexamined desire and past karma, the limitless Self mistakes itself for a vulnerable body-mind entering time and space.",
+        commentary: "In Advaita Vedanta, birth (Janma) is never the beginning of Consciousness—only the appearance of a new gross body (annamaya-kośa). Because one does not enter life as a blank slate, taking birth at #1 immediately carries you to #6 Moha (Delusion/Conditioning).",
+        scripture: "Na jāyate mriyate vā विपश्चित् — 'The wise Self is neither born, nor does It ever die.' (Kaṭha Upaniṣad 1.2.18)",
+        inquiry: "What part of you was actually born, and what is the changeless Witness observing this body's timeline right now?"
+      },
+      {
+        num: 2, loka: 1, lokaName: "Bhūr-Loka (Physical Plane)",
+        devanagari: "माया", sanskrit: "Māyā", english: "Illusion / Apparent Reality",
+        boxText: "The power that makes the One non-dual Reality appear as many separate beings and objects. Mistaking dependent appearances for independent truth.",
+        commentary: "Māyā is not 'non-existence'; it is mithyā—that which constantly changes and borrows its existence from Brahman, just as gold ornaments borrow their reality from gold. Suffering begins when we chase the shifting wave and forget the ocean.",
+        scripture: "Daivī hy eṣā guṇamayī mama māyā duratyayā — 'This divine Māyā of Mine, consisting of the three guṇas, is hard to see through.' (Bhagavad Gītā 7.14)",
+        inquiry: "Where in your life right now are you treating a temporary appearance as if it were permanent reality?"
+      },
+      {
+        num: 3, loka: 1, lokaName: "Bhūr-Loka (Physical Plane)",
+        devanagari: "क्रोध", sanskrit: "Krodha", english: "Anger / Wrath",
+        boxText: "Agitated eruption of the mind when an expectation or desire is obstructed. Anger blinds discrimination and burns the one who holds it.",
+        commentary: "Vedanta diagnoses Krodha not as an independent emotion, but as frustrated Kāma (desire). When the world refuses to conform to ego's demands, desire mutates into rage, destroying memory of truth.",
+        scripture: "Kāmāt krodho'bhijāyate — 'From obstructed desire, anger is born; from anger comes delusion of judgment.' (Bhagavad Gītā 2.62–63)",
+        inquiry: "Beneath your latest irritation or anger, what specific demand or expectation was threatened?"
+      },
+      {
+        num: 4, loka: 1, lokaName: "Bhūr-Loka (Physical Plane)",
+        devanagari: "लोभ", sanskrit: "Lobha", english: "Greed / Insatiability",
+        boxText: "The endless compulsion to accumulate more wealth, validation, or experience to cover up an inner sense of incompleteness.",
+        commentary: "When desire (Kāma) is fulfilled instead of obstructed, it often breeds Lobha—the belief that if a little gave brief relief, a mountain of it will bring permanent completeness (Pūrṇatva). Yet finite objects can never satisfy an infinite Self.",
+        scripture: "Na jātu kāmaḥ kāmānām upabhogena śāmyati — 'Desire is never pacified by the enjoyment of desired objects; it only flares up like fire fed with clarified butter.' (Manu Smṛti 2.94)",
+        inquiry: "What inner emptiness are you hoping the next acquisition or achievement will finally silence?"
+      },
+      {
+        num: 5, loka: 1, lokaName: "Bhūr-Loka (Physical Plane)",
+        devanagari: "भूर्लोक", sanskrit: "Bhū-Loka", english: "Physical Plane / Material World",
+        boxText: "The gross material realm of the five senses, survival instincts, food, and physical security. The foundational arena where karma is enacted.",
+        commentary: "Situated on the central column (Brahma-Nāḍī), Bhū-Loka represents the waking physical world (Jāgrat) and the food sheath (Annamaya Kośa). It is neither to be hated nor worshipped, but used wisely as a classroom for inquiry.",
+        scripture: "Annamayaṃ hi somya manaḥ — 'The gross body and basic mind are sustained by earth and food.' (Chāndogya Upaniṣad 6.5.4)",
+        inquiry: "Are you using the physical body as an instrument for clarity, or taking yourself to be nothing more than flesh and survival?"
+      },
+      {
+        num: 6, loka: 1, lokaName: "Bhūr-Loka (Physical Plane)",
+        devanagari: "मोह", sanskrit: "Moha", english: "Delusion / Blind Attachment",
+        boxText: "Emotional infatuation and confused judgment. Clinging to people, roles, and possessions with 'I' and 'mine' while confusing right with wrong.",
+        commentary: "In YesVedanta's rules, rolling a 6 at birth moves you from #1 Janma directly here to #6 Moha. Why? Because every human begins life operating under inherited conditioning (saṃskāras) and mistaken identity—assuming external things are the source of one's happiness.",
+        scripture: "Moha-kalilaṃ बुद्धिर व्यतितरिष्यति — 'When your intellect crosses beyond the dense thicket of delusion, you attain dispassion.' (Bhagavad Gītā 2.52)",
+        inquiry: "What person, role, or belief are you so attached to that you are afraid to examine it objectively?"
+      },
+      {
+        num: 7, loka: 1, lokaName: "Bhūr-Loka (Physical Plane)",
+        devanagari: "मद", sanskrit: "Mada", english: "Conceit / Arrogance / Pride",
+        boxText: "Intoxication with one's status, intellect, wealth, or moral superiority. Swelling of the false ego that stiffens the mind against learning.",
+        commentary: "Mada is the fifth of the six inner passions (Ṣaḍ-ripu). Whether it is pride in worldly success or pride in spiritual knowledge, conceit isolates the seeker and blocks receptivity to grace and self-correction.",
+        scripture: "Dambho darpo'bhimānaś ca — 'Ostentation, arrogance, and self-conceit belong to those of demoniac, unexamined tendencies.' (Bhagavad Gītā 16.4)",
+        inquiry: "Where do you secretly feel superior to others, and how fragile is the trait you are proud of?"
+      },
+      {
+        num: 8, loka: 1, lokaName: "Bhūr-Loka (Physical Plane)",
+        devanagari: "मत्सर / मात्सर्य", sanskrit: "Matsara / Mātsarya", english: "Avarice / Stinginess / Spite",
+        boxText: "Jealous hoarding and inability to rejoice in another's wellbeing. Miserliness of both material resources and heartfelt goodwill.",
+        commentary: "The sixth of the six classical passions, Mātsarya is the contraction of the heart that cannot bear to share or see others thrive, rooted in the zero-sum belief that another's gain diminishes your own worth.",
+        scripture: "Kāma-krodha-lobha-moha-mada-mātsaryāṇi — 'Desire, anger, greed, delusion, pride, and avarice are the six inner thieves of wisdom.' (Classical Vedantic Pramaṇa)",
+        inquiry: "When someone around you succeeds effortlessly, does your heart naturally celebrate or quietly contract?"
+      },
+      {
+        num: 9, loka: 1, lokaName: "Bhūr-Loka (Physical Plane)",
+        devanagari: "कामलोक", sanskrit: "Kāma-Loka", english: "Sensual Plane / Realm of Desire",
+        boxText: "The state of mind driven entirely by craving for sensory gratification—sight, sound, touch, taste, and novelty—seeking peace in fleeting pleasures.",
+        commentary: "Notice that the great snake of #44 Avidyā (Ignorance) drops all the way back to #9 Kāma-Loka. So long as fundamental self-ignorance remains, the mind repeatedly falls back into seeking fulfillment through sensory indulgence.",
+        scripture: "Ye hi saṃsparśajā bhogā duḥkha-yonaya eva te — 'Pleasures born of sense-contact are wombs of pain, for they have a beginning and an end.' (Bhagavad Gītā 5.22)",
+        inquiry: "How long does the satisfaction of a sensory craving actually last before the next restlessness begins?"
+      },
+
+      /* ROW 2 (10-18): BHUVAR-LOKA */
+      {
+        num: 10, loka: 2, lokaName: "Bhuvar-Loka (Astral / Mental Plane)",
+        devanagari: "शुद्धि (तपः)", sanskrit: "Śuddhi (Tapas)", english: "Purification / Inner Cleanliness",
+        boxText: "Conscious cleansing of motives, speech, and habits through honest self-observation and discipline. Clearing emotional residue so the mind can see clearly.",
+        commentary: "FIRST LADDER (10 ➔ 23): In Advaita, Citta-śuddhi (purification of the mind) is the indispensable runway for realization. Just as a dusty mirror cannot reflect your face, an agitated mind cannot recognize the Self. Practicing Śuddhi lifts you straight to #23 Svarga-Loka.",
+        scripture: "Sattva-śuddhi-saumanasyaikāgryendriya-jayātma-darśana-yogyatvāni ca — 'From purity arises clarity of mind, one-pointedness, and fitness for Self-knowledge.' (Yoga Sūtra 2.41)",
+        inquiry: "What daily habit, mental grievance, or dishonesty are you ready to clean out of your inner space today?"
+      },
+      {
+        num: 11, loka: 2, lokaName: "Bhuvar-Loka (Astral / Mental Plane)",
+        devanagari: "गन्धर्व", sanskrit: "Gandharvas", english: "Entertainment / Aesthetic Distraction",
+        boxText: "The realm of music, art, constant amusement, and mental escapism. Charming to the senses, yet capable of keeping the seeker endlessly distracted from inquiry.",
+        commentary: "The Gandharvas are celestial musicians. While beauty and art can refine a coarse mind, using continuous entertainment to avoid sitting quietly with oneself keeps awareness bound in outward projection.",
+        scripture: "Śabdādīnām anāsthaiva — 'Freedom from compulsive fascination with sound and sensory entertainment calms the mind.' (Vivekacūḍāmaṇi)",
+        inquiry: "Do you use music, screens, and entertainment to appreciate beauty, or to avoid facing your own unexamined thoughts?"
+      },
+      {
+        num: 12, loka: 2, lokaName: "Bhuvar-Loka (Astral / Mental Plane)",
+        devanagari: "ईर्ष्या", sanskrit: "Īrṣyā", english: "Envy / Resentful Comparison",
+        boxText: "Bitterness over another person's gifts, status, or peace. Measuring your life against someone else's path and feeling cheated by existence.",
+        commentary: "FIRST SNAKE (12 ➔ 8): Īrṣyā is mental poison that immediately drags the seeker down to #8 Mātsarya (Avarice/Spite). In non-duality, comparing two distinct expressions of Prakṛti is as absurd as the hand envying the eye.",
+        scripture: "Anasūyantaḥ śraddadhānāḥ — 'Those who are free from envy and full of faith become liberated from the bondage of karma.' (Bhagavad Gītā 3.31)",
+        inquiry: "Whose life or success triggers comparison in you, and what gift of your own are you ignoring while looking at them?"
+      },
+      {
+        num: 13, loka: 2, lokaName: "Bhuvar-Loka (Astral / Mental Plane)",
+        devanagari: "अन्तरिक्ष", sanskrit: "Antarikṣa", english: "Nullity / Intermediate Space / Limbo",
+        boxText: "Feeling suspended in mid-air—no longer satisfied by crude worldly pursuits, yet not yet anchored in higher wisdom. Restless emptiness.",
+        commentary: "Antarikṣa is the intermediate sky between earth and heaven. Notice that the snake of #61 Durbuddhi (Negative/Cynical Intellect) drops the player here: cynicism strips away meaning without providing truth, leaving one in existential emptiness.",
+        scripture: "Nāsti बुद्धिर अयुक्तस्य न चायुक्तस्य भावना — 'For the unsteady mind, there is neither determinate wisdom nor contemplative peace.' (Bhagavad Gītā 2.66)",
+        inquiry: "When old pleasures lose their charm, do you sink into boredom or use that space to inquire deeper?"
+      },
+      {
+        num: 14, loka: 2, lokaName: "Bhuvar-Loka (Astral / Mental Plane)",
+        devanagari: "भुवर्लोक", sanskrit: "Bhuvar-Loka", english: "Astral Plane / Subtle Emotional Realm",
+        boxText: "The subtle sphere of vital breath (prāṇa), shifting moods, imagination, and emotional currents lying between gross matter and higher intelligence.",
+        commentary: "Located on the central Brahma-Nāḍī column (Col 5), Bhuvar-Loka corresponds to the subtle body (Sūkṣma-śarīra) and dream-like emotional projection. Learning to witness moods without becoming them is the mastery of this plane.",
+        scripture: "Manomayaḥ prāṇa-śarīro bhā-rūpaḥ — 'The subtle principle consists of mind and vital energy, luminous by nature.' (Chāndogya Upaniṣad 3.14.2)",
+        inquiry: "Can you watch an emotional wave pass through your chest without immediately turning it into a personal story?"
+      },
+      {
+        num: 15, loka: 2, lokaName: "Bhuvar-Loka (Astral / Mental Plane)",
+        devanagari: "नागलोक", sanskrit: "Nāga-Loka", english: "Plane of Fantasy / Subconscious Fascination",
+        boxText: "Daydreaming, wishful thinking, and fascination with hidden powers or glamorous illusions. Living in mental castles rather than present reality.",
+        commentary: "In Vedic symbolism, Nāga-Loka is a glittering subterranean realm. Psychologically, it represents our refuge in fantasy—imagining future triumphs or mystical states instead of dealing squarely with what is right in front of us.",
+        scripture: "Manaso hy eva कल्पनम् — 'This entire web of fantasy and bondage is spun by the imagination of the mind alone.' (Yoga Vāsiṣṭha)",
+        inquiry: "How much of your mental energy is spent rehearsing imaginary futures rather than meeting the present fact?"
+      },
+      {
+        num: 16, loka: 2, lokaName: "Bhuvar-Loka (Astral / Mental Plane)",
+        devanagari: "द्वेष", sanskrit: "Dveṣa", english: "Jealousy / Aversion / Hostility",
+        boxText: "Strong revulsion, hatred, or hostility toward people and situations that threaten one's comfort or self-image. The twin brother of craving.",
+        commentary: "SNAKE (16 ➔ 4): Vedanta teaches that Rāga (attachment) and Dveṣa (aversion) are two sides of the same coin of bondage. Pushing reality away in hostility (#16) pulls you down into #4 Lobha (grasping for security).",
+        scripture: "Rāga-dveṣa-vimuktais tu viṣayān indriyaiś caran — 'Moving among objects with senses free from attachment and aversion, one attains serene peace.' (Bhagavad Gītā 2.64)",
+        inquiry: "What person or situation do you harbor strong aversion toward, and how does holding that resentment bind your mind to them?"
+      },
+      {
+        num: 17, loka: 2, lokaName: "Bhuvar-Loka (Astral / Mental Plane)",
+        devanagari: "दया", sanskrit: "Dayā", english: "Mercy / Unconditional Compassion",
+        boxText: "Recognizing the same Consciousness struggling inside every living being and responding with kindness, forgiveness, and protection from harm.",
+        commentary: "GREAT LADDER (17 ➔ 69): Why does Dayā leap almost the entire board to #69 Brahma-Loka? Because genuine compassion dissolves the walls of ego-separation. Yet notice it lands on #69 (one square past #68)—even exalted cosmic compassion must still culminate in exact non-dual discrimination!",
+        scripture: "Adveṣṭā sarva-bhūtānāṃ maitraḥ karuṇa eva ca — 'Free from malice toward any being, friendly and compassionate, free from I and mine.' (Bhagavad Gītā 12.13)",
+        inquiry: "Can you extend complete mercy toward someone's ignorance—including your own past mistakes—without excusing unskillful action?"
+      },
+      {
+        num: 18, loka: 2, lokaName: "Bhuvar-Loka (Astral / Mental Plane)",
+        devanagari: "हर्षलोक", sanskrit: "Harṣa-Loka", english: "Plane of Joy / Excited Elation",
+        boxText: "High-spirited cheerfulness and emotional elation when life goes your way. Uplifting, yet still dependent on favorable external outcomes.",
+        commentary: "Advaita distinguishes between Harṣa (excitement/elation triggered by gain) and Ānanda (uncaused fullness). Harṣa is pleasant, but because it depends on circumstances, it remains vulnerable to its opposite—Śoka (dejection).",
+        scripture: "Yo na hṛṣyati na dveṣṭi na śocati na kāṅkṣati — 'He who neither gets overly elated nor hates, neither grieves nor craves, is dear to Wisdom.' (Bhagavad Gītā 12.17)",
+        inquiry: "Is your current joy dependent on things going according to plan, or rooted in quiet inner steadiness?"
+      },
+
+      /* ROW 3 (19-27): SWAR-LOKA */
+      {
+        num: 19, loka: 3, lokaName: "Svar-Loka (Plane of Action & Virtue)",
+        devanagari: "कर्मलोक", sanskrit: "Karma-Loka", english: "Plane of Action / Conscious Responsibility",
+        boxText: "The arena of deliberate action and cause-and-effect. Realizing that your life experience is shaped not by fate, but by how you respond right now.",
+        commentary: "Every choice plants a seed (saṃskāra). In Karma-Loka, the seeker stops blaming the past or other people and takes full ownership of their present response—converting binding reaction into Karma Yoga.",
+        scripture: "Karmany evādhikāras te mā phaleṣu kadācana — 'Your right is to intelligent action alone, never to anxiety over its fruits.' (Bhagavad Gītā 2.47)",
+        inquiry: "Where are you waiting for circumstances to change instead of taking clean, detached action right now?"
+      },
+      {
+        num: 20, loka: 3, lokaName: "Svar-Loka (Plane of Action & Virtue)",
+        devanagari: "दान", sanskrit: "Dāna", english: "Charity / Generous Giving",
+        boxText: "Sharing wealth, knowledge, time, and attention freely without seeking praise or return. Loosening the grip of scarcity and possessiveness.",
+        commentary: "LADDER (20 ➔ 32): True Dāna (sāttvika charity) breaks the spell of Lobha (greed) and elevates the mind directly to #32 Mahar-Loka (the Plane of Balance and Harmony).",
+        scripture: "Dātavyam iti yad dānaṃ dīyate'nupakāriṇe — 'That gift which is given out of duty, at the right time and place, expecting nothing in return, is pure.' (Bhagavad Gītā 17.20)",
+        inquiry: "When you give time, help, or money, do you secretly look for recognition, or does the giving complete itself?"
+      },
+      {
+        num: 21, loka: 3, lokaName: "Svar-Loka (Plane of Action & Virtue)",
+        devanagari: "शमन पाप (प्रायश्चित्त)", sanskrit: "Śamana Pāpa (Prāyaścitta)", english: "Atonement / Making Amends",
+        boxText: "Facing past mistakes honestly without neurotic guilt or defensive excuses. Repairing harm done and resolving not to repeat the error.",
+        commentary: "Unacknowledged wrongdoing weighs down the subconscious mind with agitation (vikṣepa). Sincere atonement clears karmic debt through humility and behavioral correction rather than self-hatred.",
+        scripture: "Api cet sudurācāro bhajate mām ananya-bhāk — 'Even if one of very wrong conduct turns wholeheartedly to truth, he soon becomes righteous and attains peace.' (Bhagavad Gītā 9.30–31)",
+        inquiry: "Is there an old mistake you need to make right—or forgive yourself for—so your mind can stand upright in the present?"
+      },
+      {
+        num: 22, loka: 3, lokaName: "Svar-Loka (Plane of Action & Virtue)",
+        devanagari: "धर्मलोक", sanskrit: "Dharma-Loka", english: "Plane of Dharma / Cosmic Order & Integrity",
+        boxText: "Living in alignment with universal harmony, truthfulness, and ethical duty. Doing what is right rather than what is merely convenient.",
+        commentary: "MAJOR LADDER (22 ➔ 60): Aligning your personal will with Dharma removes inner conflict and propels awareness all the way to #60 Subuddhi (Positive, Clear Intellect) in the seventh plane.",
+        scripture: "Dharmo rakṣati rakṣitaḥ — 'Dharma protects and uplifts the one who upholds and protects Dharma.' (Mahābhārata / Manu Smṛti 8.15)",
+        inquiry: "In your current dilemma, what is the dharmic choice when convenience and fear are set aside?"
+      },
+      {
+        num: 23, loka: 3, lokaName: "Svar-Loka (Plane of Action & Virtue)",
+        devanagari: "स्वर्गलोक", sanskrit: "Svarga-Loka", english: "Celestial Plane / Refined Enjoyment",
+        boxText: "A state of earned harmony, comfort, and pleasant rewards resulting from past virtuous actions (#10 Śuddhi leads here). Subtle enjoyment.",
+        commentary: "Situated on the central column (Col 5), Svarga-Loka represents the best that merit (puṇya) can buy—health, peace, and refined pleasure. Yet Vedanta warns that even celestial comfort is temporary; don't mistake a pleasant rest stop for the final peak of Mokṣa.",
+        scripture: "Kṣīṇe puṇye martya-lokaṃ viśanti — 'When their merit is exhausted, even dwellers of heaven return to the mortal realm.' (Bhagavad Gītā 9.21)",
+        inquiry: "When life becomes comfortable and pleasant, does your inquiry deepen or go to sleep?"
+      },
+      {
+        num: 24, loka: 3, lokaName: "Svar-Loka (Plane of Action & Virtue)",
+        devanagari: "कुसंग-लोक", sanskrit: "Ku-Saṅga-Loka", english: "Bad Company / Toxic Influences",
+        boxText: "Associating with cynical, dishonest, or ego-driven influences—whether people, media, or inner thought-loops—that normalize delusion.",
+        commentary: "SNAKE (24 ➔ 7): Notice how closely the mind absorbs the values of its environment. Ku-saṅga (corrupting company) erodes discrimination and pulls you down to #7 Mada (Conceit/Arrogance).",
+        scripture: "Duḥsaṅgaṃ sarvathā tyajet — 'One who seeks truth should avoid corrupting, ego-inflating company by all means.' (Bhāgavata Purāṇa 11.26)",
+        inquiry: "What relationships, habits, or media feeds subtly pull your standards and clarity downward?"
+      },
+      {
+        num: 25, loka: 3, lokaName: "Svar-Loka (Plane of Action & Virtue)",
+        devanagari: "सुसंग-लोक (सत्संग)", sanskrit: "Su-Saṅga-Loka (Satsaṅga)", english: "Good Company / Fellowship of Truth",
+        boxText: "Surrounding yourself with the wise, honest scriptures, and sincere seekers who remind you of what is real and hold up a clear mirror.",
+        commentary: "Right next to #24 Ku-saṅga sits #25 Su-saṅga—showing that at every moment we choose what we keep company with. Adi Shankara praises Satsaṅga as the very first step toward detachment and liberation.",
+        scripture: "Satsaṅgatve nissaṅgatvaṃ nissaṅgatve nirmohatvam — 'From company of the wise comes non-attachment; from non-attachment comes freedom from delusion.' (Bhaja Govindam 9)",
+        inquiry: "Who or what in your life consistently reminds you of your highest clarity and stillness?"
+      },
+      {
+        num: 26, loka: 3, lokaName: "Svar-Loka (Plane of Action & Virtue)",
+        devanagari: "दुःख", sanskrit: "Duḥkha", english: "Sorrow / Suffering / Heartache",
+        boxText: "The sting of loss, disappointment, and impermanence. Though painful to the ego, sorrow shatters false securities and wakes the seeker up.",
+        commentary: "In Advaita, Duḥkha is not a punishment; it is an alarm bell telling you that you have leaned your weight on something impermanent (anitya). Right next to #26 Duḥkha sits #27 Paramārtha—when sorrow is understood rather than resented, it opens the heart to selfless service.",
+        scripture: "Āgama-apāyino'nityās tāṃs titikṣasva bhārata — 'Contacts with heat, cold, pleasure, and pain come and go; endure them calmly, O Arjuna.' (Bhagavad Gītā 2.14)",
+        inquiry: "What false assumption about permanence is this current difficulty or sorrow asking you to let go of?"
+      },
+      {
+        num: 27, loka: 3, lokaName: "Svar-Loka (Plane of Action & Virtue)",
+        devanagari: "परमार्थ (निष्काम सेवा)", sanskrit: "Paramārtha (Sevā)", english: "Selfless Service / Devotion to the Highest Good",
+        boxText: "Acting for the welfare of the whole rather than personal ego-gain. Dedicating your work and skill as an offering to the One Consciousness.",
+        commentary: "LADDER (27 ➔ 41): Moving from personal agendas to Paramārtha (the highest good / Karma Yoga) purifies the ego-sense and lifts you directly to #41 Jana-Loka (the Awakened Human Plane).",
+        scripture: "Sarva-bhūta-hite ratāḥ — 'Those sages who rejoice in the welfare of all beings attain the peace of Brahman.' (Bhagavad Gītā 5.25)",
+        inquiry: "How changes in your daily work when you stop asking 'What will I get?' and start asking 'How can I serve cleanly?'"
+      },
+
+      /* ROW 4 (28-36): MAHAR-LOKA */
+      {
+        num: 28, loka: 4, lokaName: "Mahar-Loka (Plane of Balance & Discernment)",
+        devanagari: "सुधर्म", sanskrit: "Sudharma", english: "Apt Religion / Authentic Spiritual Practice",
+        boxText: "Practicing spiritual teachings that match your real nature and mature your understanding, free from blind superstition or mechanical dogma.",
+        commentary: "LADDER (28 ➔ 50): Sudharma (authentic, living spirituality tailored to self-knowledge rather than blind sectarianism) elevates the seeker directly to #50 Tapa-Loka (the Plane of Contemplative Mastery).",
+        scripture: "Svadharme nidhanaṃ śreyaḥ para-dharmo bhayāvahaḥ — 'Authenticity on one's true path is liberating; artificial imitation breeds fear.' (Bhagavad Gītā 3.35)",
+        inquiry: "Are your spiritual practices making you freer, humbler, and clearer—or merely more rigid and judgmental?"
+      },
+      {
+        num: 29, loka: 4, lokaName: "Mahar-Loka (Plane of Balance & Discernment)",
+        devanagari: "अधर्म", sanskrit: "Adharma", english: "Irreligiosity / Unrighteousness / Dishonesty",
+        boxText: "Acting against your own conscience and universal ethics for short-term gain. Self-betrayal that clouds inner peace and breeds fear.",
+        commentary: "SNAKE (29 ➔ 6): Knowing what is right yet choosing what is dishonest or harmful (Adharma) fractures the mind's integrity and plunges awareness all the way back to #6 Moha (Delusion).",
+        scripture: "Adharmaṃ dharmam iti yā manyate tamasāvṛtā — 'That intellect which, shrouded in darkness, mistakes wrong for right is tamasic.' (Bhagavad Gītā 18.32)",
+        inquiry: "Where have you compromised your quiet inner conscience to win approval or avoid discomfort?"
+      },
+      {
+        num: 30, loka: 4, lokaName: "Mahar-Loka (Plane of Balance & Discernment)",
+        devanagari: "उत्तम गति", sanskrit: "Uttama Gati", english: "Good Tendencies / Noble Momentum",
+        boxText: "Wholesome mental habits (śubha-vāsanās) cultivated through repeated wise choices, making clarity, patience, and honesty feel natural.",
+        commentary: "Just as water carves a deeper channel each time it flows, repeated ethical and contemplative choices build Uttama Gati—an upward momentum where doing the wise thing no longer requires exhausting willpower.",
+        scripture: "Śubhair vāsanā-jālair अशुभं नाशयेत् बुधः — 'With networks of pure tendencies, the wise person dissolves impure habits, then transcends both.' (Vivekacūḍāmaṇi / Vāsiṣṭha)",
+        inquiry: "What wholesome habit or perspective has already become easier for you compared to five years ago?"
+      },
+      {
+        num: 31, loka: 4, lokaName: "Mahar-Loka (Plane of Balance & Discernment)",
+        devanagari: "यक्षलोक", sanskrit: "Yakṣa-Loka", english: "Plane of Sanctity / Guardianship of Wealth & Nature",
+        boxText: "Respectful stewardship of resources, blessings, and subtle forces. Honoring what is sacred without trying to possess or exploit it.",
+        commentary: "In Vedic lore, Yakṣas are guardians of earth's treasures under Kubera. Psychologically, this square asks whether you act as a reverent trustee of your talents and resources, or as an anxious owner.",
+        scripture: "Īśāvāsyam idaṃ sarvaṃ... tena tyaktena bhuñjīthāḥ — 'All this is pervaded by Consciousness; enjoy life through stewardship and non-grasping.' (Īśā Upaniṣad 1)",
+        inquiry: "Do you treat your skills, wealth, and body as private possessions to guard, or sacred instruments held in trust?"
+      },
+      {
+        num: 32, loka: 4, lokaName: "Mahar-Loka (Plane of Balance & Discernment)",
+        devanagari: "महर्लोक", sanskrit: "Mahar-Loka", english: "Plane of Balance / Equanimity (Samatva)",
+        boxText: "The center of emotional and intellectual equilibrium. Remaining steady, fair, and unshaken amidst success and failure, praise and blame.",
+        commentary: "Located dead-center on the Brahma-Nāḍī spine (Col 5, Row 4), Mahar-Loka is reached via the Ladder of Charity (#20 Dāna ➔ #32). Here the seeker discovers Samatva—the balanced mind that no longer swings wildly between elation and despair.",
+        scripture: "Samatvaṃ yoga ucyate — 'Equanimity of mind in success and failure is called Yoga.' (Bhagavad Gītā 2.48)",
+        inquiry: "What happens to your inner balance when someone praises you versus when someone criticizes you?"
+      },
+      {
+        num: 33, loka: 4, lokaName: "Mahar-Loka (Plane of Balance & Discernment)",
+        devanagari: "गन्धलोक", sanskrit: "Gandha-Loka", english: "Plane of Fragrance / Subtle Impression of Character",
+        boxText: "The subtle 'scent' of past tendencies (vāsanās) and character that lingers in the mind. Perceiving the subtlest trace of earth-element attachment.",
+        commentary: "In Vedantic cosmology, Gandha (fragrance/smell) is the subtle tanmātra of the earth element. Even after gross habits are dropped, subtle lingering impressions—like the scent of camphor in an empty jar—remain to be observed.",
+        scripture: "Vāsanā-tantavaḥ सूक्ष्माः — 'Subtle threads of impression linger in the heart until illuminated by direct knowledge.' (Yoga Vāsiṣṭha)",
+        inquiry: "What subtle mood or atmosphere do you leave behind in a room after you speak or act?"
+      },
+      {
+        num: 34, loka: 4, lokaName: "Mahar-Loka (Plane of Balance & Discernment)",
+        devanagari: "रसलोक", sanskrit: "Rasa-Loka", english: "Plane of Taste / Aesthetic & Emotional Relish",
+        boxText: "Savoring the essence of experience—art, devotion, and relationship—without greedy consumption. Moving from sensory craving to refined appreciation.",
+        commentary: "Rasa means both 'taste' (the subtle essence of the water element) and 'emotional/spiritual relish'. The Upanishads declare the Self itself to be Rasa—when you know the inner fullness, you enjoy life's flavors without addiction.",
+        scripture: "Raso vai saḥ, rasaṃ hy evāyaṃ labdhvā'nandī bhavati — 'That Reality itself is Rasa (the essence of joy); realizing It, one becomes truly fulfilled.' (Taittirīya Upaniṣad 2.7.1)",
+        inquiry: "Can you appreciate a beautiful moment deeply without trying to capture, repeat, or cling to it?"
+      },
+      {
+        num: 35, loka: 4, lokaName: "Mahar-Loka (Plane of Balance & Discernment)",
+        devanagari: "नरकलोक", sanskrit: "Naraka-Loka", english: "Purgatory / Self-Inflicted Mental Torment",
+        boxText: "The burning state of remorse, hostility, and inner constriction caused by cruel or violent actions (#52 Hiṃsā drops directly here).",
+        commentary: "In Advaita Vedanta, Naraka (hell/purgatory) is not an eternal damnation, but the acute psychological and karmic consequence of violating the oneness of life—especially through #52 Hiṃsā (Violence). It purges arrogance through intense wake-up pain.",
+        scripture: "Tri-vidhaṃ narakasyedaṃ dvāraṃ nāśanam ātmanaḥ — 'Lust, anger, and greed are the three gates to this self-destructive hell; therefore abandon them.' (Bhagavad Gītā 16.21)",
+        inquiry: "How do resentment, harshness, and guilt create a private purgatory inside your own mind right now?"
+      },
+      {
+        num: 36, loka: 4, lokaName: "Mahar-Loka (Plane of Balance & Discernment)",
+        devanagari: "स्वच्छ (प्रसादिनी)", sanskrit: "Svaccha (Prasāda)", english: "Clarity of Consciousness / Transparent Calm",
+        boxText: "Crystal-clear mental stillness free from turbidity and hidden agendas. Like still mountain water, the mind clearly reflects reality as it is.",
+        commentary: "At the culmination of the fourth plane sits Svaccha—lucid transparency. When rajasic agitation and tamasic fog settle, the mind becomes a distortion-free lens ready for higher self-knowledge (#37 Jñāna).",
+        scripture: "Prasāde sarva-duḥkhānāṃ hānir asyopajāyate — 'In that serene clarity of mind, all sorrows come to an end and the intellect swiftly stands firm.' (Bhagavad Gītā 2.65)",
+        inquiry: "When you stop defending an image of yourself, how naturally clear and uncomplicated is your awareness?"
+      },
+
+      /* ROW 5 (37-45): JANA-LOKA */
+      {
+        num: 37, loka: 5, lokaName: "Jana-Loka (Plane of Human Awakening & Vitality)",
+        devanagari: "ज्ञान", sanskrit: "Jñāna", english: "True Awareness / Direct Self-Knowledge",
+        boxText: "Direct insight into the distinction between the changeless Seer (Dṛk) and the changing seen (Dṛśya). Knowing Consciousness as your very nature.",
+        commentary: "GREAT LADDER (37 ➔ 66): In Advaita Vedanta, Jñāna is not book-learning; it is the direct recognition that 'I am the Witness-Consciousness.' This recognition lifts you immediately from #37 to #66 Ānanda-Loka (the Plane of Uncaused Bliss).",
+        scripture: "Satyam jñānam anantaṃ brahma — 'Brahman is Existence, pure Consciousness, and Infinite.' (Taittirīya Upaniṣad 2.1.1)",
+        inquiry: "Thoughts, sensations, and moods appear and disappear—what is the 'You' that knows all of them without changing?"
+      },
+      {
+        num: 38, loka: 5, lokaName: "Jana-Loka (Plane of Human Awakening & Vitality)",
+        devanagari: "प्राणलोक", sanskrit: "Prāṇa-Loka", english: "Plane of Life Energy / Vital Assimilation",
+        boxText: "Conscious harmony with the inward-moving vital force (Prāṇa) that animates breath, perception, and enthusiasm for living.",
+        commentary: "Squares 38, 39, and 40 explore the Prāṇamaya Kośa (vital energy sheath). When Prāṇa is steady and rhythmic through mindful breathing and moderation, the turbulent mind naturally settles.",
+        scripture: "Cale vāte calaṃ cittaṃ niścale niścalaṃ bhavet — 'When the vital breath wanders unevenly, the mind is unsteady; when breath is calm, the mind is still.' (Haṭha Yoga Pradīpikā 2.2)",
+        inquiry: "Notice your breathing at this exact moment—is it shallow and hurried, or calm and grounded?"
+      },
+      {
+        num: 39, loka: 5, lokaName: "Jana-Loka (Plane of Human Awakening & Vitality)",
+        devanagari: "अपानलोक", sanskrit: "Apāna-Loka", english: "Plane of Elimination / Letting Go",
+        boxText: "The downward and outward vital function that releases waste, tension, and outgrown impressions. Mastery of healthy release.",
+        commentary: "Just as the physical body falls ill if it cannot eliminate toxins (Apāna), the mind stagnates when it refuses to release old grievances, expired roles, and emotional clutter.",
+        scripture: "Apāne जुह्वति प्राणं प्राणेऽपानं तथापरे — 'Mastering the incoming Prāṇa and outgoing Apāna in harmony, the yogi steadies life-force.' (Bhagavad Gītā 4.29)",
+        inquiry: "What old identity, grudge, or expired chapter of life are you still holding onto that needs to be exhaled?"
+      },
+      {
+        num: 40, loka: 5, lokaName: "Jana-Loka (Plane of Human Awakening & Vitality)",
+        devanagari: "व्यानलोक", sanskrit: "Vyāna-Loka", english: "Plane of Circulation / Pervasive Energy",
+        boxText: "The integrating vital current that circulates nourishment and awareness evenly throughout the whole system without blockage.",
+        commentary: "Vyāna-vāyu pervades the entire body, coordinating movement and wholeness. Psychologically, it represents balanced integration—ensuring your spiritual understanding circulates into your everyday speech, relationships, and actions.",
+        scripture: "Kṛtsna-dehavyāpī व्यानः — 'Vyāna is the vital energy that pervades and integrates the entire embodiment.' (Tattva Bodha)",
+        inquiry: "Does your wisdom stay compartmentalized in study, or does it circulate into how you treat people daily?"
+      },
+      {
+        num: 41, loka: 5, lokaName: "Jana-Loka (Plane of Human Awakening & Vitality)",
+        devanagari: "जनलोक", sanskrit: "Jana-Loka", english: "Human Plane / Awakened Collective Humanity",
+        boxText: "The heart of mature human consciousness (reached via #27 Selfless Service). Creative wisdom, empathy, and brotherhood grounded in shared being.",
+        commentary: "Positioned on the central Brahma-Nāḍī column (Col 5, Row 5), Jana-Loka is where narrow ego-survival matures into universal human nobility, creativity, and service.",
+        scripture: "Ātmavat sarva-bhūteṣu yaḥ paśyati sa paṇḍitaḥ — 'One who sees all beings as no different from one's own Self is truly wise.' (Hitopadeśa / Gītā 6.29)",
+        inquiry: "How do your decisions shift when you see every person you meet as another window of the same Consciousness?"
+      },
+      {
+        num: 42, loka: 5, lokaName: "Jana-Loka (Plane of Human Awakening & Vitality)",
+        devanagari: "अग्निलोक", sanskrit: "Agni-Loka", english: "Plane of Fire / Purifying Will & Tejas",
+        boxText: "The inner fire of inquiry, determination, and transformative awareness that burns away mental sluggishness and self-pity.",
+        commentary: "Agni is the sacred fire that turns offerings into light. In the seeker, Agni is Mumukṣutva—the burning aspiration for truth that refuses to settle for comforting half-truths.",
+        scripture: "Jñānāgniḥ sarva-karmāṇi bhasmasāt kurute tathā — 'Just as a blazing fire turns firewood to ashes, the fire of Self-knowledge reduces all binding karma to ashes.' (Bhagavad Gītā 4.37)",
+        inquiry: "Is your desire for truth lukewarm convenience, or a steady inner fire that illuminates every excuse?"
+      },
+      {
+        num: 43, loka: 5, lokaName: "Jana-Loka (Plane of Human Awakening & Vitality)",
+        devanagari: "मनुष्य-जन्म", sanskrit: "Manuṣya-Janma", english: "Birth of Man / Preciousness of Human Inquiry",
+        boxText: "Recognizing the rare privilege of a reflective human mind capable of asking 'Who am I?' and breaking free from unconscious instinct.",
+        commentary: "Unlike #1 Janma (mere biological birth driven by karma), #43 Manuṣya-Janma represents awakening to the unique gift of human self-reflection. Animals experience pleasure and pain; only a human mind can inquire into the Witness of both.",
+        scripture: "Durlabhaṃ trayam evaitad देवानुग्रहहेतुकम् — मनुष्यत्वं मुमुक्षुत्वं महापुरुषसंश्रयः — 'Three things are rare and born of grace: a reflective human birth, longing for liberation, and guidance of the wise.' (Vivekacūḍāmaṇi 3)",
+        inquiry: "Are you using this rare human lifetime merely to repeat eat-sleep-defend-acquire, or to wake up to what you truly are?"
+      },
+      {
+        num: 44, loka: 5, lokaName: "Jana-Loka (Plane of Human Awakening & Vitality)",
+        devanagari: "अविद्या", sanskrit: "Avidyā", english: "Ignorance / Root Self-Forgetfulness",
+        boxText: "Fundamental ignorance of your true nature—superimposing the body, mind, and roles onto the limitless Self (Adhyāsa).",
+        commentary: "MAJOR SNAKE (44 ➔ 9): Even in Row 5, if root Avidyā (ignoring the Self and taking the ego to be real) is not dissolved by inquiry, it drags the seeker all the way down to #9 Kāma-Loka (Sensual Craving). Because when you forget your inner fullness, you are forced to beg from the senses.",
+        scripture: "Avidyayā mṛtyuṃ tīrtvā vidyayāmṛtam aśnute — 'Understanding and transcending ignorance, through Self-knowledge one realizes immortality.' (Īśā Upaniṣad 11)",
+        inquiry: "What happens to your anxiety the moment you stop assuming 'I am this limited body-mind'?"
+      },
+      {
+        num: 45, loka: 5, lokaName: "Jana-Loka (Plane of Human Awakening & Vitality)",
+        devanagari: "सुविद्या", sanskrit: "Suvidyā", english: "Right Knowledge / Liberating Understanding",
+        boxText: "Clear, non-contradictory knowledge of Reality aligned with the Upaniṣads and verified in your own direct experience.",
+        commentary: "GREAT LADDER (45 ➔ 67): Immediately adjacent to #44 Avidyā sits #45 Suvidyā—showing that ignorance and right knowledge are separated only by a shift in understanding. Suvidyā carries you straight to #67 Rudra-Loka (Plane of Cosmic Good), right next to #68 Mokṣa!",
+        scripture: "Na hi jñānena sadṛśaṃ pavitram iha vidyate — 'In this world, there is nothing as purifying and liberating as right Self-knowledge.' (Bhagavad Gītā 4.38)",
+        inquiry: "Do you hold Vedanta merely as an interesting philosophy, or as the direct fact of your own current Awareness?"
+      },
+
+      /* ROW 6 (46-54): TAPO-LOKA */
+      {
+        num: 46, loka: 6, lokaName: "Tapo-Loka (Plane of Austerity, Discernment & Devotion)",
+        devanagari: "विवेक", sanskrit: "Viveka", english: "Conscience / Discrimination (Real vs. Unreal)",
+        boxText: "The razor-sharp discernment between that which is permanent (Nitya / Consciousness) and that which is transient (Anitya / appearances).",
+        commentary: "LADDER (46 ➔ 62): Viveka is the crown jewel of the four qualifications (Sādhana-catuṣṭaya). When you consistently distinguish the changeless Witness from passing mental states, you ascend directly to #62 Sukha (Unshakeable Inner Happiness).",
+        scripture: "Nityānitya-vastu-vivekaḥ — 'Discrimination between the Eternal Reality and the transient appearance is the foundation of inquiry.' (Adi Śaṅkara, Tattva Bodha)",
+        inquiry: "In the situation bothering you today, what part is changing appearance and what part is the changeless Witness?"
+      },
+      {
+        num: 47, loka: 6, lokaName: "Tapo-Loka (Plane of Austerity, Discernment & Devotion)",
+        devanagari: "सरस्वती", sanskrit: "Sarasvatī (Suṣumnā)", english: "Plane of Neutrality / Subtlest Central Current",
+        boxText: "The silent, subterranean river of pure wisdom and non-reactive witness consciousness beyond the dualities of solar action and lunar emotion.",
+        commentary: "Squares 47, 48, and 49 represent the three subtle mystic rivers (Triveṇī): Sarasvatī (neutral wisdom/Suṣumnā), Yamunā (solar/Piṅgalā), and Gaṅgā (lunar/Iḍā). Standing in Sarasvatī is resting in the neutral Witness.",
+        scripture: "Udāsīnavad āsīno guṇair yo na vicālyate — 'Seated like a neutral witness, unshaken by the play of the guṇas.' (Bhagavad Gītā 14.23)",
+        inquiry: "Can you observe both energetic enthusiasm and quiet rest from the neutral center that is neither?"
+      },
+      {
+        num: 48, loka: 6, lokaName: "Tapo-Loka (Plane of Austerity, Discernment & Devotion)",
+        devanagari: "यमुना (पिंगला)", sanskrit: "Yamunā (Piṅgalā)", english: "Solar Plane / Dynamic Clarity & Execution",
+        boxText: "The solar current of vital heat, analytical intellect, and decisive outward engagement. Powerful when balanced, exhausting when excessive.",
+        commentary: "Yamunā (Piṅgalā Nāḍī) governs dynamic vigour and sharp wakefulness. The mature seeker uses solar clarity for inquiry without letting it harden into restless over-control.",
+        scripture: "Tapāmy aham ahaṃ varṣaṃ nigṛhṇāmy utsṛjāmi ca — 'I alone am the radiant solar heat and the sustaining rain.' (Bhagavad Gītā 9.19)",
+        inquiry: "Is your active drive balanced with stillness, or do you push yourself into solar burnout?"
+      },
+      {
+        num: 49, loka: 6, lokaName: "Tapo-Loka (Plane of Austerity, Discernment & Devotion)",
+        devanagari: "गंगा (इडा)", sanskrit: "Gaṅgā (Iḍā)", english: "Lunar Plane / Cooling Receptivity & Grace",
+        boxText: "The cooling lunar stream of intuition, calm surrender, and purifying grace descending from higher awareness to soothe the heated mind.",
+        commentary: "Gaṅgā (Iḍā Nāḍī) cools the fever of worldly striving (saṃsāra-tāpa). Together with #48 Yamunā and #47 Sarasvatī, it prepares the seeker for the deep contemplation of #50 Tapa-Loka.",
+        scripture: "Brahmānanda-rasa-pradā गङ्गा — 'The sacred stream of knowledge cools the burning of worldly sorrow.' (Gaṅgā Stotram)",
+        inquiry: "Do you allow space for quiet receptivity and grace, or do you try to force every insight through effort?"
+      },
+      {
+        num: 50, loka: 6, lokaName: "Tapo-Loka (Plane of Austerity, Discernment & Devotion)",
+        devanagari: "तपोलोक", sanskrit: "Tapa-Loka", english: "Plane of Austerity / One-Pointed Contemplation",
+        boxText: "Conservation and focusing of mental energy. Voluntarily declining shallow distractions so awareness shines like a focused laser.",
+        commentary: "Situated on the central Brahma-Nāḍī column (Col 5, Row 6) and reached via #28 Sudharma, Tapas in Advaita is not self-torture; it is the serene mastery of senses and mind (Śama and Dama) so contemplation remains unbroken.",
+        scripture: "Manasaḥ prasādaḥ saumyatvaṃ maunam ātma-vinigrahaḥ... etad mānasam ucyate — 'Serenity of mind, gentleness, silence, and self-mastery: this is true mental Tapas.' (Bhagavad Gītā 17.16)",
+        inquiry: "Where is your attention leaking into trivial distractions that could be gathered into focused clarity?"
+      },
+      {
+        num: 51, loka: 6, lokaName: "Tapo-Loka (Plane of Austerity, Discernment & Devotion)",
+        devanagari: "पृथ्वी", sanskrit: "Pṛthvī", english: "Earth / Grounded Embodiment & Rebirth Anchor",
+        boxText: "Concrete groundedness, patience, and testing of spiritual insight in everyday earthly reality. The return point when #72 Tamas is reached.",
+        commentary: "CRITICAL BOARD RULE ANCHOR: In YesVedanta's Mokṣa Paṭam rules, if you overshoot #68 and reach #72 (Tamoguṇa), you drop here to #51 Pṛthvī and continue counting your remaining steps from 51! Even advanced seekers who drift into spiritual inertia must return to grounded earthly life (#51) to re-apply their inquiry.",
+        scripture: "Kṣamā-vatī पृथ्वी — 'Steady, forgiving, and grounded like the Earth, the wise test their truth in daily life.' (Subhāṣita)",
+        inquiry: "Can your spirituality stand firm in ordinary earthly responsibilities, family life, and challenges?"
+      },
+      {
+        num: 52, loka: 6, lokaName: "Tapo-Loka (Plane of Austerity, Discernment & Devotion)",
+        devanagari: "हिंसालोक", sanskrit: "Hiṃsā-Loka", english: "Plane of Violence / Harm in Thought, Word, or Deed",
+        boxText: "Inflicting injury, cruelty, or harshness on other beings—or ruthless fanatical harshness toward oneself—out of ideological or personal ego.",
+        commentary: "SNAKE (52 ➔ 35): Why does Hiṃsā appear so high up in Row 6 (Tapo-Loka)? Because disciplined people and spiritual seekers can fall into righteous harshness, fanaticism, or cruelty toward those they deem 'inferior'. Violence immediately drops you into #35 Naraka-Loka (Purgatory).",
+        scripture: "Ahiṃsā paramo dharmaḥ — 'Non-injury in thought, word, and deed—born of seeing the One Self in all—is the highest Dharma.' (Mahābhārata)",
+        inquiry: "Where does subtle harshness, judgment, or coercion still hide in your words or expectations of others?"
+      },
+      {
+        num: 53, loka: 6, lokaName: "Tapo-Loka (Plane of Austerity, Discernment & Devotion)",
+        devanagari: "जललोक", sanskrit: "Jala-Loka", english: "Liquid Plane / Adaptability & Emotional Fluidity",
+        boxText: "Flowing around obstacles with humility and adaptability, like water that cleanses all it touches and naturally seeks the lowest, humblest place.",
+        commentary: "After the warning of #52 Hiṃsā (rigid harshness), #53 Jala-Loka teaches fluidity and gentleness—softening the ego so it can dissolve into the pure devotion of #54 Bhakti-Loka.",
+        scripture: "Āpūryamāṇam acala-pratiṣṭhaṃ samudram āpaḥ praviśanti yadvat — 'As rivers flow into the ocean, which remains full and unmoved, so the sage remains at peace.' (Bhagavad Gītā 2.70)",
+        inquiry: "Where are you being brittle and rigid when a fluid, humble response would dissolve the conflict?"
+      },
+      {
+        num: 54, loka: 6, lokaName: "Tapo-Loka (Plane of Austerity, Discernment & Devotion)",
+        devanagari: "भक्तिलोक", sanskrit: "Bhakti-Loka", english: "Spiritual Devotion / Supreme Love for Truth",
+        boxText: "Wholehearted surrender of the separate ego into the Ocean of Consciousness. When the lover, the beloved, and love itself are seen as One.",
+        commentary: "THE SUPREME LADDER TO MOKṢA (54 ➔ 68): Square #54 Bhakti-Loka is the ONLY ladder on the entire board that ascends directly into #68 Vaikuṇṭha (Cosmic Consciousness / Liberation)! In Advaita Vedanta, supreme devotion (Parā-Bhakti) and non-dual self-inquiry (Jñāna) are identical: complete surrender of the false 'I' reveals the ever-present Self.",
+        scripture: "Mad-bhaktiṃ labhate parām... bhaktyā mām abhijānāti yāvān yaś cāsmi tattvataḥ — 'Through supreme devotion one knows Me in reality—what and who I truly am—and enters into That immediately.' (Bhagavad Gītā 18.54–55)",
+        inquiry: "What remains of separation when you surrender every personal claim and rest wholeheartedly in Truth?"
+      },
+
+      /* ROW 7 (55-63): SATYA-LOKA */
+      {
+        num: 55, loka: 7, lokaName: "Satya-Loka (Plane of Subtle Reality & Intellect)",
+        devanagari: "अहंकार", sanskrit: "Ahaṃkāra", english: "Egotism / Spiritual Pride / The 'I-Maker'",
+        boxText: "The subtle claim 'I am the doer, the knower, the enlightened one.' Even after climbing past 54 squares, claiming ownership of wisdom causes a massive fall.",
+        commentary: "DEVASTATING SNAKE (55 ➔ 3): Look at the placement: right after #54 Bhakti (which leads to liberation) sits #55 Ahaṃkāra! If the seeker bypasses surrender and takes personal ownership of their spiritual height ('Look how advanced I am'), the snake of Ahaṃkāra plunges them from Row 7 all the way down to Row 1 (#3 Krodha / Anger).",
+        scripture: "Prakṛteḥ kriyamāṇāni guṇaiḥ karmāṇi sarvaśaḥ, ahaṃkāra-vimūḍhātmā kartāham iti manyate — 'All actions are performed by the guṇas of Prakṛti; deluded by ego, the ignorant thinks: I am the doer.' (Bhagavad Gītā 3.27)",
+        inquiry: "Has your spiritual learning made the 'I' quieter and more transparent, or subtly proud of 'my' understanding?"
+      },
+      {
+        num: 56, loka: 7, lokaName: "Satya-Loka (Plane of Subtle Reality & Intellect)",
+        devanagari: "ॐकार (प्रणव)", sanskrit: "Oṃkāra (Praṇava)", english: "Plane of Primal Vibrations / The Sacred Sound ॐ",
+        boxText: "Contemplating Om (A-U-M and the silence that follows) as the totality of waking, dream, deep sleep, and the changeless Turīya substratum.",
+        commentary: "As taught in the Māṇḍūkya Upaniṣad, Oṃkāra is not merely a chant; it is the direct pointer to how all three states of experience merge into the silent fourth (Amātra / Turīya).",
+        scripture: "Om ity etad akṣaram idam sarvam — 'Om, this imperishable syllable, is the whole of this visible and invisible universe.' (Māṇḍūkya Upaniṣad 1)",
+        inquiry: "Listen to the silence between two thoughts right now—is that awareness ever interrupted by sound?"
+      },
+      {
+        num: 57, loka: 7, lokaName: "Satya-Loka (Plane of Subtle Reality & Intellect)",
+        devanagari: "वायुलोक", sanskrit: "Vāyu-Loka", english: "Gaseous Plane / Unbound Freedom of Movement",
+        boxText: "Subtle refinement of awareness—moving through life like the wind, touching everything yet leaving no sticky footprint of attachment behind.",
+        commentary: "In Row 7, the seeker traverses the subtlest cosmic elements: Vāyu (Air, #57) and Tejas (Radiance, #58). Like the sky-wind that blows over both gardens and rubbish heaps without being stained, the free mind moves unattached.",
+        scripture: "Yathākāśa-sthito nityaṃ vāyuḥ sarvatra-go mahān — 'Just as the mighty wind moving everywhere always rests in boundless space, know all beings to rest in Awareness.' (Bhagavad Gītā 9.6)",
+        inquiry: "Can you move through today's duties like the wind—fully present, yet leaving no heavy residue of clinging?"
+      },
+      {
+        num: 58, loka: 7, lokaName: "Satya-Loka (Plane of Subtle Reality & Intellect)",
+        devanagari: "तेजोलोक", sanskrit: "Tejo-Loka", english: "Plane of Radiation / Self-Effulgent Luminosity",
+        boxText: "The inner radiance of a purified intellect (buddhi) glowing with direct understanding, prior to the final recognition of the Source of light.",
+        commentary: "Tejo-Loka is the brilliance of sattvic clarity. Advaita reminds the seeker that even the most luminous state of mind shines only because it borrows light from the self-luminous Witness (Svayam-prakāśa Ātman).",
+        scripture: "Na tatra sūryo bhāti na candra-tārakaṃ... तमेव भान्तमनुभाति सर्वम् — 'There the sun shines not, nor moon and stars; by That shining Consciousness alone does all this shine.' (Kaṭha Upaniṣad 2.2.15)",
+        inquiry: "Instead of looking at radiant experiences, turn attention gently to the Light of Awareness that knows every experience."
+      },
+      {
+        num: 59, loka: 7, lokaName: "Satya-Loka (Plane of Subtle Reality & Intellect)",
+        devanagari: "सत्यलोक", sanskrit: "Satya-Loka", english: "Plane of Reality / Abode of Truthfulness",
+        boxText: "Uncompromising alignment with Satya (Truth). Complete harmony between what you know, what you speak, and how you live.",
+        commentary: "Located on the central Brahma-Nāḍī column (Col 5, Row 7), Satya-Loka is the penultimate rung on the central axis before #68 Vaikuṇṭha directly above it. Here pretence drops away completely.",
+        scripture: "Satyam eva jayate nānṛtaṃ satyena panthā vitato deva-yānaḥ — 'Truth alone triumphs, never falsehood; by Truth is laid out the path to the Supreme.' (Muṇḍaka Upaniṣad 3.1.6)",
+        inquiry: "Is there any corner of your inner life where you are still pretending to be something you are not?"
+      },
+      {
+        num: 60, loka: 7, lokaName: "Satya-Loka (Plane of Subtle Reality & Intellect)",
+        devanagari: "सुबुद्धि", sanskrit: "Subuddhi", english: "Positive Intellect / Determined Wisdom",
+        boxText: "An intellect anchored firmly in non-dual understanding, unclouded by doubt, seeing possibilities for growth and unity in every circumstance.",
+        commentary: "The great ladder from #22 Dharma-Loka lands right here on #60 Subuddhi. A purified, dharmic life blossoms naturally into a clear, decisive intellect (Vyavasāyātmikā buddhi) capable of grasping subtle truth.",
+        scripture: "Vyavasāyātmikā buddhir ekeha kuru-nandana — 'In this path of wisdom, the resolute, clear intellect is one-pointed, O Arjuna.' (Bhagavad Gītā 2.41)",
+        inquiry: "When challenges arise, does your intellect look for excuses and blame, or for truth and clarity?"
+      },
+      {
+        num: 61, loka: 7, lokaName: "Satya-Loka (Plane of Subtle Reality & Intellect)",
+        devanagari: "दुर्बुद्धि", sanskrit: "Durbuddhi", english: "Negative Intellect / Cynicism & Perverse Reasoning",
+        boxText: "Using sharp intelligence to argue against truth, justify egoic habits, find fault everywhere, or indulge in nihilistic doubt.",
+        commentary: "SNAKE (61 ➔ 13): Right beside #60 Subuddhi sits #61 Durbuddhi! A brilliant intellect turned cynical or hyper-critical uses clever arguments to defeat its own peace—dropping all the way from Row 7 to #13 Antarikṣa (Nullity / Empty Limbo).",
+        scripture: "Ajñaś cāśrद्दधानश्च संशयात्मा विनश्यति — 'The doubting, cynical mind finds neither peace in this world nor in the next.' (Bhagavad Gītā 4.40)",
+        inquiry: "Do you ever use cleverness or skepticism as a shield to avoid humbling the ego?"
+      },
+      {
+        num: 62, loka: 7, lokaName: "Satya-Loka (Plane of Subtle Reality & Intellect)",
+        devanagari: "सुख", sanskrit: "Sukha", english: "Happiness / Inward Contentment (Ātma-Rati)",
+        boxText: "Quiet, self-contained happiness born from a clear conscience (#46 Viveka leads here) and freedom from craving—needing nothing from outside to feel whole.",
+        commentary: "Unlike #18 Harṣa (excited elation over external gain), #62 Sukha is the deep ease (Svāsthya) of resting in oneself, reached directly via the Ladder of #46 Viveka (Discrimination).",
+        scripture: "Yo'ntaḥ-sukho'ntar-ārāmas tathāntar-jyotir eva yaḥ — 'One whose happiness is within, whose peace is within, and whose light is within, is united with Brahman.' (Bhagavad Gītā 5.24)",
+        inquiry: "Notice the quiet contentment present right now when you stop demanding that this moment be different."
+      },
+      {
+        num: 63, loka: 7, lokaName: "Satya-Loka (Plane of Subtle Reality & Intellect)",
+        devanagari: "तमस्", sanskrit: "Tamas", english: "Darkness / Spiritual Complacency & Blindness",
+        boxText: "Falling asleep at the threshold of realization. Mistaking blank mental quietude or dullness for enlightenment and abandoning vigilance.",
+        commentary: "DEEPEST SNAKE ON THE BOARD (63 ➔ 2): At the very end of Row 7, just steps away from liberation, #63 Tamas plunges the player all the way back to #2 Māyā (Illusion)! As YesVedanta notes: 'No matter how far you rise in your life journey, you are never immune to the slip—stay vigilant and humble until last breath.'",
+        scripture: "Nidrālasya-pramādotthaṃ तमः — 'Tamas, born of ignorance, deludes all embodied beings through heedlessness, indolence, and sleep.' (Bhagavad Gītā 14.8)",
+        inquiry: "Where might complacency or 'spiritual comfort' be lulling your inquiry to sleep?"
+      },
+
+      /* ROW 8 (64-72): VAIKUNTHA / SUPREME COSMIC PLANE */
+      {
+        num: 64, loka: 8, lokaName: "Vaikuṇṭha-Loka (Supreme Cosmic Plane)",
+        devanagari: "प्रकृतिलोक", sanskrit: "Prakṛti-Loka", english: "Phenomenal Plane / Primal Nature Understood",
+        boxText: "Seeing the entire cosmos of matter, energy, and mind as the lawful dance of Prakṛti (Nature), while knowing yourself as the witness Puruṣa.",
+        commentary: "Entering the eighth and highest row, the seeker clearly beholds Mūla-Prakṛti—the womb of all forms and guṇas—without ever confusing the changing instrument with the Consciousness illuminating it.",
+        scripture: "Prakṛtiṃ puruṣaṃ caiva viddhy anādī ubhāv api — 'Know both Prakṛti (Nature) and Puruṣa (Consciousness) to be beginningless; all modifications belong to Prakṛti.' (Bhagavad Gītā 13.19)",
+        inquiry: "Can you let body, thoughts, and nature do their work lawfully while you remain the unentangled Witness?"
+      },
+      {
+        num: 65, loka: 8, lokaName: "Vaikuṇṭha-Loka (Supreme Cosmic Plane)",
+        devanagari: "उरन्तलोक (चिदाकाश)", sanskrit: "Uranta-Loka (Cidākāśa)", english: "Plane of Inner Space / Boundless Heart-Expanse",
+        boxText: "Discovering that the vast space inside the cave of the heart (Daharākāśa) is identical with the infinite expanse of Consciousness containing the universe.",
+        commentary: "In the Chāndogya Upaniṣad, the sage reveals that the subtle space within the heart is as vast as the outer cosmos—contains heaven, earth, fire, and wind—and never ages when the body ages.",
+        scripture: "Yāvān vā ayam ākāśas tāvān eṣo'ntarhṛdaya ākāśaḥ — 'As vast as this universal space outside is that space within the lotus of the heart.' (Chāndogya Upaniṣad 8.1.3)",
+        inquiry: "Look inward: does the Awareness in which your thoughts appear have any border, wall, or boundary?"
+      },
+      {
+        num: 66, loka: 8, lokaName: "Vaikuṇṭha-Loka (Supreme Cosmic Plane)",
+        devanagari: "आनन्दलोक", sanskrit: "Ānanda-Loka", english: "Plane of Bliss / Uncaused Fullness of Being",
+        boxText: "The natural, uncreated fullness (Pūrṇatva) of the Self—reached directly from #37 Jñāna (True Awareness). Joy that is your nature, not an event.",
+        commentary: "The ladder from #37 Jñāna lands here at #66 Ānanda-Loka. When self-knowledge removes the sense of lack, what remains is Brahmānanda—peace and fullness that does not depend on any object.",
+        scripture: "Ānando brahmeti vyajānāt — 'He recognized that Bliss-Fullness itself is Brahman, from which all beings are born.' (Taittirīya Upaniṣad 3.6.1)",
+        inquiry: "When you want nothing from this moment, isn't peaceful fullness already shining by itself?"
+      },
+      {
+        num: 67, loka: 8, lokaName: "Vaikuṇṭha-Loka (Supreme Cosmic Plane)",
+        devanagari: "रुद्रलोक (शिवलोक)", sanskrit: "Rudra-Loka (Śiva-Loka)", english: "Plane of Cosmic Good / Auspicious Dissolution of Ego",
+        boxText: "The grace of Rudra-Śiva that dissolves the final veil of individuality (#45 Suvidyā lands here). Auspicious stillness at the threshold of Liberation.",
+        commentary: "Reached via the Ladder of #45 Suvidyā (Right Knowledge), Rudra-Loka is the benevolent dissolution of the last traces of dualistic separation, standing one step away from #68 Vaikuṇṭha.",
+        scripture: "Śivaṃ śāntam advaitaṃ caturthaṃ manyante sa ātmā sa vijñeyaḥ — 'Auspicious, peaceful, non-dual: that is the Self to be realized.' (Māṇḍūkya Upaniṣad 7)",
+        inquiry: "Are you willing to let the final story of being a 'separate spiritual seeker' dissolve into pure Being?"
+      },
+      {
+        num: 68, loka: 8, lokaName: "Vaikuṇṭha-Loka (MOKṢA · LIBERATION)",
+        devanagari: "वैकुण्ठलोक (मोक्ष / तुरीय)", sanskrit: "Vaikuṇṭha-Loka (Mokṣa / Turīya)", english: "Cosmic Consciousness · Non-Dual Liberation",
+        boxText: "THE GOAL & ORIGIN: Unconditioned, non-dual Consciousness (Turīya / Brahman). Not an 'altered state of mind,' but the ever-present substratum of waking, dream, and deep sleep. Freedom from mistaken identity.",
+        commentary: "YESVEDANTA CORE TEACHING ON #68: As Acharya Andre specifically emphasizes on the game page, many faulty boards call #68 'Turiya' and define it as an 'altered state of consciousness'—contradicting the Māṇḍūkya Upaniṣad! Any 'state' that comes will also go. Turīya / Vaikuṇṭha (#68) is NOT a fleeting trance; it is your timeless, non-dual Being—the screen on which waking, dream, and deep sleep appear. You started here at #68 before birth, and the game completes when you recognize you never truly left.",
+        scripture: "Nāntaḥ-prajñaṃ na bahiṣ-prajñaṃ... adṛṣṭam avyavahāryam agrāhyam alakṣaṇam acintyam avyapadeśyam ekātma-pratyaya-sāraṃ prapañcopaśamaṃ śāntaṃ śivam advaitaṃ caturthaṃ manyante sa ātmā sa vijñeyaḥ — 'Neither inward-turned nor outward-turned consciousness... peaceful, auspicious, non-dual: that Fourth (Turīya) is the Self; That alone is to be known.' (Māṇḍūkya Upaniṣad 7)",
+        inquiry: "Right now, without changing your state of mind: are you not already the changeless Awareness in which this entire game of life has appeared?"
+      },
+      {
+        num: 69, loka: 8, lokaName: "Vaikuṇṭha-Loka (Beyond 68 · Cosmic Guṇas)",
+        devanagari: "ब्रह्मलोक (हिरण्यगर्भ)", sanskrit: "Brahma-Loka", english: "Absolute Manifest Plane / Cosmic Creator",
+        boxText: "The pinnacle of manifest creation and subtle cosmic sovereignty (#17 Dayā lands here). Yet because it is one step past #68, subtle duality remains.",
+        commentary: "FASCINATING BOARD DESIGN: Why are Squares 69, 70, 71, and 72 placed *past* #68 Vaikuṇṭha? Because if you are at #66 or #67 and roll too high—or ascend via #17 Dayā (Mercy) without final non-dual knowledge—you overshoot into #69 Brahma-Loka (the highest heaven of manifest creation) and must eventually cycle back through #72 ➔ #51 until you land squarely on #68!",
+        scripture: "Ā-brahma-bhuvanāl lokāḥ punar āvartino'rjuna — 'All realms up to the highest Brahma-Loka are still subject to return, O Arjuna; but upon realizing Me (#68), there is no rebirth.' (Bhagavad Gītā 8.16)",
+        inquiry: "Do you seek an exalted spiritual state or experience (#69), or the simple truth of what already Is (#68)?"
+      },
+      {
+        num: 70, loka: 8, lokaName: "Vaikuṇṭha-Loka (Beyond 68 · Cosmic Guṇas)",
+        devanagari: "सत्त्वगुण", sanskrit: "Sattvaguṇa", english: "True Nature / Harmony, Light & Purity (Sattva)",
+        boxText: "The purest of the three strands of Nature (Prakṛti): lucidity, peace, and wisdom. A golden chain if one identifies with 'being a pure person'.",
+        commentary: "Squares 70, 71, and 72 represent the Three Guṇas of Prakṛti (Sattva, Rajas, Tamas) at the cosmic roof of the board. Even Sattvaguṇa (#70), though luminous and pure, still binds the soul through attachment to happiness and knowledge until one transcends all three guṇas (Guṇātīta) at #68.",
+        scripture: "Tatra sattvaṃ nirmalatvāt prakāśakam anāmayam, sukha-saṅgena badhnāti jñāna-saṅgena cānagha — 'Sattva, being pure, is luminous and healthy, yet it binds through attachment to happiness and knowledge.' (Bhagavad Gītā 14.6)",
+        inquiry: "Can you appreciate mental peace and clarity (Sattva) without turning 'being peaceful' into another subtle ego identity?"
+      },
+      {
+        num: 71, loka: 8, lokaName: "Vaikuṇṭha-Loka (Beyond 68 · Cosmic Guṇas)",
+        devanagari: "रजोगुण", sanskrit: "Rajoguṇa", english: "Activity / Restless Passion & Projection (Rajas)",
+        boxText: "The cosmic force of motion, ambition, projecting, and becoming. Even at the highest level, wanting to 'do' or 'achieve' pulls one toward #72.",
+        commentary: "When the seeker overshoots #68 and rests in #71 Rajoguṇa, restlessness and the urge to project new endeavours stir again—sitting just one step away from the great wrap-around snake of #72 Tamoguṇa.",
+        scripture: "Rajo rāgātmakaṃ viddhi tṛṣṇā-saṅga-samudbhavam — 'Know Rajas to be of the nature of passion, born of thirst and attachment; it binds the embodied one through restless action.' (Bhagavad Gītā 14.7)",
+        inquiry: "Notice the subtle urge to keep 'becoming' something next—what happens when that restlessness is simply observed?"
+      },
+      {
+        num: 72, loka: 8, lokaName: "Vaikuṇṭha-Loka (Beyond 68 · Cosmic Guṇas)",
+        devanagari: "तमोगुण", sanskrit: "Tamoguṇa", english: "Inertia / Cosmic Slumber & Veiling (Tamas)",
+        boxText: "The final square of the 72-block board: cosmic inertia, veiling, and unconsciousness. Reaching or passing #72 returns you to #51 Pṛthvī (Earth).",
+        commentary: "FINAL SNAKE & REBIRTH LOOP (72 ➔ 51): In YesVedanta's rules, if you land on #72—or roll a number from 67–71 that reaches or exceeds 72—you drop immediately via the Snake of Tamoguṇa to #51 Pṛthvī (Earth) and continue counting your remaining steps from 51! Why? Because when Sattva (#70) and Rajas (#71) are not resolved into non-dual Mokṣa (#68), they inevitably tip into Tamas (#72), initiating a fresh cycle of earthly embodiment (#51) so inquiry can be completed.",
+        scripture: "Guṇān etān atītya trīn dehī deha-samudbhavān, janma-mṛtyu-jarā-duḥkhair vimukto'mṛtam aśnute — 'When the embodied one transcends these three guṇas (#70–72), freed from birth, death, and sorrow, he realizes immortality (#68).' (Bhagavad Gītā 14.20)",
+        inquiry: "Every cycle back into earthly challenge (#51) is another merciful opportunity to recognize #68—what did this cycle teach you?"
+      }
+    ];
+
+    // Canonical 10 Ladders (Virtues) & 10 Snakes (Vices) of the 1700 AD 72-Square Board
+    const LADDERS = {
+      10: { to: 23, name: "Śuddhi (Purification) ➔ Svarga-Loka" },
+      17: { to: 69, name: "Dayā (Compassion) ➔ Brahma-Loka" },
+      20: { to: 32, name: "Dāna (Charity) ➔ Mahar-Loka (Balance)" },
+      22: { to: 60, name: "Dharma-Loka ➔ Subuddhi (Clear Intellect)" },
+      27: { to: 41, name: "Paramārtha (Selfless Service) ➔ Jana-Loka" },
+      28: { to: 50, name: "Sudharma ➔ Tapa-Loka (Contemplation)" },
+      37: { to: 66, name: "Jñāna (True Awareness) ➔ Ānanda-Loka" },
+      45: { to: 67, name: "Suvidyā (Right Knowledge) ➔ Rudra-Loka" },
+      46: { to: 62, name: "Viveka (Discrimination) ➔ Sukha (Happiness)" },
+      54: { to: 68, name: "Bhakti-Loka (Supreme Devotion) ➔ Vaikuṇṭha (MOKṢA)" }
+    };
+
+    const SNAKES = {
+      12: { to: 8,  name: "Īrṣyā (Envy) ➔ Mātsarya (Avarice)" },
+      16: { to: 4,  name: "Dveṣa (Hostility) ➔ Lobha (Greed)" },
+      24: { to: 7,  name: "Ku-Saṅga (Bad Company) ➔ Mada (Conceit)" },
+      29: { to: 6,  name: "Adharma (Unrighteousness) ➔ Moha (Delusion)" },
+      44: { to: 9,  name: "Avidyā (Root Ignorance) ➔ Kāma-Loka (Craving)" },
+      52: { to: 35, name: "Hiṃsā (Violence) ➔ Naraka-Loka (Purgatory)" },
+      55: { to: 3,  name: "Ahaṃkāra (Spiritual Ego) ➔ Krodha (Anger)" },
+      61: { to: 13, name: "Durbuddhi (Cynical Intellect) ➔ Antarikṣa (Nullity)" },
+      63: { to: 2,  name: "Tamas (Complacency) ➔ Māyā (Illusion)" },
+      72: { to: 51, name: "Tamoguṇa (Inertia) ➔ Pṛthvī (Earthly Rebirth)" }
+    };
+
+    // Central Column 5 (Brahma-Nadi / Sushumna Spine)
+    const BRAHMA_NADI_SQUARES = new Set([5, 14, 23, 32, 41, 50, 59, 68]);
+
+    // Quick Map by Square Number
+    const SQUARE_MAP = {};
+    SQUARES_DATA.forEach(s => { SQUARE_MAP[s.num] = s; });
+
+    // Load any user-customized box text from localStorage
+    const CUSTOM_TEXT_KEY = "yesvedanta_mokshapatam_custom_box_v3";
+    let customBoxTexts = {};
+    try {
+      const saved = localStorage.getItem(CUSTOM_TEXT_KEY);
+      if (saved) customBoxTexts = JSON.parse(saved);
+    } catch (e) {}
+
+    function getEffectiveBoxText(num) {
+      return customBoxTexts[num] || SQUARE_MAP[num].boxText;
+    }
+
+    /***************************************************************************
+     * GAME STATE & SEEKER CONFIGURATION
+     ***************************************************************************/
+    const PLAYER_PALETTE = [
+      { id: 0, name: "Seeker I",   short: "S1", color: "#C84B11", bg: "bg-[#C84B11]" },
+      { id: 1, name: "Seeker II",  short: "S2", color: "#0F6E56", bg: "bg-[#0F6E56]" },
+      { id: 2, name: "Seeker III", short: "S3", color: "#4338CA", bg: "bg-[#4338CA]" }
+    ];
+
+    let state = {
+      playerCount: 1,
+      strictSixEntry: true, // YesVedanta rule: Solo = Roll 6; Group = optional Any Roll
+      boardViewMode: "compact", // 'compact' | 'poster'
+      vectorOpacityMode: 1, // 0 = hidden, 1 = subtle (0.42), 2 = vivid (0.88)
+      audioEnabled: true,
+      currentPlayerIndex: 0,
+      selectedSquare: 68,
+      previewDestSquare: null,
+      previewDestType: null,
+      isRolling: false,
+      pendingTransition: null, // { playerIdx, from, to, type: 'ladder'|'snake', name }
+      dirFilter: 'all',
+      players: [],
+      logs: []
+    };
+
+    function createInitialPlayers(count) {
+      const arr = [];
+      for (let i = 0; i < count; i++) {
+        arr.push({
+          ...PLAYER_PALETTE[i],
+          pos: 68,           // All players start on #68 Vaikuntha prior to embodiment
+          hasEntered: false, // Becomes true once born (#68 -> #1 -> #6)
+          hasWon: false,
+          rolls: 0
+        });
+      }
+      return arr;
+    }
+
+    /***************************************************************************
+     * WEB AUDIO SYNTHESIZER (TANPURA CHIME, DICE, LADDER, SNAKE, MOKSHA)
+     ***************************************************************************/
+    let audioCtx = null;
+    function getAudioCtx() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) audioCtx = new AudioContext();
+      }
+      if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+      return audioCtx;
+    }
+
+    function playSound(type) {
+      if (!state.audioEnabled) return;
+      const ctx = getAudioCtx();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+
+      if (type === "dice") {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(240, now);
+        osc.frequency.exponentialRampToValueAtTime(520, now + 0.09);
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.1);
+      } else if (type === "step") {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(432, now);
+        gain.gain.setValueAtTime(0.08, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.14);
+      } else if (type === "ladder") {
+        [288, 360, 432, 540, 648].forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+          gain.gain.setValueAtTime(0.11, now + idx * 0.08);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.45);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + idx * 0.08);
+          osc.stop(now + idx * 0.08 + 0.46);
+        });
+      } else if (type === "snake") {
+        [390, 330, 270, 195].forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = "sawtooth";
+          osc.frequency.setValueAtTime(freq, now + idx * 0.09);
+          gain.gain.setValueAtTime(0.07, now + idx * 0.09);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.09 + 0.35);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + idx * 0.09);
+          osc.stop(now + idx * 0.09 + 0.36);
+        });
+      } else if (type === "moksha") {
+        [216, 432, 648, 864].forEach((freq) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(freq, now);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.0008, now + 2.4);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 2.45);
+        });
+      }
+    }
+
+    /***************************************************************************
+     * 8x9 BOUSTROPHEDON BOARD RENDERING (WITH SANSKRIT, ENGLISH & IN-BOX TEXT)
+     ***************************************************************************/
+    function getBoustrophedonOrder() {
+      // Top visual row is Row 8 (72..64), Bottom visual row is Row 1 (1..9)
+      const cells = [];
+      for (let row = 8; row >= 1; row--) {
+        const start = (row - 1) * 9 + 1;
+        const end = row * 9;
+        const rowNums = [];
+        if (row % 2 === 1) {
+          // Odd rows (1, 3, 5, 7) run Left -> Right
+          for (let n = start; n <= end; n++) rowNums.push(n);
+        } else {
+          // Even rows (2, 4, 6, 8) run Right -> Left
+          for (let n = end; n >= start; n--) rowNums.push(n);
+        }
+        cells.push(...rowNums);
+      }
+      return cells;
+    }
+
+    function renderBoard() {
+      const gridEl = document.getElementById("boardGrid");
+      const order = getBoustrophedonOrder();
+      const isPoster = state.boardViewMode === "poster";
+
+      gridEl.className = isPoster ? "board-grid-poster" : "board-grid-compact flex-1 w-full h-full";
+      gridEl.innerHTML = "";
+
+      order.forEach((num) => {
+        const sq = SQUARE_MAP[num];
+        const ladder = LADDERS[num];
+        const snake = SNAKES[num];
+        const isSpine = BRAHMA_NADI_SQUARES.has(num);
+        const isSelected = state.selectedSquare === num;
+        const isPreviewDest = state.previewDestSquare === num;
+
+        const cell = document.createElement("div");
+        cell.id = `board-cell-${num}`;
+        let classes = "board-cell";
+        if (isSpine) classes += " brahma-nadi";
+        if (num === 68) classes += " cell-moksha";
+        if (num === 1 || num === 6) classes += " cell-anchor";
+        if (num === 72) classes += " cell-tamas";
+        if (isSelected) classes += " selected-cell";
+        if (isPreviewDest) {
+          classes += state.previewDestType === "ladder" ? " destination-preview" : " destination-preview-snake";
+        }
+        cell.className = classes;
+
+        cell.onclick = () => inspectSquare(num, true);
+
+        // Tokens currently sitting on this square
+        const tokensOnSquare = state.players.filter(p => p.pos === num);
+        const tokensHtml = tokensOnSquare.map(p => {
+          const isTurn = p.id === state.currentPlayerIndex && !p.hasWon;
+          const unenteredBadge = !p.hasEntered && num === 68 ? "opacity-85 ring-2 ring-amber-400" : "";
+          return `<div class="seeker-token ${p.bg} ${isTurn ? 'active-turn' : ''} ${unenteredBadge}" title="${p.name} (${p.hasEntered ? 'Square #' + num : 'Unborn at #68 — Roll 6 to enter'})">${p.short}</div>`;
+        }).join("");
+
+        // Connection Pill inside Cell
+        let badgeHtml = "";
+        if (num === 68) {
+          badgeHtml = `<span class="px-1 py-0.2 rounded bg-amber-800 text-amber-100 font-bold text-[8px] sm:text-[9px] tracking-tight">ॐ MOKṢA</span>`;
+        } else if (ladder) {
+          badgeHtml = `<span class="px-1 py-0.2 rounded bg-emerald-700 text-white font-bold text-[8px] sm:text-[9px] tracking-tight" title="Ladder: ${ladder.name}">↑${ladder.to}</span>`;
+        } else if (snake) {
+          badgeHtml = `<span class="px-1 py-0.2 rounded bg-red-800 text-white font-bold text-[8px] sm:text-[9px] tracking-tight" title="Snake: ${snake.name}">↓${snake.to}</span>`;
+        } else if (num === 1) {
+          badgeHtml = `<span class="px-1 py-0.2 rounded bg-amber-700/80 text-white font-bold text-[8px]">➔#6</span>`;
+        } else if (num === 51) {
+          badgeHtml = `<span class="px-1 py-0.2 rounded bg-stone-700 text-stone-100 font-bold text-[8px]" title="Rebirth return from #72">↺72</span>`;
+        }
+
+        const boxTextContent = getEffectiveBoxText(num);
+
+        if (isPoster) {
+          // FULL PRINT TEXT MODE: Shows complete Devanagari, IAST, English Meaning, and Unabridged Box Description directly inside every cell
+          cell.innerHTML = `
+            <div>
+              <div class="flex items-center justify-between gap-1 border-b border-stone-300/80 pb-1 mb-1">
+                <div class="flex items-baseline gap-1.5">
+                  <span class="font-cinzel font-extrabold text-xs text-stone-900">#${num}</span>
+                  <span class="font-devanagari font-bold text-xs text-[#9A2C07]">${sq.devanagari}</span>
+                  <span class="font-serif-editorial italic font-bold text-xs text-stone-700">${sq.sanskrit}</span>
+                </div>
+                ${badgeHtml}
+              </div>
+              <div class="text-[11px] font-extrabold text-stone-900 leading-tight mb-1">
+                ${sq.english}
+              </div>
+              <p class="text-[10.5px] text-stone-700 leading-snug">
+                ${boxTextContent}
+              </p>
+            </div>
+            <div class="flex items-center justify-end gap-1 mt-1.5 pt-1 border-t border-stone-200/60 min-h-[22px]">
+              ${tokensHtml}
+            </div>
+          `;
+        } else {
+          // COMPACT 8x9 FIT-SCREEN MODE: Shows Number, Devanagari + IAST Sanskrit, Bold English Meaning, and 3-line Box Summary
+          cell.innerHTML = `
+            <div class="w-full">
+              <div class="flex items-center justify-between gap-0.5 leading-none">
+                <div class="flex items-baseline gap-1 truncate">
+                  <span class="font-cinzel font-extrabold text-[10px] sm:text-[11px] ${num === 68 ? 'text-amber-950' : 'text-stone-900'}">${num}</span>
+                  <span class="font-devanagari font-bold text-[9.5px] sm:text-[10.5px] text-[#9A2C07] truncate">${sq.devanagari}</span>
+                </div>
+                ${badgeHtml}
+              </div>
+              <div class="text-[8.5px] sm:text-[9.5px] italic font-serif-editorial text-stone-600 truncate leading-tight">
+                ${sq.sanskrit}
+              </div>
+              <div class="text-[9px] sm:text-[10px] font-bold text-stone-900 truncate leading-tight mt-0.5">
+                ${sq.english.split('/')[0].split('·')[0].trim()}
+              </div>
+              <div class="hidden xl:block compact-desc text-[8px] text-stone-600 leading-[1.15] mt-0.5">
+                ${boxTextContent}
+              </div>
+            </div>
+            <div class="flex items-center justify-end gap-0.5 mt-0.5 min-h-[18px]">
+              ${tokensHtml}
+            </div>
+          `;
+        }
+
+        gridEl.appendChild(cell);
+      });
+
+      requestAnimationFrame(drawBoardVectors);
+    }
+
+    /***************************************************************************
+     * SVG OVERLAY FOR ALL 10 LADDERS & 10 SNAKES
+     ***************************************************************************/
+    function getSquareCenter(num) {
+      const gridEl = document.getElementById("boardGrid");
+      const cellEl = document.getElementById(`board-cell-${num}`);
+      if (!gridEl || !cellEl) return null;
+      const gridRect = gridEl.getBoundingClientRect();
+      const cellRect = cellEl.getBoundingClientRect();
+      return {
+        x: cellRect.left - gridRect.left + cellRect.width / 2,
+        y: cellRect.top - gridRect.top + cellRect.height / 2
+      };
+    }
+
+    function drawBoardVectors() {
+      const svg = document.getElementById("boardSvgOverlay");
+      const gridEl = document.getElementById("boardGrid");
+      if (!svg || !gridEl) return;
+
+      const w = gridEl.clientWidth;
+      const h = gridEl.clientHeight;
+      svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+      svg.innerHTML = "";
+
+      if (state.vectorOpacityMode === 0) {
+        svg.style.opacity = "0";
+        return;
+      }
+      svg.style.opacity = state.vectorOpacityMode === 1 ? "0.42" : "0.88";
+
+      // Defs for markers
+      const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+      defs.innerHTML = `
+        <marker id="ladderArrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M 0 1 L 10 5 L 0 9 z" fill="#0F6E56" />
+        </marker>
+        <marker id="snakeArrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M 0 2 L 10 5 L 0 8 z" fill="#991B1B" />
+        </marker>
+      `;
+      svg.appendChild(defs);
+
+      // Draw 10 Ladders
+      Object.entries(LADDERS).forEach(([fromStr, data]) => {
+        const from = parseInt(fromStr, 10);
+        const p1 = getSquareCenter(from);
+        const p2 = getSquareCenter(data.to);
+        if (!p1 || !p2) return;
+
+        const isHighlighted = state.selectedSquare === from || state.selectedSquare === data.to;
+        const strokeWidth = isHighlighted ? 3.2 : 1.8;
+        const opacity = isHighlighted ? "1" : "0.75";
+
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", p1.x);
+        line.setAttribute("y1", p1.y);
+        line.setAttribute("x2", p2.x);
+        line.setAttribute("y2", p2.y);
+        line.setAttribute("stroke", from === 54 ? "#D97706" : "#0F6E56");
+        line.setAttribute("stroke-width", strokeWidth);
+        line.setAttribute("stroke-dasharray", from === 54 ? "none" : "5,3");
+        line.setAttribute("opacity", opacity);
+        line.setAttribute("marker-end", "url(#ladderArrow)");
+        svg.appendChild(line);
+      });
+
+      // Draw 10 Snakes
+      Object.entries(SNAKES).forEach(([fromStr, data]) => {
+        const from = parseInt(fromStr, 10);
+        const p1 = getSquareCenter(from);
+        const p2 = getSquareCenter(data.to);
+        if (!p1 || !p2) return;
+
+        const isHighlighted = state.selectedSquare === from || state.selectedSquare === data.to;
+        const strokeWidth = isHighlighted ? 3.2 : 1.8;
+        const opacity = isHighlighted ? "1" : "0.72";
+
+        const midX = (p1.x + p2.x) / 2 + (p2.y - p1.y) * 0.14;
+        const midY = (p1.y + p2.y) / 2 - (p2.x - p1.x) * 0.14;
+
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", `M ${p1.x} ${p1.y} Q ${midX} ${midY} ${p2.x} ${p2.y}`);
+        path.setAttribute("fill", "none");
+        path.setAttribute("stroke", "#991B1B");
+        path.setAttribute("stroke-width", strokeWidth);
+        path.setAttribute("opacity", opacity);
+        path.setAttribute("marker-end", "url(#snakeArrow)");
+        svg.appendChild(path);
+      });
+    }
+
+    /***************************************************************************
+     * INSPECTOR PANEL: COMPLETE TEACHING & IN-BOX TEXT DISPLAY
+     ***************************************************************************/
+    function inspectSquare(num, switchToLiveTab = true) {
+      state.selectedSquare = num;
+      const sq = SQUARE_MAP[num];
+      const ladder = LADDERS[num];
+      const snake = SNAKES[num];
+
+      if (ladder) {
+        state.previewDestSquare = ladder.to;
+        state.previewDestType = "ladder";
+      } else if (snake) {
+        state.previewDestSquare = snake.to;
+        state.previewDestType = "snake";
+      } else {
+        state.previewDestSquare = null;
+        state.previewDestType = null;
+      }
+
+      if (switchToLiveTab) {
+        switchInspectorTab("live");
+      }
+
+      // Update Header Badges
+      document.getElementById("navSquareBadge").textContent = `#${num}`;
+      document.getElementById("inspNumberBadge").textContent = `#${num}`;
+      document.getElementById("inspLokaBadge").textContent = `Loka ${["I","II","III","IV","V","VI","VII","VIII"][sq.loka - 1]} · ${sq.lokaName}`;
+      document.getElementById("inspDevanagari").textContent = sq.devanagari;
+      document.getElementById("inspIAST").textContent = sq.sanskrit;
+      document.getElementById("inspEnglishMeaning").textContent = sq.english;
+
+      // Type Badge
+      const typeBadge = document.getElementById("inspTypeBadge");
+      if (num === 68) {
+        typeBadge.className = "text-xs font-bold px-2.5 py-1 rounded-md bg-amber-500 text-stone-950 shadow-xs";
+        typeBadge.textContent = "ॐ Mokṣa (Origin & Goal)";
+      } else if (ladder) {
+        typeBadge.className = "text-xs font-bold px-2.5 py-1 rounded-md bg-emerald-700 text-white";
+        typeBadge.textContent = `🪜 Virtue Ladder ➔ #${ladder.to}`;
+      } else if (snake) {
+        typeBadge.className = "text-xs font-bold px-2.5 py-1 rounded-md bg-red-800 text-white";
+        typeBadge.textContent = `🐍 Karmic Snake ➔ #${snake.to}`;
+      } else if (BRAHMA_NADI_SQUARES.has(num)) {
+        typeBadge.className = "text-xs font-bold px-2.5 py-1 rounded-md bg-amber-100 text-amber-900 border border-amber-400";
+        typeBadge.textContent = "⚡ Central Axis (Brahma-Nāḍī)";
+      } else {
+        typeBadge.className = "text-xs font-semibold px-2.5 py-1 rounded-md bg-stone-200 text-stone-700";
+        typeBadge.textContent = `Row ${sq.loka} State of Mind`;
+      }
+
+      // Interactive Ladder / Snake Connection Box
+      const connBox = document.getElementById("inspConnectionBox");
+      const inboundLadders = Object.entries(LADDERS).filter(([, v]) => v.to === num);
+      const inboundSnakes = Object.entries(SNAKES).filter(([, v]) => v.to === num);
+
+      if (ladder) {
+        const destSq = SQUARE_MAP[ladder.to];
+        connBox.classList.remove("hidden");
+        connBox.innerHTML = `
+          <div class="text-xs font-semibold text-emerald-900">
+            🪜 <strong>Ascends via Virtue:</strong> From #${num} ${sq.sanskrit} directly to <strong>#${destSq.num} ${destSq.devanagari} (${destSq.sanskrit} · ${destSq.english})</strong>
+          </div>
+          <button onclick="inspectSquare(${destSq.num}, true)" class="px-2.5 py-1 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold transition shrink-0">
+            Inspect #${destSq.num} ➔
+          </button>
+        `;
+      } else if (snake) {
+        const destSq = SQUARE_MAP[snake.to];
+        connBox.classList.remove("hidden");
+        connBox.innerHTML = `
+          <div class="text-xs font-semibold text-red-900">
+            🐍 <strong>Descends via Slip:</strong> From #${num} ${sq.sanskrit} down to <strong>#${destSq.num} ${destSq.devanagari} (${destSq.sanskrit} · ${destSq.english})</strong>
+          </div>
+          <button onclick="inspectSquare(${destSq.num}, true)" class="px-2.5 py-1 rounded-lg bg-red-800 hover:bg-red-900 text-white text-xs font-bold transition shrink-0">
+            Inspect #${destSq.num} ➔
+          </button>
+        `;
+      } else if (inboundLadders.length > 0 || inboundSnakes.length > 0) {
+        connBox.classList.remove("hidden");
+        const links = [
+          ...inboundLadders.map(([f]) => `<button onclick="inspectSquare(${f}, true)" class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-900 border border-emerald-300 text-xs font-bold hover:bg-emerald-200">🪜 Ladder from #${f} ${SQUARE_MAP[f].sanskrit}</button>`),
+          ...inboundSnakes.map(([f]) => `<button onclick="inspectSquare(${f}, true)" class="px-2 py-0.5 rounded bg-red-100 text-red-900 border border-red-300 text-xs font-bold hover:bg-red-200">🐍 Snake from #${f} ${SQUARE_MAP[f].sanskrit}</button>`)
+        ].join(" ");
+        connBox.innerHTML = `<div class="text-xs text-stone-600 flex flex-wrap items-center gap-1.5"><span>Connected from:</span> ${links}</div>`;
+      } else {
+        connBox.classList.add("hidden");
+      }
+
+      // Main Content Fields
+      document.getElementById("inspBoardBoxText").textContent = getEffectiveBoxText(num);
+      document.getElementById("customTextInput").value = getEffectiveBoxText(num);
+      document.getElementById("inspDeepCommentary").innerHTML = `<p>${sq.commentary}</p>`;
+      document.getElementById("inspScriptureQuote").textContent = sq.scripture;
+      document.getElementById("inspInquiryPrompt").textContent = sq.inquiry;
+
+      renderBoard();
+    }
+
+    function navigateSquare(delta) {
+      let next = state.selectedSquare + delta;
+      if (next < 1) next = 72;
+      if (next > 72) next = 1;
+      inspectSquare(next, true);
+    }
+
+    // Custom Box Text Editor Functions
+    function toggleCustomEditBox() {
+      const el = document.getElementById("customTextEditor");
+      el.classList.toggle("hidden");
+    }
+
+    function saveCustomSquareText() {
+      const val = document.getElementById("customTextInput").value.trim();
+      if (val) {
+        customBoxTexts[state.selectedSquare] = val;
+        try { localStorage.setItem(CUSTOM_TEXT_KEY, JSON.stringify(customBoxTexts)); } catch (e) {}
+        document.getElementById("customTextEditor").classList.add("hidden");
+        inspectSquare(state.selectedSquare, true);
+      }
+    }
+
+    function resetCustomSquareText() {
+      delete customBoxTexts[state.selectedSquare];
+      try { localStorage.setItem(CUSTOM_TEXT_KEY, JSON.stringify(customBoxTexts)); } catch (e) {}
+      document.getElementById("customTextEditor").classList.add("hidden");
+      inspectSquare(state.selectedSquare, true);
+    }
+
+    /***************************************************************************
+     * GAMEPLAY ENGINE: YESVEDANTA AUTHENTIC RULES (#68->#1->#6 & #72->#51)
+     ***************************************************************************/
+    function handleRollDice() {
+      if (state.isRolling || state.pendingTransition) return;
+      const player = state.players[state.currentPlayerIndex];
+      if (!player || player.hasWon) return;
+
+      state.isRolling = true;
+      const diceBox = document.getElementById("diceFaceBox");
+      diceBox.classList.add("dice-rolling");
+      playSound("dice");
+
+      const diceFaces = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
+      let ticks = 0;
+      const interval = setInterval(() => {
+        diceBox.textContent = diceFaces[Math.floor(Math.random() * 6)];
+        ticks++;
+        if (ticks >= 7) {
+          clearInterval(interval);
+          diceBox.classList.remove("dice-rolling");
+          const roll = Math.floor(Math.random() * 6) + 1;
+          diceBox.textContent = diceFaces[roll - 1];
+          state.isRolling = false;
+          processPlayerRoll(player, roll);
+        }
+      }, 55);
+    }
+
+    function processPlayerRoll(player, roll) {
+      player.rolls++;
+      const statusEl = document.getElementById("turnStatusText");
+
+      // CASE 1: Player is still unmanifest at #68 waiting to take birth
+      if (!player.hasEntered) {
+        const canEnter = state.strictSixEntry ? (roll === 6) : true;
+        if (canEnter) {
+          player.hasEntered = true;
+          player.pos = 6; // YesVedanta Rule: #68 -> #1 Janma -> immediately #6 Moha
+          playSound("step");
+
+          // Show dual Birth Teaching Banner (#1 Janma + #6 Moha)
+          document.getElementById("birthSequenceBanner").classList.remove("hidden");
+          addLog(player, `Rolled ${roll} at #68 ➔ Born into #1 Janma (Birth) and immediately placed on #6 Moha (Conditioning/Delusion).`, 6);
+          statusEl.innerHTML = `<strong style="color:${player.color}">${player.name}</strong> rolled <strong>${roll}</strong>! Embodied via <strong>#1 Janma</strong> into <strong>#6 Moha (Delusion)</strong>.`;
+          inspectSquare(6, true);
+          advanceTurn();
+        } else {
+          addLog(player, `Rolled ${roll} at #68 Vaikuṇṭha (Waiting for a 6 to enter #1 Janma ➔ #6 Moha).`, 68);
+          statusEl.innerHTML = `<strong style="color:${player.color}">${player.name}</strong> rolled <strong>${roll}</strong>. Remains unmanifest at <strong>#68</strong> (Roll <strong>6</strong> to enter).`;
+          inspectSquare(68, false);
+          advanceTurn();
+        }
+        return;
+      }
+
+      // Hide birth banner once normal moves proceed
+      document.getElementById("birthSequenceBanner").classList.add("hidden");
+
+      // CASE 2: Player is already on the board
+      const startPos = player.pos;
+      let targetPos = startPos + roll;
+      let wrappedVia72 = false;
+
+      // YESVEDANTA RULE: "If reach 72, continue counting from 51"
+      if (targetPos >= 72) {
+        const overflow = targetPos - 72;
+        targetPos = 51 + overflow;
+        wrappedVia72 = true;
+      }
+
+      player.pos = targetPos;
+      playSound("step");
+
+      const targetSq = SQUARE_MAP[targetPos];
+
+      if (wrappedVia72) {
+        playSound("snake");
+        addLog(player, `Rolled ${roll} from #${startPos} ➔ Reached #72 Tamoguṇa and continued counting from #51 Pṛthvī to land on #${targetPos} ${targetSq.sanskrit}.`, targetPos);
+        statusEl.innerHTML = `<strong style="color:${player.color}">${player.name}</strong> rolled <strong>${roll}</strong>, reached <strong>#72 Tamoguṇa</strong> &amp; wrapped via <strong>#51 Pṛthvī</strong> to <strong>#${targetPos} ${targetSq.sanskrit}</strong>!`;
+      } else {
+        addLog(player, `Rolled ${roll} ➔ Moved from #${startPos} to #${targetPos} ${targetSq.devanagari} (${targetSq.sanskrit} · ${targetSq.english}).`, targetPos);
+        statusEl.innerHTML = `<strong style="color:${player.color}">${player.name}</strong> rolled <strong>${roll}</strong> ➔ Landed on <strong>#${targetPos} ${targetSq.sanskrit} (${targetSq.english})</strong>.`;
+      }
+
+      // Inspect the square landed on
+      inspectSquare(targetPos, true);
+
+      // Check if landed squarely on #68 Vaikuntha (MOKSHA)
+      if (targetPos === 68) {
+        triggerPlayerMoksha(player);
+        return;
+      }
+
+      // Check if landed on a Ladder base or Snake head (Two-Step Contemplative Transition)
+      if (LADDERS[targetPos]) {
+        const ladder = LADDERS[targetPos];
+        state.pendingTransition = {
+          playerIdx: state.currentPlayerIndex,
+          from: targetPos,
+          to: ladder.to,
+          type: "ladder",
+          name: ladder.name
+        };
+        renderPendingTransitionUI();
+        renderSeekersStrip();
+        return;
+      }
+
+      if (SNAKES[targetPos]) {
+        const snake = SNAKES[targetPos];
+        state.pendingTransition = {
+          playerIdx: state.currentPlayerIndex,
+          from: targetPos,
+          to: snake.to,
+          type: "snake",
+          name: snake.name
+        };
+        renderPendingTransitionUI();
+        renderSeekersStrip();
+        return;
+      }
+
+      advanceTurn();
+    }
+
+    function renderPendingTransitionUI() {
+      const banner = document.getElementById("pendingTransitionBanner");
+      const btnRoll = document.getElementById("btnRollDice");
+      if (!state.pendingTransition) {
+        banner.classList.add("hidden");
+        btnRoll.disabled = false;
+        return;
+      }
+
+      btnRoll.disabled = true;
+      banner.classList.remove("hidden");
+
+      const pt = state.pendingTransition;
+      const fromSq = SQUARE_MAP[pt.from];
+      const toSq = SQUARE_MAP[pt.to];
+      const iconEl = document.getElementById("pendingIcon");
+      const titleEl = document.getElementById("pendingTitle");
+      const descEl = document.getElementById("pendingDesc");
+      const btnExec = document.getElementById("btnExecuteTransition");
+
+      if (pt.type === "ladder") {
+        banner.className = "mb-2 p-2.5 rounded-lg border-2 border-emerald-600 bg-emerald-50 flex flex-wrap items-center justify-between gap-2";
+        iconEl.textContent = "🪜";
+        titleEl.className = "text-xs font-bold uppercase tracking-wider text-emerald-950";
+        titleEl.textContent = `Virtue Ladder Reached: #${pt.from} ${fromSq.sanskrit} ➔ #${pt.to} ${toSq.sanskrit}`;
+        descEl.textContent = `Contemplate the teaching of #${pt.from} ${fromSq.sanskrit} (${fromSq.english}) on the right, then ascend.`;
+        btnExec.className = "px-4 py-1.5 rounded-lg font-bold text-xs text-white bg-emerald-700 hover:bg-emerald-800 shadow-md transition";
+        btnExec.textContent = `Ascend to #${pt.to} ${toSq.sanskrit} ➔`;
+      } else {
+        banner.className = "mb-2 p-2.5 rounded-lg border-2 border-red-700 bg-red-50 flex flex-wrap items-center justify-between gap-2";
+        iconEl.textContent = "🐍";
+        titleEl.className = "text-xs font-bold uppercase tracking-wider text-red-950";
+        titleEl.textContent = `Karmic Snake Encountered: #${pt.from} ${fromSq.sanskrit} ➔ #${pt.to} ${toSq.sanskrit}`;
+        descEl.textContent = `Reflect on how #${pt.from} ${fromSq.sanskrit} (${fromSq.english}) causes a slip, then descend to #${pt.to}.`;
+        btnExec.className = "px-4 py-1.5 rounded-lg font-bold text-xs text-white bg-red-800 hover:bg-red-900 shadow-md transition";
+        btnExec.textContent = `Descend to #${pt.to} ${toSq.sanskrit} ➔`;
+      }
+    }
+
+    function completePendingTransition() {
+      if (!state.pendingTransition) return;
+      const pt = state.pendingTransition;
+      const player = state.players[pt.playerIdx];
+      const toSq = SQUARE_MAP[pt.to];
+
+      player.pos = pt.to;
+      state.pendingTransition = null;
+      renderPendingTransitionUI();
+
+      if (pt.type === "ladder") {
+        playSound("ladder");
+        addLog(player, `🪜 Ascended Ladder from #${pt.from} to #${pt.to} ${toSq.devanagari} (${toSq.sanskrit} · ${toSq.english}).`, pt.to);
+      } else {
+        playSound("snake");
+        addLog(player, `🐍 Descended Snake from #${pt.from} to #${pt.to} ${toSq.devanagari} (${toSq.sanskrit} · ${toSq.english}).`, pt.to);
+      }
+
+      inspectSquare(pt.to, true);
+
+      if (pt.to === 68) {
+        triggerPlayerMoksha(player);
+        return;
+      }
+
+      advanceTurn();
+    }
+
+    function triggerPlayerMoksha(player) {
+      player.hasWon = true;
+      playSound("moksha");
+      addLog(player, `ॐ ATTAINED MOKṢA at #68 Vaikuṇṭha-Loka! Recognized non-dual Consciousness after ${player.rolls} rolls.`, 68);
+      document.getElementById("turnStatusText").innerHTML = `
+        <span class="text-amber-900 font-bold">ॐ MOKṢA REALIZED!</span> <strong>${player.name}</strong> has returned to <strong>#68 Vaikuṇṭha-Loka (Turīya)</strong> in ${player.rolls} rolls!
+      `;
+      advanceTurn();
+    }
+
+    function advanceTurn() {
+      const activePlayers = state.players.filter(p => !p.hasWon);
+      if (activePlayers.length > 0) {
+        let nextIdx = (state.currentPlayerIndex + 1) % state.players.length;
+        let guard = 0;
+        while (state.players[nextIdx].hasWon && guard < 5) {
+          nextIdx = (nextIdx + 1) % state.players.length;
+          guard++;
+        }
+        state.currentPlayerIndex = nextIdx;
+      }
+      renderSeekersStrip();
+      renderBoard();
+    }
+
+    function renderSeekersStrip() {
+      const container = document.getElementById("seekersStrip");
+      const currentP = state.players[state.currentPlayerIndex];
+      const subPrompt = document.getElementById("rollSubPrompt");
+
+      if (currentP && !currentP.hasWon) {
+        subPrompt.textContent = `${currentP.name}'s Turn · ${currentP.hasEntered ? 'At #' + currentP.pos : 'At #68 (Unborn)'}`;
+      } else {
+        subPrompt.textContent = "All Seekers Realized #68";
+      }
+
+      container.innerHTML = state.players.map((p, idx) => {
+        const isCurrent = idx === state.currentPlayerIndex && !p.hasWon;
+        const sq = SQUARE_MAP[p.pos];
+        return `
+          <div onclick="inspectSquare(${p.pos}, true)" class="cursor-pointer px-2.5 py-1 rounded-lg border text-xs flex items-center gap-2 transition ${isCurrent ? 'bg-amber-50 border-amber-600 shadow-xs font-bold' : 'bg-stone-100 border-stone-300 opacity-85'}">
+            <span class="w-4 h-4 rounded-full ${p.bg} text-white text-[9px] font-bold flex items-center justify-center">${p.short}</span>
+            <span>${p.name}:</span>
+            <span class="text-amber-900 font-semibold">#${p.pos} ${sq.sanskrit}</span>
+            <span class="text-[10px] text-stone-500">(${p.hasWon ? 'ॐ Mokṣa' : p.hasEntered ? p.rolls + 'r' : 'Unborn'})</span>
+          </div>
+        `;
+      }).join("");
+    }
+
+    /***************************************************************************
+     * DIRECTORY & JOURNEY LOG TABS
+     ***************************************************************************/
+    function switchInspectorTab(tab) {
+      const tabs = {
+        live: { btn: "tabBtnLive", panel: "panelLiveTeaching" },
+        directory: { btn: "tabBtnDirectory", panel: "panelDirectory" },
+        log: { btn: "tabBtnLog", panel: "panelJourneyLog" }
+      };
+
+      Object.entries(tabs).forEach(([key, cfg]) => {
+        const btn = document.getElementById(cfg.btn);
+        const panel = document.getElementById(cfg.panel);
+        if (key === tab) {
+          btn.className = "px-3 py-1 rounded-md text-xs font-bold bg-[#1C1613] text-amber-100 shadow-sm transition";
+          panel.classList.remove("hidden");
+        } else {
+          btn.className = "px-3 py-1 rounded-md text-xs font-bold text-stone-700 hover:text-stone-900 transition";
+          panel.classList.add("hidden");
+        }
+      });
+
+      if (tab === "directory") renderDirectoryList();
+      if (tab === "log") renderJourneyLog();
+    }
+
+    function setDirFilter(f) {
+      state.dirFilter = f;
+      ["all", "ladder", "snake", "spine"].forEach(k => {
+        const el = document.getElementById(`dirFilter_${k}`);
+        if (k === f) {
+          el.className = "px-2.5 py-1 rounded-md font-bold bg-stone-900 text-white";
+        } else {
+          el.className = "px-2.5 py-1 rounded-md font-semibold bg-stone-100 text-stone-700 border border-stone-300";
+        }
+      });
+      renderDirectoryList();
+    }
+
+    function renderDirectoryList() {
+      const q = (document.getElementById("dirSearchInput").value || "").toLowerCase().trim();
+      const container = document.getElementById("directoryListContainer");
+
+      const filtered = SQUARES_DATA.filter(sq => {
+        if (state.dirFilter === "ladder" && !LADDERS[sq.num]) return false;
+        if (state.dirFilter === "snake" && !SNAKES[sq.num]) return false;
+        if (state.dirFilter === "spine" && !BRAHMA_NADI_SQUARES.has(sq.num)) return false;
+
+        if (!q) return true;
+        return (
+          String(sq.num) === q ||
+          sq.devanagari.toLowerCase().includes(q) ||
+          sq.sanskrit.toLowerCase().includes(q) ||
+          sq.english.toLowerCase().includes(q) ||
+          getEffectiveBoxText(sq.num).toLowerCase().includes(q)
+        );
+      });
+
+      container.innerHTML = filtered.map(sq => {
+        const ladder = LADDERS[sq.num];
+        const snake = SNAKES[sq.num];
+        return `
+          <div onclick="inspectSquare(${sq.num}, true)" class="p-2.5 rounded-xl border border-stone-200 hover:border-amber-500 bg-stone-50/70 hover:bg-amber-50/40 cursor-pointer transition">
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-baseline gap-2">
+                <span class="font-cinzel font-bold text-xs px-2 py-0.5 rounded bg-stone-900 text-amber-300">#${sq.num}</span>
+                <span class="font-devanagari font-bold text-sm text-[#9A2C07]">${sq.devanagari}</span>
+                <span class="font-serif-editorial italic font-bold text-sm text-stone-800">${sq.sanskrit}</span>
+                <span class="text-xs font-bold text-stone-900">— ${sq.english}</span>
+              </div>
+              ${ladder ? `<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-700 text-white">↑#${ladder.to}</span>` : ""}
+              ${snake ? `<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-red-800 text-white">↓#${snake.to}</span>` : ""}
+            </div>
+            <p class="text-xs text-stone-700 mt-1 leading-snug">${getEffectiveBoxText(sq.num)}</p>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function addLog(player, text, squareNum) {
+      state.logs.unshift({
+        player,
+        text,
+        squareNum,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+      });
+      renderJourneyLog();
+    }
+
+    function renderJourneyLog() {
+      const container = document.getElementById("journeyLogContainer");
+      if (state.logs.length === 0) {
+        container.innerHTML = `<div class="text-stone-500 italic p-3">No moves yet. Roll the Karma Dice to begin your self-inquiry journey.</div>`;
+        return;
+      }
+      container.innerHTML = state.logs.map(item => `
+        <div onclick="inspectSquare(${item.squareNum}, true)" class="p-2.5 rounded-lg border border-stone-200 bg-stone-50 hover:bg-amber-50 cursor-pointer transition flex items-start justify-between gap-2">
+          <div>
+            <span class="font-bold" style="color:${item.player.color}">${item.player.name}:</span>
+            <span class="text-stone-800">${item.text}</span>
+          </div>
+          <span class="text-[10px] text-stone-400 shrink-0">${item.time}</span>
+        </div>
+      `).join("");
+    }
+
+    /***************************************************************************
+     * TOP BAR CONTROLS & KEYBOARD SHORTCUTS
+     ***************************************************************************/
+    function setBoardViewMode(mode) {
+      state.boardViewMode = mode;
+      const btnCompact = document.getElementById("btnViewCompact");
+      const btnPoster = document.getElementById("btnViewPoster");
+      const spineCol = document.getElementById("lokaSpineColumn");
+
+      if (mode === "compact") {
+        btnCompact.className = "px-2.5 py-1 rounded-md font-semibold bg-amber-600 text-white transition";
+        btnPoster.className = "px-2.5 py-1 rounded-md font-semibold text-stone-300 hover:text-white transition";
+        spineCol.classList.remove("sm:hidden");
+      } else {
+        btnPoster.className = "px-2.5 py-1 rounded-md font-semibold bg-amber-600 text-white transition";
+        btnCompact.className = "px-2.5 py-1 rounded-md font-semibold text-stone-300 hover:text-white transition";
+        spineCol.classList.add("sm:hidden");
+      }
+      renderBoard();
+    }
+
+    function toggleVectorsOverlay() {
+      state.vectorOpacityMode = (state.vectorOpacityMode + 1) % 3;
+      const statusText = document.getElementById("vectorStatusText");
+      const labels = ["Hidden", "Subtle", "Vivid"];
+      statusText.textContent = labels[state.vectorOpacityMode];
+      drawBoardVectors();
+    }
+
+    function changePlayerCount(count) {
+      state.playerCount = count;
+      [1, 2, 3].forEach(n => {
+        const btn = document.getElementById(`pCount${n}`);
+        btn.className = n === count
+          ? "px-2 py-0.5 rounded font-semibold bg-amber-700 text-white"
+          : "px-2 py-0.5 rounded font-semibold text-stone-300 hover:text-white";
+      });
+      // Per YesVedanta: solo defaults to strict 6; group can optionally use any roll
+      if (count > 1 && state.strictSixEntry) {
+        toggleEntryRule(false);
+      } else if (count === 1 && !state.strictSixEntry) {
+        toggleEntryRule(true);
+      }
+      resetGame();
+    }
+
+    function toggleEntryRule(forceVal) {
+      state.strictSixEntry = typeof forceVal === "boolean" ? forceVal : !state.strictSixEntry;
+      const lbl = document.getElementById("entryRuleLabel");
+      lbl.textContent = state.strictSixEntry ? "Roll 6 (#68➔#1➔#6)" : "Any Roll (#68➔#1➔#6)";
+    }
+
+    function toggleAudio() {
+      state.audioEnabled = !state.audioEnabled;
+      document.getElementById("btnAudio").textContent = state.audioEnabled ? "🔊" : "🔇";
+    }
+
+    function openRulesDrawer() {
+      document.getElementById("rulesModal").classList.remove("hidden");
+    }
+
+    function closeRulesDrawer() {
+      document.getElementById("rulesModal").classList.add("hidden");
+    }
+
+    function resetGame() {
+      state.players = createInitialPlayers(state.playerCount);
+      state.currentPlayerIndex = 0;
+      state.pendingTransition = null;
+      state.logs = [];
+      document.getElementById("birthSequenceBanner").classList.add("hidden");
+      renderPendingTransitionUI();
+      renderSeekersStrip();
+      inspectSquare(68, true);
+      document.getElementById("turnStatusText").innerHTML = `
+        <span class="font-semibold text-stone-900">Ready for Self-Inquiry:</span> Place awareness at <strong class="text-amber-800">#68 Vaikuṇṭha</strong>. ${state.strictSixEntry ? 'Roll <strong class="text-amber-800">6</strong>' : 'Roll dice'} to take birth (#1 Janma ➔ #6 Moha).
+      `;
+    }
+
+    window.addEventListener("resize", () => {
+      requestAnimationFrame(drawBoardVectors);
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) return;
+      if (e.code === "Space") {
+        e.preventDefault();
+        if (state.pendingTransition) {
+          completePendingTransition();
+        } else {
+          handleRollDice();
+        }
+      } else if (e.code === "ArrowLeft") {
+        e.preventDefault();
+        navigateSquare(-1);
+      } else if (e.code === "ArrowRight") {
+        e.preventDefault();
+        navigateSquare(1);
+      }
+    });
+
+    // Initialize Application on Load
+    window.addEventListener("DOMContentLoaded", () => {
+      resetGame();
+    });
+  </script>
+</body>
+</html>
