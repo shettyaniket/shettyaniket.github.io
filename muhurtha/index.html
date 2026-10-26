@@ -506,8 +506,31 @@
 
   </main>
 
+  <style>
+    .qr-get{display:flex;flex-direction:column;align-items:center;gap:16px;margin:0 0 30px;text-align:center}
+    .qr-get-title{font-weight:700;font-size:15px;letter-spacing:.03em;color:#ffd133;text-transform:uppercase}
+    .qr-cards{display:flex;gap:26px;flex-wrap:wrap;justify-content:center}
+    .qr-card{display:flex;flex-direction:column;align-items:center;gap:10px;text-decoration:none}
+    .qr-card img{width:136px;height:136px;background:#fff;border-radius:16px;padding:8px;
+      box-shadow:0 10px 26px -8px rgba(0,0,0,.55);transition:transform .15s ease}
+    .qr-card:hover img{transform:translateY(-3px)}
+    .qr-card span{font-size:13px;font-weight:700;color:#cfc7e6}
+  </style>
   <footer class="site-footer">
     <div class="wrap">
+      <div class="qr-get">
+        <span class="qr-get-title">Scan to get Muhurtha</span>
+        <div class="qr-cards">
+          <a class="qr-card" href="https://apps.apple.com/app/muhurtha/id6814728317" aria-label="Download Muhurtha on the App Store">
+            <img src="/assets/qr/appstore.svg" alt="QR code to download Muhurtha on the App Store" width="136" height="136" loading="lazy">
+            <span>App&nbsp;Store</span>
+          </a>
+          <a class="qr-card" href="https://play.google.com/store/apps/details?id=app.muhurtha.android" aria-label="Get Muhurtha on Google Play">
+            <img src="/assets/qr/playstore.svg" alt="QR code to get Muhurtha on Google Play" width="136" height="136" loading="lazy">
+            <span>Google&nbsp;Play</span>
+          </a>
+        </div>
+      </div>
       <div>
         <a href="/#apps">Apps</a>
         <a href="/support/">Support</a>
