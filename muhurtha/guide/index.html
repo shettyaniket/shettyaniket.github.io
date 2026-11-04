@@ -521,6 +521,8 @@
     <a class="nav-link" href="#ask" onclick="closeMobileNav()"><span class="nav-icon">✨</span> Asking questions</a>
     <a class="nav-link" href="#sharing" onclick="closeMobileNav()"><span class="nav-icon">📤</span> Sharing a day</a>
     <a class="nav-link" href="#learn" onclick="closeMobileNav()"><span class="nav-icon">📖</span> The Learn tab</a>
+    <a class="nav-link" href="#vidhi" onclick="closeMobileNav()"><span class="nav-icon">🪔</span> Puja Vidhi</a>
+    <a class="nav-link" href="#planets" onclick="closeMobileNav()"><span class="nav-icon">🪐</span> Planets and tide</a>
     <a class="nav-link" href="#prayers" onclick="closeMobileNav()"><span class="nav-icon">🔥</span> Prayers &amp; aartis</a>
   </div>
   <div class="nav-section">
@@ -902,8 +904,8 @@
   <section class="guide-section" id="traditions">
     <div class="section-eyebrow">Year</div>
     <h2>Choosing your traditions</h2>
-    <p>Muhurtha carries 138 festivals. Most households keep perhaps twenty. Settings →
-    <strong>Which festivals to show</strong> lets you turn regions on and off:</p>
+    <p>Muhurtha carries 163 festivals. Most households keep perhaps twenty. Settings →
+    <strong>Festivals</strong> lets you turn regions on and off:</p>
     <div class="pill-row">
       <span class="pill violet">Celebrated everywhere</span>
       <span class="pill neutral">North India</span>
@@ -1185,8 +1187,8 @@
   <section class="guide-section" id="learn">
     <div class="section-eyebrow">Ask &amp; Learn</div>
     <h2>The Learn tab</h2>
-    <p>Reading material, and nothing else. Start with <strong>How to read today</strong> — the
-    sixty-second version — then browse:</p>
+    <p>Search at the top reaches any concept, prayer, puja or katha. Otherwise start with
+    <strong>How to read today</strong> — the sixty-second version — then pick a tile:</p>
     <div class="feature-grid">
       <div class="feature-card"><span class="fc-icon">📘</span><div class="fc-title">The basics</div><div class="fc-desc">How the Hindu calendar works, tithi, paksha, nakshatra, months, samvats, eclipses, shraddha.</div></div>
       <div class="feature-card"><span class="fc-icon">📋</span><div class="fc-title">How festivals are dated</div><div class="fc-desc">Every festival and the rule that fixes its date.</div></div>
@@ -1207,6 +1209,28 @@
     <p>The aartis, chalisas and mantras people actually reach for on a festival morning, with their
     meanings beside them. Today also surfaces the relevant one on the day it's wanted — Ganesh's aarti
     on Ganesh Chaturthi, without you going looking.</p>
+  </section>
+
+  <!-- VIDHI -->
+  <section class="guide-section" id="vidhi">
+    <div class="section-eyebrow">Ask &amp; Learn</div>
+    <h2>Puja Vidhi</h2>
+    <p>Learn → <strong>Puja Vidhi</strong> walks through a puja at home: what to get ready and when, a
+    samagri checklist that remembers what you've ticked, and every step with its mantra in the script
+    you read. Where the way genuinely differs by region there is a guide for each, and the one for your
+    traditions opens first. Tap <strong>Read in full</strong> on a step to open its aarti or mantra, or
+    count it on the mala. The guides are also <a href="/muhurtha/vidhi/">on this site</a>.</p>
+  </section>
+
+  <!-- SKY -->
+  <section class="guide-section" id="planets">
+    <div class="section-eyebrow">Ask &amp; Learn</div>
+    <h2>Planets and tide strength</h2>
+    <p>Learn → <strong>Planets</strong> draws the nine grahas on a wheel of the twelve rashis. Tap a
+    planet, or press and slide your finger across the wheel, to see its name, sign and degree. For places
+    in India, the Sunrise card also has a <strong>Tide strength</strong> line, read from the Moon's phase.
+    It is an indication only and does not give high and low tide times. Switch it off under
+    Settings → Today screen.</p>
   </section>
 
   <!-- REMINDERS -->
@@ -1238,12 +1262,12 @@
     <h2>Widgets &amp; countdown</h2>
     <p>Long-press the Home Screen, tap +, and search for Muhurtha. The widgets show today's tithi and
     nakshatra and the next window, and update through the day.</p>
-    <p>The <strong>Live Activity</strong> is opt-in, under Settings. Turn it on and a countdown appears
+    <p>The <strong>Live Activity</strong> is opt-in, under Settings → Reminders. Turn it on and a countdown appears
     on the Lock Screen and in the Dynamic Island while Rahu Kaal or Abhijit is running, then clears
     itself when the window closes. If iOS has Live Activities switched off for the app, Settings says so
     instead of failing silently.</p>
     <p><strong>On Android</strong> there is a home-screen widget (long-press the home screen, choose Widgets,
-    and find Muhurtha), and the countdown is an ongoing notification. Turn on <em>Live window</em> in Settings and a
+    and find Muhurtha), and the countdown is an ongoing notification. Turn on <em>Live window</em> under Settings → Reminders and a
     countdown sits in the notification shade while Rahu Kaal or Abhijit is running, then clears itself when the
     window closes.</p>
   </section>
@@ -1252,10 +1276,10 @@
   <section class="guide-section" id="calendar-sync">
     <div class="section-eyebrow">Set up</div>
     <h2>Calendar</h2>
-    <p>Settings → <strong>Add to Apple Calendar</strong> writes a year of festivals and fasts into a
+    <p>Settings → Calendar &amp; export → <strong>Add to Apple Calendar</strong> writes a year of festivals and fasts into a
     calendar you choose, as all-day events. It asks for write-only access, so it cannot read anything
     already in your calendar — and iOS enforces that, not just the app.</p>
-    <p><strong>On Android</strong>, Settings → <strong>Add to Calendar</strong> does the same. Android has no
+    <p><strong>On Android</strong>, Settings → Calendar &amp; export → <strong>Add to Calendar</strong> does the same. Android has no
     write-only calendar permission, so it asks for calendar access; the app uses it only to find a calendar to
     write to and to replace the events it added itself, and it does not read your other events.</p>
   </section>
@@ -1264,7 +1288,7 @@
   <section class="guide-section" id="export">
     <div class="section-eyebrow">Set up</div>
     <h2>Export as CSV or PDF</h2>
-    <p>Settings → <strong>Export festival calendar</strong> builds a year of festivals for your city and
+    <p>Settings → Calendar &amp; export → <strong>Export festival calendar</strong> builds a year of festivals for your city and
     month system, and gives you three ways to take it with you:</p>
     <div class="table-wrap">
       <table>

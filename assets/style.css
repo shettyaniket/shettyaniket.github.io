@@ -46,7 +46,8 @@ a:hover { text-decoration: underline; }
   backdrop-filter: saturate(180%) blur(14px);
 }
 .site-header .wrap { display: flex; align-items: center; justify-content: space-between; height: 62px; }
-.brand { font-weight: 700; font-size: 18px; color: var(--text); letter-spacing: -0.01em; white-space: nowrap; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; color: var(--text); letter-spacing: -0.01em; white-space: nowrap; }
+.brand::before { content: ""; width: 32px; height: 32px; flex: none; border-radius: 8px; background: url(/assets/brand/logo-mark.png) center / cover no-repeat; }
 .brand:hover { text-decoration: none; }
 .nav a { color: var(--muted); margin-left: 22px; font-size: 15px; }
 .nav a:hover { color: var(--text); text-decoration: none; }
