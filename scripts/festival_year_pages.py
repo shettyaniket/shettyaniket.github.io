@@ -18,7 +18,7 @@ years = sorted({int(d[:4]) for f in data for d in f["d"]})
 head = page[:page.index("<h1>")]
 # The list's own styles sit after the index's heading.
 list_css = next(m for m in re.findall(r"<style>.*?</style>", page[page.index("<h1>"):], re.S) if ".frow" in m)
-YEAR_CSS = "<style>#yk:not([hidden]){display:flex;flex-wrap:wrap;justify-content:flex-start;gap:6px;margin:14px 0}.ymonth[hidden],.frow[hidden]{display:none}</style>"
+YEAR_CSS = "<style>#yq{display:block;width:100%;box-sizing:border-box;margin-top:14px;font:inherit;font-size:16px;color:var(--text);background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:10px 12px}#yq[hidden],#yempty[hidden]{display:none}#yk:not([hidden]){display:flex;flex-wrap:wrap;justify-content:flex-start;gap:6px;margin:14px 0}.ymonth[hidden],.frow[hidden]{display:none}</style>"
 tail = page[page.index('<p><a class="cta" href="https://apps.apple.com'):]
 tail = tail.replace('href="/muhurtha/festival-rules/">How every festival is dated</a>',
                     'href="/muhurtha/festival-rules/">How every festival is dated</a> '
@@ -56,7 +56,8 @@ def build(year):
             f'<p class="updated">In {year}, the big days are {esc(sentence)}. All {len(rows)} festivals, fasts and observances are below, worked out from the Moon and the Sun. '
             'Dates are for Mumbai; a festival can fall a day apart elsewhere, because tithis change at different local times.</p>',
             f"<p>Other years: {year_links(year)}</p>"]
-    chips = [("major", f"Major ({counts['major']})"), ("", f"All ({len(rows)})"), ("regional", f"Regional ({counts['regional']})"), ("observance", f"Observance ({counts['observance']})")]
+    chips = [("", f"All ({len(rows)})"), ("major", f"Major ({counts['major']})"), ("regional", f"Regional ({counts['regional']})"), ("observance", f"Observance ({counts['observance']})")]
+    body.append(f'<input type="search" id="yq" hidden placeholder="Search festivals in {year}" aria-label="Search festivals in {year}" autocomplete="off">')
     body.append('<div class="ff-row chips" id="yk" role="group" aria-label="Show" hidden>'
                 + "".join(f'<button class="chip" data-k="{k}" aria-pressed="false">{esc(t)}</button>' for k, t in chips) + "</div>")
     month = None
@@ -70,6 +71,7 @@ def build(year):
                     f'<a href="/muhurtha/festivals/{f["i"]}/">{esc(f["n"])}</a><p>{esc(f["g"])}</p></div>'
                     f'<span class="fkind {f["k"]}">{KIND[f["k"]]}</span></li>')
     body.append("</ul></section>")
+    body.append('<p class="fempty" id="yempty" hidden>No festivals match. Try another spelling, or choose All.</p>')
     faq = [(f"When is {short_name(f)} in {year}?", f"{short_name(f)} falls on {nice(d)}, for Mumbai. {f['g']}", f["i"]) for f, d in named]
     body.append(f"<h2>Common questions about {year}</h2>")
     for q, a, i in faq:
@@ -78,17 +80,31 @@ def build(year):
     body.append("""<script>
 (function () {
   var bar = document.getElementById("yk"), chips = [].slice.call(bar.querySelectorAll(".chip"));
+  var box = document.getElementById("yq"), empty = document.getElementById("yempty");
   var rows = [].slice.call(document.querySelectorAll(".ymonth .frow")), months = [].slice.call(document.querySelectorAll(".ymonth"));
-  function show(k, remember) {
-    chips.forEach(function (c) { c.setAttribute("aria-pressed", String(c.dataset.k === k)); });
-    rows.forEach(function (r) { r.hidden = !!k && r.dataset.k !== k; });
+  var kind = "";
+  rows.forEach(function (r) { r.dataset.s = r.querySelector(".fbody").textContent.toLowerCase(); });
+  function show(remember) {
+    var needle = box.value.trim().toLowerCase();
+    chips.forEach(function (c) { c.setAttribute("aria-pressed", String(c.dataset.k === kind)); });
+    rows.forEach(function (r) { r.hidden = (!!kind && r.dataset.k !== kind) || (!!needle && r.dataset.s.indexOf(needle) < 0); });
     months.forEach(function (m) { m.hidden = !m.querySelector(".frow:not([hidden])"); });
-    if (remember) history.replaceState(null, "", k === "major" ? location.pathname : location.pathname + "?k=" + (k || "all"));
+    empty.hidden = months.some(function (m) { return !m.hidden; });
+    if (remember) {
+      var p = new URLSearchParams();
+      if (kind) p.set("k", kind);
+      if (needle) p.set("q", box.value.trim());
+      var q = p.toString();
+      history.replaceState(null, "", location.pathname + (q ? "?" + q : ""));
+    }
   }
-  chips.forEach(function (c) { c.addEventListener("click", function () { show(c.dataset.k, true); }); });
-  var asked = new URLSearchParams(location.search).get("k");
-  bar.hidden = false;
-  show(asked === "all" ? "" : (asked === "regional" || asked === "observance") ? asked : "major", false);
+  chips.forEach(function (c) { c.addEventListener("click", function () { kind = c.dataset.k; show(true); }); });
+  box.addEventListener("input", function () { show(true); });
+  var asked = new URLSearchParams(location.search);
+  kind = ["major", "regional", "observance"].indexOf(asked.get("k")) >= 0 ? asked.get("k") : "";
+  box.value = asked.get("q") || "";
+  bar.hidden = false; box.hidden = false;
+  show(false);
 })();
 </script>""")
     crumbs = [("Home", "https://aniketshetty.com/"), ("Muhurtha", "https://aniketshetty.com/muhurtha/"),

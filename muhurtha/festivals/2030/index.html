@@ -70,11 +70,12 @@
         .ftoday { font-size:12px; font-weight:700; color:var(--accent-2); margin-left:6px; }
         .fempty { padding:32px 0; color:var(--muted); text-align:center; }
       </style>
-      <style>#yk:not([hidden]){display:flex;flex-wrap:wrap;justify-content:flex-start;gap:6px;margin:14px 0}.ymonth[hidden],.frow[hidden]{display:none}</style>
+      <style>#yq{display:block;width:100%;box-sizing:border-box;margin-top:14px;font:inherit;font-size:16px;color:var(--text);background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:10px 12px}#yq[hidden],#yempty[hidden]{display:none}#yk:not([hidden]){display:flex;flex-wrap:wrap;justify-content:flex-start;gap:6px;margin:14px 0}.ymonth[hidden],.frow[hidden]{display:none}</style>
       <h1>Hindu festivals 2030</h1>
       <p class="updated">In 2030, the big days are Holi on 20 March, Dussehra on 6 October and Diwali on 26 October. All 161 festivals, fasts and observances are below, worked out from the Moon and the Sun. Dates are for Mumbai; a festival can fall a day apart elsewhere, because tithis change at different local times.</p>
       <p>Other years: <a href="/muhurtha/festivals/2026/">2026</a> · <a href="/muhurtha/festivals/2027/">2027</a> · <a href="/muhurtha/festivals/2028/">2028</a> · <a href="/muhurtha/festivals/2029/">2029</a> · 2030 · <a href="/muhurtha/festivals/2031/">2031</a></p>
-      <div class="ff-row chips" id="yk" role="group" aria-label="Show" hidden><button class="chip" data-k="major" aria-pressed="false">Major (35)</button><button class="chip" data-k="" aria-pressed="false">All (161)</button><button class="chip" data-k="regional" aria-pressed="false">Regional (67)</button><button class="chip" data-k="observance" aria-pressed="false">Observance (59)</button></div>
+      <input type="search" id="yq" hidden placeholder="Search festivals in 2030" aria-label="Search festivals in 2030" autocomplete="off">
+      <div class="ff-row chips" id="yk" role="group" aria-label="Show" hidden><button class="chip" data-k="" aria-pressed="false">All (161)</button><button class="chip" data-k="major" aria-pressed="false">Major (35)</button><button class="chip" data-k="regional" aria-pressed="false">Regional (67)</button><button class="chip" data-k="observance" aria-pressed="false">Observance (59)</button></div>
       <section class="ymonth" id="january"><h2 class="fmonth">January 2030</h2>
 <ul class="frows">
       <li class="frow" data-k="regional"><div class="fday"><b>13</b><small>Sun</small></div><div class="fbody"><a href="/muhurtha/festivals/bhogi/">Bhogi</a><p>Old things burn in a dawn bonfire and the Pongal festival begins.</p></div><span class="fkind regional">Regional</span></li>
@@ -272,6 +273,7 @@
       <li class="frow" data-k="observance"><div class="fday"><b>16</b><small>Mon</small></div><div class="fbody"><a href="/muhurtha/festivals/dhanu-sankranti/">Dhanu Sankranti</a><p>The day the Sun enters Sagittarius</p></div><span class="fkind observance">Observance</span></li>
       <li class="frow" data-k="observance"><div class="fday"><b>24</b><small>Tue</small></div><div class="fbody"><a href="/muhurtha/festivals/bhaumvati-amavasya/">Bhaumvati Amavasya</a><p>A new moon on a Tuesday — ancestors remembered, Hanuman and Mangal worshipped.</p></div><span class="fkind observance">Observance</span></li>
       </ul></section>
+      <p class="fempty" id="yempty" hidden>No festivals match. Try another spelling, or choose All.</p>
       <h2>Common questions about 2030</h2>
       <h3>When is Makar Sankranti in 2030?</h3>
 <p>Makar Sankranti falls on Monday, 14 January 2030, for Mumbai. The Sun enters Capricorn — kites, til, harvest. <a href="/muhurtha/festivals/makar-sankranti/">More about it</a></p>
@@ -297,17 +299,31 @@
       <script>
 (function () {
   var bar = document.getElementById("yk"), chips = [].slice.call(bar.querySelectorAll(".chip"));
+  var box = document.getElementById("yq"), empty = document.getElementById("yempty");
   var rows = [].slice.call(document.querySelectorAll(".ymonth .frow")), months = [].slice.call(document.querySelectorAll(".ymonth"));
-  function show(k, remember) {
-    chips.forEach(function (c) { c.setAttribute("aria-pressed", String(c.dataset.k === k)); });
-    rows.forEach(function (r) { r.hidden = !!k && r.dataset.k !== k; });
+  var kind = "";
+  rows.forEach(function (r) { r.dataset.s = r.querySelector(".fbody").textContent.toLowerCase(); });
+  function show(remember) {
+    var needle = box.value.trim().toLowerCase();
+    chips.forEach(function (c) { c.setAttribute("aria-pressed", String(c.dataset.k === kind)); });
+    rows.forEach(function (r) { r.hidden = (!!kind && r.dataset.k !== kind) || (!!needle && r.dataset.s.indexOf(needle) < 0); });
     months.forEach(function (m) { m.hidden = !m.querySelector(".frow:not([hidden])"); });
-    if (remember) history.replaceState(null, "", k === "major" ? location.pathname : location.pathname + "?k=" + (k || "all"));
+    empty.hidden = months.some(function (m) { return !m.hidden; });
+    if (remember) {
+      var p = new URLSearchParams();
+      if (kind) p.set("k", kind);
+      if (needle) p.set("q", box.value.trim());
+      var q = p.toString();
+      history.replaceState(null, "", location.pathname + (q ? "?" + q : ""));
+    }
   }
-  chips.forEach(function (c) { c.addEventListener("click", function () { show(c.dataset.k, true); }); });
-  var asked = new URLSearchParams(location.search).get("k");
-  bar.hidden = false;
-  show(asked === "all" ? "" : (asked === "regional" || asked === "observance") ? asked : "major", false);
+  chips.forEach(function (c) { c.addEventListener("click", function () { kind = c.dataset.k; show(true); }); });
+  box.addEventListener("input", function () { show(true); });
+  var asked = new URLSearchParams(location.search);
+  kind = ["major", "regional", "observance"].indexOf(asked.get("k")) >= 0 ? asked.get("k") : "";
+  box.value = asked.get("q") || "";
+  bar.hidden = false; box.hidden = false;
+  show(false);
 })();
 </script>
       <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://aniketshetty.com/"}, {"@type": "ListItem", "position": 2, "name": "Muhurtha", "item": "https://aniketshetty.com/muhurtha/"}, {"@type": "ListItem", "position": 3, "name": "Festivals", "item": "https://aniketshetty.com/muhurtha/festivals/"}, {"@type": "ListItem", "position": 4, "name": "2030", "item": "https://aniketshetty.com/muhurtha/festivals/2030/"}]}</script>
