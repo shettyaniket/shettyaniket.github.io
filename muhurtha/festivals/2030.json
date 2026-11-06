@@ -1,0 +1,1988 @@
+{
+ "year": 2030,
+ "location": "Mumbai",
+ "source": "https://aniketshetty.com/muhurtha/festivals/2030/",
+ "festivals": [
+  {
+   "date": "2030-01-13",
+   "id": "bhogi",
+   "name": "Bhogi",
+   "kind": "regional",
+   "basis": "solar",
+   "traditions": [
+    "tamil",
+    "teluguKannada"
+   ],
+   "about": "Old things burn in a dawn bonfire and the Pongal festival begins.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/bhogi/"
+  },
+  {
+   "date": "2030-01-13",
+   "id": "lohri",
+   "name": "Lohri",
+   "kind": "regional",
+   "basis": "solar",
+   "traditions": [
+    "north",
+    "punjab"
+   ],
+   "about": "Bonfires, sesame and harvest songs on the night before Makar Sankranti (Punjab).",
+   "url": "https://aniketshetty.com/muhurtha/festivals/lohri/"
+  },
+  {
+   "date": "2030-01-14",
+   "id": "magh-bihu",
+   "name": "Magh Bihu · Bhogali Bihu",
+   "kind": "regional",
+   "basis": "solar",
+   "traditions": [
+    "bengalOdisha"
+   ],
+   "about": "Assam's harvest feast, with the Meji bonfire.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/magh-bihu/"
+  },
+  {
+   "date": "2030-01-14",
+   "id": "makar-sankranti",
+   "name": "Makar Sankranti · Pongal",
+   "kind": "major",
+   "basis": "solar",
+   "traditions": [
+    "gujarat",
+    "panIndian",
+    "punjab",
+    "tamil"
+   ],
+   "about": "The Sun enters Capricorn — kites, til, harvest.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/makar-sankranti/"
+  },
+  {
+   "date": "2030-01-15",
+   "id": "mattu-pongal",
+   "name": "Mattu Pongal · Kanuma",
+   "kind": "regional",
+   "basis": "solar",
+   "traditions": [
+    "tamil",
+    "teluguKannada"
+   ],
+   "about": "The day for cattle — bathed, decorated and thanked for the harvest.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/mattu-pongal/"
+  },
+  {
+   "date": "2030-01-15",
+   "id": "pausha-putrada-ekadashi",
+   "name": "Pausha Putrada Ekadashi",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Kept by couples hoping for a child.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/pausha-putrada-ekadashi/"
+  },
+  {
+   "date": "2030-01-16",
+   "id": "kaanum-pongal",
+   "name": "Kaanum Pongal · Kanu Pidi",
+   "kind": "regional",
+   "basis": "solar",
+   "traditions": [
+    "tamil"
+   ],
+   "about": "Families picnic by the river; sisters pray for their brothers' well-being.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/kaanum-pongal/"
+  },
+  {
+   "date": "2030-01-19",
+   "id": "pausha-purnima",
+   "name": "Pausha Purnima",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Magh snan begins; the Kumbh's first bathing day.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/pausha-purnima/"
+  },
+  {
+   "date": "2030-01-20",
+   "id": "thai-pusam",
+   "name": "Thaipusam",
+   "kind": "regional",
+   "basis": "solar",
+   "traditions": [
+    "tamil"
+   ],
+   "about": "Murugan receives the vel; kavadi carried in Tamil Nadu and Malaysia.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/thai-pusam/"
+  },
+  {
+   "date": "2030-02-07",
+   "id": "vasant-panchami",
+   "name": "Vasant Panchami",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "bengalOdisha",
+    "panIndian"
+   ],
+   "about": "Saraswati, spring, and yellow.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/vasant-panchami/"
+  },
+  {
+   "date": "2030-02-09",
+   "id": "advaita-saptami",
+   "name": "Advaita Acharya Appearance",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "vaishnava"
+   ],
+   "about": "The appearance of Shri Advaita Acharya.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/advaita-saptami/"
+  },
+  {
+   "date": "2030-02-09",
+   "id": "keddasa",
+   "name": "Keddasa",
+   "kind": "regional",
+   "basis": "solar",
+   "traditions": [
+    "tulu"
+   ],
+   "about": "Three days when the earth is said to menstruate; no digging or ploughing.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/keddasa/"
+  },
+  {
+   "date": "2030-02-09",
+   "id": "ratha-saptami",
+   "name": "Ratha Saptami",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The Sun turns his chariot north.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/ratha-saptami/"
+  },
+  {
+   "date": "2030-02-10",
+   "id": "bhishma-ashtami",
+   "name": "Bhishma Ashtami",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The day Bhishma chose to leave his body.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/bhishma-ashtami/"
+  },
+  {
+   "date": "2030-02-13",
+   "id": "kumbha-sankranti",
+   "name": "Kumbha Sankranti",
+   "kind": "observance",
+   "basis": "solar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The day the Sun enters Aquarius",
+   "url": "https://aniketshetty.com/muhurtha/festivals/kumbha-sankranti/"
+  },
+  {
+   "date": "2030-02-14",
+   "id": "jaya-ekadashi",
+   "name": "Jaya Ekadashi",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Freedom from the curse of a wandering spirit.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/jaya-ekadashi/"
+  },
+  {
+   "date": "2030-02-15",
+   "id": "varaha-dwadashi",
+   "name": "Varaha Dwadashi",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "vaishnava"
+   ],
+   "about": "The appearance of Lord Varahadeva.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/varaha-dwadashi/"
+  },
+  {
+   "date": "2030-02-16",
+   "id": "nityananda-trayodashi",
+   "name": "Nityananda Trayodashi",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "vaishnava"
+   ],
+   "about": "The appearance of Shri Nityananda Prabhu.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/nityananda-trayodashi/"
+  },
+  {
+   "date": "2030-02-18",
+   "id": "ravidas-jayanti",
+   "name": "Guru Ravidas Jayanti",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "north",
+    "punjab"
+   ],
+   "about": "The birthday of the Bhakti saint Ravidas, on the Magha full moon.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/ravidas-jayanti/"
+  },
+  {
+   "date": "2030-02-18",
+   "id": "magha-purnima",
+   "name": "Magha Purnima",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Holy dips; the Kumbh's big bathing day.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/magha-purnima/"
+  },
+  {
+   "date": "2030-02-19",
+   "id": "attukal-pongala",
+   "name": "Attukal Pongala",
+   "kind": "regional",
+   "basis": "solar",
+   "traditions": [
+    "kerala"
+   ],
+   "about": "Lakhs of women cook sweet pongala for Bhadrakali in Thiruvananthapuram, on Pooram.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/attukal-pongala/"
+  },
+  {
+   "date": "2030-02-22",
+   "id": "bhaktisiddhanta-appearance",
+   "name": "Bhaktisiddhanta Sarasvati Appearance",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "vaishnava"
+   ],
+   "about": "The appearance of Shrila Bhaktisiddhanta Sarasvati Thakura.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/bhaktisiddhanta-appearance/"
+  },
+  {
+   "date": "2030-03-02",
+   "id": "maha-shivaratri",
+   "name": "Maha Shivaratri",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The great night of Shiva.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/maha-shivaratri/"
+  },
+  {
+   "date": "2030-03-04",
+   "id": "somvati-amavasya",
+   "name": "Somvati Amavasya",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "A new moon on a Monday — a river dip, and circling the peepal tree 108 times.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/somvati-amavasya/"
+  },
+  {
+   "date": "2030-03-06",
+   "id": "phulera-dooj",
+   "name": "Phulera Dooj",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "north"
+   ],
+   "about": "Braj begins its Holi season with flowers.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/phulera-dooj/"
+  },
+  {
+   "date": "2030-03-15",
+   "id": "amalaki-ekadashi",
+   "name": "Amalaki Ekadashi",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The amla tree worshipped as Vishnu's dwelling.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/amalaki-ekadashi/"
+  },
+  {
+   "date": "2030-03-15",
+   "id": "meena-sankranti",
+   "name": "Meena Sankranti",
+   "kind": "observance",
+   "basis": "solar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The day the Sun enters Pisces",
+   "url": "https://aniketshetty.com/muhurtha/festivals/meena-sankranti/"
+  },
+  {
+   "date": "2030-03-19",
+   "id": "gaura-purnima",
+   "name": "Gaura Purnima",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "vaishnava"
+   ],
+   "about": "The appearance of Shri Chaitanya Mahaprabhu.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/gaura-purnima/"
+  },
+  {
+   "date": "2030-03-19",
+   "id": "holika-dahan",
+   "name": "Holika Dahan",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The bonfire the night before Holi.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/holika-dahan/"
+  },
+  {
+   "date": "2030-03-20",
+   "id": "holi",
+   "name": "Holi",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Colours, water, and no rules.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/holi/"
+  },
+  {
+   "date": "2030-03-20",
+   "id": "panguni-uthiram",
+   "name": "Panguni Uthiram",
+   "kind": "regional",
+   "basis": "solar",
+   "traditions": [
+    "tamil"
+   ],
+   "about": "Divine weddings — Murugan and Deivanai, Shiva and Parvati — celebrated at Tamil temples.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/panguni-uthiram/"
+  },
+  {
+   "date": "2030-03-21",
+   "id": "tukaram-beej",
+   "name": "Sant Tukaram Beej",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "maharashtra"
+   ],
+   "about": "The day Sant Tukaram is remembered as going to Vaikuntha, observed at Dehu.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/tukaram-beej/"
+  },
+  {
+   "date": "2030-03-24",
+   "id": "rangpanchami",
+   "name": "Rangpanchami",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "maharashtra"
+   ],
+   "about": "Holi's last day of colour, five days on (Maharashtra, MP).",
+   "url": "https://aniketshetty.com/muhurtha/festivals/rangpanchami/"
+  },
+  {
+   "date": "2030-03-25",
+   "id": "sheetala-saptami",
+   "name": "Sheetala Saptami",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "gujarat"
+   ],
+   "about": "Cold food for the goddess of healing (Gujarat, Rajasthan).",
+   "url": "https://aniketshetty.com/muhurtha/festivals/sheetala-saptami/"
+  },
+  {
+   "date": "2030-03-26",
+   "id": "shitala-ashtami",
+   "name": "Shitala Ashtami",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "north"
+   ],
+   "about": "Basoda — cold food offered to the goddess Shitala.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/shitala-ashtami/"
+  },
+  {
+   "date": "2030-03-29",
+   "id": "papmochani-ekadashi",
+   "name": "Papmochani Ekadashi",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The last Ekadashi of the lunar year.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/papmochani-ekadashi/"
+  },
+  {
+   "date": "2030-04-02",
+   "id": "bhaumvati-amavasya",
+   "name": "Bhaumvati Amavasya",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "A new moon on a Tuesday — ancestors remembered, Hanuman and Mangal worshipped.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/bhaumvati-amavasya/"
+  },
+  {
+   "date": "2030-04-03",
+   "id": "ghatasthapana",
+   "name": "Chaitra Navratri begins",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Spring Navratri; nine nights of the Goddess before Ram Navami.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/ghatasthapana/"
+  },
+  {
+   "date": "2030-04-03",
+   "id": "ugadi",
+   "name": "Ugadi · Gudi Padwa",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "maharashtra",
+    "panIndian",
+    "teluguKannada"
+   ],
+   "about": "Lunar new year in Maharashtra, Karnataka, Andhra and Telangana; Chaitra Navratri begins.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/ugadi/"
+  },
+  {
+   "date": "2030-04-04",
+   "id": "cheti-chand",
+   "name": "Cheti Chand",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "gujarat",
+    "maharashtra"
+   ],
+   "about": "Sindhi new year and the birth of Jhulelal.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/cheti-chand/"
+  },
+  {
+   "date": "2030-04-06",
+   "id": "chaitra-gauri",
+   "name": "Chaitra Gauri · Haldi Kunku begins",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "maharashtra"
+   ],
+   "about": "A month of Gauri worship with haldi-kunku gatherings for married women, ending on Akshaya Tritiya.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/chaitra-gauri/"
+  },
+  {
+   "date": "2030-04-06",
+   "id": "gangaur",
+   "name": "Gangaur",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "north"
+   ],
+   "about": "Rajasthan's festival of Gauri, marital happiness and spring.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/gangaur/"
+  },
+  {
+   "date": "2030-04-06",
+   "id": "matsya-jayanti",
+   "name": "Matsya Jayanti",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Vishnu's first avatar, the fish who saved the Vedas.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/matsya-jayanti/"
+  },
+  {
+   "date": "2030-04-08",
+   "id": "ramanujacharya-jayanti",
+   "name": "Ramanujacharya Jayanti",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "vaishnava"
+   ],
+   "about": "The appearance of Shri Ramanujacharya.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/ramanujacharya-jayanti/"
+  },
+  {
+   "date": "2030-04-09",
+   "id": "yamuna-jayanti",
+   "name": "Yamuna Jayanti",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "north"
+   ],
+   "about": "The river Yamuna's descent to earth.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/yamuna-jayanti/"
+  },
+  {
+   "date": "2030-04-10",
+   "id": "navapada-oli-chaitra",
+   "name": "Navapada Oli begins",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "jain"
+   ],
+   "about": "Nine days of simple ayambil meals and prayer to the nine padas (Jain).",
+   "url": "https://aniketshetty.com/muhurtha/festivals/navapada-oli-chaitra/"
+  },
+  {
+   "date": "2030-04-11",
+   "id": "ashoka-ashtami",
+   "name": "Ashoka Ashtami",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Durga Ashtami of the spring Navratri.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/ashoka-ashtami/"
+  },
+  {
+   "date": "2030-04-12",
+   "id": "ram-navami",
+   "name": "Ram Navami",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Rama's birthday, celebrated at midday.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/ram-navami/"
+  },
+  {
+   "date": "2030-04-14",
+   "id": "bisu-parba",
+   "name": "Bisu Parba",
+   "kind": "regional",
+   "basis": "solar",
+   "traditions": [
+    "tulu"
+   ],
+   "about": "Tulu new year — the Bisu kani is arranged the night before and seen first thing.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/bisu-parba/"
+  },
+  {
+   "date": "2030-04-14",
+   "id": "mesha-sankranti",
+   "name": "Vishu · Baisakhi · Puthandu · Pohela Boishakh",
+   "kind": "major",
+   "basis": "solar",
+   "traditions": [
+    "bengalOdisha",
+    "kerala",
+    "panIndian",
+    "punjab",
+    "tamil",
+    "tulu"
+   ],
+   "about": "Solar new year across Kerala, Punjab, Tamil Nadu, Bengal, Assam, Odisha.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/mesha-sankranti/"
+  },
+  {
+   "date": "2030-04-16",
+   "id": "anang-trayodashi",
+   "name": "Anang Trayodashi",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "A spring day for Kamadeva and Rati, kept for love and a happy marriage.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/anang-trayodashi/"
+  },
+  {
+   "date": "2030-04-16",
+   "id": "mahavir-jayanti",
+   "name": "Mahavir Jayanti",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The birth of Mahavira, the 24th Jain Tirthankara.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/mahavir-jayanti/"
+  },
+  {
+   "date": "2030-04-18",
+   "id": "hanuman-jayanti",
+   "name": "Hanuman Jayanti",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Hanuman's birthday on the Chaitra full moon.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/hanuman-jayanti/"
+  },
+  {
+   "date": "2030-04-28",
+   "id": "varuthini-ekadashi",
+   "name": "Varuthini Ekadashi",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Protection and prosperity; charity of gold or land.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/varuthini-ekadashi/"
+  },
+  {
+   "date": "2030-05-05",
+   "id": "akshaya-tritiya",
+   "name": "Akshaya Tritiya",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The never-diminishing day — gold, ventures, weddings.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/akshaya-tritiya/"
+  },
+  {
+   "date": "2030-05-05",
+   "id": "parashurama-jayanti",
+   "name": "Parashurama Jayanti",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The axe-wielding sixth avatar of Vishnu.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/parashurama-jayanti/"
+  },
+  {
+   "date": "2030-05-07",
+   "id": "shankara-jayanti",
+   "name": "Adi Shankara Jayanti",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "kerala",
+    "panIndian"
+   ],
+   "about": "The philosopher who unified Advaita Vedanta.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/shankara-jayanti/"
+  },
+  {
+   "date": "2030-05-11",
+   "id": "sita-navami",
+   "name": "Sita Navami",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Sita's appearance from the earth, kept at midday.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/sita-navami/"
+  },
+  {
+   "date": "2030-05-15",
+   "id": "vrishabha-sankranti",
+   "name": "Vrishabha Sankranti",
+   "kind": "observance",
+   "basis": "solar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The day the Sun enters Taurus",
+   "url": "https://aniketshetty.com/muhurtha/festivals/vrishabha-sankranti/"
+  },
+  {
+   "date": "2030-05-16",
+   "id": "narasimha-jayanti",
+   "name": "Narasimha Jayanti",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Vishnu's man-lion form, worshipped at twilight.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/narasimha-jayanti/"
+  },
+  {
+   "date": "2030-05-17",
+   "id": "buddha-purnima",
+   "name": "Buddha Purnima",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Birth, enlightenment and passing of the Buddha.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/buddha-purnima/"
+  },
+  {
+   "date": "2030-05-17",
+   "id": "kurma-jayanti",
+   "name": "Kurma Jayanti",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Vishnu as the tortoise who bore the churning mountain.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/kurma-jayanti/"
+  },
+  {
+   "date": "2030-05-27",
+   "id": "apara-ekadashi",
+   "name": "Apara Ekadashi",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Boundless merit; kept before the summer solstice.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/apara-ekadashi/"
+  },
+  {
+   "date": "2030-06-01",
+   "id": "pattanaje",
+   "name": "Pattanaje",
+   "kind": "regional",
+   "basis": "solar",
+   "traditions": [
+    "tulu"
+   ],
+   "about": "Closes the Yakshagana and Bhuta Kola season until the rains pass.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/pattanaje/"
+  },
+  {
+   "date": "2030-06-01",
+   "id": "shani-jayanti",
+   "name": "Shani Jayanti",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Saturn's birthday; oil offered at Shani temples.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/shani-jayanti/"
+  },
+  {
+   "date": "2030-06-01",
+   "id": "vat-savitri",
+   "name": "Vat Savitri Amavasya",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "north"
+   ],
+   "about": "Savitri's vow, kept on the new moon in North India.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/vat-savitri/"
+  },
+  {
+   "date": "2030-06-11",
+   "id": "ganga-dussehra",
+   "name": "Ganga Dussehra",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "north"
+   ],
+   "about": "The Ganga's descent to earth; a dip in the river.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/ganga-dussehra/"
+  },
+  {
+   "date": "2030-06-12",
+   "id": "gayatri-jayanti",
+   "name": "Gayatri Jayanti",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The day the Gayatri mantra was revealed.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/gayatri-jayanti/"
+  },
+  {
+   "date": "2030-06-12",
+   "id": "nirjala-ekadashi",
+   "name": "Nirjala Ekadashi",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The strictest Ekadashi — kept without even water; Bhima's Ekadashi.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/nirjala-ekadashi/"
+  },
+  {
+   "date": "2030-06-15",
+   "id": "mithuna-sankranti",
+   "name": "Mithuna Sankranti",
+   "kind": "observance",
+   "basis": "solar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The day the Sun enters Gemini",
+   "url": "https://aniketshetty.com/muhurtha/festivals/mithuna-sankranti/"
+  },
+  {
+   "date": "2030-06-15",
+   "id": "snana-yatra",
+   "name": "Snana Yatra",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "vaishnava"
+   ],
+   "about": "The bathing festival of Lord Jagannatha.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/snana-yatra/"
+  },
+  {
+   "date": "2030-06-15",
+   "id": "vat-purnima",
+   "name": "Vat Purnima",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "gujarat",
+    "maharashtra"
+   ],
+   "about": "Savitri's vow — married women circle the banyan tree (Maharashtra, Gujarat).",
+   "url": "https://aniketshetty.com/muhurtha/festivals/vat-purnima/"
+  },
+  {
+   "date": "2030-07-02",
+   "id": "rath-yatra",
+   "name": "Jagannath Rath Yatra",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "bengalOdisha",
+    "panIndian"
+   ],
+   "about": "Puri's chariot festival.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/rath-yatra/"
+  },
+  {
+   "date": "2030-07-11",
+   "id": "devshayani-ekadashi",
+   "name": "Devshayani (Ashadhi) Ekadashi",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "maharashtra",
+    "panIndian"
+   ],
+   "about": "Vishnu begins his four-month sleep and Chaturmas starts; the Pandharpur Wari reaches Vitthal.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/devshayani-ekadashi/"
+  },
+  {
+   "date": "2030-07-11",
+   "id": "gauri-vrat",
+   "name": "Gauri Vrat begins",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "gujarat"
+   ],
+   "about": "Five days of fasting by unmarried girls in Gujarat.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/gauri-vrat/"
+  },
+  {
+   "date": "2030-07-14",
+   "id": "kokila-vrat",
+   "name": "Kokila Vrat",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Parvati as the cuckoo; a month-long vow that begins on Ashadha Purnima.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/kokila-vrat/"
+  },
+  {
+   "date": "2030-07-15",
+   "id": "guru-purnima",
+   "name": "Guru Purnima",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Honouring teachers; Vyasa's birthday.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/guru-purnima/"
+  },
+  {
+   "date": "2030-07-17",
+   "id": "karka-sankranti",
+   "name": "Karka Sankranti",
+   "kind": "observance",
+   "basis": "solar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The day the Sun enters Cancer",
+   "url": "https://aniketshetty.com/muhurtha/festivals/karka-sankranti/"
+  },
+  {
+   "date": "2030-07-30",
+   "id": "aati-amavasya",
+   "name": "Aati Amavasya",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "tulu"
+   ],
+   "about": "The monsoon new moon — paleda kashaya, a bitter bark drink, is taken at dawn.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/aati-amavasya/"
+  },
+  {
+   "date": "2030-07-30",
+   "id": "bhaumvati-amavasya",
+   "name": "Bhaumvati Amavasya",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "A new moon on a Tuesday — ancestors remembered, Hanuman and Mangal worshipped.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/bhaumvati-amavasya/"
+  },
+  {
+   "date": "2030-07-30",
+   "id": "gatari-amavasya",
+   "name": "Gatari Amavasya",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "maharashtra"
+   ],
+   "about": "Maharashtra's feast day and Dipa Pooja on Ashadha Amavasya, before vegetarian Shravan begins.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/gatari-amavasya/"
+  },
+  {
+   "date": "2030-08-02",
+   "id": "hariyali-teej",
+   "name": "Hariyali Teej",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "north"
+   ],
+   "about": "Monsoon swings and green saris for Parvati (North India).",
+   "url": "https://aniketshetty.com/muhurtha/festivals/hariyali-teej/"
+  },
+  {
+   "date": "2030-08-04",
+   "id": "nag-panchami",
+   "name": "Nag Panchami",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Serpent worship at the height of the monsoon.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/nag-panchami/"
+  },
+  {
+   "date": "2030-08-05",
+   "id": "shravan-somvar",
+   "name": "Shravan Somvar begins",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The Mondays of Shravan, the most auspicious for Shiva.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/shravan-somvar/"
+  },
+  {
+   "date": "2030-08-09",
+   "id": "varalakshmi-vratam",
+   "name": "Varalakshmi Vratam",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "maharashtra",
+    "tamil",
+    "teluguKannada"
+   ],
+   "about": "Married women worship Lakshmi on the Friday before Shravana Purnima.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/varalakshmi-vratam/"
+  },
+  {
+   "date": "2030-08-13",
+   "id": "narali-purnima",
+   "name": "Narali Purnima",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "maharashtra"
+   ],
+   "about": "Fishing communities offer a coconut to the sea and reopen the waters after the monsoon, on the day Raksha Bandhan falls.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/narali-purnima/"
+  },
+  {
+   "date": "2030-08-13",
+   "id": "raksha-bandhan",
+   "name": "Raksha Bandhan",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Siblings' day — the rakhi thread.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/raksha-bandhan/"
+  },
+  {
+   "date": "2030-08-16",
+   "id": "kajari-teej",
+   "name": "Kajari Teej",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "north"
+   ],
+   "about": "Monsoon songs and a fast for married women (UP, Bihar, MP).",
+   "url": "https://aniketshetty.com/muhurtha/festivals/kajari-teej/"
+  },
+  {
+   "date": "2030-08-17",
+   "id": "simha-sankranti",
+   "name": "Simha Sankranti",
+   "kind": "observance",
+   "basis": "solar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The day the Sun enters Leo",
+   "url": "https://aniketshetty.com/muhurtha/festivals/simha-sankranti/"
+  },
+  {
+   "date": "2030-08-20",
+   "id": "janmashtami",
+   "name": "Krishna Janmashtami",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Krishna's birth at midnight.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/janmashtami/"
+  },
+  {
+   "date": "2030-08-21",
+   "id": "dahi-handi",
+   "name": "Dahi Handi",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "maharashtra",
+    "panIndian",
+    "tulu"
+   ],
+   "about": "Human pyramids break the pot of curd, as the young Krishna did.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/dahi-handi/"
+  },
+  {
+   "date": "2030-08-21",
+   "id": "mosaru-kudike",
+   "name": "Mosaru Kudike · Vittal Pindi",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "tulu"
+   ],
+   "about": "The day after Janmashtami, Udupi's Krishna Matha breaks the curd pots in its Leelotsava.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/mosaru-kudike/"
+  },
+  {
+   "date": "2030-08-22",
+   "id": "prabhupada-appearance",
+   "name": "Prabhupada Appearance Day",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "vaishnava"
+   ],
+   "about": "The appearance of Shrila A. C. Bhaktivedanta Swami Prabhupada.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/prabhupada-appearance/"
+  },
+  {
+   "date": "2030-08-28",
+   "id": "pola",
+   "name": "Bail Pola · Pithori Amavasya",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "maharashtra"
+   ],
+   "about": "Farmers honour their oxen; mothers keep Pithori Vrat for their children.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/pola/"
+  },
+  {
+   "date": "2030-08-31",
+   "id": "hartalika-teej",
+   "name": "Hartalika Teej",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "north"
+   ],
+   "about": "Parvati's fast to win Shiva.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/hartalika-teej/"
+  },
+  {
+   "date": "2030-09-01",
+   "id": "ganesh-chaturthi",
+   "name": "Ganesh Chaturthi",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "maharashtra",
+    "panIndian",
+    "tulu"
+   ],
+   "about": "Ganesha comes home for ten days.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/ganesh-chaturthi/"
+  },
+  {
+   "date": "2030-09-02",
+   "id": "rishi-panchami",
+   "name": "Rishi Panchami",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Honouring the seven sages; kept after Hartalika Teej.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/rishi-panchami/"
+  },
+  {
+   "date": "2030-09-04",
+   "id": "gauri-avahana",
+   "name": "Gauri Avahana",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "maharashtra"
+   ],
+   "about": "Jyeshtha Gauri is welcomed home during Ganeshotsav, on Anuradha nakshatra.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/gauri-avahana/"
+  },
+  {
+   "date": "2030-09-05",
+   "id": "gauri-pujan",
+   "name": "Gauri Pujan",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "maharashtra"
+   ],
+   "about": "The main worship of Gauri, with a feast, on Jyeshtha nakshatra.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/gauri-pujan/"
+  },
+  {
+   "date": "2030-09-05",
+   "id": "mahalakshmi-vrat",
+   "name": "Mahalakshmi Vrat begins",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "maharashtra",
+    "north"
+   ],
+   "about": "Sixteen days of fasting for Lakshmi.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/mahalakshmi-vrat/"
+  },
+  {
+   "date": "2030-09-05",
+   "id": "radha-ashtami",
+   "name": "Radha Ashtami",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "north",
+    "panIndian"
+   ],
+   "about": "Radha's birthday, fifteen days after Krishna's.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/radha-ashtami/"
+  },
+  {
+   "date": "2030-09-06",
+   "id": "gauri-visarjan",
+   "name": "Gauri Visarjan",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "maharashtra"
+   ],
+   "about": "Gauri is sent off, on Mula nakshatra.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/gauri-visarjan/"
+  },
+  {
+   "date": "2030-09-08",
+   "id": "vamana-jayanti",
+   "name": "Vamana Jayanti",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Vishnu as the dwarf who measured the worlds in three steps.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/vamana-jayanti/"
+  },
+  {
+   "date": "2030-09-09",
+   "id": "bhaktivinoda-appearance",
+   "name": "Bhaktivinoda Thakura Appearance",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "vaishnava"
+   ],
+   "about": "The appearance of Shrila Bhaktivinoda Thakura.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/bhaktivinoda-appearance/"
+  },
+  {
+   "date": "2030-09-09",
+   "id": "onam",
+   "name": "Onam · Thiruvonam",
+   "kind": "regional",
+   "basis": "solar",
+   "traditions": [
+    "kerala"
+   ],
+   "about": "Kerala's harvest festival — King Mahabali comes home.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/onam/"
+  },
+  {
+   "date": "2030-09-10",
+   "id": "anant-chaturdashi",
+   "name": "Anant Chaturdashi",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "maharashtra",
+    "panIndian"
+   ],
+   "about": "Ganesh visarjan; Vishnu as Anant.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/anant-chaturdashi/"
+  },
+  {
+   "date": "2030-09-12",
+   "id": "pitru-paksha",
+   "name": "Pitru Paksha begins",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "A fortnight for ancestors.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/pitru-paksha/"
+  },
+  {
+   "date": "2030-09-17",
+   "id": "kanya-sankranti",
+   "name": "Kanya Sankranti",
+   "kind": "observance",
+   "basis": "solar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The day the Sun enters Virgo",
+   "url": "https://aniketshetty.com/muhurtha/festivals/kanya-sankranti/"
+  },
+  {
+   "date": "2030-09-17",
+   "id": "koral-parba",
+   "name": "Koral Parba · Kadiru Habba",
+   "kind": "regional",
+   "basis": "solar",
+   "traditions": [
+    "tulu"
+   ],
+   "about": "The first sheaves of the new rice are cut, offered and eaten. The day varies by family, and Tulu panchangas differ on it.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/koral-parba/"
+  },
+  {
+   "date": "2030-09-20",
+   "id": "jivitputrika",
+   "name": "Jivitputrika (Jitiya)",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "north"
+   ],
+   "about": "Mothers fast without water for their children (Bihar, UP, Jharkhand).",
+   "url": "https://aniketshetty.com/muhurtha/festivals/jivitputrika/"
+  },
+  {
+   "date": "2030-09-27",
+   "id": "bathukamma",
+   "name": "Bathukamma begins",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "teluguKannada"
+   ],
+   "about": "Telangana's nine days of flower stacks for the goddess begin on Mahalaya Amavasya and end at Saddula Bathukamma.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/bathukamma/"
+  },
+  {
+   "date": "2030-09-27",
+   "id": "mahalaya",
+   "name": "Mahalaya Amavasya",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "bengalOdisha",
+    "panIndian"
+   ],
+   "about": "Pitru Paksha ends; Durga is invited (Bengal).",
+   "url": "https://aniketshetty.com/muhurtha/festivals/mahalaya/"
+  },
+  {
+   "date": "2030-09-28",
+   "id": "navratri",
+   "name": "Sharad Navratri begins",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "gujarat",
+    "panIndian",
+    "tulu"
+   ],
+   "about": "Nine nights of the Goddess; Ghatasthapana.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/navratri/"
+  },
+  {
+   "date": "2030-10-02",
+   "id": "maha-shashthi",
+   "name": "Maha Shashthi",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "bengalOdisha"
+   ],
+   "about": "Durga Puja begins — the goddess is welcomed at Bodhon.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/maha-shashthi/"
+  },
+  {
+   "date": "2030-10-03",
+   "id": "maha-saptami",
+   "name": "Maha Saptami",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "bengalOdisha"
+   ],
+   "about": "The goddess is installed with Nabapatrika, the nine-plant bathing.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/maha-saptami/"
+  },
+  {
+   "date": "2030-10-03",
+   "id": "navapada-oli-ashwina",
+   "name": "Navapada Oli begins",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "jain"
+   ],
+   "about": "Nine days of simple ayambil meals and prayer to the nine padas (Jain).",
+   "url": "https://aniketshetty.com/muhurtha/festivals/navapada-oli-ashwina/"
+  },
+  {
+   "date": "2030-10-03",
+   "id": "saraswati-puja",
+   "name": "Navratri Saraswati Puja",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "kerala",
+    "tamil",
+    "teluguKannada"
+   ],
+   "about": "Books, instruments and tools are worshipped on the Mula nakshatra of Navratri.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/saraswati-puja/"
+  },
+  {
+   "date": "2030-10-04",
+   "id": "durga-ashtami",
+   "name": "Durga Ashtami",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "bengalOdisha",
+    "panIndian"
+   ],
+   "about": "The eighth night — Maha Ashtami, kanya puja.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/durga-ashtami/"
+  },
+  {
+   "date": "2030-10-05",
+   "id": "ayudha-puja",
+   "name": "Ayudha Puja",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "kerala",
+    "tamil",
+    "teluguKannada",
+    "tulu"
+   ],
+   "about": "Tools, books and vehicles are cleaned and worshipped on Navami, in Karnataka, Tamil Nadu, Kerala and Tulu Nadu.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/ayudha-puja/"
+  },
+  {
+   "date": "2030-10-05",
+   "id": "maha-navami",
+   "name": "Maha Navami",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "bengalOdisha",
+    "panIndian"
+   ],
+   "about": "The ninth night; Ayudha Puja in the South.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/maha-navami/"
+  },
+  {
+   "date": "2030-10-06",
+   "id": "dussehra",
+   "name": "Dussehra · Vijayadashami",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian",
+    "tulu"
+   ],
+   "about": "Good over evil — Ravana burns, Durga returns.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/dussehra/"
+  },
+  {
+   "date": "2030-10-10",
+   "id": "kojagari-lakshmi",
+   "name": "Kojagari Lakshmi Puja",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "bengalOdisha",
+    "maharashtra"
+   ],
+   "about": "Lakshmi is worshipped at home and the household stays awake under the full moon; in Maharashtra, spiced milk is shared.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/kojagari-lakshmi/"
+  },
+  {
+   "date": "2030-10-11",
+   "id": "sharad-purnima",
+   "name": "Sharad Purnima",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Kojagiri — kheer under the brightest moon.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/sharad-purnima/"
+  },
+  {
+   "date": "2030-10-11",
+   "id": "valmiki-jayanti",
+   "name": "Valmiki Jayanti",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The birthday of Maharishi Valmiki, composer of the Ramayana.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/valmiki-jayanti/"
+  },
+  {
+   "date": "2030-10-15",
+   "id": "karwa-chauth",
+   "name": "Karwa Chauth",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "north"
+   ],
+   "about": "A day-long fast broken at moonrise (North India).",
+   "url": "https://aniketshetty.com/muhurtha/festivals/karwa-chauth/"
+  },
+  {
+   "date": "2030-10-18",
+   "id": "tula-sankranti",
+   "name": "Tula Sankranti",
+   "kind": "observance",
+   "basis": "solar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The day the Sun enters Libra",
+   "url": "https://aniketshetty.com/muhurtha/festivals/tula-sankranti/"
+  },
+  {
+   "date": "2030-10-19",
+   "id": "ahoi-ashtami",
+   "name": "Ahoi Ashtami",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "north"
+   ],
+   "about": "Mothers fast for their children (North India).",
+   "url": "https://aniketshetty.com/muhurtha/festivals/ahoi-ashtami/"
+  },
+  {
+   "date": "2030-10-23",
+   "id": "govatsa-dwadashi",
+   "name": "Govatsa Dwadashi",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "gujarat",
+    "maharashtra"
+   ],
+   "about": "Vasu Baras — cows and calves honoured as Diwali opens.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/govatsa-dwadashi/"
+  },
+  {
+   "date": "2030-10-24",
+   "id": "dhanteras",
+   "name": "Dhanteras",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Diwali begins — buy something metal.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/dhanteras/"
+  },
+  {
+   "date": "2030-10-25",
+   "id": "narak-chaturdashi",
+   "name": "Narak Chaturdashi · Choti Diwali",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Krishna defeats Narakasura; the oil bath before dawn.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/narak-chaturdashi/"
+  },
+  {
+   "date": "2030-10-26",
+   "id": "diwali",
+   "name": "Diwali · Lakshmi Puja",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The festival of lights, on the darkest night.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/diwali/"
+  },
+  {
+   "date": "2030-10-26",
+   "id": "kali-puja",
+   "name": "Kali Puja",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "bengalOdisha"
+   ],
+   "about": "Bengal and Odisha worship Kali at midnight on the new moon, the same night most of India lights Diwali lamps.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/kali-puja/"
+  },
+  {
+   "date": "2030-10-27",
+   "id": "govardhan",
+   "name": "Govardhan Puja · Bali Pratipada",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "gujarat",
+    "panIndian"
+   ],
+   "about": "Krishna lifts the hill; Gujarati new year.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/govardhan/"
+  },
+  {
+   "date": "2030-10-28",
+   "id": "bhai-dooj",
+   "name": "Bhai Dooj",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Sisters host brothers; Diwali's last day.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/bhai-dooj/"
+  },
+  {
+   "date": "2030-10-30",
+   "id": "chhath-nahay-khay",
+   "name": "Chhath: Nahay Khay",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "north"
+   ],
+   "about": "Chhath begins with a holy bath and a simple meal.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/chhath-nahay-khay/"
+  },
+  {
+   "date": "2030-10-31",
+   "id": "chhath-kharna",
+   "name": "Chhath: Kharna",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "north"
+   ],
+   "about": "A day-long fast broken at dusk with kheer, before the 36-hour waterless fast.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/chhath-kharna/"
+  },
+  {
+   "date": "2030-11-01",
+   "id": "chhath",
+   "name": "Chhath Puja",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "north"
+   ],
+   "about": "Sun worship at the river (Bihar, UP, Jharkhand).",
+   "url": "https://aniketshetty.com/muhurtha/festivals/chhath/"
+  },
+  {
+   "date": "2030-11-01",
+   "id": "skanda-sashti-kartika",
+   "name": "Kanda Sashti",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "tamil"
+   ],
+   "about": "Six days for Murugan, ending in the defeat of Surapadman.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/skanda-sashti-kartika/"
+  },
+  {
+   "date": "2030-11-02",
+   "id": "chhath-usha-arghya",
+   "name": "Chhath: Usha Arghya",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "north"
+   ],
+   "about": "Offerings to the rising Sun end the Chhath fast.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/chhath-usha-arghya/"
+  },
+  {
+   "date": "2030-11-02",
+   "id": "gopashtami",
+   "name": "Gopashtami",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "north"
+   ],
+   "about": "Krishna became a cowherd; cows are decorated and fed.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/gopashtami/"
+  },
+  {
+   "date": "2030-11-03",
+   "id": "akshaya-navami",
+   "name": "Akshaya Navami",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "north"
+   ],
+   "about": "Amla Navami — a meal eaten under the gooseberry tree.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/akshaya-navami/"
+  },
+  {
+   "date": "2030-11-04",
+   "id": "kansa-vadh",
+   "name": "Kansa Vadh",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "north"
+   ],
+   "about": "Krishna's defeat of his uncle Kansa, marked in Mathura.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/kansa-vadh/"
+  },
+  {
+   "date": "2030-11-05",
+   "id": "prabodhini-ekadashi",
+   "name": "Prabodhini (Devutthana) Ekadashi",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Vishnu wakes, Chaturmas ends and the season of weddings and Tulsi Vivah begins.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/prabodhini-ekadashi/"
+  },
+  {
+   "date": "2030-11-06",
+   "id": "tulsi-vivah",
+   "name": "Tulsi Vivah",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The tulsi plant is married to Vishnu; wedding season opens.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/tulsi-vivah/"
+  },
+  {
+   "date": "2030-11-08",
+   "id": "vaikuntha-chaturdashi",
+   "name": "Vaikuntha Chaturdashi",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Shiva and Vishnu worshipped together at midnight.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/vaikuntha-chaturdashi/"
+  },
+  {
+   "date": "2030-11-10",
+   "id": "guru-nanak-jayanti",
+   "name": "Guru Nanak Jayanti · Gurpurab",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "north",
+    "punjab"
+   ],
+   "about": "The birthday of Guru Nanak, the first Sikh Guru, on Kartik Purnima.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/guru-nanak-jayanti/"
+  },
+  {
+   "date": "2030-11-10",
+   "id": "kartik-purnima",
+   "name": "Kartik Purnima · Dev Deepawali",
+   "kind": "major",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian",
+    "punjab"
+   ],
+   "about": "The gods' Diwali on the ghats; Guru Nanak Jayanti.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/kartik-purnima/"
+  },
+  {
+   "date": "2030-11-17",
+   "id": "vrishchika-sankranti",
+   "name": "Vrishchika Sankranti",
+   "kind": "observance",
+   "basis": "solar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The day the Sun enters Scorpio",
+   "url": "https://aniketshetty.com/muhurtha/festivals/vrishchika-sankranti/"
+  },
+  {
+   "date": "2030-11-18",
+   "id": "kalabhairav-jayanti",
+   "name": "Kalabhairav Jayanti",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "Shiva's fierce form, worshipped at midnight.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/kalabhairav-jayanti/"
+  },
+  {
+   "date": "2030-11-21",
+   "id": "utpanna-ekadashi",
+   "name": "Utpanna Ekadashi",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The Ekadashi on which Ekadashi herself was born.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/utpanna-ekadashi/"
+  },
+  {
+   "date": "2030-11-23",
+   "id": "dnyaneshwar-samadhi",
+   "name": "Sant Dnyaneshwar Sanjivan Samadhi",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "maharashtra"
+   ],
+   "about": "Sant Dnyaneshwar's samadhi at Alandi; the end of the Kartiki Wari for the Varkaris.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/dnyaneshwar-samadhi/"
+  },
+  {
+   "date": "2030-11-25",
+   "id": "somvati-amavasya",
+   "name": "Somvati Amavasya",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "A new moon on a Monday — a river dip, and circling the peepal tree 108 times.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/somvati-amavasya/"
+  },
+  {
+   "date": "2030-11-29",
+   "id": "vivah-panchami",
+   "name": "Vivah Panchami",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "north"
+   ],
+   "about": "The wedding of Rama and Sita, kept in Janakpur and Ayodhya.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/vivah-panchami/"
+  },
+  {
+   "date": "2030-11-30",
+   "id": "champa-shashthi",
+   "name": "Champa Shashthi (Khandoba)",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "maharashtra",
+    "teluguKannada"
+   ],
+   "about": "The last of Khandoba's six-day festival — turmeric, dry coconut and brinjal offered to the family deity.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/champa-shashthi/"
+  },
+  {
+   "date": "2030-11-30",
+   "id": "subrahmanya-shashthi",
+   "name": "Subrahmanya Shashthi",
+   "kind": "regional",
+   "basis": "lunar",
+   "traditions": [
+    "teluguKannada",
+    "tulu"
+   ],
+   "about": "Kukke Subrahmanya's car festival and the serpent pilgrimage in coastal Karnataka; the same tithi Maharashtra keeps for Khandoba.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/subrahmanya-shashthi/"
+  },
+  {
+   "date": "2030-12-05",
+   "id": "gita-jayanti",
+   "name": "Gita Jayanti",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The day the Bhagavad Gita was spoken.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/gita-jayanti/"
+  },
+  {
+   "date": "2030-12-08",
+   "id": "kartigai-deepam",
+   "name": "Karthigai Deepam",
+   "kind": "regional",
+   "basis": "solar",
+   "traditions": [
+    "tamil",
+    "tulu"
+   ],
+   "about": "Tamil Nadu's festival of lamps; a great fire on Thiruvannamalai.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/kartigai-deepam/"
+  },
+  {
+   "date": "2030-12-09",
+   "id": "annapurna-jayanti",
+   "name": "Annapurna Jayanti",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The goddess who feeds everyone; kitchens are honoured.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/annapurna-jayanti/"
+  },
+  {
+   "date": "2030-12-09",
+   "id": "dattatreya-jayanti",
+   "name": "Dattatreya Jayanti",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "maharashtra",
+    "panIndian"
+   ],
+   "about": "The three-in-one guru.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/dattatreya-jayanti/"
+  },
+  {
+   "date": "2030-12-16",
+   "id": "dhanu-sankranti",
+   "name": "Dhanu Sankranti",
+   "kind": "observance",
+   "basis": "solar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "The day the Sun enters Sagittarius",
+   "url": "https://aniketshetty.com/muhurtha/festivals/dhanu-sankranti/"
+  },
+  {
+   "date": "2030-12-24",
+   "id": "bhaumvati-amavasya",
+   "name": "Bhaumvati Amavasya",
+   "kind": "observance",
+   "basis": "lunar",
+   "traditions": [
+    "panIndian"
+   ],
+   "about": "A new moon on a Tuesday — ancestors remembered, Hanuman and Mangal worshipped.",
+   "url": "https://aniketshetty.com/muhurtha/festivals/bhaumvati-amavasya/"
+  }
+ ]
+}
