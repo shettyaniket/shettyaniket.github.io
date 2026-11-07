@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#ffd9e8">
+<title>A few questions for {{NAME_HTML}} 💕</title>
+<meta property="og:title" content="A few questions for {{NAME_HTML}} 💕">
+<meta property="og:description" content="Answer honestly. There is only one right answer.">
+{{OG_IMAGE}}
+<style>
+:root{--pink:#ff5c9d;--pink2:#ff8ab8;--ink:#5a2342;--soft:#ffe3ef}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{font-family:ui-rounded,"SF Pro Rounded","Avenir Next Rounded","Nunito",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:linear-gradient(160deg,#ffd9e8 0%,#f0dcff 55%,#d9ecff 100%);background-attachment:fixed;overflow-x:hidden;overscroll-behavior:none}
+#bg{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.float{position:absolute;bottom:-60px;opacity:.5;animation:rise linear infinite}
+@keyframes rise{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+main{position:relative;z-index:2;min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:max(18px,env(safe-area-inset-top)) 16px max(24px,env(safe-area-inset-bottom));gap:6px}
+.top{width:min(92vw,520px);display:none;align-items:center;gap:10px;font-size:13px;font-weight:700;color:#b14b7c}
+.top .track{flex:1;height:8px;border-radius:99px;background:rgba(255,255,255,.7);overflow:hidden}
+.top .fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--pink2),var(--pink));transition:width .5s cubic-bezier(.3,1.4,.5,1)}
+.bearbox{position:relative;width:min(40vw,150px);aspect-ratio:1;flex:none}
+.bear{width:100%;height:100%;overflow:visible;animation:sway 3.2s ease-in-out infinite}
+@keyframes sway{50%{transform:translateY(-4px) rotate(-1.5deg)}}
+.bear .eyes-happy,.bear .eyes-pout,.bear .mouth-happy,.bear .mouth-pout,.bear .tear{display:none}
+.bear.happy .eyes-n,.bear.happy .mouth-n,.bear.pout .eyes-n,.bear.pout .mouth-n{display:none}
+.bear.happy .eyes-happy,.bear.happy .mouth-happy,.bear.pout .eyes-pout,.bear.pout .mouth-pout,.bear.pout .tear{display:inline}
+.bear.cheer{animation:cheer .6s ease-out}
+@keyframes cheer{30%{transform:translateY(-16px) scale(1.06)}60%{transform:translateY(0) scale(.97)}}
+.bear .tear{animation:drip 1s ease-in infinite}
+@keyframes drip{from{transform:translateY(-2px);opacity:1}to{transform:translateY(12px);opacity:0}}
+.bubble{min-height:34px;max-width:min(88vw,420px);padding:7px 16px;border-radius:18px;background:#fff;box-shadow:0 6px 18px rgba(255,92,157,.18);font-weight:700;font-size:15px;text-align:center;opacity:0;transform:translateY(6px) scale(.96);transition:.25s}
+.bubble.on{opacity:1;transform:none}
+.screen{width:min(92vw,520px);display:none;flex-direction:column;align-items:center;text-align:center}
+.screen.active{display:flex}
+.card{width:100%;background:rgba(255,255,255,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:30px;padding:22px 20px 24px;box-shadow:0 18px 50px rgba(255,92,157,.22),0 2px 0 rgba(255,255,255,.9) inset;animation:enter .45s cubic-bezier(.2,1.2,.4,1)}
+.card.leave{animation:leave .32s ease-in forwards}
+@keyframes enter{from{opacity:0;transform:translateY(24px) scale(.96)}}
+@keyframes leave{to{opacity:0;transform:translateX(-40px) scale(.96)}}
+.stage{height:112px;display:flex;align-items:center;justify-content:center}
+.stage svg{height:100%;width:auto;overflow:visible;display:block}
+.stage .emo{font-size:76px;line-height:1;display:inline-block}
+h1{font-size:clamp(28px,8vw,40px);margin:8px 0 4px;line-height:1.1}
+h2{font-size:clamp(23px,6.4vw,31px);line-height:1.2;margin:8px 4px 20px;font-weight:800}
+p.lead{font-size:17px;margin:4px auto 20px;max-width:380px;line-height:1.4}
+.actions{display:flex;justify-content:center;align-items:center;gap:18px}
+button{font:inherit;cursor:pointer;border:0}
+.yes{padding:15px 38px;border-radius:99px;font-weight:800;font-size:21px;color:#fff;background:linear-gradient(180deg,#ff7db0,#ff4f93);box-shadow:0 8px 0 #d93978,0 14px 24px rgba(255,79,147,.4);transition:transform .12s,box-shadow .12s;animation:pulse 1.6s ease-in-out infinite}
+.yes:active{transform:translateY(5px);box-shadow:0 3px 0 #d93978,0 6px 12px rgba(255,79,147,.4)}
+@keyframes pulse{50%{transform:scale(1.045)}}
+.slot{width:92px;height:54px;flex:none}
+.no{position:fixed;left:0;top:0;z-index:30;width:92px;height:54px;border-radius:99px;font-weight:800;font-size:19px;color:#8a6a7b;background:#fff;box-shadow:0 5px 0 #e3cfdb,0 10px 18px rgba(0,0,0,.08);transition:transform .11s ease-out;touch-action:none;display:none}
+.no.show{display:block}
+.burst{position:fixed;z-index:40;left:0;top:0;pointer-events:none;font-size:var(--s);animation:pop 1.25s cubic-bezier(.15,.7,.3,1) forwards;will-change:transform,opacity}
+@keyframes pop{0%{transform:translate(-50%,-50%) scale(.3);opacity:1}15%{opacity:1}100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) rotate(var(--r)) scale(1);opacity:0}}
+.fall{position:fixed;top:-40px;z-index:40;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(112vh) rotate(var(--r))}}
+.swing{transform-box:fill-box;transform-origin:50% 0;animation:swing 1.3s ease-in-out infinite}
+.swing.b{animation-delay:.25s}
+@keyframes swing{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(14deg)}}
+.ting{animation:ting 2.6s ease-out infinite;opacity:0}
+@keyframes ting{10%{opacity:1;transform:translateY(0) scale(1)}60%{opacity:0;transform:translateY(-12px) scale(1.2)}100%{opacity:0}}
+.puff{animation:puff 2.4s ease-out infinite;opacity:0;transform-box:fill-box;transform-origin:center}
+.puff.p2{animation-delay:.8s}.puff.p3{animation-delay:1.6s}
+@keyframes puff{0%{opacity:.9;transform:translate(0,0) scale(.5)}100%{opacity:0;transform:translate(24px,-34px) scale(1.5)}}
+.hop{animation:hop 1.1s ease-in-out infinite}
+@keyframes hop{0%,100%{transform:translateY(0)}40%{transform:translateY(-18px) rotate(-6deg)}}
+.glow{animation:glow 1.8s ease-in-out infinite}
+@keyframes glow{50%{transform:scale(1.14);filter:drop-shadow(0 0 16px #ffd35c)}}
+.crown{animation:crown 1.2s cubic-bezier(.3,1.5,.5,1) both}
+@keyframes crown{from{transform:translateY(-70px) rotate(-20deg);opacity:0}}
+.flutter{animation:flutter 2.2s ease-in-out infinite}
+@keyframes flutter{0%,100%{transform:translate(-14px,4px) rotate(-8deg)}50%{transform:translate(14px,-8px) rotate(8deg) scale(1.08)}}
+.spin{animation:spin 5s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.beat{animation:beat 1s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.2)}30%{transform:scale(1)}45%{transform:scale(1.14)}}
+.bloom{animation:bloom 1.4s cubic-bezier(.3,1.4,.5,1) both}
+@keyframes bloom{from{transform:scale(.2) rotate(-30deg);opacity:0}}
+.sparkle{position:absolute;font-size:22px;animation:tw 1.6s ease-in-out infinite}
+@keyframes tw{50%{transform:scale(1.4) rotate(20deg);opacity:.4}}
+.stagewrap{position:relative;display:flex;align-items:center;justify-content:center;height:100%}
+.sig{margin-top:16px;font-weight:800;color:#b14b7c}
+.ghost{margin-top:18px;background:none;color:#b14b7c;font-weight:700;text-decoration:underline;font-size:15px}
+@media (prefers-reduced-motion:reduce){.float,.swing,.puff,.hop,.glow,.flutter,.spin,.beat,.yes,.bear,.sparkle,.ting{animation:none!important}}
+</style>
+</head>
+<body>
+<div id="bg" aria-hidden="true"></div>
+<main>
+  <div class="top" id="top"><div class="track"><div class="fill" id="fill"></div></div><span id="count"></span></div>
+  <div class="bearbox">
+    <svg id="bear" class="bear" viewBox="0 0 200 200" role="img" aria-label="A cute bear with a pink bow">
+      <circle cx="48" cy="48" r="26" fill="#d9a06f"/><circle cx="48" cy="48" r="14" fill="#f6b6c4"/>
+      <circle cx="152" cy="48" r="26" fill="#d9a06f"/><circle cx="152" cy="48" r="14" fill="#f6b6c4"/>
+      <ellipse cx="100" cy="190" rx="44" ry="20" fill="#d9a06f"/>
+      <circle cx="100" cy="108" r="72" fill="#e8b88a"/>
+      <ellipse cx="100" cy="132" rx="32" ry="24" fill="#fbe5cc"/>
+      <ellipse cx="100" cy="121" rx="9" ry="6.5" fill="#6b3f2a"/>
+      <g class="eyes-n"><circle cx="72" cy="100" r="8" fill="#3b2218"/><circle cx="128" cy="100" r="8" fill="#3b2218"/><circle cx="75" cy="97" r="2.8" fill="#fff"/><circle cx="131" cy="97" r="2.8" fill="#fff"/></g>
+      <g class="eyes-happy" fill="none" stroke="#3b2218" stroke-width="5" stroke-linecap="round"><path d="M62 104 Q72 90 82 104"/><path d="M118 104 Q128 90 138 104"/></g>
+      <g class="eyes-pout"><circle cx="72" cy="102" r="9" fill="#3b2218"/><circle cx="128" cy="102" r="9" fill="#3b2218"/><circle cx="75" cy="98" r="4" fill="#fff"/><circle cx="131" cy="98" r="4" fill="#fff"/><path d="M60 95 L84 87 M140 95 L116 87" stroke="#3b2218" stroke-width="4" stroke-linecap="round"/></g>
+      <path class="tear" d="M80 112 q-5 9 0 12 q5 -3 0 -12z" fill="#8fd3ff"/>
+      <path class="mouth-n" d="M90 133 Q100 143 110 133" fill="none" stroke="#6b3f2a" stroke-width="4" stroke-linecap="round"/>
+      <path class="mouth-happy" d="M88 130 Q100 152 112 130 Z" fill="#c2455d" stroke="#6b3f2a" stroke-width="3" stroke-linejoin="round"/>
+      <path class="mouth-pout" d="M91 140 Q100 130 109 140" fill="none" stroke="#6b3f2a" stroke-width="4" stroke-linecap="round"/>
+      <ellipse cx="56" cy="124" rx="12" ry="7.5" fill="#ff8fb3" opacity=".55"/><ellipse cx="144" cy="124" rx="12" ry="7.5" fill="#ff8fb3" opacity=".55"/>
+      <g transform="translate(138 36) rotate(18)"><path d="M0 0 L-24 -14 L-24 14 Z" fill="#ff5c9d"/><path d="M0 0 L24 -14 L24 14 Z" fill="#ff5c9d"/><circle r="7" fill="#ff8ab8"/></g>
+      <path d="M100 196 C70 172 72 154 90 154 C96 154 100 160 100 160 C100 160 104 154 110 154 C128 154 130 172 100 196Z" fill="#ff4f6d"/>
+    </svg>
+  </div>
+  <div class="bubble" id="bubble" aria-live="polite"></div>
+
+  <section class="screen active" id="intro">
+    <div class="card">
+      <h1>Hi {{NAME_HTML}} 💕</h1>
+      <p class="lead">I have a few questions for you. Please answer honestly.</p>
+      <div class="actions"><button class="yes" id="start">Okay, ask me</button></div>
+    </div>
+  </section>
+
+  <section class="screen" id="quiz">
+    <div class="card" id="card">
+      <div class="stage" id="stage"></div>
+      <h2 id="q"></h2>
+      <div class="actions"><button class="yes" id="yes">Yes 💗</button><span class="slot" id="slot"></span></div>
+    </div>
+  </section>
+
+  <section class="screen" id="end">
+    <div class="card">
+      <div class="stage"><span class="emo beat">💖</span></div>
+      <h1>Every answer was yes</h1>
+      <p class="lead">I knew it, {{NAME_HTML}}. You really are all of that, and so much more.</p>
+      <div class="sig" id="sig"></div>
+      <button class="ghost" id="again">Go again</button>
+    </div>
+  </section>
+</main>
+<button class="no" id="no" tabindex="-1" aria-hidden="true">No</button>
+
+<script>
+(function(){
+var NAME = {{NAME_JS}}, FROM = {{FROM_JS}};
+var $ = function(id){ return document.getElementById(id); };
+var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+var HEARTS = ["❤️","💖","💗","💕","💘","🩷","💞"];
+var ART = {
+ rose:'<span class="emo bloom">🌹</span><span class="sparkle" style="left:-16px;top:6px">✨</span><span class="sparkle" style="right:-14px;top:28px;animation-delay:.5s">✨</span>',
+ bunny:'<span class="emo hop">🐰</span>',
+ smile:'<span class="emo glow">😊</span>',
+ crown:'<span class="emo crown">👑</span>',
+ earrings:'<svg viewBox="0 0 190 130"><g class="swing" id="e1"><circle cx="62" cy="8" r="5" fill="none" stroke="#e5b24a" stroke-width="3"/><path d="M62 13 V46" stroke="#e5b24a" stroke-width="3"/><path d="M62 46 C48 62 48 84 62 108 C76 84 76 62 62 46Z" fill="#f6c453" stroke="#e5a52a" stroke-width="2.5"/><circle cx="62" cy="82" r="5" fill="#ff5c9d"/></g><g class="swing b" id="e2"><circle cx="128" cy="8" r="5" fill="none" stroke="#e5b24a" stroke-width="3"/><path d="M128 13 V46" stroke="#e5b24a" stroke-width="3"/><path d="M128 46 C114 62 114 84 128 108 C142 84 142 62 128 46Z" fill="#f6c453" stroke="#e5a52a" stroke-width="2.5"/><circle cx="128" cy="82" r="5" fill="#ff5c9d"/></g><text class="ting" x="88" y="36" font-size="15" font-weight="800" fill="#e0589a">ting ting</text></svg>',
+ butterfly:'<span class="emo flutter">🦋</span>',
+ perfume:'<svg viewBox="0 0 150 130"><rect x="46" y="52" width="58" height="68" rx="14" fill="#ffc2dc" stroke="#f08ab5" stroke-width="3"/><rect x="68" y="40" width="14" height="14" fill="#f6c453"/><rect x="60" y="24" width="30" height="18" rx="5" fill="#f6c453" stroke="#e5a52a" stroke-width="2"/><path d="M58 70 Q75 62 92 70" fill="none" stroke="#fff" stroke-width="3" opacity=".7" stroke-linecap="round"/><circle class="puff" cx="104" cy="34" r="8" fill="#ffd0e4"/><circle class="puff p2" cx="104" cy="34" r="8" fill="#ffd0e4"/><circle class="puff p3" cx="104" cy="34" r="8" fill="#ffd0e4"/></svg>',
+ star:'<span class="emo spin">🌟</span>',
+ heart:'<span class="emo beat">💖</span>'
+};
+var Q = [
+ {t:"Are you beautiful?", say:"Obviously 💖", art:"rose"},
+ {t:"Are you adorable?", say:"I knew it 🥰", art:"bunny"},
+ {t:"Do you have a cute smile?", say:"That smile 😍", art:"smile"},
+ {t:"Do you carry yourself well?", say:"Like a queen 👑", art:"crown"},
+ {t:"Aren't your long, jingling earrings just a little bit sexy?", say:"Ting ting, yes they are 😏", art:"earrings"},
+ {t:"Do you have a cute tattoo?", say:"I love it 🦋", art:"butterfly"},
+ {t:"Do you have an amazing perfume collection?", say:"Smelling lovely 🌸", art:"perfume"},
+ {t:"Do you have a great personality?", say:"The best one ⭐", art:"star"},
+ {t:"Do you know how special you are?", say:"Good, never forget it 💞", art:"heart"}
+];
+var NOPE = ["Nice try 😏","Too slow!","Wrong button, gorgeous 💕","Hehe, not today","That one is broken, try Yes","Almost! But no 😘","Nope, the other one"];
+
+/* floating hearts in the background */
+var bg = $("bg");
+for (var i = 0; i < 14; i++) {
+  var f = document.createElement("div");
+  f.className = "float";
+  f.textContent = HEARTS[i % HEARTS.length];
+  f.style.left = (Math.random() * 100) + "vw";
+  f.style.fontSize = (16 + Math.random() * 28) + "px";
+  f.style.animationDuration = (11 + Math.random() * 14) + "s";
+  f.style.animationDelay = (-Math.random() * 20) + "s";
+  bg.appendChild(f);
+}
+
+var bear = $("bear"), bubble = $("bubble"), moodLock = false, bubbleTimer;
+function mood(m){ if (moodLock && m !== "happy") return; bear.className.baseVal = "bear" + (m ? " " + m : ""); }
+function say(s, ms){ bubble.textContent = s; bubble.classList.add("on"); clearTimeout(bubbleTimer); bubbleTimer = setTimeout(function(){ bubble.classList.remove("on"); }, ms || 1800); }
+
+function burst(x, y, n){
+  for (var i = 0; i < n; i++) {
+    var h = document.createElement("span");
+    h.className = "burst";
+    h.textContent = HEARTS[(Math.random() * HEARTS.length) | 0];
+    var a = Math.random() * Math.PI * 2, d = 90 + Math.random() * 190;
+    h.style.left = x + "px"; h.style.top = y + "px";
+    h.style.setProperty("--s", (18 + Math.random() * 20) + "px");
+    h.style.setProperty("--dx", (Math.cos(a) * d) + "px");
+    h.style.setProperty("--dy", (Math.sin(a) * d - 80) + "px");
+    h.style.setProperty("--r", ((Math.random() - .5) * 90) + "deg");
+    h.style.animationDelay = (Math.random() * .12) + "s";
+    h.addEventListener("animationend", function(){ this.remove(); });
+    document.body.appendChild(h);
+  }
+}
+function rain(count){
+  for (var i = 0; i < count; i++) setTimeout(function(){
+    var h = document.createElement("span");
+    h.className = "fall";
+    h.textContent = HEARTS[(Math.random() * HEARTS.length) | 0];
+    h.style.left = (Math.random() * 100) + "vw";
+    h.style.fontSize = (18 + Math.random() * 26) + "px";
+    h.style.animationDuration = (2.6 + Math.random() * 2.6) + "s";
+    h.style.setProperty("--r", ((Math.random() - .5) * 200) + "deg");
+    h.addEventListener("animationend", function(){ this.remove(); });
+    document.body.appendChild(h);
+  }, i * 70);
+}
+
+/* the No button that cannot be pressed */
+var no = $("no"), yes = $("yes"), slot = $("slot"), R = 125, quizOn = false;
+function setNo(x, y){ no.style.transform = "translate(" + Math.round(x) + "px," + Math.round(y) + "px)"; }
+function homeNo(){ var r = slot.getBoundingClientRect(); setNo(r.left, r.top); }
+function jump(ax, ay){
+  var w = no.offsetWidth, h = no.offsetHeight, m = 12, y = yes.getBoundingClientRect(), best = null, bestD = -1;
+  for (var i = 0; i < 50; i++) {
+    var x0 = m + Math.random() * (innerWidth - w - 2 * m), y0 = m + Math.random() * (innerHeight - h - 2 * m);
+    if (x0 < y.right + 18 && x0 + w > y.left - 18 && y0 < y.bottom + 18 && y0 + h > y.top - 18) continue;
+    var d = Math.hypot(x0 + w / 2 - ax, y0 + h / 2 - ay);
+    if (d > bestD) { bestD = d; best = [x0, y0]; }
+    if (d > R * 2.4) break;
+  }
+  if (!best) best = [m, m];
+  setNo(best[0], best[1]);
+}
+function nudge(x, y){
+  if (!quizOn) return;
+  var r = no.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+  var dx = cx - x, dy = cy - y, d = Math.hypot(dx, dy);
+  if (d >= R) { if (!moodLock) mood(""); return; }
+  mood("pout");
+  if (d < 1) { dx = 1; dy = 0; d = 1; }
+  /* slide the button away along the same line, so it always keeps its distance */
+  var m = 10, w = r.width, h = r.height;
+  var nx = Math.min(Math.max(x + dx / d * R, m + w / 2), innerWidth - m - w / 2);
+  var ny = Math.min(Math.max(y + dy / d * R, m + h / 2), innerHeight - m - h / 2);
+  if (Math.hypot(nx - x, ny - y) < R * .85) jump(x, y); else setNo(nx - w / 2, ny - h / 2);
+}
+function attempt(x, y){ jump(x, y); say(NOPE[(Math.random() * NOPE.length) | 0], 1300); mood("pout"); setTimeout(function(){ if (!moodLock) mood(""); }, 900); }
+addEventListener("pointermove", function(e){ nudge(e.clientX, e.clientY); }, {passive:true});
+addEventListener("pointerdown", function(e){ if (e.pointerType === "touch") nudge(e.clientX, e.clientY); }, {passive:true});
+no.addEventListener("pointerdown", function(e){ e.preventDefault(); attempt(e.clientX, e.clientY); });
+no.addEventListener("touchstart", function(e){ e.preventDefault(); var t = e.touches[0]; attempt(t.clientX, t.clientY); }, {passive:false});
+no.addEventListener("click", function(e){ e.preventDefault(); e.stopPropagation(); attempt(e.clientX || innerWidth / 2, e.clientY || innerHeight / 2); });
+addEventListener("resize", function(){ if (quizOn) homeNo(); });
+
+/* the questions */
+var i = 0, busy = false;
+function show(id){ ["intro","quiz","end"].forEach(function(s){ $(s).classList.toggle("active", s === id); }); }
+function render(){
+  var q = Q[i];
+  $("stage").innerHTML = '<span class="stagewrap">' + ART[q.art] + '</span>';
+  $("q").textContent = q.t;
+  $("count").textContent = (i + 1) + " / " + Q.length;
+  $("fill").style.width = ((i + 1) / Q.length * 100) + "%";
+  var c = $("card"); c.classList.remove("leave"); c.style.animation = "none"; void c.offsetWidth; c.style.animation = "";
+  busy = false;
+  homeNo(); requestAnimationFrame(function(){ homeNo(); yes.focus({preventScroll:true}); });
+}
+function start(){
+  i = 0; show("quiz"); $("top").style.display = "flex"; quizOn = true; no.classList.add("show"); render(); say("Answer carefully 😇", 1600);
+}
+function finish(){
+  quizOn = false; no.classList.remove("show"); $("top").style.display = "none"; show("end");
+  $("sig").textContent = FROM ? "With love, " + FROM + " 💕" : "";
+  moodLock = true; mood("happy"); say("Yay!!", 2500); rain(70); setTimeout(function(){ rain(50); }, 2600);
+}
+yes.addEventListener("click", function(){
+  if (busy) return; busy = true;
+  var r = yes.getBoundingClientRect();
+  burst(r.left + r.width / 2, r.top + r.height / 2, 26);
+  moodLock = true; mood("happy"); bear.classList.add("cheer"); say(Q[i].say, 1100);
+  setTimeout(function(){ bear.classList.remove("cheer"); }, 650);
+  setTimeout(function(){ $("card").classList.add("leave"); }, 950);
+  setTimeout(function(){
+    moodLock = false; mood("");
+    if (i < Q.length - 1) { i++; render(); } else finish();
+  }, 1280);
+});
+$("start").addEventListener("click", start);
+$("again").addEventListener("click", function(){ moodLock = false; mood(""); start(); });
+$("start").focus({preventScroll:true});
+})();
+</script>
+</body>
+</html>
