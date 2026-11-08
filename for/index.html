@@ -144,7 +144,7 @@ button{font:inherit;cursor:pointer;border:0}
 
 <script>
 (function(){
-var NAME = (new URLSearchParams(location.search).get("name") || "").trim().slice(0, 40), FROM = (new URLSearchParams(location.search).get("from") || "Aniket").trim().slice(0, 40);
+var NAME = decodeURIComponent(location.hash.slice(1)).replace(/[-_+]+/g, " ").trim().slice(0, 40).replace(/(^|\s)(\p{L})/gu, function (m, s, c) { return s + c.toUpperCase(); }), FROM = "Aniket";
 var $ = function(id){ return document.getElementById(id); };
 var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 var HEARTS = ["❤️","💖","💗","💕","💘","🩷","💞"];

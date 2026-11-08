@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """Makes /for/<name>/index.html from scripts/for_template.html.
 
-    python3 scripts/for_page.py "Priya" --from "Rahul"
+    python3 scripts/for_page.py --generic --from "Aniket"
 
 The page is unlisted: noindex, and not in the sitemap. The name is only in the address and the greeting."""
 import argparse, html, json, os, re, subprocess, shutil, tempfile
 
 ap = argparse.ArgumentParser()
 ap.add_argument("name", nargs="?", default="")
-ap.add_argument("--generic", action="store_true", help="one page at /for/ that takes ?name= and ?from= from the address")
+ap.add_argument("--generic", action="store_true", help="one page at /for/ that takes the name after the # in the link")
 ap.add_argument("--from", dest="sender", default="")
 a = ap.parse_args()
 slug = "" if a.generic else re.sub(r"[^a-z0-9]+", "-", a.name.lower()).strip("-")
@@ -39,10 +39,12 @@ finally:
     shutil.rmtree(tmp, ignore_errors=True)
 
 t = open(os.path.join(root, "scripts", "for_template.html"), encoding="utf-8").read()
-q = lambda k, d: '(new URLSearchParams(location.search).get("%s") || %s).trim().slice(0, 40)' % (k, json.dumps(d))
+# The name travels after the # in the link, which a browser never sends to the server: it is not in this repository or the page.
+HASH_NAME = ('decodeURIComponent(location.hash.slice(1)).replace(/[-_+]+/g, " ").trim().slice(0, 40)'
+             '.replace(/(^|\\s)(\\p{L})/gu, function (m, s, c) { return s + c.toUpperCase(); })')
 if a.generic:
     t = (t.replace("A few questions for {{NAME_HTML}} 💕", "A few questions for you 💕").replace("{{NAME_HTML}}", '<span class="nm">gorgeous</span>')
-           .replace("{{NAME_JS}}", q("name", "")).replace("{{FROM_JS}}", q("from", a.sender or "Aniket")).replace("{{OG_IMAGE}}", og))
+           .replace("{{NAME_JS}}", HASH_NAME).replace("{{FROM_JS}}", json.dumps(a.sender or "Aniket")).replace("{{OG_IMAGE}}", og))
 else:
     t = (t.replace("{{NAME_HTML}}", '<span class="nm">%s</span>' % html.escape(a.name)).replace("{{NAME_JS}}", json.dumps(a.name).replace("</", "<\\/"))
            .replace("{{FROM_JS}}", json.dumps(a.sender).replace("</", "<\\/")).replace("{{OG_IMAGE}}", og))
