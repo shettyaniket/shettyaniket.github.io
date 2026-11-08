@@ -171,6 +171,11 @@ var Q = [
 ];
 var NOPE = ["Nice try 😏","Too slow!","Wrong button, gorgeous 💕","Hehe, not today","That one is broken, try Yes","Almost! But no 😘","Nope, the other one"];
 
+/* a name from the address fills every spot the page says it */
+var nms = document.querySelectorAll(".nm");
+for (var n = 0; n < nms.length; n++) nms[n].textContent = NAME || "gorgeous";
+if (NAME) document.title = "A few questions for " + NAME + " \uD83D\uDC95";
+
 /* floating hearts in the background */
 var bg = $("bg");
 for (var i = 0; i < 14; i++) {
