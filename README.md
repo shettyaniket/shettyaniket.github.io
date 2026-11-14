@@ -16,6 +16,8 @@ Live domain: **https://aniketshetty.com** · GitHub repo: **shettyaniket**
 /loanyieldiq/           App landing page (product synopsis)
 /loanyieldiq/guide/     User guide
 /loanyieldiq/privacy/   Privacy policy   ← Privacy URL for App Store Connect
+/skywards/              App landing page
+/skywards/privacy/      Privacy policy   ← Privacy URL for App Store Connect
 /support/               Shared support    ← Support URL (works for every app)
 /terms/                 Shared terms / Apple EULA
 apps.json               ⭐ edit this to add apps to the home gallery

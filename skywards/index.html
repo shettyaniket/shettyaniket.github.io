@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png">
+  <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+  <title>Skywards — Your personal flight log | Aniket Shetty</title>
+  <meta name="description" content="Skywards is a free flight log for iPhone and iPad: add a flight by typing its number, see your trips on a 3D globe, count down to the next one, and keep a logbook of every kilometre, airport and country. No account, no ads.">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/">Aniket Shetty</a>
+      <nav class="nav">
+        <a href="/#apps">Apps</a>
+        <a href="/#story">The Story</a>
+        <a href="/support/">Support</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="wrap">
+      <div class="app-hero">
+        <div class="big-icon" style="background:none;padding:0;overflow:hidden;"><img src="/assets/icons/skywards.png" alt="Skywards app icon" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+        <div>
+          <span class="os-tag">iPhone · iPad · iOS 17+</span>
+          <h1>Skywards</h1>
+          <p class="lede">Skywards is a personal flight log. Type a flight number and a date and it fills in the route, times and terminals for you. Your upcoming trips sit on a 3D globe with a countdown to the next one, and every flight you've taken adds up in a logbook of distance, hours, airports and countries. No account, no ads, no subscription — your flights are stored on your device.</p>
+          <div class="btn-row">
+            <a class="btn soon" href="#">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 1.5c.1 1-.3 2-.9 2.8-.7.8-1.7 1.4-2.7 1.3-.1-1 .4-2 1-2.7.6-.8 1.7-1.3 2.6-1.4zM19 17.3c-.5 1.1-.7 1.6-1.3 2.6-.9 1.4-2.1 3.1-3.6 3.1-1.3 0-1.7-.9-3.5-.8-1.8 0-2.2.8-3.5.8-1.5 0-2.6-1.5-3.5-2.9-2.5-3.9-2.8-8.5-1.2-11 1-1.6 2.6-2.5 4.1-2.5 1.5 0 2.5.9 3.7.9 1.2 0 1.9-.9 3.7-.9 1.3 0 2.7.7 3.7 2-3.3 1.8-2.8 6.5.9 8.6z"/></svg>
+              Coming soon on the App Store
+            </a>
+            <a class="btn secondary" href="/skywards/privacy/">Privacy</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pad pad-t">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Every flight, in one place.</h2>
+          <p>For people who like knowing where they've been, and when they're off next.</p>
+        </div>
+        <div class="features">
+          <div class="feature">
+            <h3>✍️ Add a flight by typing it</h3>
+            <p>Write "6E5047 on 14th June" and Skywards works out the rest. You can also scan a boarding pass, import from Apple Wallet, enter it by hand or bring in a CSV of past flights.</p>
+          </div>
+          <div class="feature">
+            <h3>🌍 Your trips on a 3D globe</h3>
+            <p>Upcoming routes are drawn on a globe you can spin and zoom, focused on where your next flight leaves from. Switch to a flat map whenever you prefer.</p>
+          </div>
+          <div class="feature">
+            <h3>⏳ A countdown to the next one</h3>
+            <p>The next flight sits at the top as a boarding-pass card — route, local times, terminals, weather at both ends and the days left to go. Connecting legs are grouped with their layovers.</p>
+          </div>
+          <div class="feature">
+            <h3>📖 A logbook that adds up</h3>
+            <p>Distance flown, hours in the air, airports, countries, airlines and aircraft types, by year or all time, with charts and your personal records.</p>
+          </div>
+          <div class="feature">
+            <h3>🎬 Your year as a video</h3>
+            <p>Turn a year of flying into a short replay video with your routes animated on the map, ready to save or share.</p>
+          </div>
+          <div class="feature">
+            <h3>🔔 Reminders before you fly</h3>
+            <p>Web check-in, passport, power bank, departure alerts — pick what you want and when, with separate sets for personal and work trips. Add any flight to your calendar in a tap.</p>
+          </div>
+          <div class="feature">
+            <h3>🎨 Make it yours</h3>
+            <p>Six colour themes, kilometres or miles, your date format, and a home airport so outbound and return legs are told apart.</p>
+          </div>
+          <div class="feature">
+            <h3>🔒 Free and private</h3>
+            <p>No account, no ads, no analytics. Your flight history stays on your device; the app only goes online to look up flight details, weather and maps.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pad pad-t">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>A note on flight details</h2>
+          <p>Routes and times come from public flight-data sources and are a convenience, not an official record. Airlines change schedules, gates and terminals — always confirm with your airline before you travel. If a lookup gets something wrong, you can try another source or edit the flight yourself.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>
+        <a href="/#apps">Apps</a>
+        <a href="/support/">Support</a>
+        <a href="/skywards/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+      </div>
+      <div>© <span id="year"></span> Aniket Shetty</div>
+    </div>
+  </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

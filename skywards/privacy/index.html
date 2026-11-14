@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png">
+  <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+  <title>Privacy Policy — Skywards</title>
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/">Aniket Shetty</a>
+      <nav class="nav">
+        <a href="/#apps">Apps</a>
+        <a href="/support/">Support</a>
+        <a href="/terms/">Terms</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content">
+    <div class="wrap">
+      <h1>Skywards — Privacy Policy</h1>
+      <p class="updated">Last updated: 14 November 2026</p>
+
+      <h2>The short version</h2>
+      <p><strong>Skywards collects no personal data.</strong> There are no accounts, no analytics, no
+      ads, and no third-party tracking or crash-reporting SDKs. Your flights are stored on your device
+      and are not sent to me. The app does go online to look up flight details, weather and maps; what
+      is sent in those requests is described below.</p>
+
+      <h2>Your data stays on your device</h2>
+      <p>Your flights, logbook, reminders, loyalty programme numbers, name, profile photo and settings
+      are stored locally on your device using Apple's SwiftData framework and app storage, and shared
+      only with the Skywards widget on the same device. They are not synced to any server of mine, not
+      shared with any third party, and not accessible to me. Deleting the app deletes this data.</p>
+
+      <h2>Flight lookups</h2>
+      <p>When you add or refresh a flight, Skywards sends the <strong>flight number</strong> (and, when
+      you search by city, the two airport codes) to public flight-data sources to fetch the route,
+      times, terminals and aircraft type. These include adsbdb, the OpenSky Network, adsb.lol and
+      publicly available flight-status pages. The requests contain no name, account or device
+      identifier from the app, but as with any internet request, the service receiving it can see your
+      IP address. Each service's own privacy policy applies to what it does with that.</p>
+      <p>If you choose to enter your own AirLabs API key in Settings, flight lookups are also sent to
+      AirLabs using that key. The key is stored only on your device.</p>
+
+      <h2>Weather, maps and images</h2>
+      <p>To show weather for a flight, Skywards sends the airport's location and the date to
+      Open-Meteo; aviation weather reports (METAR) come from aviationweather.gov by airport code. Maps
+      and the globe are drawn by Apple Maps. Aircraft photos and airline logos are downloaded from
+      public image sources (planespotters.net, Wikipedia and pics.avs.io) by aircraft type or airline
+      code. None of these requests include who you are or your flight history.</p>
+
+      <h2>Camera, calendar and photos</h2>
+      <p><strong>Camera:</strong> used only when you choose to scan a boarding pass. The text is read on
+      your device; the image is not uploaded.<br>
+      <strong>Calendar:</strong> if you tap "Add to Calendar", Skywards writes that flight to your
+      calendar. It asks for write-only access and cannot read your existing events.<br>
+      <strong>Photos:</strong> used to save a replay video or stats card you export, and to pick a
+      profile photo if you want one. The profile photo stays on your device.</p>
+
+      <h2>Notifications</h2>
+      <p>Pre-flight reminders are local notifications scheduled on your device. No push server is involved.</p>
+
+      <h2>Sharing</h2>
+      <p>Boarding-pass cards, stats cards, videos and CSV exports leave your device only when you share
+      or save them yourself through the standard iOS share sheet.</p>
+
+      <h2>Children's privacy</h2>
+      <p>Skywards does not knowingly collect data from anyone, including children under 13.</p>
+
+      <h2>Third-party services</h2>
+      <p>Skywards does not integrate any advertising networks, analytics platforms, or tracking SDKs of
+      any kind. The only third parties involved are the data sources listed above, contacted directly
+      from your device when a lookup is needed.</p>
+
+      <h2>Not an official travel record</h2>
+      <p>Flight details shown in Skywards come from public sources and may be out of date or wrong.
+      Always confirm times, gates and terminals with your airline.</p>
+
+      <h2>Changes to this policy</h2>
+      <p>If this policy changes, the updated version will appear on this page with a new date above.</p>
+
+      <h2>Contact</h2>
+      <p>Questions? Email <a href="mailto:aniket.shetty@gmail.com">aniket.shetty@gmail.com</a>.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>
+        <a href="/skywards/">Skywards</a>
+        <a href="/support/">Support</a>
+        <a href="/terms/">Terms</a>
+      </div>
+      <div>© <span id="year"></span> Aniket Shetty</div>
+    </div>
+  </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

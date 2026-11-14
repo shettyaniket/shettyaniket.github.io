@@ -57,5 +57,14 @@
     "icon": "/assets/icons/paceandsip.png",
     "accent": "#34d399",
     "collectsData": false
+  },
+  {
+    "slug": "skywards",
+    "name": "Skywards",
+    "tagline": "Your personal flight log — add a flight by typing its number, see your trips on a 3D globe, and keep a logbook of every kilometre. Free, no account.",
+    "platform": "iOS 17+",
+    "icon": "/assets/icons/skywards.png",
+    "accent": "#2979ff",
+    "collectsData": false
   }
 ]
